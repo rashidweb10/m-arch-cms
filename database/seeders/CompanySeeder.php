@@ -15,7 +15,7 @@ class CompanySeeder extends Seeder
     public function run(): void
     {
         $schools = [
-            'School 1 - Landing', 'School 2', 'School 3', 'School 4', 'School 5', 'School 6', 'School 7', 'School 8'
+            'School 1 - Landing'
         ];
 
         User::factory()->create([
@@ -54,13 +54,13 @@ class CompanySeeder extends Seeder
             //     $company->meta()->create($meta);
             // }
 
-            User::factory()->create([
-                'name' => 'School admin ' . ($company->id),
-                'email' => 'school' . ($company->id) . '@example.com',
-                'role_id' => 2,
-                'company_id' => $company->id,
-                'password' => bcrypt('school' . ($company->id) . '@example.com'),
-            ]);            
+            // User::factory()->create([
+            //     'name' => 'School admin ' . ($company->id),
+            //     'email' => 'school' . ($company->id) . '@example.com',
+            //     'role_id' => 2,
+            //     'company_id' => $company->id,
+            //     'password' => bcrypt('school' . ($company->id) . '@example.com'),
+            // ]);            
         }
     }
 }
