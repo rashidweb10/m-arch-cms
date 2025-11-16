@@ -1,0 +1,11 @@
+Scope of Work - Maxcrude Project
+    Homepage (Frontend & Backend – fully dynamic)
+    About Page (Frontend & Backend – fully dynamic)
+    Product List Page (Frontend & Backend – fully dynamic)
+    Contact Us Page (Frontend & Backend – fully dynamic)
+    Form submission (store in backend + email notification to Admin)
+    Dynamic Header (excluding menu)
+    Dynamic Footer (excluding menu)
+    Testing
+    Deployment
+    Post-deployment Support (Bug fixes for up to 1 month after launch)
