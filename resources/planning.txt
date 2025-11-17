@@ -1,0 +1,73 @@
+HOMEPAGE FIELDS
+
+*Banner*
+Banners -- multi image select
+
+*About*
+Title -- Input
+Description -- Text Editor
+Image -- single image
+
+*Courses*
+Make Featured Course Dynamic
+
+*About2*
+Title 2 -- Input
+Description 2 -- Text Editor
+
+*Our Achievements*
+Title & Counts -- Input Add More
+
+*Mission*
+Title -- Input
+Description -- Text Editor
+Image -- single image
+
+
+*Awards & Achivements*
+Title & Image -- Input & Image Add More
+
+*Footer*
+Video -- Input
+Image -- Single Image
+
+*Why*
+Title & Image -- Input & Image Add More
+
+-----------------------------------------------
+
+ABOUTPAGE FIELDS
+
+*Breadcrumb*
+Image -- single image 
+
+*About*
+Title -- Input
+Description -- Text Editor
+Image -- single image
+
+*Courses*
+Make Featured Course Dynamic
+
+*Awards & Achivements*
+Title & Image -- Input & Image Add More
+
+*Why*
+Title & Image -- Input & Image Add More
+
+-----------------------------------------------
+
+COURSEPAGE FIELDS
+directly dynamic from course table
+
+-----------------------------------------------
+
+FACULTIES FIELDS
+Title -- Input
+Description -- Text Editor
+Name, Designation, Profile Picture -- Input & Image Add More
+
+-----------------------------------------------
+
+TESTIMONIALS FIELDS
+Image -- Image Add More
