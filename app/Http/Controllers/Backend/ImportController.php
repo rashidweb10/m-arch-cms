@@ -61,11 +61,13 @@ class ImportController extends Controller
     // -----------------------------------------
     public function importCourses()
     {
-        $data = $this->readExcel("courses.xlsx");
+        $data = $this->readExcel("tblcourses.csv");
         if (!$data['status']) return $data;
 
         $rows = $data['rows'];
         $insert = [];
+
+        array_shift($rows); // removes first row
 
         foreach ($rows as $r) {
             if (!isset($r[0])) continue;
@@ -73,15 +75,15 @@ class ImportController extends Controller
             $insert[] = [
                 'id'         => $r[0],
                 'name'       => $r[1] ?? null,
-                'image'      => $r[2] ?? null,
-                'category_id'=> $r[3] ?? null,
-                'is_active'  => $r[4] ?? 1,
-                'created_at' => now(),
+                'image'      => null,
+                'category_id'=> $r[2] ?? 0,
+                'is_active'  => $r[3] ?? 1,
+                'created_at' => (!empty($r[5]) && $r[5] != '0000-00-00 00:00:00') ? $r[5] : now(),
                 'updated_at' => now(),
             ];
         }
 
-        foreach (array_chunk($insert, 500) as $chunk) {
+        foreach (array_chunk($insert, 100) as $chunk) {
             DB::table('courses')->insertOrIgnore($chunk);
         }
 
@@ -93,27 +95,41 @@ class ImportController extends Controller
     // -----------------------------------------
     public function importCourseEnrolments()
     {
-        $data = $this->readExcel("course_enrolments.xlsx");
+        ini_set('memory_limit', '1024M');
+        set_time_limit(0); // prevents execution timeout
+
+        $data = $this->readExcel("tblusercourse.csv");
         if (!$data['status']) return $data;
 
         $rows = $data['rows'];
-        $insert = [];
+        array_shift($rows); // remove header row
 
-        foreach ($rows as $r) {
-            if (!isset($r[0])) continue;
+        $insert = [];
+        $chunkSize = 200; // best performance for 100k rows
+
+        foreach ($rows as $index => $r) {
+            // skip empty row
+            if (!isset($r[0]) || $r[0] === null || trim($r[0]) === '') continue;
 
             $insert[] = [
                 'id'         => $r[0],
-                'user_id'    => $r[1] ?? null,
+                'user_id'    => $r[1],
                 'course_id'  => $r[2] ?? null,
-                'is_active'  => $r[3] ?? 1,
-                'created_at' => now(),
+                'is_active'  => $r[4] ?? 0,
+                'created_at' => (!empty($r[7]) && $r[7] != '0000-00-00 00:00:00') ? $r[7] : now(),
                 'updated_at' => now(),
             ];
+
+            // Insert when chunk reaches limit
+            if (count($insert) === $chunkSize) {
+                DB::table('course_enrolments')->insertOrIgnore($insert);
+                $insert = []; // reset array
+            }
         }
 
-        foreach (array_chunk($insert, 500) as $chunk) {
-            DB::table('course_enrolments')->insertOrIgnore($chunk);
+        // Insert remaining rows
+        if (!empty($insert)) {
+            DB::table('course_enrolments')->insertOrIgnore($insert);
         }
 
         return "Course Enrolments Imported Successfully";
@@ -124,29 +140,43 @@ class ImportController extends Controller
     // -----------------------------------------
     public function importCourseMaterials()
     {
-        $data = $this->readExcel("course_materials.xlsx");
+        ini_set('memory_limit', '1024M');
+        set_time_limit(0);
+
+        $data = $this->readExcel("tblcoursematerials.csv");
         if (!$data['status']) return $data;
 
         $rows = $data['rows'];
+        array_shift($rows); // remove header row
+
         $insert = [];
+        $chunkSize = 100;
 
         foreach ($rows as $r) {
-            if (!isset($r[0])) continue;
+
+            if (!isset($r[0]) || trim($r[0]) === '') continue;
 
             $insert[] = [
                 'id'          => $r[0],
-                'course_id'   => $r[1] ?? null,
-                'title'       => $r[2] ?? '',
-                'description' => $r[3] ?? null,
-                'attachments' => $r[4] ?? null,
-                'is_active'   => $r[5] ?? 1,
-                'created_at'  => now(),
+                'course_id'   => $r[1],
+                'title'       => null,
+                'description' => null,
+                'attachments' => null,
+                'is_active'   => $r[3] ?? 0,
+                'created_at'  => (!empty($r[5]) && $r[5] != '0000-00-00 00:00:00') ? $r[5] : now(),
                 'updated_at'  => now(),
             ];
+
+            // Insert when chunk is filled
+            if (count($insert) === $chunkSize) {
+                DB::table('course_materials')->insertOrIgnore($insert);
+                $insert = []; // reset array
+            }
         }
 
-        foreach (array_chunk($insert, 500) as $chunk) {
-            DB::table('course_materials')->insertOrIgnore($chunk);
+        // Insert any remaining rows less than chunk size
+        if (!empty($insert)) {
+            DB::table('course_materials')->insertOrIgnore($insert);
         }
 
         return "Course Materials Imported Successfully";

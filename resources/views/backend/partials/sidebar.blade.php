@@ -35,6 +35,13 @@
                 <span class="menu-text"> Dashboard </span>
             </a>
         </li> 
+
+        <li class="side-nav-item">
+            <a href="{{ route('companies.edit', 1) }}" class="side-nav-link">
+                <span class="menu-icon"><i class="ti ti-school"></i></span>
+                <span class="menu-text"> Company </span>
+            </a>
+        </li>        
         
         <li class="side-nav-item">
             <a data-bs-toggle="collapse" href="#sidebarUploads" aria-expanded="false" aria-controls="sidebarTables"
@@ -58,13 +65,6 @@
                 </ul>
             </div>
         </li> 
-        
-        <li class="side-nav-item">
-            <a href="{{ route('companies.edit', 1) }}" class="side-nav-link">
-                <span class="menu-icon"><i class="ti ti-school"></i></span>
-                <span class="menu-text"> Company </span>
-            </a>
-        </li>
         
         <li class="side-nav-item">
             <a href="{{ route('pages.index') }}" class="side-nav-link">
