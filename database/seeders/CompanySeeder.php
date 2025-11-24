@@ -15,7 +15,7 @@ class CompanySeeder extends Seeder
     public function run(): void
     {
         $schools = [
-            'School 1 - Landing'
+            'School'
         ];
 
         User::factory()->create([

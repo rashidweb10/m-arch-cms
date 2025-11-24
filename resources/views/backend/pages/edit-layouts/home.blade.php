@@ -20,6 +20,8 @@ $achievement_image = $pageData->meta->where('meta_key', 'achievement_image')->fi
 
 $home_awards = json_decode($pageData->meta->where('meta_key', 'home_awards')->first()->meta_value ?? '[]', true);
 
+$video = $pageData->meta->where('meta_key', 'video')->first()->meta_value ?? '';
+
 $home_quicklinks = json_decode($pageData->meta->where('meta_key', 'home_quicklinks')->first()->meta_value ?? '[]', true);
 
 @endphp
@@ -286,7 +288,27 @@ $home_quicklinks = json_decode($pageData->meta->where('meta_key', 'home_quicklin
         <i class="ti ti-plus"></i>
         <span class="ml-2">Add More</span>
     </button>     
-</div>   
+</div> 
+
+<div class="row">
+    <div class="col-md-12">
+        <hr>
+        <h4 class="text-primary">Video Section</h4>
+    </div>     
+    <div class="col-md-12">
+        <label for="name" class="form-label">Video <span class="text-danger">*</span></label>
+        <div class="form-group mb-2">
+            <div class="input-group" data-toggle="aizuploader" data-type="video" data-multiple="false">
+                <div class="input-group-prepend">
+                    <div class="input-group-text bg-soft-secondary font-weight-medium">{{ __('Browse') }}</div>
+                </div>
+                <div class="form-control file-amount">{{ __('Choose File') }}</div>
+                <input value="{{$video}}" type="hidden" name="meta[video]" class="selected-files" required>
+            </div>
+            <div class="file-preview box sm"></div>
+        </div>
+    </div>    
+</div> 
 
 <div class="row">
     <div class="col-md-12">
