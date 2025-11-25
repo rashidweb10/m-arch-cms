@@ -75,7 +75,7 @@
         
         <!-- Secondary Meta Data -->
         <div class="col-lg-5">
-            <div class="card d-none">
+            <div class="card">
                 <div class="card-body">
                     <h5 class="text-uppercase mt-0 mb-3 bg-light p-2">Social Links</h5>
 
@@ -88,8 +88,8 @@
                         <input type="url" class="form-control" id="meta-instagram" name="meta[instagram_url]" value="{{ old('meta.instagram_url', $pageData->meta->where('meta_key', 'instagram_url')->first()->meta_value ?? '') }}" placeholder="Enter Instagram URL">
                     </div>
                     <div class="mb-3 form-group">
-                        <label for="meta-linkedin" class="form-label">LinkedIn URL</label>
-                        <input type="url" class="form-control" id="meta-linkedin" name="meta[linkedin_url]" value="{{ old('meta.linkedin_url', $pageData->meta->where('meta_key', 'linkedin_url')->first()->meta_value ?? '') }}" placeholder="Enter LinkedIn URL">
+                        <label for="meta-x" class="form-label">X URL</label>
+                        <input type="url" class="form-control" id="meta-x" name="meta[x_url]" value="{{ old('meta.x_url', $pageData->meta->where('meta_key', 'x_url')->first()->meta_value ?? '') }}" placeholder="Enter X URL">
                     </div>
                     <div class="mb-3 form-group">
                         <label for="meta-youtube" class="form-label">YouTube URL</label>
