@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f1b51beaf22d0e7b108c8bdd18d6d2db",
+    "content-hash": "433aa94dd2e71f714736a21b1c0b7658",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -2813,6 +2813,49 @@
                 }
             ],
             "time": "2024-10-10T12:33:01+00:00"
+        },
+        {
+            "name": "marinarch/laravel-backup-manager",
+            "version": "dev-autobackup",
+            "dist": {
+                "type": "path",
+                "url": "backup-manager",
+                "reference": "eb01f57a59d9a86de344cac1ae9da25ce5a47401"
+            },
+            "require": {
+                "illuminate/console": "^9.0|^10.0|^11.0|^12.0",
+                "illuminate/database": "^9.0|^10.0|^11.0|^12.0",
+                "illuminate/filesystem": "^9.0|^10.0|^11.0|^12.0",
+                "illuminate/queue": "^9.0|^10.0|^11.0|^12.0",
+                "illuminate/support": "^9.0|^10.0|^11.0|^12.0",
+                "php": ">=8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Marinarch\\BackupManager\\BackupManagerServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Marinarch\\BackupManager\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Backup management package for Laravel 9, 10, 11, and 12 with UI, scheduling, and multi-destination storage.",
+            "keywords": [
+                "backup",
+                "database backup",
+                "filesystem backup",
+                "laravel"
+            ],
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "markbaker/complex",
@@ -10948,7 +10991,7 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "stability-flags": {},
     "prefer-stable": true,
     "prefer-lowest": false,

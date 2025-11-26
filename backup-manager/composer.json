@@ -1,0 +1,36 @@
+{
+  "name": "marinarch/laravel-backup-manager",
+  "description": "Backup management package for Laravel 9, 10, 11, and 12 with UI, scheduling, and multi-destination storage.",
+  "keywords": [
+    "laravel",
+    "backup",
+    "database backup",
+    "filesystem backup"
+  ],
+  "type": "library",
+  "license": "MIT",
+  "require": {
+    "php": ">=8.0",
+    "illuminate/support": "^9.0|^10.0|^11.0|^12.0",
+    "illuminate/console": "^9.0|^10.0|^11.0|^12.0",
+    "illuminate/filesystem": "^9.0|^10.0|^11.0|^12.0",
+    "illuminate/database": "^9.0|^10.0|^11.0|^12.0",
+    "illuminate/queue": "^9.0|^10.0|^11.0|^12.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Marinarch\\BackupManager\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Marinarch\\BackupManager\\BackupManagerServiceProvider"
+      ]
+    }
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true
+}
+
+
