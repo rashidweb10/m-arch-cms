@@ -17,32 +17,53 @@ class PageSeeder extends Seeder
                 'language' => 'en',
                 'title' => 'Home',
                 'content' => 'Welcome to the home page.',
-                'seo_title' => 'Home - Marinarch Thane',
-                'seo_description' => 'Welcome to Marinarch Thane - Home page.',
+                'seo_title' => 'Home - Marinarch',
+                'seo_description' => 'Welcome to Marinarch - Home page.',
                 'seo_keywords' => 'Home, Marinarch',
                 'layout' => 'home',
                 'is_active' => true,
                 'company_id' => 1,
-                'meta' => [
-                    ['meta_key' => 'custom_css', 'meta_value' => ''],
-                    ['meta_key' => 'custom_js', 'meta_value' => ''],
-                ],
+                'meta' => [],
             ],
             [
                 'slug' => 'about-us',
                 'language' => 'en',
                 'title' => 'About Us',
                 'content' => 'This is the about us page content.',
-                'seo_title' => 'About Us - Marinarch Thane',
-                'seo_description' => 'Learn more about Marinarch Thane.',
-                'seo_keywords' => 'about us, Marinarch Thane',
+                'seo_title' => 'About Us - Marinarch',
+                'seo_description' => 'Learn more about Marinarch.',
+                'seo_keywords' => 'about us, Marinarch',
                 'layout' => 'about',
                 'is_active' => true,
                 'company_id' => 2,
-                'meta' => [
-                    ['meta_key' => 'custom_css', 'meta_value' => '.about-us { font-size: 18px; }'],
-                ],
-            ]                                         
+                'meta' => [],
+            ],
+            [
+                'slug' => 'testimonials',
+                'language' => 'en',
+                'title' => 'Testimonials',
+                'content' => 'This is the testimonials page content.',
+                'seo_title' => 'Testimonials - Marinarch',
+                'seo_description' => 'Learn more about Marinarch.',
+                'seo_keywords' => 'Testimonials, Marinarch',
+                'layout' => 'testimonials',
+                'is_active' => true,
+                'company_id' => 2,
+                'meta' => [],
+            ],
+            [
+                'slug' => 'faculties',
+                'language' => 'en',
+                'title' => 'Faculties',
+                'content' => 'This is the faculties page content.',
+                'seo_title' => 'Faculties - Marinarch',
+                'seo_description' => 'Learn more about Marinarch.',
+                'seo_keywords' => 'Faculties, Marinarch',
+                'layout' => 'faculties',
+                'is_active' => true,
+                'company_id' => 2,
+                'meta' => [],
+            ]                                          
         ];
 
         // Loop through the pages and create them with metadata
@@ -54,12 +75,15 @@ class PageSeeder extends Seeder
             $page = Page::create($pageData);
 
             // Add metadata for the page
+            
             foreach ($metaData as $meta) {
-                PageMeta::create([
-                    'page_id' => $page->id,
-                    'meta_key' => $meta['meta_key'],
-                    'meta_value' => $meta['meta_value'],
-                ]);
+                if(!empty($meta)) {
+                    PageMeta::create([
+                        'page_id' => $page->id,
+                        'meta_key' => $meta['meta_key'],
+                        'meta_value' => $meta['meta_value'],
+                    ]);
+                }
             }
         }
     }
