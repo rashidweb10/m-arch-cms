@@ -60,9 +60,9 @@ $home_quicklinks = json_decode($pageData->meta->where('meta_key', 'home_quicklin
         <input class="form-control" value="{{$about_title}}" name="meta[about_title]" type="text" required>
     </div>   
     <div class="col-md-6">
-        <label for="name" class="form-label">Image (Select only 3)<span class="text-danger">*</span></label>
+        <label for="name" class="form-label">Image<span class="text-danger">*</span></label>
         <div class="form-group mb-2">
-            <div class="input-group" data-toggle="aizuploader" data-type="image" data-multiple="true">
+            <div class="input-group" data-toggle="aizuploader" data-type="image" data-multiple="false">
                 <div class="input-group-prepend">
                     <div class="input-group-text bg-soft-secondary font-weight-medium">{{ __('Browse') }}</div>
                 </div>
