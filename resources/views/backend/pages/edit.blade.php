@@ -27,16 +27,16 @@
                         <input type="text" id="title" name="title" value="{{ old('title', $pageData->title) }}" class="form-control" placeholder="Enter page title" required>
                     </div> 
 
-                    <div class="mb-2 form-group d-none">
-                        <label for="content" class="form-label">Content</label>
-                        <textarea name="content" class="form-control text-editor" rows="4">{{ old('content', $pageData->content) }}</textarea>
-                    </div>
-
                     @if($pageData->layout == 'default')
-
+                        @include('backend.pages.edit-layouts.'.$pageData->layout)
                     @else
                         @include('backend.pages.edit-layouts.'.$pageData->layout)
-                    @endif                                      
+                    @endif   
+                    
+                    <div class="mb-2 form-group @if($pageData->layout != 'default') d-none @endif">
+                        <label for="content" class="form-label">Content</label>
+                        <textarea name="content" class="form-control text-editor" rows="4">{{ old('content', $pageData->content) }}</textarea>
+                    </div>                    
                 </div>
             </div>         
         </div>

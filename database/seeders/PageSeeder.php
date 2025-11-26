@@ -63,6 +63,32 @@ class PageSeeder extends Seeder
                 'is_active' => true,
                 'company_id' => 2,
                 'meta' => [],
+            ],
+            [
+                'slug' => 'terms-and-conditions',
+                'language' => 'en',
+                'title' => 'Terms & Conditions',
+                'content' => 'This is the Terms & Conditions page content.',
+                'seo_title' => 'Terms & Conditions - Marinarch',
+                'seo_description' => 'Learn more about Marinarch.',
+                'seo_keywords' => 'Terms & Conditions, Marinarch',
+                'layout' => 'default',
+                'is_active' => true,
+                'company_id' => 2,
+                'meta' => [],
+            ],
+            [
+                'slug' => 'privacy-policy',
+                'language' => 'en',
+                'title' => 'Privacy Policy',
+                'content' => 'This is the Privacy Policy page content.',
+                'seo_title' => 'Privacy Policy - Marinarch',
+                'seo_description' => 'Learn more about Marinarch.',
+                'seo_keywords' => 'Privacy Policy, Marinarch',
+                'layout' => 'default',
+                'is_active' => true,
+                'company_id' => 2,
+                'meta' => [],
             ]                                          
         ];
 
