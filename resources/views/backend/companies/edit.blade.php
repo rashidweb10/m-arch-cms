@@ -68,6 +68,17 @@
                         <label for="company-google-map" class="form-label">Google Map Embed</label>
                         <textarea class="form-control" id="company-google-map" name="google_map" rows="3" placeholder="Paste Google Map iframe">{{ old('google_map', $pageData->google_map) }}</textarea>
                     </div>
+                    <div class="mb-2 form-group">
+                        <label for="company-brochure" class="form-label">{{ __('Brochure') }}</label>
+                        <div class="input-group" data-toggle="aizuploader" data-type="image" data-multiple="false">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text bg-soft-secondary font-weight-medium">{{ __('Browse') }}</div>
+                            </div>
+                            <div class="form-control file-amount">{{ __('Choose File') }}</div>
+                            <input type="hidden" id="company-brochure" name="meta[brochure]" value="{{ old('meta.brochure', $pageData->meta->where('meta_key', 'brochure')->first()->meta_value ?? '') }}" class="selected-files">
+                        </div>
+                        <div class="file-preview box sm"></div>
+                    </div>                    
                 </div>
             </div>
             
@@ -91,6 +102,10 @@
                         <label for="meta-x" class="form-label">X URL</label>
                         <input type="url" class="form-control" id="meta-x" name="meta[x_url]" value="{{ old('meta.x_url', $pageData->meta->where('meta_key', 'x_url')->first()->meta_value ?? '') }}" placeholder="Enter X URL">
                     </div>
+                    <div class="mb-3 form-group">
+                        <label for="meta-linkedin" class="form-label">LinkedIn URL</label>
+                        <input type="url" class="form-control" id="meta-linkedin" name="meta[linkedin_url]" value="{{ old('meta.linkedin_url', $pageData->meta->where('meta_key', 'linkedin_url')->first()->meta_value ?? '') }}" placeholder="Enter LinkedIn URL">
+                    </div>                    
                     <div class="mb-3 form-group">
                         <label for="meta-youtube" class="form-label">YouTube URL</label>
                         <input type="url" class="form-control" id="meta-youtube" name="meta[youtube_url]" value="{{ old('meta.youtube_url', $pageData->meta->where('meta_key', 'youtube_url')->first()->meta_value ?? '') }}" placeholder="Enter YouTube URL">
