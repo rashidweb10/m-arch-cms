@@ -44,6 +44,31 @@
         </li>        
         
         <li class="side-nav-item">
+            <a href="{{ route('pages.index') }}" class="side-nav-link">
+                <span class="menu-icon"><i class="ti ti-pencil"></i></span>
+                <span class="menu-text"> Pages </span>
+            </a>
+        </li> 
+
+        <li class="side-nav-item">
+            <a data-bs-toggle="collapse" href="#sidebarUploads" aria-expanded="false" aria-controls="sidebarTables"
+                class="side-nav-link">
+                <span class="menu-icon"><i class="ti ti-books"></i></span>
+                <span class="menu-text"> Course Management </span>
+                <span class="menu-arrow"></span>
+            </a>
+            <div class="collapse" id="sidebarUploads">
+                <ul class="sub-menu">
+                    <li class="side-nav-item">
+                        <a href="{{ route('course-categories.index') }}" class="side-nav-link">
+                            <span class="menu-text">Categories</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </li>         
+        
+        <li class="side-nav-item">
             <a data-bs-toggle="collapse" href="#sidebarUploads" aria-expanded="false" aria-controls="sidebarTables"
                 class="side-nav-link">
                 <span class="menu-icon"><i class="ti ti-file-upload"></i></span>
@@ -64,14 +89,7 @@
                     </li>
                 </ul>
             </div>
-        </li> 
-        
-        <li class="side-nav-item">
-            <a href="{{ route('pages.index') }}" class="side-nav-link">
-                <span class="menu-icon"><i class="ti ti-pencil"></i></span>
-                <span class="menu-text"> Pages </span>
-            </a>
-        </li>                
+        </li>         
         
         <li class="side-nav-item">
             <a href="{{ route('forms.by', ['form_name' => (auth()->user()->company_id == 1) ? 'contact' : 'contact']) }}" class="side-nav-link">
