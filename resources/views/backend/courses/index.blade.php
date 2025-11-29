@@ -12,7 +12,7 @@
         <div class="card">
             <div class="card-header border-bottom border-dashed align-items-center">
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-10">
                         <form class="row g-3 align-items-center">
                             <div class="col-md-3">
                                 <select name="category" class="form-select select2" id="category-select">
@@ -25,15 +25,22 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
+                                <select name="status" class="form-select select2" id="status-select">
+                                    <option value="" selected>All Status</option>
+                                    <option value="1" @if(request()->get('status') == '1') selected @endif>Active</option>
+                                    <option value="0" @if(request()->get('status') == '0') selected @endif>Inactive</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
                                 <input type="text" name="search" class="form-control" value="{{request()->get('search')}}" placeholder="Search with name">
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-1">
                                 <button type="submit" class="btn btn-success btn-icon w-100">
                                     <i class="ti ti-search"></i>
                                 </button>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-1">
                                 <button type="reset" class="btn btn-warning btn-icon w-100" 
                                     onclick="window.location.href = '{{ route(Route::currentRouteName()) }}';">
                                     <i class="ti ti-refresh"></i>
@@ -41,7 +48,7 @@
                             </div>
                         </form>
                     </div>
-                    <div class="col-md-2 offset-md-2 text-end">
+                    <div class="col-md-2 text-end">
                         <button onclick="smallModal('{{url(route('courses.create'))}}', 'Add New')"
                         class="btn btn-primary btn-icon w-100"><i class="ti ti-plus"></i> Add New</button>        
                     </div>

@@ -26,6 +26,7 @@ class CourseController extends Controller
         // Get the search parameter from the request
         $categoryId = request()->input('category');
         $search = request()->input('search');
+        $status = request()->input('status');
     
         // Start building the query
         $query = Course::with('category');
@@ -33,6 +34,11 @@ class CourseController extends Controller
         // Filter by category if provided
         if ($categoryId) {
             $query->where('category_id', $categoryId);
+        }
+
+        // Filter by status if provided
+        if ($status !== null && $status !== '') {
+            $query->where('is_active', $status);
         }
 
         if ($search) {
