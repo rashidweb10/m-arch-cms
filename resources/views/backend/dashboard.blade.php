@@ -103,18 +103,18 @@
         'name' => 'courses',
         'icon' => 'ti ti-books',
         'count' => $coursesCount,
-        'url' => '',
+        'url' => route('courses.index'),
     ])   
 
     @include('backend.includes.dashboard-card', [
         'name' => 'course categories',
         'icon' => 'ti ti-category',
         'count' => $courseCategoriesCount,
-        'url' => '',
+        'url' => route('course-categories.index'),
     ])   
 
     @include('backend.includes.dashboard-card', [
-        'name' => 'course material',
+        'name' => 'course materials',
         'icon' => 'ti ti-file-text',
         'count' => $courseMaterialsCount,
         'url' => '',
