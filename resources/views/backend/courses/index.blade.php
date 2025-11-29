@@ -72,7 +72,7 @@
                         <tbody>
                             @foreach ($pageData as $index => $row)
                             <tr>
-                                <td>{{ $index + 1 }}</td>
+                                <td>{{ $pageData->firstItem() + $index }}</td>
                                 <td class="d-flex align-items-center">
                                     <a href="{{ uploaded_asset($row->image) }}" target="_blank">
                                         <img src="{{ uploaded_asset($row->image) }}"
