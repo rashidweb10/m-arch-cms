@@ -64,6 +64,11 @@
                             <span class="menu-text">Categories</span>
                         </a>
                     </li>
+                    <li class="side-nav-item">
+                        <a href="{{ route('courses.index') }}" class="side-nav-link">
+                            <span class="menu-text">Courses</span>
+                        </a>
+                    </li>                    
                 </ul>
             </div>
         </li>         
