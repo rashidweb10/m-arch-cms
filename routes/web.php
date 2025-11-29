@@ -38,15 +38,15 @@ Route::prefix('command')->group(function () {
     Route::get('queue-flush', [CommandController::class, 'queueFlush']);    
 });
 
-Route::get('/', [FrontendController::class, 'home'])->name('home');
+// Route::get('/', [FrontendController::class, 'home'])->name('home');
 
-Route::get('/about-us', [FrontendController::class, 'about'])->name('about');
+// Route::get('/about-us', [FrontendController::class, 'about'])->name('about');
 
-Route::get('/products', [FrontendController::class, 'products'])->name('products');
+// Route::get('/products', [FrontendController::class, 'products'])->name('products');
 
-Route::get('/contact-us', [FrontendController::class, 'contact'])->name('contact');
+// Route::get('/contact-us', [FrontendController::class, 'contact'])->name('contact');
 
-Route::post('/submit-form', [FormController::class, 'submit'])->middleware(['protect.forms','recaptcha','throttle:4,1'])->name('form.submit');
+// Route::post('/submit-form', [FormController::class, 'submit'])->middleware(['protect.forms','recaptcha','throttle:4,1'])->name('form.submit');
 
 // Group routes under the 'backend' prefix
 Route::prefix('backend')->group(function () {
@@ -110,24 +110,24 @@ Route::prefix('backend')->group(function () {
 
 
 //Page Routes
-Route::get('{slug}', function ($slug) {
-    //$page = DB::table('pages')->where('slug', $slug)->first();
-    $page = DB::table('pages')->where('slug', $slug)->where('company_id', config('custom.school_id'))->first();
+// Route::get('{slug}', function ($slug) {
+//     //$page = DB::table('pages')->where('slug', $slug)->first();
+//     $page = DB::table('pages')->where('slug', $slug)->where('company_id', config('custom.school_id'))->first();
 
-    if (!$page) {
-        abort(404);
-    }
+//     if (!$page) {
+//         abort(404);
+//     }
 
-    switch ($page->layout) {
-        case 'circulars':
-            return app(FrontendController::class)->circulars($page->slug);
-        case 'achivements':
-            return app(FrontendController::class)->achivements($page->slug);
-        case 'newsletter':
-            return app(FrontendController::class)->newsletter($page->slug);  
-        case 'default':
-            return app(FrontendController::class)->default($page->slug);           
-        default:
-            abort(404, 'Route needs to be manually define.');
-    }
-})->where('slug', '.*');
+//     switch ($page->layout) {
+//         case 'circulars':
+//             return app(FrontendController::class)->circulars($page->slug);
+//         case 'achivements':
+//             return app(FrontendController::class)->achivements($page->slug);
+//         case 'newsletter':
+//             return app(FrontendController::class)->newsletter($page->slug);  
+//         case 'default':
+//             return app(FrontendController::class)->default($page->slug);           
+//         default:
+//             abort(404, 'Route needs to be manually define.');
+//     }
+// })->where('slug', '.*');
