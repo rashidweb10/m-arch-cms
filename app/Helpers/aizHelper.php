@@ -39,7 +39,7 @@ if (!function_exists('uploaded_asset')) {
 
         // Fallback if asset not found
         if ($asset === null) {
-            return static_asset('assets/frontend/img/placeholder.jpg');
+            return static_asset('assets/frontend/img/default.png');
         }
         
         // Thumbnail Image

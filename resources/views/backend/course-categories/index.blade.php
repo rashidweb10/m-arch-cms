@@ -55,8 +55,8 @@
                             <tr>
                                 <td>{{ $index + 1 }}</td>
                                 <td class="d-flex align-items-center">
-                                    <a href="{{ $row->image ? uploaded_asset($row->image) : asset('public/assets/backend/img/logo.png') }}" target="_blank">
-                                        <img src="{{ $row->image ? uploaded_asset($row->image) : asset('assets/backend/img/logo.png') }}"
+                                    <a href="{{ uploaded_asset($row->image) }}" target="_blank">
+                                        <img src="{{ uploaded_asset($row->image) }}"
                                             width="32"
                                             height="32"
                                             class="rounded me-2"
