@@ -90,11 +90,11 @@
                                 <td>
                                     @if($row->attachments)
                                         @php
-                                            $attachments = is_string($row->attachments) ? json_decode($row->attachments, true) : $row->attachments;
+                                            $attachments = explode(',', $row->attachments);
                                             $attachmentCount = is_array($attachments) ? count($attachments) : 0;
                                         @endphp
                                         @if($attachmentCount > 0)
-                                            <span class="badge bg-info">{{ $attachmentCount }} file(s)</span>
+                                            <span class="badge bg-secondary">{{ $attachmentCount }} file(s)</span>
                                         @else
                                             No files
                                         @endif
