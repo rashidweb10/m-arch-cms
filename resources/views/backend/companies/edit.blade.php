@@ -70,7 +70,7 @@
                     </div>
                     <div class="mb-2 form-group">
                         <label for="company-brochure" class="form-label">{{ __('Brochure') }}</label>
-                        <div class="input-group" data-toggle="aizuploader" data-type="image" data-multiple="false">
+                        <div class="input-group" data-toggle="aizuploader" data-type="document" data-multiple="false">
                             <div class="input-group-prepend">
                                 <div class="input-group-text bg-soft-secondary font-weight-medium">{{ __('Browse') }}</div>
                             </div>
