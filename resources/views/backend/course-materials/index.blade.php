@@ -74,7 +74,17 @@
                             @foreach ($pageData as $index => $row)
                             <tr>
                                 <td>{{ $pageData->firstItem() + $index }}</td>
-                                <td>{{ $row->course->name ?? 'N/A' }}</td>
+                                <td>
+                                    @if($row->course)
+                                        <a href="{{ url('backend/courses?search=' . urlencode($row->course->name)) }}" 
+                                        target="_blank" 
+                                        class="text-primary">
+                                            {{ text_limit($row->course->name) }}
+                                        </a>
+                                    @else
+                                        N/A
+                                    @endif
+                                </td>
                                 <td>{{ $row->title ?? 'N/A' }}</td>
                                 <td>{{ Str::limit($row->description ?? 'N/A', 50) }}</td>
                                 <td>

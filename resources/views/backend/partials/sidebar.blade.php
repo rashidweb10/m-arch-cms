@@ -68,7 +68,12 @@
                         <a href="{{ route('courses.index') }}" class="side-nav-link">
                             <span class="menu-text">Courses</span>
                         </a>
-                    </li>                    
+                    </li>   
+                    <li class="side-nav-item">
+                        <a href="{{ route('course-materials.index') }}" class="side-nav-link">
+                            <span class="menu-text">Materials</span>
+                        </a>
+                    </li>                                     
                 </ul>
             </div>
         </li>         

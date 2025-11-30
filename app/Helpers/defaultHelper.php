@@ -543,4 +543,12 @@ if (!function_exists('getTinyMCEApiKey')) {
         return $key->api_key;
     }
 }
+
+if (!function_exists('text_limit')) {
+    function text_limit($text, $limit = 15)
+    {
+        return \Illuminate\Support\Str::limit($text, $limit);
+    }
+}
+
 /*End - tiny MCE Helper*/
