@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class CourseMaterial extends Model
 {
     protected $fillable = [
+        'category_id',
         'course_id',
         'title',
         'description',
         'attachments',
+        'sorting_id',
         'is_active',
     ];
 

@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('course_materials', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('category_id')->nullable();
             $table->unsignedBigInteger('course_id');
             $table->string('title');
             $table->text('description')->nullable();
             $table->text('attachments')->nullable(); // JSON or multiple file paths
+            $table->text('sorting_id')->nullable();
             $table->boolean('is_active')->default(1);
             $table->timestamps();
         });
