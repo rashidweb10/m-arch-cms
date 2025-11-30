@@ -76,3 +76,8 @@ Image -- Image Add More
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
+
+
+UPDATE course_materials cm
+JOIN courses c ON cm.course_id = c.id
+SET cm.category_id = c.category_id;
