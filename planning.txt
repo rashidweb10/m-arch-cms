@@ -1,11 +1,83 @@
-Scope of Work - Maxcrude Project
-    Homepage (Frontend & Backend – fully dynamic)
-    About Page (Frontend & Backend – fully dynamic)
-    Product List Page (Frontend & Backend – fully dynamic)
-    Contact Us Page (Frontend & Backend – fully dynamic)
-    Form submission (store in backend + email notification to Admin)
-    Dynamic Header (excluding menu)
-    Dynamic Footer (excluding menu)
-    Testing
-    Deployment
-    Post-deployment Support (Bug fixes for up to 1 month after launch)
+*CMS PAGES*
+
+HOMEPAGE FIELDS
+
+*Banner*
+Banners -- multi image select
+
+*About*
+Title -- Input
+Description -- Text Editor
+Image -- single image
+
+*Courses*
+Make Featured Course Dynamic
+
+*About2*
+Title 2 -- Input
+Description 2 -- Text Editor
+
+*Our Achievements*
+Title & Counts -- Input Add More
+
+*Mission*
+Title -- Input
+Description -- Text Editor
+Image -- single image
+
+
+*Awards & Achivements*
+Title & Image -- Input & Image Add More
+
+*Footer*
+Video -- Input
+Image -- Single Image
+
+*Why*
+Title & Image -- Input & Image Add More
+
+-----------------------------------------------
+
+ABOUTPAGE FIELDS
+
+*Breadcrumb*
+Image -- single image 
+
+*About*
+Title -- Input
+Description -- Text Editor
+Image -- single image
+
+*Courses*
+Make Featured Course Dynamic
+
+*Awards & Achivements*
+Title & Image -- Input & Image Add More
+
+*Why*
+Title & Image -- Input & Image Add More
+
+-----------------------------------------------
+
+COURSEPAGE FIELDS
+directly dynamic from course table
+
+-----------------------------------------------
+
+FACULTIES FIELDS
+Title -- Input
+Description -- Text Editor
+Name, Designation, Profile Picture -- Input & Image Add More
+
+-----------------------------------------------
+
+TESTIMONIALS FIELDS
+Image -- Image Add More
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+
+
+UPDATE course_materials cm
+JOIN courses c ON cm.course_id = c.id
+SET cm.category_id = c.category_id;
