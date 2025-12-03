@@ -14,7 +14,7 @@
                 <div class="row">
                     <div class="col-md-10">
                         <form class="row g-3 align-items-center">
-                            <div class="col-md-3">
+                            <div class="col-md">
                                 <select name="category" class="form-select select2" id="category-select">
                                     <option value="" selected>All Categories</option>
                                     @if(isset($categoryList))
@@ -27,19 +27,19 @@
                                     @endif
                                 </select>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md">
                                 <select name="course" class="form-select select2" id="course-select">
                                     <option value="" selected>Select Course</option>
                                 </select>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md">
                                 <select name="status" class="form-select select2" id="status-select">
                                     <option value="" selected>All Status</option>
                                     <option value="1" @if(request()->get('status') == '1') selected @endif>Active</option>
                                     <option value="0" @if(request()->get('status') == '0') selected @endif>Inactive</option>
                                 </select>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md">
                                 <input type="text" name="search" class="form-control" value="{{request()->get('search')}}" placeholder="Search with title">
                             </div>
                             <div class="col-md-1">
@@ -67,6 +67,7 @@
                         <thead>
                             <tr>
                                 <th>#</th>
+                                <th>Category</th>
                                 <th>Course</th>
                                 <th>Title</th>
                                 <th>Description</th>
@@ -81,6 +82,11 @@
                             @foreach ($pageData as $index => $row)
                             <tr>
                                 <td>{{ $pageData->firstItem() + $index }}</td>
+                                <td>
+                                    <a target="_blank" class="text-primary" href="{{ url('backend/course-categories?search=' . urlencode($row->category->name ?? '')) }}">
+                                        {{ $row->category->name ?? 'N/A' }}
+                                    </a>
+                                </td>                                
                                 <td>
                                     @if($row->course)
                                         <a href="{{ url('backend/courses?search=' . urlencode($row->course->name)) }}" 
@@ -144,6 +150,10 @@ $(document).ready(function () {
         const categoryId = $(this).val();
         const $courseSelect = $('#course-select');
 
+        if (!categoryId) {
+            return false;
+        }
+
         // Show a temporary loading option
         $courseSelect.html('<option value="">Loading...</option>');
 
@@ -155,7 +165,7 @@ $(document).ready(function () {
             },
             success: function (response) {
                 // Reset options
-                let options = '<option value="">All Courses</option>';
+                let options = '<option value="">Select Course</option>';
 
                 if (Array.isArray(response) && response.length) {
                     response.forEach(function (course) {
@@ -170,7 +180,7 @@ $(document).ready(function () {
                 $courseSelect.html('<option value="">All Courses</option>').trigger('change.select2');
             }
         });
-    });
+    }).trigger('change');
 });
 </script>
 @endsection
