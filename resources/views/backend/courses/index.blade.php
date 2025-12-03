@@ -61,8 +61,8 @@
                             <tr>
                                 <th>#</th>
                                 <th>Image</th>
-                                <th>Name</th>
                                 <th>Category</th>
+                                <th>Name</th>
                                 <th>Status</th>
                                 <th>Created At</th>
                                 <th>Updated At</th>                                
@@ -82,8 +82,12 @@
                                             alt="{{ $row->name }}">
                                     </a>
                                 </td> 
+                                <td>
+                                    <a target="_blank" class="text-primary" href="{{ url('backend/course-categories?search=' . urlencode($row->category->name ?? '')) }}">
+                                        {{ $row->category->name ?? 'N/A' }}
+                                    </a>
+                                </td>
                                 <td>{{ $row->name }}</td>
-                                <td>{{ $row->category->name ?? 'N/A' }}</td>
                                 <td>
                                 <span class="badge {{ $row->is_active ? 'bg-success' : 'bg-danger' }}">
                                     {{ $row->is_active ? 'Active' : 'Inactive' }}
