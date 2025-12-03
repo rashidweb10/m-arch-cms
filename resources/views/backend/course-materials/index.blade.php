@@ -15,14 +15,21 @@
                     <div class="col-md-10">
                         <form class="row g-3 align-items-center">
                             <div class="col-md-3">
+                                <select name="category" class="form-select select2" id="category-select">
+                                    <option value="" selected>All Categories</option>
+                                    @if(isset($categoryList))
+                                        @foreach ($categoryList as $index => $row)
+                                            <option value="{{ $row->id }}" 
+                                                @if(request()->get('category') == $row->id) selected @endif>
+                                                {{ $row->name }}
+                                            </option>
+                                        @endforeach
+                                    @endif
+                                </select>
+                            </div>
+                            <div class="col-md-3">
                                 <select name="course" class="form-select select2" id="course-select">
-                                    <option value="" selected>All Courses</option>
-                                    @foreach ($courseList as $index => $row)
-                                        <option value="{{ $row->id }}" 
-                                            @if(request()->get('course') == $row->id) selected @endif>
-                                            {{ $row->name }}
-                                        </option>
-                                    @endforeach
+                                    <option value="" selected>Select Course</option>
                                 </select>
                             </div>
                             <div class="col-md-3">
@@ -130,6 +137,41 @@ const callbackCourseMaterials = function(response) {
         location.reload();
     }, 1500);
 }
+
+// When the category changes, fetch courses for that category via AJAX
+$(document).ready(function () {
+    $('#category-select').on('change', function () {
+        const categoryId = $(this).val();
+        const $courseSelect = $('#course-select');
+
+        // Show a temporary loading option
+        $courseSelect.html('<option value="">Loading...</option>');
+
+        $.ajax({
+            url: '{{ route('courses.by-category') }}',
+            method: 'GET',
+            data: {
+                category_id: categoryId
+            },
+            success: function (response) {
+                // Reset options
+                let options = '<option value="">All Courses</option>';
+
+                if (Array.isArray(response) && response.length) {
+                    response.forEach(function (course) {
+                        options += '<option value="' + course.id + '">' + course.name + '</option>';
+                    });
+                }
+
+                $courseSelect.html(options).trigger('change.select2');
+            },
+            error: function () {
+                // On error, just reset to default option
+                $courseSelect.html('<option value="">All Courses</option>').trigger('change.select2');
+            }
+        });
+    });
+});
 </script>
 @endsection
 

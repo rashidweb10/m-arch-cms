@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\CourseMaterial;
 use App\Models\Course;
+use App\Models\CourseCategory;
 
 class CourseMaterialController extends Controller
 {
@@ -23,14 +24,22 @@ class CourseMaterialController extends Controller
      */
     public function index()
     {
-        // Get the search parameter from the request
-        $courseId = request()->input('course');
-        $search = request()->input('search');
-        $status = request()->input('status');
+        // Get the search/filter parameters from the request
+        $categoryId = request()->input('category');
+        $courseId   = request()->input('course');
+        $search     = request()->input('search');
+        $status     = request()->input('status');
     
         // Start building the query
         $query = CourseMaterial::with('course');
     
+        // Filter by category (via the related course) if provided
+        if ($categoryId) {
+            $query->whereHas('course', function ($q) use ($categoryId) {
+                $q->where('category_id', $categoryId);
+            });
+        }
+
         // Filter by course if provided
         if ($courseId) {
             $query->where('course_id', $courseId);
@@ -41,8 +50,9 @@ class CourseMaterialController extends Controller
             $query->where('is_active', $status);
         }
 
+        // Free-text search on title / description
         if ($search) {
-            $query->where(function($query) use ($search) {
+            $query->where(function ($query) use ($search) {
                 $query->where('title', 'like', '%'.$search.'%')
                     ->orWhere('description', 'like', '%'.$search.'%');
             });
@@ -52,11 +62,17 @@ class CourseMaterialController extends Controller
     
         $pageData = $query->paginate(5);
     
-        // Get dropdown data for courses
-        $courseList = Course::where('is_active', 1)->orderBy('name', 'asc')->get();
+        // Get dropdown data for categories and courses
+        $categoryList = CourseCategory::where('is_active', 1)->orderBy('name', 'asc')->get();
+
+        $courseQuery = Course::where('is_active', 1);
+        if ($categoryId) {
+            $courseQuery->where('category_id', $categoryId);
+        }
+        $courseList = $courseQuery->orderBy('name', 'asc')->get();
     
         // Return the view with data
-        return view('backend.course-materials.index', compact('pageData', 'courseList'));
+        return view('backend.course-materials.index', compact('pageData', 'courseList', 'categoryList'));
     }
 
     /**

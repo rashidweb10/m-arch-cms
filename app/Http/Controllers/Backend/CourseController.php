@@ -25,8 +25,8 @@ class CourseController extends Controller
     {
         // Get the search parameter from the request
         $categoryId = request()->input('category');
-        $search = request()->input('search');
-        $status = request()->input('status');
+        $search     = request()->input('search');
+        $status     = request()->input('status');
     
         // Start building the query
         $query = Course::with('category');
@@ -56,6 +56,24 @@ class CourseController extends Controller
     
         // Return the view with data
         return view('backend.courses.index', compact('pageData', 'categoryList'));
+    }
+
+    /**
+     * Return list of active courses for a given category (AJAX helper).
+     */
+    public function getByCategory(Request $request)
+    {
+        $categoryId = $request->input('category_id');
+
+        $query = Course::where('is_active', 1);
+
+        if ($categoryId) {
+            $query->where('category_id', $categoryId);
+        }
+
+        $courses = $query->orderBy('name', 'asc')->get(['id', 'name']);
+
+        return response()->json($courses);
     }
 
     /**

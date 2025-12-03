@@ -104,6 +104,9 @@ Route::prefix('backend')->group(function () {
         Route::resource('courses', CourseController::class);
     });  
 
+    // AJAX route to get courses by category (used in Course Materials page filter)
+    Route::middleware('auth.backend')->get('ajax/courses-by-category', [CourseController::class, 'getByCategory'])->name('courses.by-category');
+
     Route::middleware('auth.backend')->group(function () {
         Route::resource('course-materials', CourseMaterialController::class);
     });  

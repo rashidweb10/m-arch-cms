@@ -76,7 +76,11 @@ Image -- Image Add More
 
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
+INSERT INTO `course_categories` (`id`, `name`, `image`, `is_active`, `created_at`, `updated_at`) VALUES ('1', 'Uncategorized', NULL, '1', NULL, NULL);
 
+UPDATE courses 
+SET category_id = 1 
+WHERE category_id = 0;
 
 UPDATE course_materials cm
 JOIN courses c ON cm.course_id = c.id
