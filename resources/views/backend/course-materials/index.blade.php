@@ -67,6 +67,7 @@
                         <thead>
                             <tr>
                                 <th>#</th>
+                                <th>Sort ID</th>
                                 <th>Category</th>
                                 <th>Course</th>
                                 <th>Title</th>
@@ -82,6 +83,7 @@
                             @foreach ($pageData as $index => $row)
                             <tr>
                                 <td>{{ $pageData->firstItem() + $index }}</td>
+                                <td>{{ $row->sorting_id ?? 'N/A' }}</td>
                                 <td>
                                     <a target="_blank" class="text-primary" href="{{ url('backend/course-categories?search=' . urlencode($row->category->name ?? '')) }}">
                                         {{ $row->category->name ?? 'N/A' }}

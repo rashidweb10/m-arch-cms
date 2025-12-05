@@ -31,7 +31,7 @@ class CourseMaterialController extends Controller
         $status     = request()->input('status');
     
         // Start building the query
-        $query = CourseMaterial::with('course');
+        $query = CourseMaterial::with('course', 'category');
     
         // Filter by category (via the related course) if provided
         if ($categoryId) {
@@ -58,7 +58,7 @@ class CourseMaterialController extends Controller
             });
         }      
     
-        $query->orderBy('id', 'desc');
+        $query->orderBy('id', 'desc')->orderBy('sorting_id', 'asc');
     
         $pageData = $query->paginate(5);
     
@@ -81,8 +81,8 @@ class CourseMaterialController extends Controller
     public function create()
     {
         $categoryList = CourseCategory::where('is_active', 1)->orderBy('name', 'asc')->get();
-        //$courseList = Course::where('is_active', 1)->orderBy('name', 'asc')->get();
-        return view('backend.course-materials.create', compact('categoryList'));
+        $courseList = Course::where('is_active', 1)->orderBy('name', 'asc')->get();
+        return view('backend.course-materials.create', compact('courseList', 'categoryList'));
     }
 
     /**
@@ -198,4 +198,3 @@ class CourseMaterialController extends Controller
         }
     }    
 }
-
