@@ -67,7 +67,7 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Sort ID</th>
+                                <th>Series ID</th>
                                 <th>Category</th>
                                 <th>Course</th>
                                 <th>Title</th>
