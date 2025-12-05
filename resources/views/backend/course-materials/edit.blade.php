@@ -3,14 +3,36 @@
     @method('PUT')
     <div class="row">
 
+        <!-- Category -->
+        <div class="col-sm-12">
+            <div class="form-group mb-2">
+                <label for="category_id" class="form-label">Course Category</label>
+                <select name="category_id" id="category_id" class="form-select select2">
+                    <option value="">--Select Category--</option>
+                    @php
+                        // Get the category ID - prefer material's category_id, fallback to course's category_id
+                        $selectedCategoryId = old('category_id', $pageData->category_id ?? ($pageData->course->category_id ?? null));
+                    @endphp
+                    @foreach ($categoryList as $index => $row)
+                        <option value="{{ $row->id }}" @if($selectedCategoryId == $row->id) selected @endif>{{ $row->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+
         <!-- Course -->
         <div class="col-sm-12">
             <div class="form-group mb-2">
                 <label for="course_id" class="form-label">Course <span class="text-danger">*</span></label>
-                <select name="course_id" class="form-select select2" required>
-                    <option value="">--Select--</option>
+                <select name="course_id" id="course_id" class="form-select select2" required>
+                    <option value="">--Select Course--</option>
+                    @php
+                        $selectedCourseId = old('course_id', $pageData->course_id);
+                    @endphp
                     @foreach ($courseList as $index => $row)
-                        <option value="{{ $row->id }}" @if(old('course_id', $pageData->course_id) == $row->id) selected @endif>{{ $row->name }}</option>
+                        @if($selectedCourseId == $row->id)
+                        <option value="{{ $row->id }}" selected>{{ $row->name }}</option>
+                        @endif
                     @endforeach
                 </select>
             </div>
@@ -45,6 +67,14 @@
                 </div>
                 <div class="file-preview box sm"></div>
             </div>
+        </div>
+
+        <!-- Sorting -->
+        <div class="col-sm-12">
+            <div class="form-group mb-2">
+                <label for="sorting_id" class="form-label">Sorting</label>
+                <input value="{{ old('sorting_id', $pageData->sorting_id) }}" name="sorting_id" type="number" class="form-control" placeholder="Enter sorting number">
+            </div>
         </div>     
      
         <!-- Is Active (dropdown) -->
@@ -73,6 +103,55 @@ $(document).ready(function() {
     initTextEditor();
     AIZ.uploader.previewGenerate();
     initSelect2('.select2');
+
+    // Store the initially selected course ID and name
+    const initialCourseId = $('#course_id').val();
+    const initialCourseName = $('#course_id option:selected').text();
+
+    // When category changes, fetch courses for that category via AJAX
+    $('#category_id').on('change', function () {
+        const categoryId = $(this).val();
+        const $courseSelect = $('#course_id');
+        const currentCourseId = $courseSelect.val() || initialCourseId;
+        const currentCourseName = $courseSelect.find('option:selected').text() || initialCourseName;
+
+        // Show a temporary loading option
+        $courseSelect.html('<option value="">Loading...</option>');
+
+        $.ajax({
+            url: '{{ route('courses.by-category') }}',
+            method: 'GET',
+            data: {
+                category_id: categoryId
+            },
+            success: function (response) {
+                // Reset options
+                let options = '<option value="">--Select Course--</option>';
+                let courseFound = false;
+
+                if (Array.isArray(response) && response.length) {
+                    response.forEach(function (course) {
+                        options += '<option value="' + course.id + '">' + course.name + '</option>';
+                    });
+                }
+
+                // If the current course is not in the filtered list, add it anyway (preserve selection)
+                // if (currentCourseId && !courseFound) {
+                //     options = '<option value="' + currentCourseId + '" selected>' + currentCourseName + '</option>' + options;
+                // }
+
+                $courseSelect.html(options).trigger('change.select2');
+            },
+            error: function () {
+                // On error, preserve the current selection
+                let options = '<option value="">--Select Course--</option>';
+                if (currentCourseId) {
+                    options = '<option value="' + currentCourseId + '" selected>' + currentCourseName + '</option>';
+                }
+                $courseSelect.html(options).trigger('change.select2');
+            }
+        });
+    });
 
     $("#edit").submit(function(e) {
         var form = $(this);

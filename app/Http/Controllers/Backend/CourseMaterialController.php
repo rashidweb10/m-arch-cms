@@ -80,8 +80,9 @@ class CourseMaterialController extends Controller
      */
     public function create()
     {
-        $courseList = Course::where('is_active', 1)->orderBy('name', 'asc')->get();
-        return view('backend.course-materials.create', compact('courseList'));
+        $categoryList = CourseCategory::where('is_active', 1)->orderBy('name', 'asc')->get();
+        //$courseList = Course::where('is_active', 1)->orderBy('name', 'asc')->get();
+        return view('backend.course-materials.create', compact('categoryList'));
     }
 
     /**
@@ -91,19 +92,23 @@ class CourseMaterialController extends Controller
     {
         // Validate the incoming data
         $validated = $request->validate([
+            'category_id' => 'nullable|exists:course_categories,id',
             'course_id' => 'required|exists:courses,id',
             'title' => 'required|string|min:3|max:200',
             'description' => 'nullable|string',
             'attachments' => 'nullable|string',
+            'sorting_id' => 'nullable|integer',
             'is_active' => 'required|boolean',
         ]);
 
         // If validation passes, proceed to saving the data
         $courseMaterial = new CourseMaterial();
+        $courseMaterial->category_id = $request->input('category_id');
         $courseMaterial->course_id = $request->input('course_id');
         $courseMaterial->title = $request->input('title');
         $courseMaterial->description = $request->input('description');
         $courseMaterial->attachments = $request->input('attachments');
+        $courseMaterial->sorting_id = $request->input('sorting_id');
         $courseMaterial->is_active = $request->input('is_active');
         $courseMaterial->save();
 
@@ -124,9 +129,16 @@ class CourseMaterialController extends Controller
      */
     public function edit(string $id)
     {
-        $pageData = CourseMaterial::findOrFail($id);
-        $courseList = Course::where('is_active', 1)->orWhere('id', $pageData->course_id)->orderBy('name', 'asc')->get();
-        return view('backend.course-materials.edit', compact('pageData', 'courseList'));
+        $pageData = CourseMaterial::with('course')->findOrFail($id);
+        $categoryList = CourseCategory::where('is_active', 1)->orderBy('name', 'asc')->get();
+        
+        // Get courses - include the current course even if inactive, and all active courses
+        $courseList = Course::where('is_active', 1)
+            ->orWhere('id', $pageData->course_id)
+            ->orderBy('name', 'asc')
+            ->get();
+        
+        return view('backend.course-materials.edit', compact('pageData', 'courseList', 'categoryList'));
     }
 
     /**
@@ -139,18 +151,22 @@ class CourseMaterialController extends Controller
     
         // Validate the incoming data
         $validated = $request->validate([
+            'category_id' => 'nullable|exists:course_categories,id',
             'course_id' => 'required|exists:courses,id',
             'title' => 'required|string|min:3|max:200',
             'description' => 'nullable|string',
             'attachments' => 'nullable|string',
+            'sorting_id' => 'nullable|integer',
             'is_active' => 'required|boolean',
         ]);
     
         // If validation passes, update the data
+        $courseMaterial->category_id = $request->input('category_id');
         $courseMaterial->course_id = $request->input('course_id');
         $courseMaterial->title = $request->input('title');
         $courseMaterial->description = $request->input('description');
         $courseMaterial->attachments = $request->input('attachments');
+        $courseMaterial->sorting_id = $request->input('sorting_id');
         $courseMaterial->is_active = $request->input('is_active');
         $courseMaterial->save();
     
