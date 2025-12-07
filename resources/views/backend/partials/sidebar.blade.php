@@ -51,6 +51,13 @@
         </li> 
 
         <li class="side-nav-item">
+            <a href="{{ route('students.index') }}" class="side-nav-link">
+                <span class="menu-icon"><i class="ti ti-users"></i></span>
+                <span class="menu-text"> Students </span>
+            </a>
+        </li>         
+    
+        <li class="side-nav-item">
             <a data-bs-toggle="collapse" href="#courses" aria-expanded="false" aria-controls="sidebarTables"
                 class="side-nav-link">
                 <span class="menu-icon"><i class="ti ti-books"></i></span>
