@@ -124,7 +124,7 @@
         'name' => 'course enrolments',
         'icon' => 'ti ti-user-plus',
         'count' => $courseEnrolmentsCount,
-        'url' => route('students.index'),
+        'url' => route('course-enrolments.index'),
     ])   
 
     @include('backend.includes.dashboard-card', [
@@ -138,7 +138,7 @@
         'name' => 'inactive students',
         'icon' => 'ti ti-user-x',
         'count' => $inactiveStudentsCount,
-        'url' => route('course-enrolments.index'),
+        'url' => route('students.index'),
     ])   
 </div>
 @endsection
