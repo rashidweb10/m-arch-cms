@@ -117,28 +117,28 @@
         'name' => 'course materials',
         'icon' => 'ti ti-file-text',
         'count' => $courseMaterialsCount,
-        'url' => '',
+        'url' => route('course-materials.index'),
     ])  
 
     @include('backend.includes.dashboard-card', [
         'name' => 'course enrolments',
         'icon' => 'ti ti-user-plus',
         'count' => $courseEnrolmentsCount,
-        'url' => '',
+        'url' => route('students.index'),
     ])   
 
     @include('backend.includes.dashboard-card', [
         'name' => 'active students',
         'icon' => 'ti ti-user-check',
         'count' => $activeStudentsCount,
-        'url' => '',
+        'url' => route('students.index'),
     ])  
 
     @include('backend.includes.dashboard-card', [
         'name' => 'inactive students',
         'icon' => 'ti ti-user-x',
         'count' => $inactiveStudentsCount,
-        'url' => '',
+        'url' => route('course-enrolments.index'),
     ])   
 </div>
 @endsection
