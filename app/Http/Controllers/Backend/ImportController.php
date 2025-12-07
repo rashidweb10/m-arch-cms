@@ -116,7 +116,7 @@ class ImportController extends Controller
                 'user_id'    => $r[1],
                 'course_id'  => $r[2] ?? null,
                 'is_active'  => $r[4] ?? 0,
-                'created_at' => (!empty($r[7]) && $r[7] != '0000-00-00 00:00:00') ? $r[7] : now(),
+                'created_at' => (!empty($r[6]) && $r[6] != '0000-00-00 00:00:00') ? $r[6] : now(),
                 'updated_at' => now(),
             ];
 
