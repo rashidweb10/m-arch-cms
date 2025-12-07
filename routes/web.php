@@ -11,6 +11,7 @@ use App\Http\Controllers\Backend\CompanyController;
 use App\Http\Controllers\Backend\CourseCategoryController;
 use App\Http\Controllers\Backend\CourseController;
 use App\Http\Controllers\Backend\CourseMaterialController;
+use App\Http\Controllers\Backend\StudentController;
 use App\Http\Controllers\Backend\TeamController;
 use App\Http\Controllers\Backend\CampusController;
 use App\Http\Controllers\Backend\GalleryController;
@@ -109,6 +110,10 @@ Route::prefix('backend')->group(function () {
 
     Route::middleware('auth.backend')->group(function () {
         Route::resource('course-materials', CourseMaterialController::class);
+    });  
+
+    Route::middleware('auth.backend')->group(function () {
+        Route::resource('students', StudentController::class);
     });  
     
     Route::middleware('auth.backend')->group(function () {

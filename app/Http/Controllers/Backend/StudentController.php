@@ -1,0 +1,174 @@
+<?php
+
+namespace App\Http\Controllers\Backend;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+
+class StudentController extends Controller
+{
+    protected $moduleName;
+
+    public function __construct()
+    {
+        //Module Name
+        $this->moduleName = 'Students';
+        view()->share('moduleName', $this->moduleName);
+    }
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        // Get the search/filter parameters from the request
+        $search = request()->input('search');
+        $status = request()->input('status');
+    
+        // Start building the query - only get users with role_id = 3 (students)
+        $query = User::where('role_id', 3);
+    
+        // Filter by status if provided
+        if ($status !== null && $status !== '') {
+            $query->where('is_active', $status);
+        }
+
+        // Free-text search on name, email, phone, location
+        if ($search) {
+            $query->where(function ($query) use ($search) {
+                $query->where('name', 'like', '%'.$search.'%')
+                    ->orWhere('email', 'like', '%'.$search.'%')
+                    ->orWhere('phone', 'like', '%'.$search.'%')
+                    ->orWhere('location', 'like', '%'.$search.'%');
+            });
+        }      
+    
+        $query->orderBy('id', 'desc');
+    
+        $pageData = $query->paginate(10);
+    
+        // Return the view with data
+        return view('backend.students.index', compact('pageData'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        return view('backend.students.create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        // Validate the incoming data
+        $validated = $request->validate([
+            'name' => 'required|string|min:3|max:200',
+            'email' => 'required|email|unique:users,email',
+            'phone' => 'nullable|string|max:20',
+            'location' => 'nullable|string|max:200',
+            'password' => 'required|string|min:8',
+            'is_active' => 'required|boolean',
+        ]);
+
+        // If validation passes, proceed to saving the data
+        $student = new User();
+        $student->role_id = 3; // Set role_id to 3 for students
+        $student->company_id = $request->input('company_id');
+        $student->name = $request->input('name');
+        $student->email = $request->input('email');
+        $student->phone = $request->input('phone');
+        $student->location = $request->input('location');
+        $student->password = Hash::make($request->input('password'));
+        $student->is_active = $request->input('is_active');
+        $student->save();
+
+        // Return JSON response for AJAX handling
+        return response()->json(['status' => true, 'notification' => 'Record created successfully!']);
+    }       
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        $pageData = User::where('role_id', 3)->findOrFail($id);
+        return view('backend.students.edit', compact('pageData'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, $id)
+    {
+        // Find the existing record by ID and ensure it's a student (role_id = 3)
+        $student = User::where('role_id', 3)->findOrFail($id);
+    
+        // Validate the incoming data
+        $validated = $request->validate([
+            'name' => 'required|string|min:3|max:200',
+            'email' => 'required|email|unique:users,email,'.$id,
+            'phone' => 'nullable|string|max:20',
+            'location' => 'nullable|string|max:200',
+            'password' => 'nullable|string|min:8',
+            'is_active' => 'required|boolean',
+        ]);
+    
+        // If validation passes, update the data
+        $student->company_id = $request->input('company_id');
+        $student->name = $request->input('name');
+        $student->email = $request->input('email');
+        $student->phone = $request->input('phone');
+        $student->location = $request->input('location');
+        
+        // Only update password if provided
+        if ($request->filled('password')) {
+            $student->password = Hash::make($request->input('password'));
+        }
+        
+        $student->is_active = $request->input('is_active');
+        $student->save();
+    
+        // Return JSON response for AJAX handling
+        return response()->json(['status' => true, 'notification' => 'Record updated successfully!']);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy($id)
+    {
+        try {
+            // Attempt to delete the record (only if it's a student)
+            $student = User::where('role_id', 3)->findOrFail($id);
+            $student->delete();
+    
+            // Redirect back with a success message
+            return redirect()->route('students.index')->with('success', 'Record deleted successfully!');
+        } catch (\Exception $e) {
+            // Log the error message and stack trace
+            \Log::error('Error deleting Student record', [
+                'error_message' => $e->getMessage(),
+                'stack_trace' => $e->getTraceAsString(),
+                'student_id' => $id
+            ]);
+    
+            // Redirect back with an error message
+            return redirect()->route('students.index')->with('error', 'There was an error deleting the record.');
+        }
+    }    
+}
+
