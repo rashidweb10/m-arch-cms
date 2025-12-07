@@ -114,6 +114,18 @@ class CourseEnrolmentController extends Controller
             'is_active' => 'required|boolean',
         ]);
 
+        // Check if student is already enrolled in the same course
+        $existingEnrolment = CourseEnrolment::where('user_id', $request->input('user_id'))
+            ->where('course_id', $request->input('course_id'))
+            ->first();
+
+        if ($existingEnrolment) {
+            return response()->json([
+                'status' => false, 
+                'notification' => 'This student is already enrolled in this course!'
+            ], 422);
+        }
+
         // If validation passes, proceed to saving the data
         $courseEnrolment = new CourseEnrolment();
         $courseEnrolment->user_id = $request->input('user_id');
@@ -170,6 +182,19 @@ class CourseEnrolmentController extends Controller
             'validity' => 'nullable|date',
             'is_active' => 'required|boolean',
         ]);
+
+        // Check if student is already enrolled in the same course (excluding current record)
+        $existingEnrolment = CourseEnrolment::where('user_id', $request->input('user_id'))
+            ->where('course_id', $request->input('course_id'))
+            ->where('id', '!=', $id)
+            ->first();
+
+        if ($existingEnrolment) {
+            return response()->json([
+                'status' => false, 
+                'notification' => 'This student is already enrolled in this course!'
+            ], 422);
+        }
     
         // If validation passes, update the data
         $courseEnrolment->user_id = $request->input('user_id');
