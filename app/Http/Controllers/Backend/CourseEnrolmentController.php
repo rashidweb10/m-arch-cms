@@ -1,0 +1,209 @@
+<?php
+
+namespace App\Http\Controllers\Backend;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Models\CourseEnrolment;
+use App\Models\Course;
+use App\Models\CourseCategory;
+use App\Models\User;
+use Carbon\Carbon;
+
+class CourseEnrolmentController extends Controller
+{
+    protected $moduleName;
+
+    public function __construct()
+    {
+        //Module Name
+        $this->moduleName = 'Course Enrolments';
+        view()->share('moduleName', $this->moduleName);
+    }
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        // Get the search/filter parameters from the request
+        $categoryId = request()->input('category');
+        $courseId   = request()->input('course');
+        $search     = request()->input('search');
+        $status     = request()->input('status');
+        $validityFrom = request()->input('validity_from');
+        $validityTo   = request()->input('validity_to');
+    
+        // Start building the query
+        $query = CourseEnrolment::with('user', 'course.category');
+    
+        // Filter by category (via the related course) if provided
+        if ($categoryId) {
+            $query->whereHas('course', function ($q) use ($categoryId) {
+                $q->where('category_id', $categoryId);
+            });
+        }
+
+        // Filter by course if provided
+        if ($courseId) {
+            $query->where('course_id', $courseId);
+        }
+
+        // Filter by status if provided
+        if ($status !== null && $status !== '') {
+            $query->where('is_active', $status);
+        }
+
+        // Filter by validity date range
+        if ($validityFrom) {
+            $query->where('validity', '>=', $validityFrom);
+        }
+        if ($validityTo) {
+            $query->where('validity', '<=', $validityTo);
+        }
+
+        // Free-text search on user name, email, and phone
+        if ($search) {
+            $query->whereHas('user', function ($q) use ($search) {
+                $q->where('name', 'like', '%'.$search.'%')
+                  ->orWhere('email', 'like', '%'.$search.'%')
+                  ->orWhere('phone', 'like', '%'.$search.'%');
+            });
+        }      
+    
+        $query->orderBy('id', 'desc');
+    
+        $pageData = $query->paginate(5);
+    
+        // Get dropdown data for categories and courses
+        $categoryList = CourseCategory::where('is_active', 1)->orderBy('name', 'asc')->get();
+
+        $courseQuery = Course::where('is_active', 1);
+        if ($categoryId) {
+            $courseQuery->where('category_id', $categoryId);
+        }
+        $courseList = $courseQuery->orderBy('name', 'asc')->get();
+    
+        // Return the view with data
+        return view('backend.course-enrolments.index', compact('pageData', 'courseList', 'categoryList'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        $categoryList = CourseCategory::where('is_active', 1)->orderBy('name', 'asc')->get();
+        $courseList = Course::where('is_active', 1)->orderBy('name', 'asc')->get();
+        // Get students (users with role_id = 3)
+        $students = User::where('role_id', 3)->orderBy('name', 'asc')->get();
+        return view('backend.course-enrolments.create', compact('courseList', 'categoryList', 'students'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        // Validate the incoming data
+        $validated = $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'category_id' => 'nullable|exists:course_categories,id',
+            'course_id' => 'required|exists:courses,id',
+            'validity' => 'nullable|date',
+            'is_active' => 'required|boolean',
+        ]);
+
+        // If validation passes, proceed to saving the data
+        $courseEnrolment = new CourseEnrolment();
+        $courseEnrolment->user_id = $request->input('user_id');
+        $courseEnrolment->course_id = $request->input('course_id');
+        $courseEnrolment->validity = $request->input('validity');
+        $courseEnrolment->is_active = $request->input('is_active');
+        $courseEnrolment->save();
+
+        // Return JSON response for AJAX handling
+        return response()->json(['status' => true, 'notification' => 'Record created successfully!']);
+    }       
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        $pageData = CourseEnrolment::with('user', 'course')->findOrFail($id);
+        $categoryList = CourseCategory::where('is_active', 1)->orderBy('name', 'asc')->get();
+        
+        // Get courses - include the current course even if inactive, and all active courses
+        $courseList = Course::where('is_active', 1)
+            ->orWhere('id', $pageData->course_id)
+            ->orderBy('name', 'asc')
+            ->get();
+        
+        // Get students (users with role_id = 3)
+        $students = User::where('role_id', 3)->orderBy('name', 'asc')->get();
+        
+        return view('backend.course-enrolments.edit', compact('pageData', 'courseList', 'categoryList', 'students'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, $id)
+    {
+        // Find the existing record by ID
+        $courseEnrolment = CourseEnrolment::findOrFail($id);
+    
+        // Validate the incoming data
+        $validated = $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'category_id' => 'nullable|exists:course_categories,id',
+            'course_id' => 'required|exists:courses,id',
+            'validity' => 'nullable|date',
+            'is_active' => 'required|boolean',
+        ]);
+    
+        // If validation passes, update the data
+        $courseEnrolment->user_id = $request->input('user_id');
+        $courseEnrolment->course_id = $request->input('course_id');
+        $courseEnrolment->validity = $request->input('validity');
+        $courseEnrolment->is_active = $request->input('is_active');
+        $courseEnrolment->save();
+    
+        // Return JSON response for AJAX handling
+        return response()->json(['status' => true, 'notification' => 'Record updated successfully!']);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy($id)
+    {
+        try {
+            // Attempt to delete the record
+            CourseEnrolment::destroy($id);
+    
+            // Redirect back with a success message
+            return redirect()->route('course-enrolments.index')->with('success', 'Record deleted successfully!');
+        } catch (\Exception $e) {
+            // Log the error message and stack trace
+            \Log::error('Error deleting CourseEnrolment record', [
+                'error_message' => $e->getMessage(),
+                'stack_trace' => $e->getTraceAsString(),
+                'course_enrolment_id' => $id
+            ]);
+    
+            // Redirect back with an error message
+            return redirect()->route('course-enrolments.index')->with('error', 'There was an error deleting the record.');
+        }
+    }    
+}
+
