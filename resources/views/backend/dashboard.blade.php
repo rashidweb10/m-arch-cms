@@ -131,14 +131,15 @@
         'name' => 'active students',
         'icon' => 'ti ti-user-check',
         'count' => $activeStudentsCount,
-        'url' => route('students.index'),
-    ])  
+        'url' => route('students.index', ['status' => 1]),
+    ])
 
     @include('backend.includes.dashboard-card', [
         'name' => 'inactive students',
         'icon' => 'ti ti-user-x',
         'count' => $inactiveStudentsCount,
-        'url' => route('students.index'),
-    ])   
+        'url' => route('students.index', ['status' => 0]),
+    ])
+   
 </div>
 @endsection
