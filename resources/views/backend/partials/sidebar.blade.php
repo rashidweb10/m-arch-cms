@@ -80,7 +80,12 @@
                         <a href="{{ route('course-materials.index') }}" class="side-nav-link">
                             <span class="menu-text">Materials</span>
                         </a>
-                    </li>                                     
+                    </li>     
+                    <li class="side-nav-item">
+                        <a href="{{ route('course-enrolments.index') }}" class="side-nav-link">
+                            <span class="menu-text">Enrolments</span>
+                        </a>
+                    </li>                                                    
                 </ul>
             </div>
         </li>         

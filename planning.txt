@@ -88,3 +88,13 @@ SET cm.category_id = c.category_id;
 
 UPDATE course_materials
 SET title = NULL;
+
+DELETE FROM course_materials
+WHERE course_id NOT IN (SELECT id FROM courses);
+
+DELETE ce
+FROM course_enrolments ce
+LEFT JOIN users u ON ce.user_id = u.id
+LEFT JOIN courses c ON ce.course_id = c.id
+WHERE u.id IS NULL
+   OR c.id IS NULL;
