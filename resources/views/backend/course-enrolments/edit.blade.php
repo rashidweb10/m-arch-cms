@@ -24,8 +24,8 @@
         <!-- Category -->
         <div class="col-sm-12">
             <div class="form-group mb-2">
-                <label for="category_id" class="form-label">Course Category</label>
-                <select name="category_id" id="category_id" class="form-select select2">
+                <label for="category_id" class="form-label">Course Category <span class="text-danger">*</span></label>
+                <select name="category_id" id="category_id" class="form-select select2" required>
                     <option value="">--Select Category--</option>
                     @php
                         // Get the category ID - prefer course's category_id
@@ -59,8 +59,8 @@
         <!-- Validity -->
         <div class="col-sm-12">
             <div class="form-group mb-2">
-                <label for="validity" class="form-label">Validity</label>
-                <input value="{{ old('validity', $pageData->validity ? date('Y-m-d', strtotime($pageData->validity)) : '') }}" name="validity" type="date" class="form-control">
+                <label for="validity" class="form-label">Validity <span class="text-danger">*</span></label>
+                <input value="{{ old('validity', $pageData->validity ? date('Y-m-d', strtotime($pageData->validity)) : '') }}" name="validity" type="date" class="form-control" required>
             </div>
         </div>
 
