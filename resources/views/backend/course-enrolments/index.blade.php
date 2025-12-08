@@ -97,7 +97,17 @@
                             <tr>
                                 <td>{{ $pageData->firstItem() + $index }}</td>
                                 <td>{{ $row->user->name ?? 'N/A' }}</td>
-                                <td>{{ $row->user->email ?? 'N/A' }}</td>
+                                <td>
+                                    @if(!empty($row->user->email))
+                                        <a href="{{ route('students.index', ['search' => $row->user->email]) }}"
+                                        target="_blank"
+                                        class="text-primary">
+                                            {{ text_limit($row->user->email) }}
+                                        </a>
+                                    @else
+                                        N/A
+                                    @endif
+                                </td>
                                 <td>{{ $row->user->phone ?? 'N/A' }}</td>
                                 <td>
                                     @if($row->course)
