@@ -234,6 +234,9 @@ function ajaxSubmit(e, form, callBackFunction) {
                                 errors += '<div>' + msg + '</div>';
                             }
                         });
+                    } else {
+                        // Fallback error message if notification is not an object
+                        errors = response.notification || 'An unexpected error occurred.';
                     }
                     // Show the validation errors using toastr
                     Command: toastr["error"](errors, "Alert");
