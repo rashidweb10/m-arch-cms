@@ -116,6 +116,7 @@ class ImportController extends Controller
                 'user_id'    => $r[1],
                 'course_id'  => $r[2] ?? null,
                 'is_active'  => $r[4] ?? 0,
+                'validity'   => (!empty($r[6]) && $r[6] != '0000-00-00 00:00:00') ? \Carbon\Carbon::parse($r[6])->addDays(365)->format('Y-m-d') : now()->addDays(365)->format('Y-m-d'),
                 'created_at' => (!empty($r[6]) && $r[6] != '0000-00-00 00:00:00') ? $r[6] : now(),
                 'updated_at' => now(),
             ];
