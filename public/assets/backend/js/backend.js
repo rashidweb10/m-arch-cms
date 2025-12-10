@@ -151,8 +151,19 @@ function initValidate(selector) {
 
 
 //select2
+// function initSelect2(selector = '.select2') {
+//     $(selector).select2();
+// }
+
 function initSelect2(selector = '.select2') {
-    $(selector).select2();
+    $(selector).each(function () {
+        let modal = $(this).closest('.modal'); // finds largeModal or smallModal automatically
+
+        $(this).select2({
+            width: '100%',
+            dropdownParent: modal.length ? modal : $(document.body)
+        });
+    });
 }
 
 
@@ -234,9 +245,6 @@ function ajaxSubmit(e, form, callBackFunction) {
                                 errors += '<div>' + msg + '</div>';
                             }
                         });
-                    } else {
-                        // Fallback error message if notification is not an object
-                        errors = response.notification || 'An unexpected error occurred.';
                     }
                     // Show the validation errors using toastr
                     Command: toastr["error"](errors, "Alert");
