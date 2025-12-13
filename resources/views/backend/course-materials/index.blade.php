@@ -12,6 +12,30 @@
         <div class="card">
             <div class="card-header border-bottom border-dashed align-items-center">
                 <div class="row">
+                    <div class="col-md-2 mb-2">
+                        <div class="dropdown">
+                            <button class="btn border dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="bulk-action-btn" disabled>
+                                Bulk Action
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                    <a class="dropdown-item" href="javascript:void(0)" onclick="showBulkDeleteModal()">
+                                        Delete Selection
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="javascript:void(0)" onclick="showBulkActiveModal()">
+                                        Mark as Active
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="javascript:void(0)" onclick="showBulkInactiveModal()">
+                                        Mark as Inactive
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                     <div class="col-md-10">
                         <form class="row g-3 align-items-center">
                             <div class="col-md">
@@ -55,17 +79,23 @@
                             </div>
                         </form>
                     </div>
-                    <div class="col-md-2 text-end">
-                        <button onclick="smallModal('{{url(route('course-materials.create'))}}', 'Add New')"
-                        class="btn btn-primary btn-icon w-100"><i class="ti ti-plus"></i> Add New</button>        
+                    <div class="col-md-12 mt-2">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input check-all" id="select-all">
+                            <label class="form-check-label" for="select-all">Select All</label>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="card-body">
                 <div class="table-responsive-sm">
+                    <form id="bulk-action-form">
                     <table class="table table-striped">
                         <thead>
                             <tr>
+                                <th width="50">
+                                    <input type="checkbox" class="form-check-input check-all-header" id="select-all-header">
+                                </th>
                                 <th>#</th>
                                 <th>Series ID</th>
                                 <th>Category</th>
@@ -82,6 +112,9 @@
                         <tbody>
                             @foreach ($pageData as $index => $row)
                             <tr>
+                                <td>
+                                    <input type="checkbox" class="form-check-input check-one" name="id[]" value="{{ $row->id }}">
+                                </td>
                                 <td>{{ $pageData->firstItem() + $index }}</td>
                                 <td>{{ $row->sorting_id ?? 'N/A' }}</td>
                                 <td>
@@ -132,6 +165,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    </form>
                     {{ $pageData->appends(request()->input())->links() }}
                 </div> <!-- end table-responsive-->
             </div> <!-- end card body-->
@@ -139,11 +173,284 @@
     </div><!-- end col-->
 </div><!-- end row-->
 
+<!-- Bulk Delete Modal -->
+<div class="modal fade" id="bulk-delete-modal" tabindex="-1" aria-labelledby="bulk-delete-modal-label" aria-hidden="true" role="dialog">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="bulk-delete-modal-label">Delete Confirmation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <p class="mt-1">Are you sure to delete selected materials?</p>
+                <button type="button" class="btn btn-link mt-2" data-bs-dismiss="modal">Cancel</button>
+                <a href="javascript:void(0)" onclick="bulkDelete()" class="btn btn-primary mt-2">Delete</a>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- Bulk Active Modal -->
+<div class="modal fade" id="bulk-active-modal" tabindex="-1" aria-labelledby="bulk-active-modal-label" aria-hidden="true" role="dialog">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="bulk-active-modal-label">Activate Confirmation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <p class="mt-1">Are you sure to activate selected materials?</p>
+                <button type="button" class="btn btn-link mt-2" data-bs-dismiss="modal">Cancel</button>
+                <a href="javascript:void(0)" onclick="bulkActive()" class="btn btn-success mt-2">Activate</a>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- Bulk Inactive Modal -->
+<div class="modal fade" id="bulk-inactive-modal" tabindex="-1" aria-labelledby="bulk-inactive-modal-label" aria-hidden="true" role="dialog">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="bulk-inactive-modal-label">Deactivate Confirmation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <p class="mt-1">Are you sure to deactivate selected materials?</p>
+                <button type="button" class="btn btn-link mt-2" data-bs-dismiss="modal">Cancel</button>
+                <a href="javascript:void(0)" onclick="bulkInactive()" class="btn btn-warning mt-2">Deactivate</a>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 <script defer>
 const callbackCourseMaterials = function(response) {
     setTimeout(function() {
         location.reload();
     }, 1500);
+}
+
+// Select All functionality
+$(document).on("change", ".check-all, .check-all-header", function() {
+    if(this.checked) {
+        $('.check-one:checkbox').each(function() {
+            this.checked = true;
+        });
+        $('#select-all').prop('checked', true);
+        $('#select-all-header').prop('checked', true);
+    } else {
+        $('.check-one:checkbox').each(function() {
+            this.checked = false;
+        });
+        $('#select-all').prop('checked', false);
+        $('#select-all-header').prop('checked', false);
+    }
+    updateBulkActionButton();
+});
+
+// Update bulk action button state
+$(document).on("change", ".check-one", function() {
+    updateBulkActionButton();
+});
+
+function updateBulkActionButton() {
+    const checkedCount = $('.check-one:checked').length;
+    const $bulkBtn = $('#bulk-action-btn');
+    
+    if (checkedCount > 0) {
+        $bulkBtn.prop('disabled', false);
+        $bulkBtn.text('Bulk Action (' + checkedCount + ')');
+    } else {
+        $bulkBtn.prop('disabled', true);
+        $bulkBtn.text('Bulk Action');
+    }
+}
+
+// Show Bulk Delete Modal
+function showBulkDeleteModal() {
+    const checkedCount = $('.check-one:checked').length;
+    if (checkedCount === 0) {
+        alert('Please select at least one material.');
+        return;
+    }
+    $('#bulk-delete-modal').modal('show');
+}
+
+// Show Bulk Active Modal
+function showBulkActiveModal() {
+    const checkedCount = $('.check-one:checked').length;
+    if (checkedCount === 0) {
+        alert('Please select at least one material.');
+        return;
+    }
+    $('#bulk-active-modal').modal('show');
+}
+
+// Show Bulk Inactive Modal
+function showBulkInactiveModal() {
+    const checkedCount = $('.check-one:checked').length;
+    if (checkedCount === 0) {
+        alert('Please select at least one material.');
+        return;
+    }
+    $('#bulk-inactive-modal').modal('show');
+}
+
+// Bulk Delete
+function bulkDelete() {
+    const selectedIds = [];
+    $('.check-one:checked').each(function() {
+        selectedIds.push($(this).val());
+    });
+
+    if (selectedIds.length === 0) {
+        alert('Please select at least one material.');
+        return;
+    }
+
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: "{{ route('course-materials.bulk-delete') }}",
+        type: 'POST',
+        data: {
+            id: selectedIds
+        },
+        success: function (response) {
+            if(response.status) {
+                $('#bulk-delete-modal').modal('hide');
+                if (typeof AIZ !== 'undefined' && AIZ.plugins && AIZ.plugins.notify) {
+                    AIZ.plugins.notify('success', response.notification || 'Materials deleted successfully!');
+                } else {
+                    alert(response.notification || 'Materials deleted successfully!');
+                }
+                setTimeout(function() {
+                    location.reload();
+                }, 1500);
+            } else {
+                if (typeof AIZ !== 'undefined' && AIZ.plugins && AIZ.plugins.notify) {
+                    AIZ.plugins.notify('danger', response.notification || 'Something went wrong.');
+                } else {
+                    alert(response.notification || 'Something went wrong.');
+                }
+            }
+        },
+        error: function() {
+            if (typeof AIZ !== 'undefined' && AIZ.plugins && AIZ.plugins.notify) {
+                AIZ.plugins.notify('danger', 'Something went wrong.');
+            } else {
+                alert('Something went wrong.');
+            }
+        }
+    });
+}
+
+// Bulk Active
+function bulkActive() {
+    const selectedIds = [];
+    $('.check-one:checked').each(function() {
+        selectedIds.push($(this).val());
+    });
+
+    if (selectedIds.length === 0) {
+        $('#bulk-active-modal').modal('hide');
+        alert('Please select at least one material.');
+        return;
+    }
+
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: "{{ route('course-materials.bulk-active') }}",
+        type: 'POST',
+        data: {
+            id: selectedIds
+        },
+        success: function (response) {
+            if(response.status) {
+                $('#bulk-active-modal').modal('hide');
+                if (typeof AIZ !== 'undefined' && AIZ.plugins && AIZ.plugins.notify) {
+                    AIZ.plugins.notify('success', response.notification || 'Materials activated successfully!');
+                } else {
+                    alert(response.notification || 'Materials activated successfully!');
+                }
+                setTimeout(function() {
+                    location.reload();
+                }, 1500);
+            } else {
+                $('#bulk-active-modal').modal('hide');
+                if (typeof AIZ !== 'undefined' && AIZ.plugins && AIZ.plugins.notify) {
+                    AIZ.plugins.notify('danger', response.notification || 'Something went wrong.');
+                } else {
+                    alert(response.notification || 'Something went wrong.');
+                }
+            }
+        },
+        error: function() {
+            $('#bulk-active-modal').modal('hide');
+            if (typeof AIZ !== 'undefined' && AIZ.plugins && AIZ.plugins.notify) {
+                AIZ.plugins.notify('danger', 'Something went wrong.');
+            } else {
+                alert('Something went wrong.');
+            }
+        }
+    });
+}
+
+// Bulk Inactive
+function bulkInactive() {
+    const selectedIds = [];
+    $('.check-one:checked').each(function() {
+        selectedIds.push($(this).val());
+    });
+
+    if (selectedIds.length === 0) {
+        $('#bulk-inactive-modal').modal('hide');
+        alert('Please select at least one material.');
+        return;
+    }
+
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: "{{ route('course-materials.bulk-inactive') }}",
+        type: 'POST',
+        data: {
+            id: selectedIds
+        },
+        success: function (response) {
+            if(response.status) {
+                $('#bulk-inactive-modal').modal('hide');
+                if (typeof AIZ !== 'undefined' && AIZ.plugins && AIZ.plugins.notify) {
+                    AIZ.plugins.notify('success', response.notification || 'Materials deactivated successfully!');
+                } else {
+                    alert(response.notification || 'Materials deactivated successfully!');
+                }
+                setTimeout(function() {
+                    location.reload();
+                }, 1500);
+            } else {
+                $('#bulk-inactive-modal').modal('hide');
+                if (typeof AIZ !== 'undefined' && AIZ.plugins && AIZ.plugins.notify) {
+                    AIZ.plugins.notify('danger', response.notification || 'Something went wrong.');
+                } else {
+                    alert(response.notification || 'Something went wrong.');
+                }
+            }
+        },
+        error: function() {
+            $('#bulk-inactive-modal').modal('hide');
+            if (typeof AIZ !== 'undefined' && AIZ.plugins && AIZ.plugins.notify) {
+                AIZ.plugins.notify('danger', 'Something went wrong.');
+            } else {
+                alert('Something went wrong.');
+            }
+        }
+    });
 }
 
 // When the category changes, fetch courses for that category via AJAX

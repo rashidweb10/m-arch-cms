@@ -196,5 +196,110 @@ class CourseMaterialController extends Controller
             // Redirect back with an error message
             return redirect()->route('course-materials.index')->with('error', 'There was an error deleting the record.');
         }
+    }
+
+    /**
+     * Bulk delete course materials
+     */
+    public function bulkDelete(Request $request)
+    {
+        try {
+            $ids = $request->input('id', []);
+            
+            if (empty($ids) || !is_array($ids)) {
+                return response()->json([
+                    'status' => false,
+                    'notification' => 'No materials selected for deletion.'
+                ]);
+            }
+
+            $deletedCount = CourseMaterial::whereIn('id', $ids)->delete();
+
+            return response()->json([
+                'status' => true,
+                'notification' => $deletedCount . ' material(s) deleted successfully!'
+            ]);
+        } catch (\Exception $e) {
+            \Log::error('Error bulk deleting CourseMaterial records', [
+                'error_message' => $e->getMessage(),
+                'stack_trace' => $e->getTraceAsString(),
+                'ids' => $request->input('id', [])
+            ]);
+
+            return response()->json([
+                'status' => false,
+                'notification' => 'There was an error deleting the records.'
+            ]);
+        }
+    }
+
+    /**
+     * Bulk activate course materials
+     */
+    public function bulkActive(Request $request)
+    {
+        try {
+            $ids = $request->input('id', []);
+            
+            if (empty($ids) || !is_array($ids)) {
+                return response()->json([
+                    'status' => false,
+                    'notification' => 'No materials selected.'
+                ]);
+            }
+
+            $updatedCount = CourseMaterial::whereIn('id', $ids)->update(['is_active' => 1]);
+
+            return response()->json([
+                'status' => true,
+                'notification' => $updatedCount . ' material(s) activated successfully!'
+            ]);
+        } catch (\Exception $e) {
+            \Log::error('Error bulk activating CourseMaterial records', [
+                'error_message' => $e->getMessage(),
+                'stack_trace' => $e->getTraceAsString(),
+                'ids' => $request->input('id', [])
+            ]);
+
+            return response()->json([
+                'status' => false,
+                'notification' => 'There was an error activating the records.'
+            ]);
+        }
+    }
+
+    /**
+     * Bulk deactivate course materials
+     */
+    public function bulkInactive(Request $request)
+    {
+        try {
+            $ids = $request->input('id', []);
+            
+            if (empty($ids) || !is_array($ids)) {
+                return response()->json([
+                    'status' => false,
+                    'notification' => 'No materials selected.'
+                ]);
+            }
+
+            $updatedCount = CourseMaterial::whereIn('id', $ids)->update(['is_active' => 0]);
+
+            return response()->json([
+                'status' => true,
+                'notification' => $updatedCount . ' material(s) deactivated successfully!'
+            ]);
+        } catch (\Exception $e) {
+            \Log::error('Error bulk deactivating CourseMaterial records', [
+                'error_message' => $e->getMessage(),
+                'stack_trace' => $e->getTraceAsString(),
+                'ids' => $request->input('id', [])
+            ]);
+
+            return response()->json([
+                'status' => false,
+                'notification' => 'There was an error deactivating the records.'
+            ]);
+        }
     }    
 }
