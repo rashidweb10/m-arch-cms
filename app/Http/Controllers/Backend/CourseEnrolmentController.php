@@ -229,6 +229,111 @@ class CourseEnrolmentController extends Controller
             // Redirect back with an error message
             return redirect()->route('course-enrolments.index')->with('error', 'There was an error deleting the record.');
         }
+    }
+
+    /**
+     * Bulk delete course enrolments
+     */
+    public function bulkDelete(Request $request)
+    {
+        try {
+            $ids = $request->input('id', []);
+            
+            if (empty($ids) || !is_array($ids)) {
+                return response()->json([
+                    'status' => false,
+                    'notification' => 'No enrolments selected for deletion.'
+                ]);
+            }
+
+            $deletedCount = CourseEnrolment::whereIn('id', $ids)->delete();
+
+            return response()->json([
+                'status' => true,
+                'notification' => $deletedCount . ' enrolment(s) deleted successfully!'
+            ]);
+        } catch (\Exception $e) {
+            \Log::error('Error bulk deleting CourseEnrolment records', [
+                'error_message' => $e->getMessage(),
+                'stack_trace' => $e->getTraceAsString(),
+                'ids' => $request->input('id', [])
+            ]);
+
+            return response()->json([
+                'status' => false,
+                'notification' => 'There was an error deleting the records.'
+            ]);
+        }
+    }
+
+    /**
+     * Bulk activate course enrolments
+     */
+    public function bulkActive(Request $request)
+    {
+        try {
+            $ids = $request->input('id', []);
+            
+            if (empty($ids) || !is_array($ids)) {
+                return response()->json([
+                    'status' => false,
+                    'notification' => 'No enrolments selected.'
+                ]);
+            }
+
+            $updatedCount = CourseEnrolment::whereIn('id', $ids)->update(['is_active' => 1]);
+
+            return response()->json([
+                'status' => true,
+                'notification' => $updatedCount . ' enrolment(s) activated successfully!'
+            ]);
+        } catch (\Exception $e) {
+            \Log::error('Error bulk activating CourseEnrolment records', [
+                'error_message' => $e->getMessage(),
+                'stack_trace' => $e->getTraceAsString(),
+                'ids' => $request->input('id', [])
+            ]);
+
+            return response()->json([
+                'status' => false,
+                'notification' => 'There was an error activating the records.'
+            ]);
+        }
+    }
+
+    /**
+     * Bulk deactivate course enrolments
+     */
+    public function bulkInactive(Request $request)
+    {
+        try {
+            $ids = $request->input('id', []);
+            
+            if (empty($ids) || !is_array($ids)) {
+                return response()->json([
+                    'status' => false,
+                    'notification' => 'No enrolments selected.'
+                ]);
+            }
+
+            $updatedCount = CourseEnrolment::whereIn('id', $ids)->update(['is_active' => 0]);
+
+            return response()->json([
+                'status' => true,
+                'notification' => $updatedCount . ' enrolment(s) deactivated successfully!'
+            ]);
+        } catch (\Exception $e) {
+            \Log::error('Error bulk deactivating CourseEnrolment records', [
+                'error_message' => $e->getMessage(),
+                'stack_trace' => $e->getTraceAsString(),
+                'ids' => $request->input('id', [])
+            ]);
+
+            return response()->json([
+                'status' => false,
+                'notification' => 'There was an error deactivating the records.'
+            ]);
+        }
     }    
 }
 
