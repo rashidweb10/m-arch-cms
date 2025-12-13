@@ -104,6 +104,9 @@ Route::prefix('backend')->group(function () {
 
     Route::middleware('auth.backend')->group(function () {
         Route::resource('courses', CourseController::class);
+        Route::post('courses/bulk-delete', [CourseController::class, 'bulkDelete'])->name('courses.bulk-delete');
+        Route::post('courses/bulk-active', [CourseController::class, 'bulkActive'])->name('courses.bulk-active');
+        Route::post('courses/bulk-inactive', [CourseController::class, 'bulkInactive'])->name('courses.bulk-inactive');
     });  
 
     // AJAX route to get courses by category (used in Course Materials page filter)

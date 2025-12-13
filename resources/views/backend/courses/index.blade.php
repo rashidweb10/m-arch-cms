@@ -53,12 +53,33 @@
                         class="btn btn-primary btn-icon w-100"><i class="ti ti-plus"></i> Add New</button>        
                     </div>
                 </div>
+                <div class="row mt-3" id="bulkActionsContainer" style="display: none;">
+                    <div class="col-md-12">
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="text-muted" id="selectedCount">0 items selected</span>
+                            <button type="button" class="btn btn-xs btn-danger" onclick="bulkDeleteCourses()">
+                                <i class="ti ti-trash"></i> Delete
+                            </button>
+                            <button type="button" class="btn btn-xs btn-success" onclick="bulkActiveCourses()">
+                                <i class="ti ti-check"></i> Active
+                            </button>
+                            <button type="button" class="btn btn-xs btn-warning" onclick="bulkInactiveCourses()">
+                                <i class="ti ti-x"></i> Inactive
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="card-body">
                 <div class="table-responsive-sm">
                     <table class="table table-striped">
                         <thead>
                             <tr>
+                                <th width="50" class="text-center">
+                                    <div class="form-check d-flex justify-content-center">
+                                        <input class="form-check-input" type="checkbox" id="selectAll" onchange="toggleSelectAll()" style="cursor: pointer; width: 1.2em; height: 1.2em; margin-top: 0.25em;">
+                                    </div>
+                                </th>
                                 <th>#</th>
                                 <th>Image</th>
                                 <th>Category</th>
@@ -72,6 +93,11 @@
                         <tbody>
                             @foreach ($pageData as $index => $row)
                             <tr>
+                                <td class="text-center">
+                                    <div class="form-check d-flex justify-content-center">
+                                        <input class="form-check-input row-checkbox" type="checkbox" value="{{ $row->id }}" onchange="updateBulkActions()" style="cursor: pointer; width: 1.2em; height: 1.2em; margin-top: 0.25em;">
+                                    </div>
+                                </td>
                                 <td>{{ $pageData->firstItem() + $index }}</td>
                                 <td class="d-flex align-items-center">
                                     <a href="{{ uploaded_asset($row->image) }}" target="_blank">
@@ -115,6 +141,103 @@ const callbackCourses = function(response) {
     setTimeout(function() {
         location.reload();
     }, 1500);
+}
+
+// Bulk actions functions
+function toggleSelectAll() {
+    const selectAll = document.getElementById('selectAll');
+    const checkboxes = document.querySelectorAll('.row-checkbox');
+    checkboxes.forEach(checkbox => {
+        checkbox.checked = selectAll.checked;
+    });
+    updateBulkActions();
+}
+
+function updateBulkActions() {
+    const checkboxes = document.querySelectorAll('.row-checkbox:checked');
+    const selectedCount = checkboxes.length;
+    const bulkActionsContainer = document.getElementById('bulkActionsContainer');
+    const selectedCountSpan = document.getElementById('selectedCount');
+    
+    if (selectedCount > 0) {
+        bulkActionsContainer.style.display = 'block';
+        selectedCountSpan.textContent = selectedCount + ' item(s) selected';
+    } else {
+        bulkActionsContainer.style.display = 'none';
+    }
+    
+    // Update select all checkbox state
+    const allCheckboxes = document.querySelectorAll('.row-checkbox');
+    const selectAll = document.getElementById('selectAll');
+    if (allCheckboxes.length > 0) {
+        selectAll.checked = selectedCount === allCheckboxes.length;
+    }
+}
+
+function getSelectedIds() {
+    const checkboxes = document.querySelectorAll('.row-checkbox:checked');
+    const ids = Array.from(checkboxes).map(checkbox => checkbox.value);
+    return ids;
+}
+
+function bulkDeleteCourses() {
+    const ids = getSelectedIds();
+    if (ids.length === 0) {
+        toastr.error('Please select at least one item');
+        return;
+    }
+    
+    const message = 'Are you sure you want to delete ' + ids.length + ' selected item(s)?';
+    document.getElementById('bulk_delete_message').textContent = message;
+    document.getElementById('bulk_delete_ids').value = ids.join(',');
+    document.getElementById('bulk_delete_form').setAttribute('action', '{{ route("courses.bulk-delete") }}');
+    callBackFunction = callbackBulkCourses;
+    $('#bulkDeleteModal').modal('show');
+}
+
+function bulkActiveCourses() {
+    const ids = getSelectedIds();
+    if (ids.length === 0) {
+        toastr.error('Please select at least one item');
+        return;
+    }
+    
+    const message = 'Are you sure you want to activate ' + ids.length + ' selected item(s)?';
+    document.getElementById('bulk_active_message').textContent = message;
+    document.getElementById('bulk_active_ids').value = ids.join(',');
+    document.getElementById('bulk_active_form').setAttribute('action', '{{ route("courses.bulk-active") }}');
+    callBackFunction = callbackBulkCourses;
+    $('#bulkActiveModal').modal('show');
+}
+
+function bulkInactiveCourses() {
+    const ids = getSelectedIds();
+    if (ids.length === 0) {
+        toastr.error('Please select at least one item');
+        return;
+    }
+    
+    const message = 'Are you sure you want to deactivate ' + ids.length + ' selected item(s)?';
+    document.getElementById('bulk_inactive_message').textContent = message;
+    document.getElementById('bulk_inactive_ids').value = ids.join(',');
+    document.getElementById('bulk_inactive_form').setAttribute('action', '{{ route("courses.bulk-inactive") }}');
+    callBackFunction = callbackBulkCourses;
+    $('#bulkInactiveModal').modal('show');
+}
+
+// Callback function for bulk actions
+const callbackBulkCourses = function(response) {
+    // Close all bulk modals
+    $('#bulkDeleteModal').modal('hide');
+    $('#bulkActiveModal').modal('hide');
+    $('#bulkInactiveModal').modal('hide');
+    
+    // Only reload on success
+    if (response && response.status) {
+        setTimeout(function() {
+            location.reload();
+        }, 1500);
+    }
 }
 </script>
 @endsection
