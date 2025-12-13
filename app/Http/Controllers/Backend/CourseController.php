@@ -49,7 +49,7 @@ class CourseController extends Controller
     
         $query->orderBy('id', 'desc');
     
-        $pageData = $query->paginate(5);
+        $pageData = $query->paginate(config('custom.pagination_per_page'));
     
         // Get dropdown data for categories
         $categoryList = CourseCategory::where('is_active', 1)->orderBy('name', 'asc')->get();

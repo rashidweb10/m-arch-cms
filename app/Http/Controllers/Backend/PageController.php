@@ -67,7 +67,7 @@ class PageController extends Controller
         // Apply ordering from request
         $query->orderBy($sort, $direction);
     
-        $pageData = $query->paginate(25);
+        $pageData = $query->paginate(config('custom.pagination_per_page'));
     
         // Get dropdown data for companies
         $companyList = getCompanyList();

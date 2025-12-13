@@ -48,7 +48,7 @@ class CourseCategoryController extends Controller
 
         $query->orderBy('id', 'desc');
     
-        $pageData = $query->paginate(5);
+        $pageData = $query->paginate(config('custom.pagination_per_page'));
     
         // Get dropdown data for companies
         $companyList = getCompanyList();

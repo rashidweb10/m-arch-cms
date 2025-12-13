@@ -60,7 +60,7 @@ class CourseMaterialController extends Controller
     
         $query->orderBy('id', 'desc')->orderBy('sorting_id', 'asc');
     
-        $pageData = $query->paginate(5);
+        $pageData = $query->paginate(config('custom.pagination_per_page'));
     
         // Get dropdown data for categories and courses
         $categoryList = CourseCategory::where('is_active', 1)->orderBy('name', 'asc')->get();

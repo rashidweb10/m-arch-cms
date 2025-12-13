@@ -12,4 +12,5 @@ return [
     'cache_minutes' => env('CACHE_MINUTES', 120),
     'from_email' => env('MAIL_FROM_ADDRESS'),
     'tinymce_api' => env('TINYMCE_API_KEY'),
+    'pagination_per_page' => env('PAGINATION_PER_PAGE', 10),
 ];

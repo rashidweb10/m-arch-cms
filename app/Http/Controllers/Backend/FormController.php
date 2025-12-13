@@ -52,7 +52,7 @@ class FormController extends Controller
                   ->orWhere('ip', 'like', '%' . $request->search . '%');
         }
 
-        $pageData = $query->orderBy('created_at', 'desc')->paginate(7);
+        $pageData = $query->orderBy('created_at', 'desc')->paginate(config('custom.pagination_per_page'));
 
         //dd($pageData);
 

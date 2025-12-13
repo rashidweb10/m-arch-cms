@@ -66,7 +66,7 @@ class UploadController extends Controller
             $all_uploads->where('user_id', User::where('company_id', $request->company)->value('id'));
         }         
 
-        $all_uploads = $all_uploads->paginate(20)->appends(request()->query());
+        $all_uploads = $all_uploads->paginate(config('custom.pagination_per_page', 50))->appends(request()->query());
         $extensions = Upload::select('extension')->distinct()->pluck('extension');
 
         return view('backend.uploads.index', compact('all_uploads', 'search', 'sort_by', 'extensions', 'extension'));
@@ -192,7 +192,7 @@ class UploadController extends Controller
         
         $uploads->where('type', $request->type); //new
 
-        return $uploads->paginate(60)->appends(request()->query());
+        return $uploads->paginate(config('custom.pagination_per_page', 50))->appends(request()->query());
     }
 
     public function destroy($id)
