@@ -114,6 +114,9 @@ Route::prefix('backend')->group(function () {
 
     Route::middleware('auth.backend')->group(function () {
         Route::resource('course-materials', CourseMaterialController::class);
+        Route::post('course-materials/bulk-delete', [CourseMaterialController::class, 'bulkDelete'])->name('course-materials.bulk-delete');
+        Route::post('course-materials/bulk-active', [CourseMaterialController::class, 'bulkActive'])->name('course-materials.bulk-active');
+        Route::post('course-materials/bulk-inactive', [CourseMaterialController::class, 'bulkInactive'])->name('course-materials.bulk-inactive');
     });  
 
     Route::middleware('auth.backend')->group(function () {

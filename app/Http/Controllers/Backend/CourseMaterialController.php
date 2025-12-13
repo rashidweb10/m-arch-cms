@@ -196,5 +196,104 @@ class CourseMaterialController extends Controller
             // Redirect back with an error message
             return redirect()->route('course-materials.index')->with('error', 'There was an error deleting the record.');
         }
+    }
+
+    /**
+     * Bulk delete course materials
+     */
+    public function bulkDelete(Request $request)
+    {
+        try {
+            $ids = explode(',', $request->input('ids'));
+            
+            if (empty($ids) || !is_array($ids)) {
+                return response()->json(['status' => false, 'notification' => 'No items selected for deletion.']);
+            }
+
+            $deleted = CourseMaterial::whereIn('id', $ids)->delete();
+            
+            if ($deleted > 0) {
+                return response()->json([
+                    'status' => true, 
+                    'notification' => $deleted . ' record(s) deleted successfully!'
+                ]);
+            } else {
+                return response()->json(['status' => false, 'notification' => 'No records were deleted.']);
+            }
+        } catch (\Exception $e) {
+            \Log::error('Error bulk deleting CourseMaterial records', [
+                'error_message' => $e->getMessage(),
+                'stack_trace' => $e->getTraceAsString(),
+                'ids' => $request->input('ids')
+            ]);
+
+            return response()->json(['status' => false, 'notification' => 'There was an error deleting the records.']);
+        }
+    }
+
+    /**
+     * Bulk activate course materials
+     */
+    public function bulkActive(Request $request)
+    {
+        try {
+            $ids = explode(',', $request->input('ids'));
+            
+            if (empty($ids) || !is_array($ids)) {
+                return response()->json(['status' => false, 'notification' => 'No items selected for activation.']);
+            }
+
+            $updated = CourseMaterial::whereIn('id', $ids)->update(['is_active' => 1]);
+            
+            if ($updated > 0) {
+                return response()->json([
+                    'status' => true, 
+                    'notification' => $updated . ' record(s) activated successfully!'
+                ]);
+            } else {
+                return response()->json(['status' => false, 'notification' => 'No records were activated.']);
+            }
+        } catch (\Exception $e) {
+            \Log::error('Error bulk activating CourseMaterial records', [
+                'error_message' => $e->getMessage(),
+                'stack_trace' => $e->getTraceAsString(),
+                'ids' => $request->input('ids')
+            ]);
+
+            return response()->json(['status' => false, 'notification' => 'There was an error activating the records.']);
+        }
+    }
+
+    /**
+     * Bulk deactivate course materials
+     */
+    public function bulkInactive(Request $request)
+    {
+        try {
+            $ids = explode(',', $request->input('ids'));
+            
+            if (empty($ids) || !is_array($ids)) {
+                return response()->json(['status' => false, 'notification' => 'No items selected for deactivation.']);
+            }
+
+            $updated = CourseMaterial::whereIn('id', $ids)->update(['is_active' => 0]);
+            
+            if ($updated > 0) {
+                return response()->json([
+                    'status' => true, 
+                    'notification' => $updated . ' record(s) deactivated successfully!'
+                ]);
+            } else {
+                return response()->json(['status' => false, 'notification' => 'No records were deactivated.']);
+            }
+        } catch (\Exception $e) {
+            \Log::error('Error bulk deactivating CourseMaterial records', [
+                'error_message' => $e->getMessage(),
+                'stack_trace' => $e->getTraceAsString(),
+                'ids' => $request->input('ids')
+            ]);
+
+            return response()->json(['status' => false, 'notification' => 'There was an error deactivating the records.']);
+        }
     }    
 }
