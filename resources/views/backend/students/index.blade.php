@@ -64,8 +64,10 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th width="50">
-                                    <input type="checkbox" id="selectAll" onchange="toggleSelectAll()">
+                                <th width="50" class="text-center">
+                                    <div class="form-check d-flex justify-content-center">
+                                        <input class="form-check-input" type="checkbox" id="selectAll" onchange="toggleSelectAll()" style="cursor: pointer; width: 1.2em; height: 1.2em; margin-top: 0.25em;">
+                                    </div>
                                 </th>
                                 <th>#</th>
                                 <th>Name</th>
@@ -81,8 +83,10 @@
                         <tbody>
                             @foreach ($pageData as $index => $row)
                             <tr>
-                                <td>
-                                    <input type="checkbox" class="row-checkbox" value="{{ $row->id }}" onchange="updateBulkActions()">
+                                <td class="text-center">
+                                    <div class="form-check d-flex justify-content-center">
+                                        <input class="form-check-input row-checkbox" type="checkbox" value="{{ $row->id }}" onchange="updateBulkActions()" style="cursor: pointer; width: 1.2em; height: 1.2em; margin-top: 0.25em;">
+                                    </div>
                                 </td>
                                 <td>{{ $pageData->firstItem() + $index }}</td>
                                 <td>{{ $row->name ?? 'N/A' }}</td>
