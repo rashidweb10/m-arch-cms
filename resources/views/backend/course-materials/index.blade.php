@@ -269,19 +269,25 @@ function executeBulkDelete() {
             id: selectedIds
         },
         success: function (response) {
+            $('#bulk-delete-modal').modal('hide');
             if(response.status) {
-                $('#bulk-delete-modal').modal('hide');
-                if (typeof AIZ !== 'undefined' && AIZ.plugins && AIZ.plugins.notify) {
+                // Show success notification
+                if (typeof toastr !== 'undefined') {
+                    toastr.success(response.notification || 'Materials deleted successfully!', 'Success');
+                } else if (typeof AIZ !== 'undefined' && AIZ.plugins && AIZ.plugins.notify) {
                     AIZ.plugins.notify('success', response.notification || 'Materials deleted successfully!');
                 } else {
                     alert(response.notification || 'Materials deleted successfully!');
                 }
+                // Reload page after showing notification
                 setTimeout(function() {
                     location.reload();
                 }, 1500);
             } else {
-                $('#bulk-delete-modal').modal('hide');
-                if (typeof AIZ !== 'undefined' && AIZ.plugins && AIZ.plugins.notify) {
+                // Show error notification
+                if (typeof toastr !== 'undefined') {
+                    toastr.error(response.notification || 'Something went wrong.', 'Error');
+                } else if (typeof AIZ !== 'undefined' && AIZ.plugins && AIZ.plugins.notify) {
                     AIZ.plugins.notify('danger', response.notification || 'Something went wrong.');
                 } else {
                     alert(response.notification || 'Something went wrong.');
@@ -290,7 +296,9 @@ function executeBulkDelete() {
         },
         error: function() {
             $('#bulk-delete-modal').modal('hide');
-            if (typeof AIZ !== 'undefined' && AIZ.plugins && AIZ.plugins.notify) {
+            if (typeof toastr !== 'undefined') {
+                toastr.error('Something went wrong. Please try again.', 'Error');
+            } else if (typeof AIZ !== 'undefined' && AIZ.plugins && AIZ.plugins.notify) {
                 AIZ.plugins.notify('danger', 'Something went wrong.');
             } else {
                 alert('Something went wrong.');
@@ -322,19 +330,25 @@ function executeBulkActive() {
             id: selectedIds
         },
         success: function (response) {
+            $('#bulk-active-modal').modal('hide');
             if(response.status) {
-                $('#bulk-active-modal').modal('hide');
-                if (typeof AIZ !== 'undefined' && AIZ.plugins && AIZ.plugins.notify) {
+                // Show success notification
+                if (typeof toastr !== 'undefined') {
+                    toastr.success(response.notification || 'Materials activated successfully!', 'Success');
+                } else if (typeof AIZ !== 'undefined' && AIZ.plugins && AIZ.plugins.notify) {
                     AIZ.plugins.notify('success', response.notification || 'Materials activated successfully!');
                 } else {
                     alert(response.notification || 'Materials activated successfully!');
                 }
+                // Reload page after showing notification
                 setTimeout(function() {
                     location.reload();
                 }, 1500);
             } else {
-                $('#bulk-active-modal').modal('hide');
-                if (typeof AIZ !== 'undefined' && AIZ.plugins && AIZ.plugins.notify) {
+                // Show error notification
+                if (typeof toastr !== 'undefined') {
+                    toastr.error(response.notification || 'Something went wrong.', 'Error');
+                } else if (typeof AIZ !== 'undefined' && AIZ.plugins && AIZ.plugins.notify) {
                     AIZ.plugins.notify('danger', response.notification || 'Something went wrong.');
                 } else {
                     alert(response.notification || 'Something went wrong.');
@@ -343,7 +357,9 @@ function executeBulkActive() {
         },
         error: function() {
             $('#bulk-active-modal').modal('hide');
-            if (typeof AIZ !== 'undefined' && AIZ.plugins && AIZ.plugins.notify) {
+            if (typeof toastr !== 'undefined') {
+                toastr.error('Something went wrong. Please try again.', 'Error');
+            } else if (typeof AIZ !== 'undefined' && AIZ.plugins && AIZ.plugins.notify) {
                 AIZ.plugins.notify('danger', 'Something went wrong.');
             } else {
                 alert('Something went wrong.');
@@ -375,19 +391,25 @@ function executeBulkInactive() {
             id: selectedIds
         },
         success: function (response) {
+            $('#bulk-inactive-modal').modal('hide');
             if(response.status) {
-                $('#bulk-inactive-modal').modal('hide');
-                if (typeof AIZ !== 'undefined' && AIZ.plugins && AIZ.plugins.notify) {
+                // Show success notification
+                if (typeof toastr !== 'undefined') {
+                    toastr.success(response.notification || 'Materials deactivated successfully!', 'Success');
+                } else if (typeof AIZ !== 'undefined' && AIZ.plugins && AIZ.plugins.notify) {
                     AIZ.plugins.notify('success', response.notification || 'Materials deactivated successfully!');
                 } else {
                     alert(response.notification || 'Materials deactivated successfully!');
                 }
+                // Reload page after showing notification
                 setTimeout(function() {
                     location.reload();
                 }, 1500);
             } else {
-                $('#bulk-inactive-modal').modal('hide');
-                if (typeof AIZ !== 'undefined' && AIZ.plugins && AIZ.plugins.notify) {
+                // Show error notification
+                if (typeof toastr !== 'undefined') {
+                    toastr.error(response.notification || 'Something went wrong.', 'Error');
+                } else if (typeof AIZ !== 'undefined' && AIZ.plugins && AIZ.plugins.notify) {
                     AIZ.plugins.notify('danger', response.notification || 'Something went wrong.');
                 } else {
                     alert(response.notification || 'Something went wrong.');
@@ -396,7 +418,9 @@ function executeBulkInactive() {
         },
         error: function() {
             $('#bulk-inactive-modal').modal('hide');
-            if (typeof AIZ !== 'undefined' && AIZ.plugins && AIZ.plugins.notify) {
+            if (typeof toastr !== 'undefined') {
+                toastr.error('Something went wrong. Please try again.', 'Error');
+            } else if (typeof AIZ !== 'undefined' && AIZ.plugins && AIZ.plugins.notify) {
                 AIZ.plugins.notify('danger', 'Something went wrong.');
             } else {
                 alert('Something went wrong.');
