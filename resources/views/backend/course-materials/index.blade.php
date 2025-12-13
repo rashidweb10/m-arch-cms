@@ -173,57 +173,6 @@
     </div><!-- end col-->
 </div><!-- end row-->
 
-<!-- Bulk Delete Modal -->
-<div class="modal fade" id="bulk-delete-modal" tabindex="-1" aria-labelledby="bulk-delete-modal-label" aria-hidden="true" role="dialog">
-    <div class="modal-dialog modal-sm modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="bulk-delete-modal-label">Delete Confirmation</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body text-center">
-                <p class="mt-1">Are you sure to delete selected materials?</p>
-                <button type="button" class="btn btn-link mt-2" data-bs-dismiss="modal">Cancel</button>
-                <a href="javascript:void(0)" onclick="bulkDelete()" class="btn btn-primary mt-2">Delete</a>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-<!-- Bulk Active Modal -->
-<div class="modal fade" id="bulk-active-modal" tabindex="-1" aria-labelledby="bulk-active-modal-label" aria-hidden="true" role="dialog">
-    <div class="modal-dialog modal-sm modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="bulk-active-modal-label">Activate Confirmation</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body text-center">
-                <p class="mt-1">Are you sure to activate selected materials?</p>
-                <button type="button" class="btn btn-link mt-2" data-bs-dismiss="modal">Cancel</button>
-                <a href="javascript:void(0)" onclick="bulkActive()" class="btn btn-success mt-2">Activate</a>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-<!-- Bulk Inactive Modal -->
-<div class="modal fade" id="bulk-inactive-modal" tabindex="-1" aria-labelledby="bulk-inactive-modal-label" aria-hidden="true" role="dialog">
-    <div class="modal-dialog modal-sm modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="bulk-inactive-modal-label">Deactivate Confirmation</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body text-center">
-                <p class="mt-1">Are you sure to deactivate selected materials?</p>
-                <button type="button" class="btn btn-link mt-2" data-bs-dismiss="modal">Cancel</button>
-                <a href="javascript:void(0)" onclick="bulkInactive()" class="btn btn-warning mt-2">Deactivate</a>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
 <script defer>
 const callbackCourseMaterials = function(response) {
     setTimeout(function() {
@@ -297,14 +246,15 @@ function showBulkInactiveModal() {
     $('#bulk-inactive-modal').modal('show');
 }
 
-// Bulk Delete
-function bulkDelete() {
+// Execute Bulk Delete - called from centralized modal
+function executeBulkDelete() {
     const selectedIds = [];
     $('.check-one:checked').each(function() {
         selectedIds.push($(this).val());
     });
 
     if (selectedIds.length === 0) {
+        $('#bulk-delete-modal').modal('hide');
         alert('Please select at least one material.');
         return;
     }
@@ -330,6 +280,7 @@ function bulkDelete() {
                     location.reload();
                 }, 1500);
             } else {
+                $('#bulk-delete-modal').modal('hide');
                 if (typeof AIZ !== 'undefined' && AIZ.plugins && AIZ.plugins.notify) {
                     AIZ.plugins.notify('danger', response.notification || 'Something went wrong.');
                 } else {
@@ -338,6 +289,7 @@ function bulkDelete() {
             }
         },
         error: function() {
+            $('#bulk-delete-modal').modal('hide');
             if (typeof AIZ !== 'undefined' && AIZ.plugins && AIZ.plugins.notify) {
                 AIZ.plugins.notify('danger', 'Something went wrong.');
             } else {
@@ -347,8 +299,8 @@ function bulkDelete() {
     });
 }
 
-// Bulk Active
-function bulkActive() {
+// Execute Bulk Active - called from centralized modal
+function executeBulkActive() {
     const selectedIds = [];
     $('.check-one:checked').each(function() {
         selectedIds.push($(this).val());
@@ -400,8 +352,8 @@ function bulkActive() {
     });
 }
 
-// Bulk Inactive
-function bulkInactive() {
+// Execute Bulk Inactive - called from centralized modal
+function executeBulkInactive() {
     const selectedIds = [];
     $('.check-one:checked').each(function() {
         selectedIds.push($(this).val());

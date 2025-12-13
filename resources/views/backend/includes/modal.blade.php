@@ -55,3 +55,54 @@
         </div>
     </div>
 </div>
+
+<!-- Bulk Delete Modal -->
+<div class="modal fade" id="bulk-delete-modal" tabindex="-1" aria-labelledby="bulk-delete-modal-label" aria-hidden="true" role="dialog">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="bulk-delete-modal-label">Delete Confirmation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <p class="mt-1">Are you sure to delete selected items?</p>
+                <button type="button" class="btn btn-link mt-2" data-bs-dismiss="modal">Cancel</button>
+                <a href="javascript:void(0)" onclick="executeBulkDelete()" class="btn btn-primary mt-2">Delete</a>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- Bulk Active Modal -->
+<div class="modal fade" id="bulk-active-modal" tabindex="-1" aria-labelledby="bulk-active-modal-label" aria-hidden="true" role="dialog">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="bulk-active-modal-label">Activate Confirmation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <p class="mt-1">Are you sure to activate selected items?</p>
+                <button type="button" class="btn btn-link mt-2" data-bs-dismiss="modal">Cancel</button>
+                <a href="javascript:void(0)" onclick="executeBulkActive()" class="btn btn-success mt-2">Activate</a>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- Bulk Inactive Modal -->
+<div class="modal fade" id="bulk-inactive-modal" tabindex="-1" aria-labelledby="bulk-inactive-modal-label" aria-hidden="true" role="dialog">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="bulk-inactive-modal-label">Deactivate Confirmation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <p class="mt-1">Are you sure to deactivate selected items?</p>
+                <button type="button" class="btn btn-link mt-2" data-bs-dismiss="modal">Cancel</button>
+                <a href="javascript:void(0)" onclick="executeBulkInactive()" class="btn btn-warning mt-2">Deactivate</a>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
