@@ -66,6 +66,13 @@ $(".ajaxDeleteForm").submit(function (e) {
     ajaxSubmit(e, form, callBackFunction);
 });
 
+// Handle bulk action forms
+$(document).on('submit', '.ajaxBulkForm', function (e) {
+    e.preventDefault();
+    var form = $(this);
+    ajaxSubmitBulk(e, form, callBackFunction);
+});
+
 function closeModel() {}
 
 function closeConfirmModel() {
@@ -169,7 +176,18 @@ function initSelect2(selector = '.select2') {
 
 //Form Submition
 function ajaxSubmit(e, form, callBackFunction) {
-    if(form.valid()) {
+    // Check if form has validation, if not, skip validation check
+    var isValid = true;
+    if (form.length && typeof form.valid === 'function') {
+        try {
+            isValid = form.valid();
+        } catch(err) {
+            // If validation is not initialized, consider form valid
+            isValid = true;
+        }
+    }
+    
+    if(isValid) {
         e.preventDefault();
         
         var btn = $(form).find('button[type="submit"]');
@@ -179,8 +197,8 @@ function ajaxSubmit(e, form, callBackFunction) {
         $(btn).css('pointer-events', 'none');
 
         var action = form.attr('action');
-        var form = e.target;
-        var data = new FormData(form);
+        var formElement = e.target;
+        var data = new FormData(formElement);
         $.ajax({
             type: "POST",
             url: action,
@@ -197,7 +215,9 @@ function ajaxSubmit(e, form, callBackFunction) {
                 if (response.status) {
                     // If response status is true, show a success notification
                     Command: toastr["success"](response.notification, "Success");
-                    callBackFunction(response); // Callback function if success
+                    if (callBackFunction && typeof callBackFunction === 'function') {
+                        callBackFunction(response); // Callback function if success
+                    }
                 } else {
                     // Handle case when response status is false (error from server)
                     var errors = '';
@@ -257,6 +277,105 @@ function ajaxSubmit(e, form, callBackFunction) {
     }else {
         toastr.error('Please make sure to fill all the necessary fields');
     }
+}
+
+// Bulk form submission (no validation required)
+function ajaxSubmitBulk(e, form, callBackFunction) {
+    e.preventDefault();
+    
+    var btn = $(form).find('button[type="submit"]');
+    var btn_text = $(btn).html();
+    $(btn).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>');
+    $(btn).css('opacity', '0.7');
+    $(btn).css('pointer-events', 'none');
+
+    var action = form.attr('action');
+    var formElement = e.target;
+    var data = new FormData(formElement);
+    
+    $.ajax({
+        type: "POST",
+        url: action,
+        processData: false,
+        contentType: false,
+        dataType: 'json',
+        data: data,
+        success: function(response)
+        {
+            $(btn).html(btn_text);
+            $(btn).css('opacity', '1');
+            $(btn).css('pointer-events', 'inherit');
+        
+            if (response.status) {
+                // If response status is true, show a success notification
+                Command: toastr["success"](response.notification, "Success");
+                if (callBackFunction && typeof callBackFunction === 'function') {
+                    callBackFunction(response); // Callback function if success
+                }
+            } else {
+                // Handle case when response status is false (error from server)
+                var errors = '';
+                
+                // Check if response.notification is an object (validation errors)
+                if (typeof response.notification === 'object') {
+                    $.each(response.notification, function(key, msg) {
+                        // If msg is an array (multiple errors for the same field)
+                        if (Array.isArray(msg)) {
+                            $.each(msg, function(index, message) {
+                                errors += '<div>' + message + '</div>';
+                            });
+                        } else {
+                            errors += '<div>' + msg + '</div>';
+                        }
+                    });
+                } else {
+                    // Fallback error message if notification is not an object
+                    errors = response.notification || 'An unexpected error occurred.';
+                }
+                
+                // Show the errors in a toastr notification
+                Command: toastr["error"](errors, "Alert");
+                // Close modals on error
+                $('#bulkDeleteModal').modal('hide');
+                $('#bulkActiveModal').modal('hide');
+                $('#bulkInactiveModal').modal('hide');
+            }
+        },
+        error: function(xhr) {
+            $(btn).html(btn_text);
+            $(btn).css('opacity', '1');
+            $(btn).css('pointer-events', 'inherit');
+        
+            // Check if the status code is 422 (Laravel validation errors)
+            if (xhr.status === 422) {
+                var errors = '';
+                var response = xhr.responseJSON; // Get the response from Laravel
+        
+                // Iterate over Laravel validation errors
+                if (response && response.errors) {
+                    $.each(response.errors, function(key, msg) {
+                        // If msg is an array (multiple errors for the same field)
+                        if (Array.isArray(msg)) {
+                            $.each(msg, function(index, message) {
+                                errors += '<div>' + message + '</div>';
+                            });
+                        } else {
+                            errors += '<div>' + msg + '</div>';
+                        }
+                    });
+                }
+                // Show the validation errors using toastr
+                Command: toastr["error"](errors, "Alert");
+            } else {
+                // Handle unexpected errors (non-validation errors)
+                Command: toastr["error"]("An unexpected error occurred. Please try again later.", "Error");
+            }
+            // Close modals on error
+            $('#bulkDeleteModal').modal('hide');
+            $('#bulkActiveModal').modal('hide');
+            $('#bulkInactiveModal').modal('hide');
+        }
+    });
 }
 
 function initDatatable(selector){

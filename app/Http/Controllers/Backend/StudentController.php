@@ -169,6 +169,108 @@ class StudentController extends Controller
             // Redirect back with an error message
             return redirect()->route('students.index')->with('error', 'There was an error deleting the record.');
         }
+    }
+
+    /**
+     * Bulk delete students
+     */
+    public function bulkDelete(Request $request)
+    {
+        try {
+            $ids = explode(',', $request->input('ids'));
+            
+            if (empty($ids) || !is_array($ids)) {
+                return response()->json(['status' => false, 'notification' => 'No items selected for deletion.']);
+            }
+
+            // Only delete students (role_id = 3)
+            $deleted = User::where('role_id', 3)->whereIn('id', $ids)->delete();
+            
+            if ($deleted > 0) {
+                return response()->json([
+                    'status' => true, 
+                    'notification' => $deleted . ' record(s) deleted successfully!'
+                ]);
+            } else {
+                return response()->json(['status' => false, 'notification' => 'No records were deleted.']);
+            }
+        } catch (\Exception $e) {
+            \Log::error('Error bulk deleting Student records', [
+                'error_message' => $e->getMessage(),
+                'stack_trace' => $e->getTraceAsString(),
+                'ids' => $request->input('ids')
+            ]);
+
+            return response()->json(['status' => false, 'notification' => 'There was an error deleting the records.']);
+        }
+    }
+
+    /**
+     * Bulk activate students
+     */
+    public function bulkActive(Request $request)
+    {
+        try {
+            $ids = explode(',', $request->input('ids'));
+            
+            if (empty($ids) || !is_array($ids)) {
+                return response()->json(['status' => false, 'notification' => 'No items selected for activation.']);
+            }
+
+            // Only update students (role_id = 3)
+            $updated = User::where('role_id', 3)->whereIn('id', $ids)->update(['is_active' => 1]);
+            
+            if ($updated > 0) {
+                return response()->json([
+                    'status' => true, 
+                    'notification' => $updated . ' record(s) activated successfully!'
+                ]);
+            } else {
+                return response()->json(['status' => false, 'notification' => 'No records were activated.']);
+            }
+        } catch (\Exception $e) {
+            \Log::error('Error bulk activating Student records', [
+                'error_message' => $e->getMessage(),
+                'stack_trace' => $e->getTraceAsString(),
+                'ids' => $request->input('ids')
+            ]);
+
+            return response()->json(['status' => false, 'notification' => 'There was an error activating the records.']);
+        }
+    }
+
+    /**
+     * Bulk deactivate students
+     */
+    public function bulkInactive(Request $request)
+    {
+        try {
+            $ids = explode(',', $request->input('ids'));
+            
+            if (empty($ids) || !is_array($ids)) {
+                return response()->json(['status' => false, 'notification' => 'No items selected for deactivation.']);
+            }
+
+            // Only update students (role_id = 3)
+            $updated = User::where('role_id', 3)->whereIn('id', $ids)->update(['is_active' => 0]);
+            
+            if ($updated > 0) {
+                return response()->json([
+                    'status' => true, 
+                    'notification' => $updated . ' record(s) deactivated successfully!'
+                ]);
+            } else {
+                return response()->json(['status' => false, 'notification' => 'No records were deactivated.']);
+            }
+        } catch (\Exception $e) {
+            \Log::error('Error bulk deactivating Student records', [
+                'error_message' => $e->getMessage(),
+                'stack_trace' => $e->getTraceAsString(),
+                'ids' => $request->input('ids')
+            ]);
+
+            return response()->json(['status' => false, 'notification' => 'There was an error deactivating the records.']);
+        }
     }    
 }
 

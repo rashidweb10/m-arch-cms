@@ -119,6 +119,9 @@ Route::prefix('backend')->group(function () {
 
     Route::middleware('auth.backend')->group(function () {
         Route::resource('students', StudentController::class);
+        Route::post('students/bulk-delete', [StudentController::class, 'bulkDelete'])->name('students.bulk-delete');
+        Route::post('students/bulk-active', [StudentController::class, 'bulkActive'])->name('students.bulk-active');
+        Route::post('students/bulk-inactive', [StudentController::class, 'bulkInactive'])->name('students.bulk-inactive');
     });  
     
     Route::middleware('auth.backend')->group(function () {

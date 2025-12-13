@@ -55,3 +55,78 @@
         </div>
     </div>
 </div>
+
+<!-- Bulk Delete Confirmation Modal -->
+<div class="modal fade" id="bulkDeleteModal" tabindex="-1" aria-labelledby="bulkDeleteModal-label" aria-modal="true" role="dialog" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <form method="POST" class="ajaxBulkForm" action="" id="bulk_delete_form">
+                    @csrf
+                    @method('POST')
+                    <input type="hidden" name="ids" id="bulk_delete_ids" value="">
+                    <i class="fa-solid fa-trash" style="font-size: 50px; color: #dc3545;"></i>
+                    <p class="mt-3" id="bulk_delete_message">Are you sure you want to delete selected items?</p>
+                    <div class="d-flex justify-content-center gap-2 mt-2">
+                        <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal" aria-label="Close">
+                            <i class="fa-solid fa-xmark"></i> Cancel
+                        </button>
+                        <button type="submit" class="btn btn-sm btn-success">
+                            <i class="fa-solid fa-check"></i> Delete
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bulk Active Confirmation Modal -->
+<div class="modal fade" id="bulkActiveModal" tabindex="-1" aria-labelledby="bulkActiveModal-label" aria-modal="true" role="dialog" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <form method="POST" class="ajaxBulkForm" action="" id="bulk_active_form">
+                    @csrf
+                    @method('POST')
+                    <input type="hidden" name="ids" id="bulk_active_ids" value="">
+                    <i class="fa-solid fa-check-circle" style="font-size: 50px; color: #28a745;"></i>
+                    <p class="mt-3" id="bulk_active_message">Are you sure you want to activate selected items?</p>
+                    <div class="d-flex justify-content-center gap-2 mt-2">
+                        <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal" aria-label="Close">
+                            <i class="fa-solid fa-xmark"></i> Cancel
+                        </button>
+                        <button type="submit" class="btn btn-sm btn-success">
+                            <i class="fa-solid fa-check"></i> Activate
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bulk Inactive Confirmation Modal -->
+<div class="modal fade" id="bulkInactiveModal" tabindex="-1" aria-labelledby="bulkInactiveModal-label" aria-modal="true" role="dialog" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <form method="POST" class="ajaxBulkForm" action="" id="bulk_inactive_form">
+                    @csrf
+                    @method('POST')
+                    <input type="hidden" name="ids" id="bulk_inactive_ids" value="">
+                    <i class="fa-solid fa-times-circle" style="font-size: 50px; color: #dc3545;"></i>
+                    <p class="mt-3" id="bulk_inactive_message">Are you sure you want to deactivate selected items?</p>
+                    <div class="d-flex justify-content-center gap-2 mt-2">
+                        <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal" aria-label="Close">
+                            <i class="fa-solid fa-xmark"></i> Cancel
+                        </button>
+                        <button type="submit" class="btn btn-sm btn-success">
+                            <i class="fa-solid fa-check"></i> Deactivate
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
