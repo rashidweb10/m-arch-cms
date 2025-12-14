@@ -13,4 +13,5 @@ return [
     'from_email' => env('MAIL_FROM_ADDRESS'),
     'tinymce_api' => env('TINYMCE_API_KEY'),
     'pagination_per_page' => env('PAGINATION_PER_PAGE', 10),
+    'pagination_per_media_page' => env('PAGINATION_PER_MEDIA_PAGE', 24),
 ];
