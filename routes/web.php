@@ -49,6 +49,7 @@ Route::get('/about-us', [FrontendController::class, 'about'])->name('about');
 Route::get('/products', [FrontendController::class, 'products'])->name('products');
 
 Route::get('/contact-us', [FrontendController::class, 'contact'])->name('contact');
+Route::get('/courses', [FrontendController::class, 'courses'])->name('courses');
 
 Route::post('/submit-form', [FormController::class, 'submit'])->middleware(['protect.forms','recaptcha','throttle:4,1'])->name('form.submit');
 

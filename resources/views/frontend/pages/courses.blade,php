@@ -1,0 +1,186 @@
+@extends('frontend.layouts.app')
+
+@section('meta.title', 'Contact Us')
+@section('meta.description', 'Contact Us')
+
+@section('content')
+
+@include('frontend.partials.breadcrumb', ['title' => "Courses"])
+
+<section class="courses_section pb-5 pt-5">
+   <div class="container">
+      <div class="row g-4 align-items-center">
+         <div class="col-lg-6 position-relative" data-aos="fade-right" data-aos-duration="1000" data-aos-once="true">
+            <div class="position-relative">
+               <img src="images/deck-courses.jpg"
+                  alt="Deck training" class="hvr-bounce-in w-100 course-card-img">
+               <div class="position-absolute top-3 start-3">
+                  <span class="badge bg-primary text-white badge-count">4 Courses</span>
+               </div>
+            </div>
+         </div>
+         <div class="col-lg-6" data-aos="fade-left" data-aos-duration="1000" data-aos-once="true">
+            <h2 class="h2 robot_slab">Deck Courses</h2>
+            <ul class="list-group list-group-flush mb-3" style="display: inline-table;">
+               <li class="list-group-item">
+                  <i class="fa-solid fa-book me-2"></i> ASM for Masters (FG) Exams in India <i class="fa-regular fa-file-pdf pdf_class"></i>
+               </li>
+               <li class="list-group-item">
+                  <i class="fa-solid fa-book me-2"></i> ASM for Masters (NCV) Exams in India <i class="fa-regular fa-file-pdf pdf_class"></i>
+               </li>
+               <li class="list-group-item">
+                  <i class="fa-solid fa-book me-2"></i> Chief Mate (FG) Phase 1 and Phase 2 <i class="fa-regular fa-file-pdf pdf_class"></i>
+               </li>
+               <li class="list-group-item">
+                  <i class="fa-solid fa-book me-2"></i> Chief Mate (NCV) phase 1 and phase 2 <i class="fa-regular fa-file-pdf pdf_class"></i>
+               </li>
+            </ul>
+         </div>
+      </div>
+   </div>
+</section>
+<div class="course_hr">
+   <div class="container">
+      <hr>
+   </div>
+</div>
+<!-- Engineering Courses Section -->
+<section class="courses_section pb-5 pt-5">
+   <div class="container">
+      <div class="row g-4 align-items-center flex-lg-row-reverse">
+         <div class="col-lg-6 position-relative" data-aos="fade-right" data-aos-duration="1000" data-aos-once="true">
+            <div class="position-relative">
+               <img src="images/engineering-courses.jpg"
+                  alt="Engineering training" class="hvr-bounce-in w-100 course-card-img shadow-sm">
+               <div class="position-absolute top-3 start-3">
+                  <span class="badge bg-success text-white badge-count">4 Courses</span>
+               </div>
+            </div>
+         </div>
+         <div class="col-lg-6" data-aos="fade-left" data-aos-duration="1000" data-aos-once="true">
+            <h2 class="h2 robot_slab">Engineering Courses</h2>
+            <ul class="list-group list-group-flush mb-3" style="display: inline-table;">
+               <li class="list-group-item"><i class="fa-solid fa-book me-2"></i> MEO Cl1 Exams <i class="fa-regular fa-file-pdf pdf_class"></i></li>
+               <li class="list-group-item"><i class="fa-solid fa-book me-2"></i> MEO Cl2 Exams <i class="fa-regular fa-file-pdf pdf_class"></i></li>
+               <li class="list-group-item"><i class="fa-solid fa-book me-2"></i> MEO Cl4 Exams <i class="fa-regular fa-file-pdf pdf_class"></i></il>
+               <li class="list-group-item"><i class="fa-solid fa-book me-2"></i> ETO Exams <i class="fa-regular fa-file-pdf pdf_class"></i></li>
+            </ul>
+         </div>
+      </div>
+   </div>
+</section>
+<div class="course_hr">
+   <div class="container">
+      <hr>
+   </div>
+</div>
+<!-- Value Added Courses Section -->
+<section class="courses_section pb-5 pt-5">
+   <div class="container">
+      <div class="row g-4 align-items-center">
+         <div class="col-lg-6 position-relative" data-aos="fade-right" data-aos-duration="1000" data-aos-once="true">
+            <div class="position-relative">
+               <img src="images/extra-first-class-exams.jpg"
+                  alt="Value added courses" class="hvr-bounce-in w-100 course-card-img shadow-sm">
+               <div class="position-absolute top-3 start-3">
+                  <span class="badge bg-info text-white badge-count">Multiple</span>
+               </div>
+            </div>
+         </div>
+         <div class="col-lg-6" data-aos="fade-left" data-aos-duration="1000" data-aos-once="true">
+            <h2 class="h2 robot_slab">Value Added Courses</h2>
+            <ul class="list-group list-group-flush mb-3" style="display: inline-table;">
+               <li class="list-group-item"><i class="fa-solid fa-book me-2"></i> Basic and Advanced Hydraulic Courses <i class="fa-regular fa-file-pdf pdf_class"></i></li>
+               <li class="list-group-item"><i class="fa-solid fa-book me-2"></i> ISM Code course <i class="fa-regular fa-file-pdf pdf_class"></i></li>
+               <li class="list-group-item"><i class="fa-solid fa-book me-2"></i> ISPS Code course <i class="fa-regular fa-file-pdf pdf_class"></i></li>
+               <li class="list-group-item"><i class="fa-solid fa-book me-2"></i> Bridge Team Resource Management <i class="fa-regular fa-file-pdf pdf_class"></i> </li>
+               <li class="list-group-item"><i class="fa-solid fa-book me-2"></i> Engine Room Resource Management <i class="fa-regular fa-file-pdf pdf_class"></i> </li>
+               <li class="list-group-item"><i class="fa-solid fa-book me-2"></i> Operational Engineering Knowledge for Deck Officers <i class="fa-regular fa-file-pdf pdf_class"></i></li>
+               <li class="list-group-item"><i class="fa-solid fa-book me-2"></i> Risk management and Incident Investigation <i class="fa-regular fa-file-pdf pdf_class"></i></li>
+               <li class="list-group-item"><i class="fa-solid fa-book me-2"></i> Volatile Organic Compound, Vapour Emission Control Management Level </li>
+               <li class="list-group-item"><i class="fa-solid fa-book me-2"></i> Reefer Container Familiarization Course <i class="fa-regular fa-file-pdf pdf_class"></i></li>
+               <li class="list-group-item"><i class="fa-solid fa-book me-2"></i> Electro Hydraulic Crane Course <i class="fa-regular fa-file-pdf pdf_class"></i></li>
+               <li class="list-group-item"><i class="fa-solid fa-book me-2"></i> ME Engine Course <i class="fa-regular fa-file-pdf pdf_class"></i></li>
+            </ul>
+         </div>
+      </div>
+   </div>
+</section>
+<div class="course_hr">
+   <div class="container">
+      <hr>
+   </div>
+</div>
+<!-- Advanced Courses Section -->
+<section class="courses_section pb-5 pt-5">
+   <div class="container">
+      <div class="row g-4 align-items-center flex-lg-row-reverse">
+         <div class="col-lg-6 position-relative" data-aos="fade-right" data-aos-duration="1000" data-aos-once="true">
+            <div class="position-relative">
+               <img src="https://images.unsplash.com/photo-1549880338-65ddcdfd017b?auto=format&fit=crop&w=1400&q=60"
+                  alt="Advanced courses" class="hvr-bounce-in w-100 course-card-img shadow-sm">
+               <div class="position-absolute top-3 start-3">
+                  <span class="badge bg-dark text-white badge-count">Advanced</span>
+               </div>
+            </div>
+         </div>
+         <div class="col-lg-6" data-aos="fade-left" data-aos-duration="1000" data-aos-once="true">
+            <h2 class="h2 robot_slab">Advance Courses</h2>
+            <div class="mb-3">
+               <h6>1) Extra First-Class Exams</h6>
+               <ul>
+                  <li>Part A</li>
+                  <li>Part B</li>
+               </ul>
+            </div>
+            <div class="course_hr">
+               <hr>
+            </div>
+            <div class="mb-3">
+               <h6>2) Institute of Chartered Shipbrokers (ICS)</h6>
+               <ul>
+                  <li>Professional Qualifying Examinations (PQE)</li>
+                  <li>Foundation Diploma</li>
+                  <li>Advanced Diploma</li>
+               </ul>
+            </div>
+            <div class="course_hr">
+               <hr>
+            </div>
+            <div class="mb-3">
+               <h6>3) Post Graduate Diploma in Shipping Management &amp; Logistics (PGDSM&amp;L)</h6>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+<div class="course_hr">
+   <div class="container">
+      <hr>
+   </div>
+</div>
+<!-- IMU CET / Entrance Prep Section -->
+<section class="courses_section pb-5 pt-5">
+   <div class="container">
+      <div class="row g-4 align-items-center">
+         <div class="col-lg-6 position-relative" data-aos="fade-right" data-aos-duration="1000" data-aos-once="true">
+            <div class="position-relative">
+               <img src="https://images.unsplash.com/photo-1549880338-65ddcdfd017b?auto=format&fit=crop&w=1400&q=60"
+                  alt="Entrance exam prep" class="hvr-bounce-in w-100 course-card-img">
+               <div class="position-absolute top-3 start-3">
+                  <span class="badge bg-warning text-dark badge-count">Preparation</span>
+               </div>
+            </div>
+         </div>
+         <div class="col-lg-6" data-aos="fade-left" data-aos-duration="1000" data-aos-once="true">
+            <h2 class="h2 robot_slab ">IMU CET Entrance</h2>
+            <ul class="list-group list-group-flush mb-3" style="display: inline-table;">
+               <li class="list-group-item"><i class="fa-solid fa-book me-2"></i> IMU CET Entrance <i class="fa-regular fa-file-pdf pdf_class"></i></li>
+               <li class="list-group-item"><i class="fa-solid fa-book me-2"></i> IMU CET Entrance Preparation <i class="fa-regular fa-file-pdf pdf_class"></i></li>
+               <li class="list-group-item"><i class="fa-solid fa-book me-2"></i> Basic and Advanced (prep modules) <i class="fa-regular fa-file-pdf pdf_class"></i></li>
+            </ul>
+         </div>
+      </div>
+   </div>
+</section>
+@endsection
