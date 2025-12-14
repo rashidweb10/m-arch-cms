@@ -49,6 +49,16 @@ class FrontendController extends Controller
     public function courses()
     {
         return view('frontend.pages.courses');
+    }    
+
+    public function faculties()
+    {
+        return view('frontend.pages.faculties');
+    }     
+
+    public function testimonials()
+    {
+        return view('frontend.pages.testimonials');
     }     
         
     public function default($slug)

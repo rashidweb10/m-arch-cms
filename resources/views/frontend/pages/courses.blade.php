@@ -12,7 +12,7 @@
       <div class="row g-4 align-items-center">
          <div class="col-lg-6 position-relative" data-aos="fade-right" data-aos-duration="1000" data-aos-once="true">
             <div class="position-relative">
-               <img src="images/deck-courses.jpg"
+               <img src="assets/frontend/img/deck-courses.jpg"
                   alt="Deck training" class="hvr-bounce-in w-100 course-card-img">
                <div class="position-absolute top-3 start-3">
                   <span class="badge bg-primary text-white badge-count">4 Courses</span>
@@ -50,7 +50,7 @@
       <div class="row g-4 align-items-center flex-lg-row-reverse">
          <div class="col-lg-6 position-relative" data-aos="fade-right" data-aos-duration="1000" data-aos-once="true">
             <div class="position-relative">
-               <img src="images/engineering-courses.jpg"
+               <img src="assets/frontend/img/engineering-courses.jpg"
                   alt="Engineering training" class="hvr-bounce-in w-100 course-card-img shadow-sm">
                <div class="position-absolute top-3 start-3">
                   <span class="badge bg-success text-white badge-count">4 Courses</span>
@@ -62,7 +62,7 @@
             <ul class="list-group list-group-flush mb-3" style="display: inline-table;">
                <li class="list-group-item"><i class="fa-solid fa-book me-2"></i> MEO Cl1 Exams <i class="fa-regular fa-file-pdf pdf_class"></i></li>
                <li class="list-group-item"><i class="fa-solid fa-book me-2"></i> MEO Cl2 Exams <i class="fa-regular fa-file-pdf pdf_class"></i></li>
-               <li class="list-group-item"><i class="fa-solid fa-book me-2"></i> MEO Cl4 Exams <i class="fa-regular fa-file-pdf pdf_class"></i></il>
+               <li class="list-group-item"><i class="fa-solid fa-book me-2"></i> MEO Cl4 Exams <i class="fa-regular fa-file-pdf pdf_class"></i></li>
                <li class="list-group-item"><i class="fa-solid fa-book me-2"></i> ETO Exams <i class="fa-regular fa-file-pdf pdf_class"></i></li>
             </ul>
          </div>
@@ -80,7 +80,7 @@
       <div class="row g-4 align-items-center">
          <div class="col-lg-6 position-relative" data-aos="fade-right" data-aos-duration="1000" data-aos-once="true">
             <div class="position-relative">
-               <img src="images/extra-first-class-exams.jpg"
+               <img src="assets/frontend/img/extra-first-class-exams.jpg"
                   alt="Value added courses" class="hvr-bounce-in w-100 course-card-img shadow-sm">
                <div class="position-absolute top-3 start-3">
                   <span class="badge bg-info text-white badge-count">Multiple</span>
@@ -184,3 +184,4 @@
    </div>
 </section>
 @endsection
+
