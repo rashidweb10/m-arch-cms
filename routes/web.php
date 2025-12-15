@@ -19,6 +19,9 @@ use App\Http\Controllers\Backend\GalleryController;
 use App\Http\Controllers\Backend\PageController;
 use App\Http\Controllers\Backend\FormController as BackendFormController;
 use App\Http\Controllers\Backend\ImportController;
+use App\Http\Controllers\Backend\BackupController;
+use App\Http\Controllers\Backend\BackupScheduleController;
+use App\Http\Controllers\Backend\BackupSettingsController;
 
 //Frontend
 use App\Http\Controllers\FrontendController;
@@ -145,6 +148,23 @@ Route::prefix('backend')->group(function () {
     Route::get('/import-course-enrolments', [ImportController::class, 'importCourseEnrolments']);
     Route::get('/import-course-materials', [ImportController::class, 'importCourseMaterials']); 
     Route::get('/import-users', [ImportController::class, 'importUsers']);   
+    
+    // Backup Management Routes
+    Route::middleware('auth.backend')->group(function () {
+        // Backup routes
+        Route::resource('backups', BackupController::class);
+        Route::get('backups/{id}/download', [BackupController::class, 'download'])->name('backups.download');
+        Route::get('backups/{id}/logs', [BackupController::class, 'logs'])->name('backups.logs');
+        
+        // Backup Schedule routes
+        Route::resource('backup-schedules', BackupScheduleController::class);
+        Route::post('backup-schedules/{id}/run', [BackupScheduleController::class, 'run'])->name('backup-schedules.run');
+        Route::post('backup-schedules/{id}/toggle', [BackupScheduleController::class, 'toggle'])->name('backup-schedules.toggle');
+        
+        // Backup Settings routes
+        Route::get('backup-settings', [BackupSettingsController::class, 'index'])->name('backup-settings.index');
+        Route::post('backup-settings', [BackupSettingsController::class, 'update'])->name('backup-settings.update');
+    });
 });
 
 
