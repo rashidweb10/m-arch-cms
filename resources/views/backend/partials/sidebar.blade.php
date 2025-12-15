@@ -120,6 +120,12 @@
             </a>
         </li>   
         <li class="side-nav-item">
+            <a href="{{ route('backups.index') }}" class="side-nav-link text-info fw-bold">
+                <span class="menu-icon"><i class="ti ti-download"></i></span>
+                <span class="menu-text"> Backups </span>
+            </a>
+        </li>        
+        <li class="side-nav-item">
             <a target="_blank" href="{{ url('') . '/command/optimize-clear?back=true' }}" class="side-nav-link text-danger fw-bold">
                 <span class="menu-icon"><i class="ti ti-refresh"></i></span>
                 <span class="menu-text"> Clear Cache </span>
