@@ -4,7 +4,7 @@
          <div class="col-md-2">
             <div class="footer_logo">
                <a href="/">
-               <img title="MaxCrude" class="w-100" src="assets/frontend/img/marinarch-logo.png">
+               <img title="MaxCrude" class="w-100" src="{{ asset('assets/frontend/img/marinarch-logo.png') }}">
                </a>
             </div>
          </div>
