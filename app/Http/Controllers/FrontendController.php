@@ -10,6 +10,8 @@ use App\Models\TeamCategory;
 use App\Models\Company;
 use App\Models\Campus;
 use App\Models\Gallery;
+use App\Models\Blog;
+use App\Models\BlogCategory;
 use Illuminate\Support\Facades\Cache;
 
 class FrontendController extends Controller
@@ -66,9 +68,31 @@ class FrontendController extends Controller
         $pageData = Page::with('meta')->where('is_active', 1)
         ->where('slug', $slug)
         ->firstOrFail();
-    
+
         return view('frontend.pages.common', compact('pageData'));
-    }     
-        
+    }
+
+    public function blogIndex()
+    {
+        $blogs = Blog::published()->activeCategories()->with('categories')->paginate(12);
+        return view('frontend.blogs.index', compact('blogs'));
+    }
+
+    public function blogShow($slug)
+    {
+        $blog = Blog::published()->activeCategories()->with('categories')->where('slug', $slug)->firstOrFail();
+        $relatedBlogs = Blog::published()->activeCategories()->whereHas('categories', function ($q) use ($blog) {
+            $q->whereIn('blog_categories.id', $blog->categories->pluck('id'));
+        })->where('id', '!=', $blog->id)->limit(3)->get();
+        return view('frontend.blogs.show', compact('blog', 'relatedBlogs'));
+    }
+
+    public function blogCategory($slug)
+    {
+        $category = BlogCategory::where('slug', $slug)->where('status', true)->firstOrFail();
+        $blogs = $category->blogs()->published()->paginate(12);
+        return view('frontend.blogs.category', compact('category', 'blogs'));
+    }
+
 }
 

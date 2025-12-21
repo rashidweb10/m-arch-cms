@@ -13,6 +13,8 @@ use App\Http\Controllers\Backend\CourseController;
 use App\Http\Controllers\Backend\CourseMaterialController;
 use App\Http\Controllers\Backend\CourseEnrolmentController;
 use App\Http\Controllers\Backend\StudentController;
+use App\Http\Controllers\Backend\BlogCategoryController;
+use App\Http\Controllers\Backend\BlogController;
 use App\Http\Controllers\Backend\TeamController;
 use App\Http\Controllers\Backend\CampusController;
 use App\Http\Controllers\Backend\GalleryController;
@@ -52,6 +54,10 @@ Route::get('/contact-us', [FrontendController::class, 'contact'])->name('contact
 Route::get('/courses', [FrontendController::class, 'courses'])->name('courses');
 Route::get('/faculties', [FrontendController::class, 'faculties'])->name('faculties');
 Route::get('/testimonials', [FrontendController::class, 'testimonials'])->name('testimonials');
+
+Route::get('/blog', [FrontendController::class, 'blogIndex'])->name('blog.index');
+Route::get('/blog/{slug}', [FrontendController::class, 'blogShow'])->name('blog.show');
+Route::get('/blog/category/{slug}', [FrontendController::class, 'blogCategory'])->name('blog.category');
 
 Route::post('/submit-form', [FormController::class, 'submit'])->middleware(['protect.forms','recaptcha','throttle:4,1'])->name('form.submit');
 
@@ -134,7 +140,18 @@ Route::prefix('backend')->group(function () {
         Route::post('students/bulk-delete', [StudentController::class, 'bulkDelete'])->name('students.bulk-delete');
         Route::post('students/bulk-active', [StudentController::class, 'bulkActive'])->name('students.bulk-active');
         Route::post('students/bulk-inactive', [StudentController::class, 'bulkInactive'])->name('students.bulk-inactive');
-    });  
+    });
+
+    Route::middleware('auth.backend')->group(function () {
+        Route::resource('blog-categories', BlogCategoryController::class);
+    });
+
+    Route::middleware('auth.backend')->group(function () {
+        Route::resource('blogs', BlogController::class);
+        Route::post('blogs/bulk-delete', [BlogController::class, 'bulkDelete'])->name('blogs.bulk-delete');
+        Route::post('blogs/bulk-publish', [BlogController::class, 'bulkPublish'])->name('blogs.bulk-publish');
+        Route::post('blogs/bulk-draft', [BlogController::class, 'bulkDraft'])->name('blogs.bulk-draft');
+    });
     
     Route::middleware('auth.backend')->group(function () {
         Route::get('forms-by/{form_name}', [BackendFormController::class, 'index'])->name('forms.by');
