@@ -135,10 +135,11 @@
    });
 </script>
 <script>
-   document.addEventListener("DOMContentLoaded", function() {
-     Fancybox.bind("[data-fancybox='gallery']", {
-       Thumbs: { autoStart: true },
-       Toolbar: { display: ["zoom", "close"] },
+   $(document).ready(function() {
+     $('[data-fancybox="gallery1"]').fancybox({
+       thumbs: { autoStart: true },
+       toolbar: true,
+       buttons: ["zoom", "close"]
      });
    });
 </script>
