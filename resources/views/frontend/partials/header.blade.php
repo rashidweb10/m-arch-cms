@@ -144,6 +144,12 @@
                                     </li>
 
                                     <li class="nav-item">
+                                        <a class="nav-link robot_slab" href="{{ route('blog.index') }}">
+                                            Blogs
+                                        </a>
+                                    </li>                                    
+
+                                    <li class="nav-item">
                                         <a class="nav-link robot_slab" href="{{ route('contact') }}">
                                             Contact Us
                                         </a>
