@@ -43,7 +43,7 @@
                 <!-- Logo -->
                 <div class="col-md-1 col-3 order-md-1 order-2">
                     <div class="logo_width">
-                        <a class="navbar-brand" href="index.php">
+                        <a class="navbar-brand" href="/">
                             <img
                                 class="w-150"
                                 src="assets/frontend/img/marinarch-logo.png"
@@ -81,7 +81,7 @@
                                 <ul class="navbar-nav ms-md-auto mb-0 position_tops">
 
                                     <li class="nav-item">
-                                        <a class="nav-link robot_slab" href="index.html">
+                                        <a class="nav-link robot_slab" href="{{ route('home') }}">
                                             Home
                                         </a>
                                     </li>
@@ -93,19 +93,19 @@
                                         </a>
                                         <ul class="submenu">
                                             <li>
-                                                <a href="about-us.php">
+                                                <a href="{{ route('about') }}">
                                                     <i class="fa-regular fa-address-card"></i>
                                                     About Us
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="courses.php">
+                                                <a href="{{ route('courses') }}">
                                                     <i class="fa-brands fa-discourse"></i>
                                                     Courses
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="faculties.php">
+                                                <a href="{{ route('faculties') }}">
                                                     <i class="fa-regular fa-address-card"></i>
                                                     Faculties
                                                 </a>
@@ -119,9 +119,9 @@
                                             Courses
                                         </a>
                                         <ul class="submenu">
-                                            <li><a href="about-us.php">About Us</a></li>
-                                            <li><a href="courses.php">Courses</a></li>
-                                            <li><a href="faculties.php">Faculties</a></li>
+                                            <li><a href="{{ route('about') }}">About Us</a></li>
+                                            <li><a href="{{ route('courses') }}">Courses</a></li>
+                                            <li><a href="{{ route('faculties') }}">Faculties</a></li>
                                         </ul>
                                     </li>
 
@@ -131,20 +131,20 @@
                                             Faculties
                                         </a>
                                         <ul class="submenu">
-                                            <li><a href="about-us.php">About Us</a></li>
-                                            <li><a href="courses.php">Courses</a></li>
-                                            <li><a href="faculties.php">Faculties</a></li>
+                                            <li><a href="{{ route('about') }}">About Us</a></li>
+                                            <li><a href="{{ route('courses') }}">Courses</a></li>
+                                            <li><a href="{{ route('faculties') }}">Faculties</a></li>
                                         </ul>
                                     </li>
 
                                     <li class="nav-item">
-                                        <a class="nav-link robot_slab" href="testimonials.php">
+                                        <a class="nav-link robot_slab" href="{{ route('testimonials') }}">
                                             Student Speak
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
-                                        <a class="nav-link robot_slab" href="contact-us.php">
+                                        <a class="nav-link robot_slab" href="{{ route('contact') }}">
                                             Contact Us
                                         </a>
                                     </li>

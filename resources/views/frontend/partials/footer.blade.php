@@ -15,22 +15,22 @@
                      <h5 class="robot_slab">Quick Link</h5>
                      <ul class="footer-menu">
                         <li>
-                           <a href="index.php">Home </a>
+                           <a href="{{ route('home') }}">Home </a>
                         </li>
                         <li>
-                           <a href="about-us.php">Marine Arch</a>
+                           <a href="{{ route('about') }}">Marine Arch</a>
                         </li>
                         <li>
-                           <a href="courses.php">Courses</a>
+                           <a href="{{ route('courses') }}">Courses</a>
                         </li>
                         <li>
-                           <a href="faculties.php">Faculties</a>
+                           <a href="{{ route('faculties') }}">Faculties</a>
                         </li>
                         <li>
-                           <a href="testimonials.php">Student Speak</a>
+                           <a href="{{ route('testimonials') }}">Student Speak</a>
                         </li>
                         <li>
-                           <a href="contact-us.php">Contact Us</a>
+                           <a href="{{ route('contact') }}">Contact Us</a>
                         </li>
                      </ul>
                   </div>
