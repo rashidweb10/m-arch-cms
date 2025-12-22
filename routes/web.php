@@ -13,6 +13,8 @@ use App\Http\Controllers\Backend\CourseController;
 use App\Http\Controllers\Backend\CourseMaterialController;
 use App\Http\Controllers\Backend\CourseEnrolmentController;
 use App\Http\Controllers\Backend\StudentController;
+use App\Http\Controllers\Backend\BlogController;
+use App\Http\Controllers\Backend\BlogCategoryController;
 use App\Http\Controllers\Backend\TeamController;
 use App\Http\Controllers\Backend\CampusController;
 use App\Http\Controllers\Backend\GalleryController;
@@ -135,6 +137,17 @@ Route::prefix('backend')->group(function () {
         Route::post('students/bulk-active', [StudentController::class, 'bulkActive'])->name('students.bulk-active');
         Route::post('students/bulk-inactive', [StudentController::class, 'bulkInactive'])->name('students.bulk-inactive');
     });  
+
+    Route::middleware('auth.backend')->group(function () {
+        Route::resource('blog-categories', BlogCategoryController::class);
+    });
+
+    Route::middleware('auth.backend')->group(function () {
+        Route::resource('blogs', BlogController::class);
+        Route::post('blogs/bulk-delete', [BlogController::class, 'bulkDelete'])->name('blogs.bulk-delete');
+        Route::post('blogs/bulk-active', [BlogController::class, 'bulkActive'])->name('blogs.bulk-active');
+        Route::post('blogs/bulk-inactive', [BlogController::class, 'bulkInactive'])->name('blogs.bulk-inactive');
+    });
     
     Route::middleware('auth.backend')->group(function () {
         Route::get('forms-by/{form_name}', [BackendFormController::class, 'index'])->name('forms.by');

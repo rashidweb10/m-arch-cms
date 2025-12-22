@@ -56,6 +56,29 @@
                 <span class="menu-text"> Students </span>
             </a>
         </li>         
+
+        <li class="side-nav-item">
+            <a data-bs-toggle="collapse" href="#blog" aria-expanded="false" aria-controls="sidebarTables"
+                class="side-nav-link">
+                <span class="menu-icon"><i class="ti ti-notebook"></i></span>
+                <span class="menu-text"> Blog Management </span>
+                <span class="menu-arrow"></span>
+            </a>
+            <div class="collapse" id="blog">
+                <ul class="sub-menu">
+                    <li class="side-nav-item">
+                        <a href="{{ route('blog-categories.index') }}" class="side-nav-link">
+                            <span class="menu-text">Categories</span>
+                        </a>
+                    </li>
+                    <li class="side-nav-item">
+                        <a href="{{ route('blogs.index') }}" class="side-nav-link">
+                            <span class="menu-text">Blogs</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </li>
     
         <li class="side-nav-item">
             <a data-bs-toggle="collapse" href="#courses" aria-expanded="false" aria-controls="sidebarTables"
