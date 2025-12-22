@@ -55,6 +55,9 @@ Route::get('/courses', [FrontendController::class, 'courses'])->name('courses');
 Route::get('/faculties', [FrontendController::class, 'faculties'])->name('faculties');
 Route::get('/testimonials', [FrontendController::class, 'testimonials'])->name('testimonials');
 
+Route::get('/blog', [FrontendController::class, 'blogs'])->name('blog.index');
+Route::get('/blog/{slug}', [FrontendController::class, 'blogDetail'])->name('blog.show');
+
 Route::post('/submit-form', [FormController::class, 'submit'])->middleware(['protect.forms','recaptcha','throttle:4,1'])->name('form.submit');
 
 // Group routes under the 'backend' prefix

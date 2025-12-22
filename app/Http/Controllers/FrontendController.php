@@ -10,6 +10,8 @@ use App\Models\TeamCategory;
 use App\Models\Company;
 use App\Models\Campus;
 use App\Models\Gallery;
+use App\Models\Blog;
+use App\Models\BlogCategory;
 use Illuminate\Support\Facades\Cache;
 
 class FrontendController extends Controller
@@ -60,6 +62,68 @@ class FrontendController extends Controller
     {
         return view('frontend.pages.testimonials');
     }     
+
+    public function blogs(Request $request)
+    {
+        $categorySlug = $request->input('category');
+        $search = $request->input('search');
+
+        $categories = BlogCategory::where('is_active', 1)
+            ->orderBy('name', 'asc')
+            ->get();
+
+        $query = Blog::with('categories')
+            ->where('is_active', 1)
+            ->orderBy('published_at', 'desc')
+            ->orderBy('id', 'desc');
+
+        if ($categorySlug) {
+            $query->whereHas('categories', function ($q) use ($categorySlug) {
+                $q->where('blog_categories.slug', $categorySlug);
+            });
+        }
+
+        if ($search) {
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', '%'.$search.'%')
+                    ->orWhere('excerpt', 'like', '%'.$search.'%')
+                    ->orWhere('content', 'like', '%'.$search.'%');
+            });
+        }
+
+        $blogs = $query->paginate(config('custom.pagination_per_page'));
+
+        return view('frontend.pages.blogs.index', compact('blogs', 'categories', 'categorySlug', 'search'));
+    }
+
+    public function blogDetail(string $slug)
+    {
+        $blog = Blog::with('categories')
+            ->where('is_active', 1)
+            ->where('slug', $slug)
+            ->firstOrFail();
+
+        $categories = BlogCategory::where('is_active', 1)
+            ->orderBy('name', 'asc')
+            ->get();
+
+        $categoryIds = $blog->categories->pluck('id')->toArray();
+
+        $relatedBlogsQuery = Blog::where('is_active', 1)
+            ->where('id', '!=', $blog->id)
+            ->orderBy('published_at', 'desc')
+            ->orderBy('id', 'desc');
+
+        if (!empty($categoryIds)) {
+            $relatedBlogsQuery->whereHas('categories', function ($q) use ($categoryIds) {
+                $q->whereIn('blog_categories.id', $categoryIds);
+            });
+        }
+
+        $relatedBlogs = $relatedBlogsQuery->limit(6)->get();
+
+        return view('frontend.pages.blogs.show', compact('blog', 'categories', 'relatedBlogs'));
+    }
         
     public function default($slug)
     {
