@@ -22,6 +22,8 @@ class DatabaseSeeder extends Seeder
             //GallerySeeder::class,
             PageSeeder::class,
             TinyMCEKeysSeeder::class,
+            BlogCategorySeeder::class,
+            BlogSeeder::class,
         ]);        
     }
 }
