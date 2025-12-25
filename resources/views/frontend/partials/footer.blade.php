@@ -30,6 +30,9 @@
                            <a href="{{ route('testimonials') }}">Student Speak</a>
                         </li>
                         <li>
+                           <a href="{{ route('blog.index') }}">Blogs</a>
+                        </li>                        
+                        <li>
                            <a href="{{ route('contact') }}">Contact Us</a>
                         </li>
                      </ul>

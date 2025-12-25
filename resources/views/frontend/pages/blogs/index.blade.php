@@ -27,8 +27,8 @@
                             </select>
                         </div>
 
-                        <button type="submit" class="btn btn-2 robot_slab w-100">Filter</button>
-                        <a href="{{ route('blog.index') }}" class="btn btn-outline-secondary robot_slab w-100 mt-2">Reset</a>
+                        <button type="submit" class="btn btn-2 btn-success robot_slab w-100">Filter</button>
+                        <a href="{{ route('blog.index') }}" class="btn btn-secondary robot_slab w-100 mt-2">Reset</a>
                     </form>
                 </div>
             </div>
@@ -39,11 +39,7 @@
                         <div class="col-md-6 mb-4">
                             <a href="{{ route('blog.show', $blog->slug) }}" class="text-decoration-none text-dark">
                                 <div class="classroom_box border_2 position-relative">
-                                    @if($blog->image)
-                                        <img class="hvr-bounce-in w-100" src="{{ uploaded_asset($blog->image) }}" alt="{{ $blog->title }}">
-                                    @else
-                                        <img class="hvr-bounce-in w-100" src="{{ asset('assets/frontend/img/b1.jpeg') }}" alt="{{ $blog->title }}">
-                                    @endif
+                                    <img class="hvr-bounce-in w-100" src="{{ uploaded_asset($blog->image) }}" alt="{{ $blog->title }}">
 
                                     <div class="text-center pt-3">
                                         <p class="centered-text robot_slab">{{ $blog->title }}</p>
