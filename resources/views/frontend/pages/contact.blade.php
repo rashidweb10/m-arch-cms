@@ -20,9 +20,7 @@
                </div>
                <div>
                   <h5 class="fw-semibold mb-1">MarinArch – Online Coaching Classes</h5>
-                  <p class="mb-0 text-muted"><strong>Address:</strong> Soham Tropical Lagoon,
-                     In front of Swaraswati Vidhyalaya, Kavesar, Off Ghodbunder Road,
-                     Thane - 400615 Maharashtra India.
+                  <p class="mb-0 text-muted"><strong>Address:</strong> {!! get_setting('address') !!}
                   </p>
                </div>
             </div>
@@ -33,7 +31,7 @@
                </div>
                <div>
                   <h5 class="fw-semibold mb-1">Email Us</h5>
-                  <p class="mb-0 text-muted">info@marinarch.in</p>
+                  <p class="mb-0 text-muted">{{get_setting('email')}}</p>
                </div>
             </div>
             <!-- Call Us -->
@@ -43,17 +41,17 @@
                </div>
                <div>
                   <h5 class="fw-semibold mb-1">Call Us</h5>
-                  <p class="mb-0 text-muted">+91 9920062295</p>
+                  <p class="mb-0 text-muted">{{get_setting('phone')}}</p>
                </div>
             </div>
             <!-- Social Media -->
             <div class="mt-5">
                <h5 class="fw-semibold mb-3 robot_slab ">Follow our social media</h5>
                <div class="d-flex gap-2">
-                  <a href="#" class="icon-circle"><i class="fa-brands fa-facebook"></i></a>
-                  <a href="#" class="icon-circle"><i class="fa-brands fa-instagram"></i></a>
-                  <a href="#" class="icon-circle"><i class="fa-brands fa-twitter"></i></a>
-                  <a href="#" class="icon-circle"><i class="fa-brands fa-youtube"></i></a>
+                  <a href="{{ get_setting('facebook_url') }}" class="icon-circle"><i class="fa-brands fa-facebook"></i></a>
+                  <a href="{{ get_setting('instagram_url') }}" class="icon-circle"><i class="fa-brands fa-instagram"></i></a>
+                  <a href="{{ get_setting('x_url') }}" class="icon-circle"><i class="fa-brands fa-twitter"></i></a>
+                  <a href="{{ get_setting('youtube_url') }}" class="icon-circle"><i class="fa-brands fa-youtube"></i></a>
                </div>
             </div>
          </div>
@@ -104,5 +102,5 @@
       </div>
    </div>
 </section>
-<iframe style="margin-bottom: -7px;" src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3766.370979156978!2d72.96844317503248!3d19.26622688197789!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1763804983333!5m2!1sen!2sin" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>       
+{!! get_setting('google_map') !!}
 @endsection
