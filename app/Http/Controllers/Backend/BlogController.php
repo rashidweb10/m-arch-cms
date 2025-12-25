@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\BlogCategory;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class BlogController extends Controller
 {
@@ -62,7 +63,14 @@ class BlogController extends Controller
     {
         $request->validate([
             'title' => 'required|string|min:3|max:255',
-            'slug' => 'required|string|max:255',
+            'slug' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('blogs', 'slug')->where(function ($query) {
+                    return $query->where('company_id', auth()->user()->company_id);
+                }),
+            ],
             'excerpt' => 'nullable|string',
             'content' => 'nullable|string',
             'image' => 'nullable|string',
@@ -112,7 +120,16 @@ class BlogController extends Controller
 
         $request->validate([
             'title' => 'required|string|min:3|max:255',
-            'slug' => 'required|string|max:255',
+            'slug' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('blogs', 'slug')
+                    ->ignore($blog->id)
+                    ->where(function ($query) {
+                        return $query->where('company_id', auth()->user()->company_id);
+                    }),
+            ],
             'excerpt' => 'nullable|string',
             'content' => 'nullable|string',
             'image' => 'nullable|string',
