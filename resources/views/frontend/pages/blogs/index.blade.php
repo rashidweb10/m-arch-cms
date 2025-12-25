@@ -37,29 +37,45 @@
                 <div class="row">
                     @forelse($blogs as $blog)
                         <div class="col-md-6 mb-4">
-                            <a href="{{ route('blog.show', $blog->slug) }}" class="text-decoration-none text-dark">
-                                <div class="classroom_box border_2 position-relative">
-                                    <img class="hvr-bounce-in w-100" src="{{ uploaded_asset($blog->image) }}" alt="{{ $blog->title }}">
+                            @php
+                                $cats = $blog->categories ? $blog->categories->pluck('name')->filter()->values() : collect();
+                                $primaryCategory = $cats->first();
+                                $extraCategoryCount = max(0, $cats->count() - 1);
+                                $imageSrc = uploaded_asset($blog->image);
+                                $dateText = $blog->published_at
+                                    ? \Illuminate\Support\Carbon::parse($blog->published_at)->format('M d, Y')
+                                    : ($blog->created_at ? $blog->created_at->format('M d, Y') : null);
+                            @endphp
 
-                                    <div class="text-center pt-3">
-                                        <p class="centered-text robot_slab">{{ $blog->title }}</p>
-                                    </div>
+                            <div class="blog-card h-100">
+                                <div class="blog-card-media position-relative">
+                                    <img class="blog-card-img" src="{{ $imageSrc }}" alt="{{ $blog->title }}">
+
+                                    @if($primaryCategory)
+                                        <div class="blog-card-badges">
+                                            <span class="blog-badge">{{ $primaryCategory }}</span>
+                                            @if($extraCategoryCount)
+                                                <span class="blog-badge blog-badge-muted">+{{ $extraCategoryCount }}</span>
+                                            @endif
+                                        </div>
+                                    @endif
                                 </div>
-                            </a>
 
-                            <div class="pt-2">
-                                @php
-                                    $cats = $blog->categories ? $blog->categories->pluck('name')->filter()->values() : collect();
-                                @endphp
-                                @if($cats->count())
-                                    <small class="text-muted">{{ $cats->implode(', ') }}</small>
-                                @endif
+                                <div class="blog-card-body">
+                                    @if($dateText)
+                                        <div class="blog-card-meta">{{ $dateText }}</div>
+                                    @endif
 
-                                @if($blog->excerpt)
-                                    <div class="mt-2">
-                                        {{ \Illuminate\Support\Str::limit(strip_tags($blog->excerpt), 120) }}
-                                    </div>
-                                @endif
+                                    <h5 class="blog-card-title robot_slab">{{ $blog->title }}</h5>
+
+                                    @if($blog->excerpt)
+                                        <div class="blog-card-excerpt">
+                                            {{ \Illuminate\Support\Str::limit(strip_tags($blog->excerpt), 140) }}
+                                        </div>
+                                    @endif
+
+                                    <a href="{{ route('blog.show', $blog->slug) }}" class="stretched-link" aria-label="Read {{ $blog->title }}"></a>
+                                </div>
                             </div>
                         </div>
                     @empty
