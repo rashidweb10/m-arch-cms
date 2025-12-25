@@ -1,10 +1,10 @@
 @extends('frontend.layouts.app')
 
-@section('meta.title', 'Blog')
-@section('meta.description', 'Blog')
+@section('meta.title', "Blogs")
+@section('meta.description', "Blogs")
 
 @section('content')
-@include('frontend.partials.breadcrumb', ['title' => 'Blog'])
+@include('frontend.partials.breadcrumb', ['title' => "Blogs"])
 
 <section class="pt-4 pt-md-5 pb-5">
     <div class="container">
