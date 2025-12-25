@@ -55,7 +55,10 @@ class FrontendController extends Controller
 
     public function faculties()
     {
-        return view('frontend.pages.faculties');
+       $pageData = Page::with('meta')->where('is_active', 1)
+        ->where('slug', 'faculties')
+        ->firstOrFail();        
+        return view('frontend.pages.faculties', compact('pageData'));
     }     
 
     public function testimonials()
