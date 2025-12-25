@@ -4,7 +4,7 @@
          <div class="col-md-2">
             <div class="footer_logo">
                <a href="/">
-               <img title="MaxCrude" class="w-100" src="assets/frontend/img/marinarch-logo.png">
+               <img title="MaxCrude" class="w-100" src="{{ asset('assets/frontend/img/marinarch-logo.png') }}">
                </a>
             </div>
          </div>
@@ -39,21 +39,21 @@
                   <h4 class="text-md-start robot_slab">Go Social</h4>
                   <div class="d-flex gap-2 justify-content-md-start">
                      <a target="_blank" href="/">
-                     <img class="w-20 hvr-bounce-in" src="assets/frontend/img/fb.png">
+                     <img class="w-20 hvr-bounce-in" src="{{ asset('assets/frontend/img/fb.png') }}">
                      </a>
                      <a target="_blank" href="">
-                     <img class="w-20 hvr-bounce-in" src="assets/frontend/img/insta.png">
+                     <img class="w-20 hvr-bounce-in" src="{{ asset('assets/frontend/img/insta.png') }}">
                      </a>
                      <a target="_blank" href="/">
-                     <img class="w-20 hvr-bounce-in" src="assets/frontend/img/in.png">
+                     <img class="w-20 hvr-bounce-in" src="{{ asset('assets/frontend/img/in.png') }}">
                      </a>
                      <a target="_blank" href="/">
-                     <img class="w-20 hvr-bounce-in" src="assets/frontend/img/yt.png">
+                     <img class="w-20 hvr-bounce-in" src="{{ asset('assets/frontend/img/yt.png') }}">
                      </a>
                   </div>
                </div>
                <div class="col-lg-2 pt-5 pb-4">
-                  <img class="playstore_size" src="assets/frontend/img/icon-play-store.png" />
+                  <img class="playstore_size" src="{{ asset('assets/frontend/img/icon-play-store.png') }}" />
                </div>
             </div>
          </div>

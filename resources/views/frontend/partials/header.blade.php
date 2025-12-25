@@ -46,7 +46,7 @@
                         <a class="navbar-brand" href="/">
                             <img
                                 class="w-150"
-                                src="assets/frontend/img/marinarch-logo.png"
+                                src="{{ asset('assets/frontend/img/marinarch-logo.png') }}"
                                 title="MarinArch Logo"
                                 alt="MarinArch Logo"
                             />
