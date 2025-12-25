@@ -59,44 +59,90 @@
          <div class="col-lg-6">
             <div class="bg-light p-4 p-md-5 rounded-3 shadow-sm">
                <h3 class="fw-bold mb-4 robot_slab ">Send us a message</h3>
-               <form>
-                  <!-- Name and Company -->
-                  <div class="row g-3">
-                     <div class="col-md-6">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name" placeholder="Name">
-                     </div>
-                     <div class="col-md-6">
-                        <label for="company" class="form-label">Company</label>
-                        <input type="text" class="form-control" id="company" placeholder="Company">
-                     </div>
-                  </div>
-                  <!-- Phone and Email -->
-                  <div class="row g-3 mt-1">
-                     <div class="col-md-6">
-                        <label for="phone" class="form-label">Phone</label>
-                        <input type="text" class="form-control" id="phone" placeholder="Phone">
-                     </div>
-                     <div class="col-md-6">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" placeholder="Email">
-                     </div>
-                  </div>
-                  <!-- Subject -->
-                  <div class="mt-3">
-                     <label for="subject" class="form-label">Subject</label>
-                     <input type="text" class="form-control" id="subject" placeholder="Subject">
-                  </div>
-                  <!-- Message -->
-                  <div class="mt-3">
-                     <label for="message" class="form-label">Message</label>
-                     <textarea class="form-control" id="message" rows="5" placeholder="Message"></textarea>
-                  </div>
-                  <!-- Button -->
-                  <button type="submit" class="btn btn-primary w-100 py-2 mt-4 fs-5">
-                  Send
-                  </button>
-               </form>
+
+<form class="needs-validation" id="contactForm" action="{{route('form.submit')}}" method="POST" onsubmit="protect_with_recaptcha_v3(this, 'contact')">
+  @include('frontend.components.form-alert')
+  @csrf
+  <!-- Name & Company -->
+  <div class="row mb-3">
+    <div class="col-md-6 mb-3 mb-md-0">
+      <input type="hidden" name="form_name" value="contact">
+      <label for="name" class="form-label text-muted fw-medium">Name</label>
+      <input 
+        type="text" 
+        class="form-control" 
+        id="name" 
+        name="name" 
+        required 
+      />
+      <div class="invalid-feedback">Please enter your name.</div>
+    </div>
+    <div class="col-md-6">
+      <label for="company" class="form-label text-muted fw-medium">Company</label>
+      <input 
+        type="text" 
+        class="form-control" 
+        id="company" 
+        name="company" 
+        required
+      />
+    </div>
+  </div>
+
+  <!-- Phone & Email -->
+  <div class="row mb-3">
+    <div class="col-md-6 mb-3 mb-md-0">
+      <label for="phone" class="form-label text-muted fw-medium">Phone</label>
+      <input type="tel" class="form-control" id="phone" name="phone"
+       pattern="[0-9]{10}" title="Please enter exactly 10 digits"
+       maxlength="10" inputmode="numeric" required>
+    </div>
+    <div class="col-md-6">
+      <label for="email" class="form-label text-muted fw-medium">Email</label>
+      <input 
+        type="email" 
+        class="form-control" 
+        id="email" 
+        name="email" 
+        required 
+      />
+      <div class="invalid-feedback">Please enter a valid email.</div>
+    </div>
+  </div>
+
+  <!-- Subject -->
+  <div class="mb-3">
+    <label for="subject" class="form-label text-muted fw-medium">Subject</label>
+    <input 
+      type="text" 
+      class="form-control" 
+      id="subject" 
+      name="subject" 
+    />
+  </div>
+
+  <!-- Message -->
+  <div class="mb-4">
+    <label for="message" class="form-label text-muted fw-medium">Message</label>
+    <textarea 
+      class="form-control" 
+      id="message" 
+      name="message" 
+      rows="5" 
+    ></textarea>
+    <div class="invalid-feedback">Please enter your message.</div>
+  </div>
+
+  <!-- Submit Button -->
+  <button 
+    type="submit"
+    class="btn btn-primary w-100 py-2 mt-4 fs-5"
+  >
+    Send
+  </button>
+</form>
+
+
             </div>
          </div>
       </div>
