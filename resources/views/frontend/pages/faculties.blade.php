@@ -8,6 +8,7 @@
 @php
   $about_title = $pageData->meta->where('meta_key', 'about_title')->first()->meta_value ?? '';
   $about_description = $pageData->meta->where('meta_key', 'about_description')->first()->meta_value ?? '';
+  $faculties = json_decode($pageData->meta->where('meta_key', 'faculty')->first()->meta_value ?? '[]', true);
 @endphp
 
 @include('frontend.partials.breadcrumb', ['title' => $pageData->title, 'image' => $pageData->meta->where('meta_key', 'banner_images')->first()->meta_value ?? ''])
@@ -25,45 +26,38 @@
          </p>
       </div>
       <!-- Faculty Grid -->
+      @if(isset($faculties['itration']) && is_array($faculties['itration']))
       <div class="row g-5">
-         <!-- Faculty 1 -->
-         <div class="col-lg-6">
-            <div class="card faculty-card p-4">
-               <div class="d-flex align-items-start gap-3">
-                  <img src="assets/frontend/img/archana.jpg" alt="Ms Archana Saxena Sangal" class="faculty-image" />
-                  <div>
-                     <h5 class="faculty-name mb-1 robot_slab ">Ms Archana Saxena Sangal</h5>
-                     <p class="faculty-description">
-                        (Director of MarinArch, CE, Ex Technical Superintendent)
-                     </p>
-                  </div>
-               </div>
+
+      @foreach($faculties['itration'] as $index => $itration)
+      <div class="col-lg-6 mb-4">
+         <div class="card faculty-card p-4">
+            <div class="d-flex align-items-start gap-3">
+
+            <img
+               src="{{ uploaded_asset($faculties['image'][$index]) }}"
+               alt="{{ $faculties['name'][$index] ?? 'Faculty' }}"
+               class="faculty-image"
+            />
+
+            <div>
+               <h5 class="faculty-name mb-1 robot_slab">
+                  {{ $faculties['name'][$index] ?? '' }}
+               </h5>
+
+               <p class="faculty-description">
+                  {!! nl2br(e($faculties['description'][$index] ?? '')) !!}
+               </p>
             </div>
-         </div>
-         <!-- Faculty 7 (New) -->
-         <div class="col-lg-6">
-            <div class="card faculty-card p-4">
-               <div class="d-flex align-items-start gap-3">
-                  <img src="assets/frontend/img/mahajan.jpg" alt="Mr Arun O Mahajan" class="faculty-image" />
-                  <div>
-                     <h5 class="faculty-name mb-1 robot_slab ">Mr. Arun O Mahajan</h5>
-                     <ul class="faculty-description">
-                        <li class="faculty-description">BE (Mechanical)</li>
-                        <li class="faculty-description" >M Tech (Thermal Power Engg.)</li>
-                        <li class="faculty-description">MEO Class I (Motor)</li>
-                        <li class="faculty-description">15 Years Sailing Experience at Various Ranks,
-                           Including CE Rank
-                        </li>
-                        <li class="faculty-description">14 Years Teaching Experience, Worked as Senior
-                           Associate Professor (Marine Engeering) at
-                           Tolani Maritime Institute.
-                        </li>
-                     </ul>
-                  </div>
-               </div>
+
             </div>
          </div>
       </div>
+      @endforeach
+
+
+      </div>
+      @endif
    </div>
 </section>
 
