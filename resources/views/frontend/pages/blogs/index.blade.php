@@ -28,6 +28,7 @@
                         </div>
 
                         <button type="submit" class="btn btn-2 robot_slab w-100">Filter</button>
+                        <a href="{{ route('blog.index') }}" class="btn btn-outline-secondary robot_slab w-100 mt-2">Reset</a>
                     </form>
                 </div>
             </div>
