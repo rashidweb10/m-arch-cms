@@ -10,7 +10,7 @@
 
                 <div class="col-md-4">
                     <p class="mrg_35 robot_slab">
-                        All Admission on Counselling Call: +91 9920062295
+                        All Admission on Counselling Call: {{get_setting('phone')}}
                     </p>
                 </div>
 
@@ -18,9 +18,11 @@
                     <div class="d-flex browser_link">
                         <ul class="d-flex ms-auto mb-0">
                             <li class="nav-item">
-                                <a target="_blank" class="nav-link robot_slab" href="/">
+                                @if( get_setting('brochure') )
+                                <a target="_blank" class="nav-link robot_slab" href="{{ uploaded_asset(get_setting('brochure')) }}">
                                     Brochure
                                 </a>
+                                @endif
                             </li>
                             <li class="nav-item">
                                 <a target="_blank" class="nav-link robot_slab" href="/">
@@ -46,7 +48,7 @@
                         <a class="navbar-brand" href="/">
                             <img
                                 class="w-150"
-                                src="{{ asset('assets/frontend/img/marinarch-logo.png') }}"
+                                src="{{ uploaded_asset(get_setting('logo')) }}"
                                 title="MarinArch Logo"
                                 alt="MarinArch Logo"
                             />
