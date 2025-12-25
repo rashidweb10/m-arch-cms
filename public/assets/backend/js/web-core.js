@@ -2060,11 +2060,75 @@ $.fn.toggleAttr = function (attr, attr1, attr2) {
                 var content = $this.data("content");
                 var target = $this.data("target");
 
+                AIZ.extra.addMoreSortable(target, $this);
+
                 $this.on("click", function (e) {
                     e.preventDefault();
                     $(target).append(content);
                     AIZ.plugins.bootstrapSelect();
+                    AIZ.extra.addMoreSortable(target, $this);
                 });
+            });
+        },
+        addMoreSortable: function (target, $trigger) {
+            if (typeof $.fn.sortable !== "function") {
+                return;
+            }
+
+            if (!target) {
+                return;
+            }
+
+            if ($trigger && $trigger.data("sortable") === false) {
+                return;
+            }
+
+            var $target = $(target);
+            if ($target.length === 0) {
+                return;
+            }
+
+            if ($target.data("sortable") === false) {
+                return;
+            }
+
+            var itemsSelector = $target.data("sortableItems")
+                ? $target.data("sortableItems")
+                : ".remove-parent";
+
+            if ($target.find(itemsSelector).length === 0) {
+                itemsSelector = "> *";
+            }
+
+            $target.find(itemsSelector).each(function () {
+                var $item = $(this);
+                if ($item.hasClass("remove-parent") && $item.find("> .aiz-sortable-handle").length === 0) {
+                    if (!$item.attr("style") || $item.attr("style").indexOf("position") === -1) {
+                        $item.css("position", "relative");
+                    }
+                    $item.prepend(
+                        '<div class="aiz-sortable-handle" style="position:absolute;right:11px;top:62%;transform:translateY(-50%);cursor:move;padding:4px 6px;z-index:10;">' +
+                            '<i style="font-size: 16px;color: #889096;" class="ti ti-arrows-move"></i>' +
+                        "</div>"
+                    );
+                }
+            });
+
+            if ($target.hasClass("ui-sortable")) {
+                try {
+                    $target.sortable("destroy");
+                } catch (e) {}
+            }
+
+            $target.sortable({
+                items: itemsSelector,
+                handle: ".aiz-sortable-handle",
+                cancel: "input, textarea, select, option, button, a, .aiz-uploader, .file-preview-item",
+                tolerance: "pointer",
+                forcePlaceholderSize: true,
+                start: function (event, ui) {
+                    ui.placeholder.height(ui.item.outerHeight());
+                },
             });
         },
         removeParent: function () {
