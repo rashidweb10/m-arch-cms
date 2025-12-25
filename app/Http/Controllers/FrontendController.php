@@ -60,7 +60,10 @@ class FrontendController extends Controller
 
     public function testimonials()
     {
-        return view('frontend.pages.testimonials');
+       $pageData = Page::with('meta')->where('is_active', 1)
+        ->where('slug', 'testimonials')
+        ->firstOrFail();         
+        return view('frontend.pages.testimonials', compact('pageData'));
     }     
 
     public function blogs(Request $request)
