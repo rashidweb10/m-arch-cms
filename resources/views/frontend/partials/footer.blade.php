@@ -4,7 +4,7 @@
          <div class="col-md-2">
             <div class="footer_logo">
                <a href="/">
-               <img title="MaxCrude" class="w-100" src="{{ asset('assets/frontend/img/marinarch-logo.png') }}">
+               <img title="MarinArch" class="w-100" src="{{ uploaded_asset(get_setting('logo')) }}">
                </a>
             </div>
          </div>
@@ -41,16 +41,16 @@
                <div class="col-lg-10  pt-4 pb-4">
                   <h4 class="text-md-start robot_slab">Go Social</h4>
                   <div class="d-flex gap-2 justify-content-md-start">
-                     <a target="_blank" href="/">
+                     <a target="_blank" href="{{ get_setting('facebook_url') }}">
                      <img class="w-20 hvr-bounce-in" src="{{ asset('assets/frontend/img/fb.png') }}">
                      </a>
-                     <a target="_blank" href="">
+                     <a target="_blank" href="{{ get_setting('instagram_url') }}">
                      <img class="w-20 hvr-bounce-in" src="{{ asset('assets/frontend/img/insta.png') }}">
                      </a>
-                     <a target="_blank" href="/">
+                     <a target="_blank" href="{{ get_setting('linkedin_url') }}">
                      <img class="w-20 hvr-bounce-in" src="{{ asset('assets/frontend/img/in.png') }}">
                      </a>
-                     <a target="_blank" href="/">
+                     <a target="_blank" href="{{ get_setting('youtube_url') }}">
                      <img class="w-20 hvr-bounce-in" src="{{ asset('assets/frontend/img/yt.png') }}">
                      </a>
                   </div>
@@ -62,10 +62,10 @@
          </div>
          <div class="col-md-2"></div>
          <div class="col-md-7">
-            <p class="footer-copyright mb-0">© 2025 Marine Arch. All Rights Reserved.</p>
+            <p class="footer-copyright mb-0">© {{date("Y")}} {{get_setting('name')}}. All Rights Reserved.</p>
          </div>
          <div class="col-md-3 text-end">
-            <p class="footer-copyright mb-0 copyrighr2 text-end">Powered by <a href="https://maptek.in/" target="_blank" style="font-weight:bold">Maptek</a>
+            <p class="footer-copyright mb-0 copyrighr2 text-end">Powered by <a href="{{config('custom.author_url')}}" target="_blank" style="font-weight:bold">{{config("custom.author")}}</a>
             </p>
          </div>
       </div>
