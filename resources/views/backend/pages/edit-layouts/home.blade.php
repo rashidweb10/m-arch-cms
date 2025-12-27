@@ -296,16 +296,9 @@ $home_quicklinks = json_decode($pageData->meta->where('meta_key', 'home_quicklin
         <h4 class="text-primary">Video Section</h4>
     </div>     
     <div class="col-md-12">
-        <label for="name" class="form-label">Video <span class="text-danger">*</span></label>
+        <label for="name" class="form-label">Youtube Video <span class="text-danger">*</span></label>
         <div class="form-group mb-2">
-            <div class="input-group" data-toggle="aizuploader" data-type="video" data-multiple="false">
-                <div class="input-group-prepend">
-                    <div class="input-group-text bg-soft-secondary font-weight-medium">{{ __('Browse') }}</div>
-                </div>
-                <div class="form-control file-amount">{{ __('Choose File') }}</div>
-                <input value="{{$video}}" type="hidden" name="meta[video]" class="selected-files" required>
-            </div>
-            <div class="file-preview box sm"></div>
+            <input class="form-control" value="{{$video}}" name="meta[video]" type="text" required>
         </div>
     </div>    
 </div> 

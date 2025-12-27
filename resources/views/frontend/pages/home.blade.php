@@ -23,6 +23,8 @@
   $achievement_description = $pageData->meta->where('meta_key', 'achievement_description')->first()->meta_value ?? '';
   $achievement_image = $pageData->meta->where('meta_key', 'achievement_image')->first()->meta_value ?? '';  
 
+  $video = $pageData->meta->where('meta_key', 'video')->first()->meta_value ?? '';
+
   $quicklinks = json_decode($pageData->meta->where('meta_key', 'home_quicklinks')->first()->meta_value ?? '[]', true);
 @endphp
 
@@ -167,11 +169,13 @@
       </div>
    </div>
 </section>
+
+@if(!empty($video))
 <section class="awards_achievements pt-4 pt-md-5 pb-0 position-relative" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
    <div class="container">
       <div class="row justify-content-center">
          <div class="col-md-7">
-            <iframe width="100%" height="345" src="https://www.youtube.com/embed/bmmYE4wX-jE" title="Royal Caribbean Odyssey of the Seas | Full Walkthrough Ship Tour" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <iframe width="100%" height="345" src="{{ $video }}" title="Royal Caribbean Odyssey of the Seas | Full Walkthrough Ship Tour" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
          </div>
          <div class="col-md-5">
             <div class="owl-carousel achievements">
@@ -195,7 +199,7 @@
       </div>
    </div>
 </section>
-
+@endif
 
 @if(isset($quicklinks['itration']) && is_array($quicklinks['itration']))
 <section class="gallery_section">
