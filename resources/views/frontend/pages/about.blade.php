@@ -118,6 +118,7 @@
       </div>
    </div>
 </section>
+
 <section class="courses_we_offered pt-4 pt-md-5 pb-md-5 pb-4 position-relative" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
    <div class="container">
       <div class="row justify-content-center">
@@ -127,6 +128,7 @@
             </div>
          </div>
          <div class="owl-carousel curseswe_offer">
+
             <div class="item">
                <div class="aos-init aos-animate position-relative">
                   <div class="offered_box">
@@ -135,22 +137,7 @@
                   </div>
                </div>
             </div>
-            <div class="item">
-               <div class="aos-init aos-animate position-relative">
-                  <div class="offered_box">
-                     <img class="jbox-img rotate w-100 hvr-bounce-in" src="assets/frontend/img/engineering-courses.jpg" alt="">
-                     <p class="text-center pt-1">Engineering Courses</p>
-                  </div>
-               </div>
-            </div>
-            <div class="item">
-               <div class="aos-init aos-animate position-relative">
-                  <div class="offered_box">
-                     <img class="jbox-img rotate w-100 hvr-bounce-in" src="assets/frontend/img/extra-first-class-exams.jpg" alt="">
-                     <p class="text-center pt-1">Extra First Class Exams</p>
-                  </div>
-               </div>
-            </div>
+
          </div>
       </div>
    </div>
