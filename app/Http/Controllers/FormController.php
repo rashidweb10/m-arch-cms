@@ -58,6 +58,16 @@ class FormController extends Controller
                     'subject' => 'nullable|string|max:100',
                     'message' => 'nullable|string|max:150'
                 ];
+
+            case 'admission':
+                return [
+                    'form_name' => 'required|max:20',
+                    'name'      => 'required|string|max:50',
+                    'phone'     => 'required|digits_between:10,15',
+                    'email'     => 'required|email|max:50',
+                    'message'   => 'nullable|string|max:150',
+                ];
+
             default:
                 return [
                     'form_name' => 'required|max:20',

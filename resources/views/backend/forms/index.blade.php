@@ -40,7 +40,7 @@
                             </div>
                         </form>                        
                     </div>
-                    <!-- <div class="col-md-3 offset-md-1 text-end">
+                    <div class="col-md-3 offset-md-1 text-end">
                         @if(!auth()->user()->company_id)
                         <div class="btn-group" role="group">
                             @foreach($formNames as $name)
@@ -51,7 +51,7 @@
                             @endforeach
                         </div>  
                         @endif     
-                    </div> -->
+                    </div>
                 </div>
             </div>
             <div class="card-body">
