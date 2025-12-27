@@ -5,14 +5,18 @@
 
 @section('content')
 @php
-  $banner_images = $pageData->meta->where('meta_key', 'banner_images')->first()->meta_value ?? '';
-  $about = json_decode($pageData->meta->where('meta_key', 'about')->first()->meta_value ?? '[]', true);
-  $partner_title = $pageData->meta->where('meta_key', 'partner_title')->first()->meta_value ?? '';
-  $partner_description = $pageData->meta->where('meta_key', 'partner_description')->first()->meta_value ?? '';
-  $partners = json_decode($pageData->meta->where('meta_key', 'partners')->first()->meta_value ?? '[]', true);
+   $banner_images = $pageData->meta->where('meta_key', 'banner_images')->first()->meta_value ?? '';
+
+   $about_description = $pageData->meta->where('meta_key', 'about_description')->first()->meta_value ?? '';
+   $about_image = $pageData->meta->where('meta_key', 'about_image')->first()->meta_value ?? '';
+   $about_title = $pageData->meta->where('meta_key', 'about_title')->first()->meta_value ?? '';
+
+   $milestones = json_decode($pageData->meta->where('meta_key', 'home_milestones')->first()->meta_value ?? '[]', true);
+
+   $quicklinks = json_decode($pageData->meta->where('meta_key', 'home_quicklinks')->first()->meta_value ?? '[]', true);
 @endphp
 
-@include('frontend.partials.breadcrumb', ['title' => $pageData->title])
+@include('frontend.partials.breadcrumb', ['title' => $pageData->title, 'image' => $banner_images])
 
 <!--about us section start-->
 <section class="about_section pt-0 pt-md-5 pb-md-5 position-relative">
@@ -53,21 +57,15 @@
          </div>
          <div class="col-lg-8 paddngrgt80" data-aos="fade-right" data-aos-duration="1000" data-aos-once="true">
             <div class="text-start mb-md-4 mb-2 pt-4">
-               <h3 class="roboto text_color roboto fw-normal robot_slab ">Welcome to MarinArch Academy</h3>
+               <h3 class="roboto text_color roboto fw-normal robot_slab ">{{$about_title}}</h3>
             </div>
-            <p>
-               MarinArch is a live tutorial session which prepare the candidates in the systematic way to excel their Marine Engineer Officer exams. It is the most convenient and economical way to prepare for the MEO exams.
-            </p>
-            <p>
-               It's result oriented program where lectures are conducted by qualified person in marine field. A candidate can do the group study sitting at his/her/ home from any part of world so no waste of time and money in travelling and boarding.
-            </p>
-            <p>
-               In MarinArch, the study material is provided to the candidates. It’s a 2way session, a lot of discussions. The provision of MOC orals is also there for the candidate.
-            </p>
+           <div>
+             {!! $about_description !!}
+           </div>
          </div>
          <div class="col-lg-4 col-12 pt-5" data-aos="fade-left" data-aos-duration="1000" data-aos-once="true">
             <div class="about_border border_6 position-relative">
-               <img class="hvr-bounce-in aboutimgss" src="assets/frontend/img/marinarch-logo.png" alt="img" />
+               <img class="hvr-bounce-in aboutimgss" src="{{ uploaded_asset($about_image) }}" alt="img" />
             </div>
          </div>
       </div>
@@ -110,36 +108,25 @@
       </div>
    </div>
 </section>
+
+ @if(isset($milestones['itration']) && is_array($milestones['itration']))
 <section id="counter" class="statistics-section about-us" >
    <div class="container">
       <div class="row">
+         @foreach($milestones['itration'] as $index => $itration)
          <div class="col-md-3 col-6 text-center" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
-            <div class="stastic  startimg ">
-               <div class="counter-value robot_slab" data-count="3">1+</div>
-               <p class="robot_slab">Years in Teaching</p>
+            <div class="stastic  @if($loop->last) @else startimg @endif ">
+               <div class="counter-value robot_slab" data-count="{{$milestones['title'][$index]}}">1+</div>
+               <p class="robot_slab">{{$milestones['description'][$index]}}</p>
             </div>
          </div>
-         <div class="col-md-3 col-6 text-center" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
-            <div class="stastic  startimg ">
-               <div class="counter-value robot_slab" data-count="8">1+</div>
-               <p class="robot_slab">Courses</p>
-            </div>
-         </div>
-         <div class="col-md-3 col-6 text-center" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
-            <div class="stastic  startimg ">
-               <div class="counter-value robot_slab" data-count="6">1+</div>
-               <p class="robot_slab">Faculties</p>
-            </div>
-         </div>
-         <div class="col-md-3 col-6 text-center" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
-            <div class="stastic  startimg ">
-               <div class="counter-value robot_slab" data-count="63">1+</div>
-               <p class="robot_slab">Students Passed</p>
-            </div>
-         </div>
+         @endforeach
       </div>
    </div>
 </section>
+@endif
+
+@if(isset($quicklinks['itration']) && is_array($quicklinks['itration']))
 <section class="gallery_section">
    <div class="bgcolor pb-4 pt-4 pb-md-5 pt-md-5">
       <div class="container">
@@ -147,39 +134,24 @@
             <h3 class="robot_slab text_color text-center">Why MarinArch</h3>
          </div>
          <div class="row">
+
+            @foreach($quicklinks['itration'] as $index => $itration)  
             <div class="col-md-4" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
-               <a class="text-decoration-none text-dark" href="campus-facilities.html">
+               <a class="text-decoration-none text-dark" href="{{$quicklinks['url'][$index]}}">
                   <div class="classroom_box border_2 position-relative">
-                     <img class="hvr-bounce-in w-100" src="assets/frontend/img/career.jpg" alt="Image 1">
+                     <img class="hvr-bounce-in w-100" src="{{ uploaded_asset($quicklinks['icon'][$index]) }}" alt="Image {{ $index }}">
                      <div class=" text-center pt-3">
-                        <p class="robot_slab centered-text">Career Achievements</p>
+                        <p class="robot_slab centered-text">{{$quicklinks['title'][$index]}}</p>
                      </div>
                   </div>
                </a>
             </div>
-            <div class="col-md-4" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
-               <a class="text-decoration-none text-dark" href="campus-facilities.html">
-                  <div class="classroom_box border_2 position-relative">
-                     <img class="hvr-bounce-in w-100" src="assets/frontend/img/flexibility.jpg" alt="Image 1">
-                     <div class=" text-center pt-3">
-                        <p class="centered-text robot_slab ">Flexibility</p>
-                     </div>
-                  </div>
-               </a>
-            </div>
-            <div class="col-md-4" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
-               <a class="text-decoration-none text-dark" href="campus-facilities.html">
-                  <div class="classroom_box border_2 position-relative">
-                     <img class="hvr-bounce-in w-100" src="assets/frontend/img/cost-effective.jpg" alt="Image 1">
-                     <div class=" text-center pt-3">
-                        <p class="centered-text robot_slab ">Cost Effective</p>
-                     </div>
-                  </div>
-               </a>
-            </div>
+            @endforeach
+
          </div>
       </div>
    </div>
 </section>
+@endif
 
 @endsection

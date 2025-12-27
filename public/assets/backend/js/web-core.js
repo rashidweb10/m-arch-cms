@@ -2107,7 +2107,7 @@ $.fn.toggleAttr = function (attr, attr1, attr2) {
                         $item.css("position", "relative");
                     }
                     $item.prepend(
-                        '<div class="aiz-sortable-handle" style="position:absolute;right:11px;top:62%;transform:translateY(-50%);cursor:move;padding:4px 6px;z-index:10;">' +
+                        '<div class="aiz-sortable-handle" style="position:absolute;right:50px;top:50px;transform:translateY(-50%);cursor:move;padding:4px 6px;z-index:10;width: auto;">' +
                             '<i style="font-size: 16px;color: #889096;" class="ti ti-arrows-move"></i>' +
                         "</div>"
                     );
