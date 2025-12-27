@@ -21,7 +21,9 @@
 
   $achievement_title = $pageData->meta->where('meta_key', 'achievement_title')->first()->meta_value ?? '';
   $achievement_description = $pageData->meta->where('meta_key', 'achievement_description')->first()->meta_value ?? '';
-  $achievement_image = $pageData->meta->where('meta_key', 'achievement_image')->first()->meta_value ?? '';  
+  $achievement_image = $pageData->meta->where('meta_key', 'achievement_image')->first()->meta_value ?? ''; 
+  
+  $home_awards = json_decode($pageData->meta->where('meta_key', 'home_awards')->first()->meta_value ?? '[]', true);
 
   $video = $pageData->meta->where('meta_key', 'video')->first()->meta_value ?? '';
 
@@ -117,6 +119,8 @@
       </div>
    </div>
 </section>
+
+@if(isset($home_awards['itration']) && is_array($home_awards['itration']))
 <section class="awards_achievements pt-4 pt-md-5 pb-0 position-relative" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
    <div class="container">
       <div class="row justify-content-center">
@@ -126,49 +130,27 @@
             </div>
          </div>
          <div class="row">
+
+            @foreach($home_awards['itration'] as $index => $itration)
             <div class="col-md-3">
                <div class="aos-init aos-animate position-relative">
                   <div class="about_border border_9 position-relative">
-                     <a href="assets/frontend/img/aboutus.png" data-fancybox="gallery1">
-                     <img class="jbox-img rotate w-100 hvr-bounce-in" src="assets/frontend/img/aboutus.png" alt="">
+                     <a href="{{ uploaded_asset($home_awards['image'][$index]) }}" data-fancybox="gallery1">
+                     <img class="jbox-img rotate w-100 hvr-bounce-in" src="{{ uploaded_asset($home_awards['image'][$index]) }}" alt="{{ central_asset(uploaded_asset($home_awards['title'][$index])) }}">
                      </a>
                   </div>
                </div>
             </div>
-            <div class="col-md-3">
-               <div class="aos-init aos-animate position-relative">
-                  <div class="about_border border_9 position-relative">
-                     <a href="assets/frontend/img/aboutus.png" data-fancybox="gallery1">
-                     <img class="jbox-img rotate w-100 hvr-bounce-in" src="assets/frontend/img/aboutus.png" alt="">
-                     </a>
-                  </div>
-               </div>
-            </div>
-            <div class="col-md-3">
-               <div class="aos-init aos-animate position-relative">
-                  <div class="about_border border_9 position-relative">
-                     <a href="assets/frontend/img/aboutus.png" data-fancybox="gallery1">
-                     <img class="jbox-img rotate w-100 hvr-bounce-in" src="assets/frontend/img/aboutus.png" alt="">
-                     </a>
-                  </div>
-               </div>
-            </div>
-            <div class="col-md-3">
-               <div class="aos-init aos-animate position-relative">
-                  <div class="about_border border_9 position-relative">
-                     <a href="assets/frontend/img/aboutus.png" data-fancybox="gallery1">
-                     <img class="jbox-img rotate w-100 hvr-bounce-in" src="assets/frontend/img/aboutus.png" alt="">
-                     </a>
-                  </div>
-               </div>
-            </div>
+            @endforeach
+
          </div>
-         <div class="read-more text-center mt-4">
+         {{-- <div class="read-more text-center mt-4">
             <a href="/" class="btn-2 robot_slab">View All</a>
-         </div>
+         </div> --}}
       </div>
    </div>
 </section>
+@endif
 
 @if(!empty($video))
 <section class="awards_achievements pt-4 pt-md-5 pb-0 position-relative" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
