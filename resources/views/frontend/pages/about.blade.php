@@ -26,33 +26,80 @@
          <div class="col-lg-5">
             <div class="admission_form">
                <h4 class="robot_slab text_color pt-70 robot_slab pb-3">Admission Enquiry Form</h4>
-               <form method="post" action="" id="admissionForm" onsubmit="">
-                  <div class="row">
-                     <div class="col-md-12 col-12 mb-3">
-                        <div class="form-outline">
-                           <input type="text" class="form-control" name="name" placeholder="Name*" required="">
-                        </div>
-                     </div>
-                     <div class="col-md-12 col-6 mb-3">
-                        <div class="form-outline">
-                           <input type="text" class="form-control" name="phone" placeholder="Mobile Number*" required="" pattern="\d{10}" maxlength="10" title="Please enter a valid 10-digit mobile number">
-                        </div>
-                     </div>
-                     <div class="col-md-12 col-12 mb-3">
-                        <div class="form-outline">
-                           <input type="email" class="form-control" name="email" placeholder="Email ID*" required="">
-                        </div>
-                     </div>
-                     <div class="col-md-12 col-12 mb-3">
-                        <div class="form-outline">
-                           <textarea type="text" class="form-control" name="message" placeholder="Comment" ></textarea>
-                        </div>
-                     </div>
-                     <div class="col-md-12 text-center">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                     </div>
+                  
+
+               <form 
+               class="needs-validation"
+               id="admissionForm"
+               action="{{ route('form.submit') }}"
+               method="POST"
+               onsubmit="protect_with_recaptcha_v3(this, 'admission')"
+               >
+               @csrf
+               @include('frontend.components.form-alert')
+
+               <input type="hidden" name="form_name" value="admission">
+
+               <div class="row">
+                  <!-- Name -->
+                  <div class="col-md-12 mb-3">
+                     <input 
+                     type="text"
+                     class="form-control"
+                     name="name"
+                     placeholder="Name *"
+                     required
+                     >
+                     <div class="invalid-feedback">Please enter your name.</div>
                   </div>
+
+                  <!-- Phone -->
+                  <div class="col-md-12 mb-3">
+                     <input
+                     type="tel"
+                     class="form-control"
+                     name="phone"
+                     placeholder="Mobile Number *"
+                     pattern="[0-9]{10}"
+                     maxlength="10"
+                     inputmode="numeric"
+                     required
+                     >
+                     <div class="invalid-feedback">Enter a valid 10-digit number.</div>
+                  </div>
+
+                  <!-- Email -->
+                  <div class="col-md-12 mb-3">
+                     <input
+                     type="email"
+                     class="form-control"
+                     name="email"
+                     placeholder="Email ID *"
+                     required
+                     >
+                     <div class="invalid-feedback">Enter a valid email.</div>
+                  </div>
+
+                  <!-- Message -->
+                  <div class="col-md-12 mb-3">
+                     <textarea
+                     class="form-control"
+                     name="message"
+                     placeholder="Comment"
+                     rows="4"
+                     ></textarea>
+                  </div>
+
+                  <!-- Submit -->
+                  <div class="col-md-12 text-center">
+                     <button type="submit" class="btn btn-primary">
+                     Submit
+                     </button>
+                  </div>
+               </div>
                </form>
+
+
             </div>
          </div>
          <div class="col-lg-8 paddngrgt80" data-aos="fade-right" data-aos-duration="1000" data-aos-once="true">
