@@ -24,6 +24,7 @@ use App\Http\Controllers\Backend\ImportController;
 
 //Frontend
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\Frontend\AuthController as FrontendAuthController;
 use App\Http\Controllers\FormController;
 
 Route::prefix('command')->group(function () {
@@ -59,6 +60,33 @@ Route::get('/blog', [FrontendController::class, 'blogs'])->name('blog.index');
 Route::get('/blog/{slug}', [FrontendController::class, 'blogDetail'])->name('blog.show');
 
 Route::post('/submit-form', [FormController::class, 'submit'])->middleware(['protect.forms','recaptcha','throttle:4,1'])->name('form.submit');
+
+// Frontend Authentication Routes
+Route::prefix('auth')->group(function () {
+    // Login
+    Route::get('/login', [FrontendAuthController::class, 'showLoginForm'])->name('auth.login');
+    Route::post('/login', [FrontendAuthController::class, 'login'])->name('auth.login');
+    
+    // Registration
+    Route::get('/register', [FrontendAuthController::class, 'showRegisterForm'])->name('auth.register');
+    Route::post('/register', [FrontendAuthController::class, 'register'])->name('auth.register');
+    
+    // OTP Verification
+    Route::get('/verify-otp', [FrontendAuthController::class, 'showVerifyOtpForm'])->name('auth.verify-otp');
+    Route::post('/verify-otp', [FrontendAuthController::class, 'verifyOtp'])->name('auth.verify-otp');
+    Route::post('/resend-otp', [FrontendAuthController::class, 'resendOtp'])->name('auth.resend-otp');
+    
+    // Google OAuth
+    Route::get('/google', [FrontendAuthController::class, 'redirectToGoogle'])->name('auth.google');
+    Route::get('/google/callback', [FrontendAuthController::class, 'handleGoogleCallback'])->name('auth.google.callback');
+    
+    // Profile (Authenticated)
+    Route::middleware('auth')->group(function () {
+        Route::get('/profile', [FrontendAuthController::class, 'profile'])->name('auth.profile');
+        Route::put('/profile', [FrontendAuthController::class, 'updateProfile'])->name('auth.profile.update');
+        Route::post('/logout', [FrontendAuthController::class, 'logout'])->name('auth.logout');
+    });
+});
 
 // Group routes under the 'backend' prefix
 Route::prefix('backend')->group(function () {

@@ -1,0 +1,107 @@
+@extends('frontend.layouts.app')
+
+@section('meta.title', 'Login')
+@section('meta.description', 'Login to your account')
+
+@section('content')
+
+@include('frontend.partials.breadcrumb', ['title' => "Login"])
+
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-5">
+                <div class="bg-light p-4 p-md-5 rounded-3 shadow-sm">
+                    <h3 class="fw-bold mb-4 text-center robot_slab">Login to your account</h3>
+
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul class="mb-0">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                    @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
+                    @if (session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+
+                    <form action="{{ route('auth.login') }}" method="POST">
+                        @csrf
+                        
+                        <div class="mb-3">
+                            <label for="login" class="form-label text-muted fw-medium">Email or Phone</label>
+                            <input 
+                                type="text" 
+                                class="form-control @error('login') is-invalid @enderror" 
+                                id="login" 
+                                name="login" 
+                                value="{{ old('login') }}"
+                                placeholder="Enter email or 10-digit phone number"
+                                required 
+                            />
+                            @error('login')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="password" class="form-label text-muted fw-medium">Password</label>
+                            <input 
+                                type="password" 
+                                class="form-control @error('password') is-invalid @enderror" 
+                                id="password" 
+                                name="password" 
+                                placeholder="Enter your password"
+                                required 
+                            />
+                            @error('password')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="remember" name="remember">
+                            <label class="form-check-label" for="remember">
+                                Remember me
+                            </label>
+                        </div>
+
+                        <div class="d-grid mb-3">
+                            <button type="submit" class="btn btn-primary w-100 py-2 fs-5">
+                                Login
+                            </button>
+                        </div>
+
+                        <div class="text-center mb-3">
+                            <p class="mb-0">OR</p>
+                        </div>
+
+                        <div class="d-grid mb-3">
+                            <a href="{{ route('auth.google') }}" class="btn btn-danger w-100 py-2">
+                                <i class="fab fa-google me-2"></i> Login with Google
+                            </a>
+                        </div>
+
+                        <div class="text-center">
+                            <p class="mb-0">Don't have an account? <a href="{{ route('auth.register') }}">Register here</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@endsection
+

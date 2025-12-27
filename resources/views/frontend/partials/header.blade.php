@@ -25,10 +25,26 @@
                                 @endif
                             </li>
                             <li class="nav-item">
-                                <a target="_blank" class="nav-link robot_slab" href="/">
-                                    Student Login
-                                </a>
+                                @auth
+                                    <a class="nav-link robot_slab" href="{{ route('auth.profile') }}">
+                                        My Profile
+                                    </a>
+                                @else
+                                    <a class="nav-link robot_slab" href="{{ route('auth.login') }}">
+                                        Login
+                                    </a>
+                                @endauth
                             </li>
+                            @auth
+                            <li class="nav-item">
+                                <form action="{{ route('auth.logout') }}" method="POST" class="d-inline">
+                                    @csrf
+                                    <button type="submit" class="nav-link robot_slab border-0 bg-transparent p-0" style="cursor: pointer;">
+                                        Logout
+                                    </button>
+                                </form>
+                            </li>
+                            @endauth
                         </ul>
                     </div>
                 </div>
