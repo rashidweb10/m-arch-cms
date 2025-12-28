@@ -205,17 +205,24 @@ class AuthController extends Controller
     /**
      * Resend OTP
      */
-    public function resendOtp()
+    public function resendOtp(Request $request)
     {
         $userId = session('pending_verification_user_id');
         if (!$userId) {
-            return back()->with('error', 'Session expired. Please register again.');
+            return redirect()->route('auth.register')->with('error', 'Session expired. Please register again.');
         }
 
         $user = User::find($userId);
         if (!$user) {
             session()->forget('pending_verification_user_id');
-            return redirect()->route('auth.register')->with('error', 'User not found.');
+            return redirect()->route('auth.register')->with('error', 'User not found. Please register again.');
+        }
+
+        // Check if user is already verified
+        if ($user->email_verified_at) {
+            session()->forget('pending_verification_user_id');
+            Auth::login($user);
+            return redirect()->route('auth.dashboard')->with('success', 'Your email is already verified.');
         }
 
         // Generate new OTP
@@ -231,10 +238,10 @@ class AuthController extends Controller
             Mail::to($user->email)->send(new OtpVerificationMail($otp));
         } catch (\Exception $e) {
             \Log::error('Failed to send OTP email: ' . $e->getMessage());
-            return back()->with('error', 'Failed to send OTP. Please try again.');
+            return back()->with('error', 'Failed to send OTP email. Please try again later.');
         }
 
-        return back()->with('success', 'OTP has been resent to your email.');
+        return redirect()->route('auth.verify-otp')->with('success', 'A new OTP has been sent to your email address. Please check your inbox.');
     }
 
     /**

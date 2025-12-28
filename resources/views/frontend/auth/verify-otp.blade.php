@@ -68,15 +68,15 @@
                                 Verify Email
                             </button>
                         </div>
-
-                        <div class="text-center">
-                            <p class="mb-2">Didn't receive the OTP?</p>
-                            <form action="{{ route('auth.resend-otp') }}" method="POST" class="d-inline">
-                                @csrf
-                                <button type="submit" class="btn btn-link p-0">Resend OTP</button>
-                            </form>
-                        </div>
                     </form>
+
+                    <div class="text-center">
+                        <p class="mb-2">Didn't receive the OTP?</p>
+                        <form action="{{ route('auth.resend-otp') }}" method="POST" class="d-inline">
+                            @csrf
+                            <button type="submit" class="btn btn-link p-0">Resend OTP</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
