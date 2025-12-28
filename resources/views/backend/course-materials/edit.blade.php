@@ -69,6 +69,14 @@
             </div>
         </div>
 
+        <!-- YouTube Embed URL -->
+        <div class="col-sm-12">
+            <div class="form-group mb-2">
+                <label for="youtube_embed_url" class="form-label">YouTube Embed URL</label>
+                <input value="{{ old('youtube_embed_url', $pageData->youtube_embed_url) }}" name="youtube_embed_url" type="url" class="form-control" placeholder="Enter YouTube Embed URL">
+            </div>
+        </div>
+
         <!-- Sorting -->
         <div class="col-sm-12">
             <div class="form-group mb-2">

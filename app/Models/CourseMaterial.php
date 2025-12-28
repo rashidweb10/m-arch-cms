@@ -14,6 +14,7 @@ class CourseMaterial extends Model
         'attachments',
         'sorting_id',
         'is_active',
+        'youtube_embed_url',
     ];
 
     // Relationship: Each material belongs to a course
