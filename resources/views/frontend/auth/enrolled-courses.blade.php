@@ -20,7 +20,7 @@
                         <th>Category</th>
                         <th>Enrolled Date</th>
                         <th>Validity</th>
-                        <th>Status</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,19 +33,17 @@
                                 {{ $enrolment->course->category->name ?? 'N/A' }}
                             </td>
                             <td>
-                                {{ $enrolment->created_at->format('M d, Y') }}
+                                {{ formatDate($enrolment->created_at) }}
                             </td>
                             <td>
                                 @if($enrolment->validity)
-                                    {{ $enrolment->validity }} days
+                                    {{ formatDate($enrolment->validity) }}
                                 @else
                                     <span class="text-muted">N/A</span>
                                 @endif
                             </td>
                             <td>
-                                <span class="badge {{ $enrolment->is_active ? 'bg-success' : 'bg-secondary' }}">
-                                    {{ $enrolment->is_active ? 'Active' : 'Inactive' }}
-                                </span>
+                                -
                             </td>
                         </tr>
                     @endforeach
