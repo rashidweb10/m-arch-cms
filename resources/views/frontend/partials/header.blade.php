@@ -20,7 +20,7 @@
                             <li class="nav-item">
                                 @if( get_setting('brochure') )
                                 <a target="_blank" class="nav-link robot_slab" href="{{ uploaded_asset(get_setting('brochure')) }}">
-                                    Brochure
+                                    <i class="fas fa-file-download me-1"></i> Brochure
                                 </a>
                                 @endif
                             </li>
@@ -64,12 +64,12 @@
                             @else
                                 <li class="nav-item">
                                     <a class="nav-link robot_slab" href="{{ route('auth.login') }}">
-                                        Login
+                                        <i class="fas fa-sign-in-alt me-1"></i> Login
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link robot_slab" href="{{ route('auth.register') }}">
-                                        Register
+                                        <i class="fas fa-user-plus me-1"></i> Register
                                     </a>
                                 </li>
                             @endauth
