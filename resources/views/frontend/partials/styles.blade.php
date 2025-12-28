@@ -105,4 +105,42 @@ ul {
 	top: 1px;
 }
 
+/* User Dropdown in Header */
+.header_section_top .dropdown-menu {
+	margin-top: 10px;
+	border-radius: 5px;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+	border: 1px solid #e0e0e0;
+	min-width: 220px;
+}
+
+.header_section_top .dropdown-item {
+	padding: 10px 20px;
+	color: #333;
+	transition: all 0.3s;
+}
+
+.header_section_top .dropdown-item:hover {
+	background-color: #f8f9fa;
+	color: #000;
+}
+
+.header_section_top .dropdown-item i {
+	width: 20px;
+	text-align: center;
+}
+
+.header_section_top .dropdown-divider {
+	margin: 5px 0;
+}
+
+.header_section_top .dropdown-toggle::after {
+	margin-left: 8px;
+	vertical-align: 0.15em;
+}
+
+.header_section_top .nav-link.dropdown-toggle {
+	cursor: pointer;
+}
+
 </style>

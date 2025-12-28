@@ -25,18 +25,41 @@
                                 @endif
                             </li>
                             @auth
-                                <li class="nav-item">
-                                    <a class="nav-link robot_slab" href="{{ route('auth.dashboard') }}">
-                                        My Profile
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link robot_slab dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fas fa-user-circle me-1"></i> {{ Auth::user()->name }}
                                     </a>
-                                </li>
-                                <li class="nav-item">
-                                    <form action="{{ route('auth.logout') }}" method="POST" class="d-inline">
-                                        @csrf
-                                        <button type="submit" class="nav-link robot_slab border-0 bg-transparent p-0" style="cursor: pointer;">
-                                            Logout
-                                        </button>
-                                    </form>
+                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('auth.dashboard') }}">
+                                                <i class="fas fa-tachometer-alt me-2"></i> Dashboard
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('auth.profile') }}">
+                                                <i class="fas fa-user me-2"></i> Edit Profile
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('auth.change-password') }}">
+                                                <i class="fas fa-lock me-2"></i> Change Password
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('auth.enrolled-courses') }}">
+                                                <i class="fas fa-graduation-cap me-2"></i> Enrolled Courses
+                                            </a>
+                                        </li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li>
+                                            <form action="{{ route('auth.logout') }}" method="POST" class="d-inline">
+                                                @csrf
+                                                <button type="submit" class="dropdown-item text-danger" style="cursor: pointer; border: none; background: none; width: 100%; text-align: left;">
+                                                    <i class="fas fa-sign-out-alt me-2"></i> Logout
+                                                </button>
+                                            </form>
+                                        </li>
+                                    </ul>
                                 </li>
                             @else
                                 <li class="nav-item">
