@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Mail\OtpVerificationMail;
+use App\Mail\PasswordResetOtpMail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -422,6 +423,163 @@ class AuthController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(12);
         return view('frontend.auth.enrolled-courses', compact('user', 'enrolledCourses'));
+    }
+
+    /**
+     * Show forgot password form
+     */
+    public function showForgotPasswordForm()
+    {
+        return view('frontend.auth.forgot-password');
+    }
+
+    /**
+     * Handle forgot password request
+     */
+    public function forgotPassword(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+
+        $user = User::where('email', $request->email)->first();
+
+        // Don't reveal if email exists or not for security
+        if (!$user) {
+            return redirect()->route('auth.forgot-password')->with('success', 'If the email exists, a password reset OTP has been sent.');
+        }
+
+        // Generate 6-digit OTP
+        $otp = str_pad(rand(0, 999999), 6, '0', STR_PAD_LEFT);
+        $otpExpiresAt = now()->addMinutes(10);
+
+        // Store OTP in user record (we can reuse email_otp field or create a separate field)
+        // For now, we'll use a session-based approach
+        $user->email_otp = $otp;
+        $user->email_otp_expires_at = $otpExpiresAt;
+        $user->save();
+
+        // Send OTP email
+        try {
+            Mail::to($user->email)->send(new PasswordResetOtpMail($otp));
+        } catch (\Exception $e) {
+            \Log::error('Failed to send password reset OTP email: ' . $e->getMessage());
+            return back()->with('error', 'Failed to send password reset email. Please try again later.');
+        }
+
+        // Store user ID in session for OTP verification
+        session(['password_reset_user_id' => $user->id]);
+
+        return redirect()->route('auth.reset-password')->with('success', 'A password reset OTP has been sent to your email address.');
+    }
+
+    /**
+     * Show reset password form
+     */
+    public function showResetPasswordForm()
+    {
+        if (!session('password_reset_user_id')) {
+            return redirect()->route('auth.forgot-password')->with('error', 'Please request a password reset first.');
+        }
+
+        return view('frontend.auth.reset-password');
+    }
+
+    /**
+     * Handle reset password request
+     */
+    public function resetPassword(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'otp' => 'required|string|size:6',
+            'password' => [
+                'required',
+                'string',
+                'min:8',
+                'confirmed',
+                'regex:/[a-z]/',      // Must contain at least one lowercase letter
+                'regex:/[A-Z]/',      // Must contain at least one uppercase letter
+                'regex:/[0-9]/',      // Must contain at least one digit
+                'regex:/[@$!%*#?&]/', // Must contain at least one special character
+            ],
+        ], [
+            'password.min' => 'Password must be at least 8 characters long.',
+            'password.regex' => 'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character (@$!%*#?&).',
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+
+        $userId = session('password_reset_user_id');
+        if (!$userId) {
+            return redirect()->route('auth.forgot-password')->with('error', 'Session expired. Please request a new password reset.');
+        }
+
+        $user = User::find($userId);
+        if (!$user) {
+            session()->forget('password_reset_user_id');
+            return redirect()->route('auth.forgot-password')->with('error', 'User not found. Please request a new password reset.');
+        }
+
+        // Check if OTP matches and is not expired
+        if ($user->email_otp !== $request->otp) {
+            return back()->withErrors(['otp' => 'Invalid OTP.'])->withInput();
+        }
+
+        if (now()->gt($user->email_otp_expires_at)) {
+            return back()->withErrors(['otp' => 'OTP has expired. Please request a new password reset.'])->withInput();
+        }
+
+        // Reset password
+        $user->password = Hash::make($request->password);
+        $user->email_otp = null;
+        $user->email_otp_expires_at = null;
+        $user->save();
+
+        // Clear session
+        session()->forget('password_reset_user_id');
+
+        return redirect()->route('auth.login')->with('success', 'Your password has been reset successfully. Please login with your new password.');
+    }
+
+    /**
+     * Resend password reset OTP
+     */
+    public function resendPasswordResetOtp()
+    {
+        $userId = session('password_reset_user_id');
+        if (!$userId) {
+            return redirect()->route('auth.forgot-password')->with('error', 'Session expired. Please request a password reset again.');
+        }
+
+        $user = User::find($userId);
+        if (!$user) {
+            session()->forget('password_reset_user_id');
+            return redirect()->route('auth.forgot-password')->with('error', 'User not found.');
+        }
+
+        // Generate new OTP
+        $otp = str_pad(rand(0, 999999), 6, '0', STR_PAD_LEFT);
+        $otpExpiresAt = now()->addMinutes(10);
+
+        $user->email_otp = $otp;
+        $user->email_otp_expires_at = $otpExpiresAt;
+        $user->save();
+
+        // Send OTP email
+        try {
+            Mail::to($user->email)->send(new PasswordResetOtpMail($otp));
+        } catch (\Exception $e) {
+            \Log::error('Failed to send password reset OTP email: ' . $e->getMessage());
+            return back()->with('error', 'Failed to send OTP. Please try again later.');
+        }
+
+        return redirect()->route('auth.reset-password')->with('success', 'A new password reset OTP has been sent to your email address.');
     }
 
     /**

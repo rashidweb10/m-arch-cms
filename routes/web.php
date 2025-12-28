@@ -76,6 +76,15 @@ Route::prefix('auth')->group(function () {
     Route::post('/verify-otp', [FrontendAuthController::class, 'verifyOtp'])->name('auth.verify-otp');
     Route::post('/resend-otp', [FrontendAuthController::class, 'resendOtp'])->name('auth.resend-otp');
     
+    // Forgot Password
+    Route::get('/forgot-password', [FrontendAuthController::class, 'showForgotPasswordForm'])->name('auth.forgot-password');
+    Route::post('/forgot-password', [FrontendAuthController::class, 'forgotPassword'])->name('auth.forgot-password');
+    
+    // Reset Password
+    Route::get('/reset-password', [FrontendAuthController::class, 'showResetPasswordForm'])->name('auth.reset-password');
+    Route::post('/reset-password', [FrontendAuthController::class, 'resetPassword'])->name('auth.reset-password');
+    Route::post('/resend-password-reset-otp', [FrontendAuthController::class, 'resendPasswordResetOtp'])->name('auth.resend-password-reset-otp');
+    
     // Google OAuth
     Route::get('/google', [FrontendAuthController::class, 'redirectToGoogle'])->name('auth.google');
     Route::get('/google/callback', [FrontendAuthController::class, 'handleGoogleCallback'])->name('auth.google.callback');
