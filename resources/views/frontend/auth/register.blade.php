@@ -118,12 +118,15 @@
                                     class="form-control @error('password') is-invalid @enderror" 
                                     id="password" 
                                     name="password" 
-                                    placeholder="Enter password (min 6 characters)"
+                                    placeholder="Enter password"
                                     required 
                                 />
                                 @error('password')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
+                                <small class="text-muted">
+                                    Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character (@$!%*#?&).
+                                </small>
                             </div>
 
                             <div class="col-md-6 mb-3">

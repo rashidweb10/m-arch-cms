@@ -69,7 +69,7 @@ class AuthController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended('/')->with('success', 'Welcome back!');
+        return redirect()->intended(route('auth.profile'))->with('success', 'Welcome back!');
     }
 
     /**
@@ -90,10 +90,21 @@ class AuthController extends Controller
             'email' => 'required|email|unique:users,email',
             'phone' => 'required|string|regex:/^\d{10}$/|unique:users,phone',
             'location' => 'required|string|max:255',
-            'password' => 'required|string|min:6|confirmed',
+            'password' => [
+                'required',
+                'string',
+                'min:8',
+                'confirmed',
+                'regex:/[a-z]/',      // Must contain at least one lowercase letter
+                'regex:/[A-Z]/',      // Must contain at least one uppercase letter
+                'regex:/[0-9]/',      // Must contain at least one digit
+                'regex:/[@$!%*#?&]/', // Must contain at least one special character
+            ],
         ], [
             'phone.regex' => 'Phone number must be exactly 10 digits.',
             'phone.unique' => 'This phone number is already registered.',
+            'password.min' => 'Password must be at least 8 characters long.',
+            'password.regex' => 'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character (@$!%*#?&).',
         ]);
 
         if ($validator->fails()) {
@@ -188,7 +199,7 @@ class AuthController extends Controller
         // Auto login
         Auth::login($user);
 
-        return redirect()->route('auth.profile')->with('success', 'Email verified successfully!');
+        return redirect()->route('auth.profile')->with('success', 'Email verified successfully! Welcome to your profile!');
     }
 
     /**
@@ -268,7 +279,7 @@ class AuthController extends Controller
                 Auth::login($user, true);
             }
 
-            return redirect()->intended('/')->with('success', 'Welcome! You have been logged in with Google.');
+            return redirect()->intended(route('auth.profile'))->with('success', 'Welcome! You have been logged in with Google.');
         } catch (\Exception $e) {
             \Log::error('Google OAuth error: ' . $e->getMessage());
             return redirect()->route('auth.login')->with('error', 'Failed to authenticate with Google. Please try again.');
@@ -312,6 +323,69 @@ class AuthController extends Controller
         $user->save();
 
         return back()->with('success', 'Profile updated successfully!');
+    }
+
+    /**
+     * Show change password form
+     */
+    public function showChangePasswordForm()
+    {
+        $user = Auth::user();
+        return view('frontend.auth.change-password', compact('user'));
+    }
+
+    /**
+     * Update password
+     */
+    public function changePassword(Request $request)
+    {
+        $user = Auth::user();
+
+        $validator = Validator::make($request->all(), [
+            'current_password' => 'required|string',
+            'password' => [
+                'required',
+                'string',
+                'min:8',
+                'confirmed',
+                'regex:/[a-z]/',      // Must contain at least one lowercase letter
+                'regex:/[A-Z]/',      // Must contain at least one uppercase letter
+                'regex:/[0-9]/',      // Must contain at least one digit
+                'regex:/[@$!%*#?&]/', // Must contain at least one special character
+            ],
+        ], [
+            'password.min' => 'Password must be at least 8 characters long.',
+            'password.regex' => 'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character (@$!%*#?&).',
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+
+        // Check if current password is correct
+        if (!Hash::check($request->current_password, $user->password)) {
+            return back()->withErrors(['current_password' => 'Current password is incorrect.'])->withInput();
+        }
+
+        // Update password
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        return back()->with('success', 'Password changed successfully!');
+    }
+
+    /**
+     * Show enrolled courses page
+     */
+    public function enrolledCourses()
+    {
+        $user = Auth::user();
+        $enrolledCourses = \App\Models\CourseEnrolment::with('course.category')
+            ->where('user_id', $user->id)
+            ->where('is_active', 1)
+            ->orderBy('created_at', 'desc')
+            ->paginate(12);
+        return view('frontend.auth.enrolled-courses', compact('user', 'enrolledCourses'));
     }
 
     /**

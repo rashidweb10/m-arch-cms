@@ -84,6 +84,10 @@ Route::prefix('auth')->group(function () {
     Route::middleware('auth')->group(function () {
         Route::get('/profile', [FrontendAuthController::class, 'profile'])->name('auth.profile');
         Route::put('/profile', [FrontendAuthController::class, 'updateProfile'])->name('auth.profile.update');
+        Route::get('/change-password', [FrontendAuthController::class, 'showChangePasswordForm'])->name('auth.change-password');
+        Route::post('/change-password', [FrontendAuthController::class, 'changePassword'])->name('auth.change-password.store');
+        Route::get('/courses', [FrontendAuthController::class, 'courses'])->name('auth.courses');
+        Route::get('/enrolled-courses', [FrontendAuthController::class, 'enrolledCourses'])->name('auth.enrolled-courses');
         Route::post('/logout', [FrontendAuthController::class, 'logout'])->name('auth.logout');
     });
 });
