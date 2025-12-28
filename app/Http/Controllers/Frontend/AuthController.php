@@ -257,9 +257,18 @@ class AuthController extends Controller
             $user = User::where('email', $googleUser->email)->first();
 
             if ($user) {
-                // Update Google ID if not set
+                // Update Google ID and email verification if not set
+                $needsUpdate = false;
                 if (!$user->google_id) {
                     $user->google_id = $googleUser->id;
+                    $needsUpdate = true;
+                }
+                // Mark email as verified since it's from Google OAuth
+                if (!$user->email_verified_at) {
+                    $user->email_verified_at = now();
+                    $needsUpdate = true;
+                }
+                if ($needsUpdate) {
                     $user->save();
                 }
 
