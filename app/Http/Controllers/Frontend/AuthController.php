@@ -118,6 +118,7 @@ class AuthController extends Controller
 
         // Create user with unverified status
         $user = User::create([
+            'role_id' => 3,
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
@@ -285,6 +286,7 @@ class AuthController extends Controller
             } else {
                 // Create new user
                 $user = User::create([
+                    'role_id' => 3,
                     'name' => $googleUser->name,
                     'email' => $googleUser->email,
                     'google_id' => $googleUser->id,
