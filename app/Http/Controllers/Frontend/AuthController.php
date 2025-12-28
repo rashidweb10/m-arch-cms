@@ -266,6 +266,11 @@ class AuthController extends Controller
             $user = User::where('email', $googleUser->email)->first();
 
             if ($user) {
+                // If user is not active, redirect with an error
+                if (!$user->is_active) {
+                    return redirect()->route('auth.login')->with('error', 'Your account is inactive. Please contact support.');
+                }
+                
                 // Update Google ID and email verification if not set
                 $needsUpdate = false;
                 if (!$user->google_id) {
