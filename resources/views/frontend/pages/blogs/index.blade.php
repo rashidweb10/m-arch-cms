@@ -62,19 +62,19 @@
                                 </div>
 
                                 <div class="blog-card-body">
-                                    @if($dateText)
-                                        <div class="blog-card-meta">{{ $dateText }}</div>
-                                    @endif
+                                    <a href="{{ route('blog.show', $blog->slug) }}" class="" aria-label="Read {{ $blog->title }}">
+                                        @if($dateText)
+                                            <div class="blog-card-meta">{{ $dateText }}</div>
+                                        @endif
 
-                                    <h5 class="blog-card-title robot_slab">{{ $blog->title }}</h5>
+                                        <h5 class="blog-card-title robot_slab">{{ $blog->title }}</h5>
 
-                                    @if($blog->excerpt)
-                                        <div class="blog-card-excerpt">
-                                            {{ \Illuminate\Support\Str::limit(strip_tags($blog->excerpt), 140) }}
-                                        </div>
-                                    @endif
-
-                                    <a href="{{ route('blog.show', $blog->slug) }}" class="stretched-link" aria-label="Read {{ $blog->title }}"></a>
+                                        @if($blog->excerpt)
+                                            <div class="blog-card-excerpt">
+                                                {{ \Illuminate\Support\Str::limit(strip_tags($blog->excerpt), 140) }}
+                                            </div>
+                                        @endif
+                                    </a>
                                 </div>
                             </div>
                         </div>
