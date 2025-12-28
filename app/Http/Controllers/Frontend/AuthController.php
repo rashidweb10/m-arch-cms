@@ -313,21 +313,15 @@ class AuthController extends Controller
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email,' . $user->id,
-            'phone' => 'required|string|regex:/^\d{10}$/|unique:users,phone,' . $user->id,
             'location' => 'required|string|max:255',
-        ], [
-            'phone.regex' => 'Phone number must be exactly 10 digits.',
-            'phone.unique' => 'This phone number is already registered.',
         ]);
 
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
 
+        // Only update name and location - email and phone are not changeable
         $user->name = $request->name;
-        $user->email = $request->email;
-        $user->phone = $request->phone;
         $user->location = $request->location;
         $user->save();
 

@@ -52,16 +52,13 @@
                 <label for="email" class="form-label text-muted fw-medium">Email <span class="text-danger">*</span></label>
                 <input 
                     type="email" 
-                    class="form-control @error('email') is-invalid @enderror" 
+                    class="form-control bg-light" 
                     id="email" 
-                    name="email" 
-                    value="{{ old('email', $user->email) }}"
-                    placeholder="Enter your email"
-                    required 
+                    value="{{ $user->email }}"
+                    readonly
+                    style="cursor: not-allowed;"
                 />
-                @error('email')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
+                <small class="text-muted">Email cannot be changed</small>
             </div>
         </div>
 
@@ -70,19 +67,13 @@
                 <label for="phone" class="form-label text-muted fw-medium">Phone (10 digits) <span class="text-danger">*</span></label>
                 <input 
                     type="tel" 
-                    class="form-control @error('phone') is-invalid @enderror" 
+                    class="form-control bg-light" 
                     id="phone" 
-                    name="phone" 
-                    value="{{ old('phone', $user->phone) }}"
-                    placeholder="Enter 10-digit phone number"
-                    pattern="[0-9]{10}"
-                    maxlength="10"
-                    inputmode="numeric"
-                    required 
+                    value="{{ $user->phone }}"
+                    readonly
+                    style="cursor: not-allowed;"
                 />
-                @error('phone')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
+                <small class="text-muted">Phone cannot be changed</small>
             </div>
 
             <div class="col-md-6 mb-3">
