@@ -31,7 +31,7 @@
 	padding-right: 0px !important;
 }
 
-.menu>li:hover>.submenu {
+.menu:hover>.submenu {
 	display: block;
 }
 

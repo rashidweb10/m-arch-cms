@@ -165,9 +165,24 @@
                                             Courses
                                         </a>
                                         <ul class="submenu">
-                                            <li><a href="{{ route('about') }}">About Us</a></li>
-                                            <li><a href="{{ route('courses') }}">Courses</a></li>
-                                            <li><a href="{{ route('faculties') }}">Faculties</a></li>
+                                            <li>
+                                                <a href="{{ route('about') }}">
+                                                    <i class="fa-regular fa-address-card"></i>
+                                                    About Us
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('courses') }}">
+                                                    <i class="fa-brands fa-discourse"></i>
+                                                    Courses
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('faculties') }}">
+                                                    <i class="fa-regular fa-address-card"></i>
+                                                    Faculties
+                                                </a>
+                                            </li>
                                         </ul>
                                     </li>
 
@@ -177,9 +192,24 @@
                                             Faculties
                                         </a>
                                         <ul class="submenu">
-                                            <li><a href="{{ route('about') }}">About Us</a></li>
-                                            <li><a href="{{ route('courses') }}">Courses</a></li>
-                                            <li><a href="{{ route('faculties') }}">Faculties</a></li>
+                                            <li>
+                                                <a href="{{ route('about') }}">
+                                                    <i class="fa-regular fa-address-card"></i>
+                                                    About Us
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('courses') }}">
+                                                    <i class="fa-brands fa-discourse"></i>
+                                                    Courses
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('faculties') }}">
+                                                    <i class="fa-regular fa-address-card"></i>
+                                                    Faculties
+                                                </a>
+                                            </li>
                                         </ul>
                                     </li>
 
