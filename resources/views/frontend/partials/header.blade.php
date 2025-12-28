@@ -24,26 +24,31 @@
                                 </a>
                                 @endif
                             </li>
-                            <li class="nav-item">
-                                @auth
-                                    <a class="nav-link robot_slab" href="{{ route('auth.profile') }}">
+                            @auth
+                                <li class="nav-item">
+                                    <a class="nav-link robot_slab" href="{{ route('auth.dashboard') }}">
                                         My Profile
                                     </a>
-                                @else
+                                </li>
+                                <li class="nav-item">
+                                    <form action="{{ route('auth.logout') }}" method="POST" class="d-inline">
+                                        @csrf
+                                        <button type="submit" class="nav-link robot_slab border-0 bg-transparent p-0" style="cursor: pointer;">
+                                            Logout
+                                        </button>
+                                    </form>
+                                </li>
+                            @else
+                                <li class="nav-item">
                                     <a class="nav-link robot_slab" href="{{ route('auth.login') }}">
                                         Login
                                     </a>
-                                @endauth
-                            </li>
-                            @auth
-                            <li class="nav-item">
-                                <form action="{{ route('auth.logout') }}" method="POST" class="d-inline">
-                                    @csrf
-                                    <button type="submit" class="nav-link robot_slab border-0 bg-transparent p-0" style="cursor: pointer;">
-                                        Logout
-                                    </button>
-                                </form>
-                            </li>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link robot_slab" href="{{ route('auth.register') }}">
+                                        Register
+                                    </a>
+                                </li>
                             @endauth
                         </ul>
                     </div>
