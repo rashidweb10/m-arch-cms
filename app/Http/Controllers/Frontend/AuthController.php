@@ -69,7 +69,7 @@ class AuthController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('auth.profile'))->with('success', 'Welcome back!');
+        return redirect()->intended(route('auth.dashboard'))->with('success', 'Welcome back!');
     }
 
     /**
@@ -199,7 +199,7 @@ class AuthController extends Controller
         // Auto login
         Auth::login($user);
 
-        return redirect()->route('auth.profile')->with('success', 'Email verified successfully! Welcome to your profile!');
+        return redirect()->route('auth.dashboard')->with('success', 'Email verified successfully! Welcome to your dashboard!');
     }
 
     /**
@@ -279,11 +279,20 @@ class AuthController extends Controller
                 Auth::login($user, true);
             }
 
-            return redirect()->intended(route('auth.profile'))->with('success', 'Welcome! You have been logged in with Google.');
+            return redirect()->intended(route('auth.dashboard'))->with('success', 'Welcome! You have been logged in with Google.');
         } catch (\Exception $e) {
             \Log::error('Google OAuth error: ' . $e->getMessage());
             return redirect()->route('auth.login')->with('error', 'Failed to authenticate with Google. Please try again.');
         }
+    }
+
+    /**
+     * Show dashboard page
+     */
+    public function dashboard()
+    {
+        $user = Auth::user();
+        return view('frontend.auth.dashboard', compact('user'));
     }
 
     /**

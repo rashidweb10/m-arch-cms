@@ -14,6 +14,9 @@
                         <h5 class="mb-0 robot_slab">My Account</h5>
                     </div>
                     <nav class="nav flex-column">
+                        <a class="nav-link {{ request()->routeIs('auth.dashboard') ? 'active bg-primary text-white rounded' : '' }}" href="{{ route('auth.dashboard') }}">
+                            <i class="fas fa-tachometer-alt me-2"></i> Dashboard
+                        </a>
                         <a class="nav-link {{ request()->routeIs('auth.profile') ? 'active bg-primary text-white rounded' : '' }}" href="{{ route('auth.profile') }}">
                             <i class="fas fa-user me-2"></i> Edit Profile
                         </a>
