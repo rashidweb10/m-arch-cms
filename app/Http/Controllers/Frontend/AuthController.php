@@ -320,18 +320,35 @@ class AuthController extends Controller
     {
         $user = Auth::user();
 
-        $validator = Validator::make($request->all(), [
+        // Build validation rules
+        $rules = [
             'name' => 'required|string|max:255',
             'location' => 'required|string|max:255',
+        ];
+
+        // If phone is empty, allow updating it with validation
+        if (empty($user->phone)) {
+            $rules['phone'] = 'required|string|regex:/^\d{10}$/|unique:users,phone';
+        }
+
+        $validator = Validator::make($request->all(), $rules, [
+            'phone.regex' => 'Phone number must be exactly 10 digits.',
+            'phone.unique' => 'This phone number is already registered.',
         ]);
 
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
 
-        // Only update name and location - email and phone are not changeable
+        // Update name and location
         $user->name = $request->name;
         $user->location = $request->location;
+
+        // Update phone only if it was empty
+        if (empty($user->phone) && $request->has('phone')) {
+            $user->phone = $request->phone;
+        }
+
         $user->save();
 
         return back()->with('success', 'Profile updated successfully!');

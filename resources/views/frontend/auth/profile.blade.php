@@ -64,16 +64,39 @@
 
         <div class="row">
             <div class="col-md-6 mb-3">
-                <label for="phone" class="form-label text-muted fw-medium">Phone (10 digits) <span class="text-danger">*</span></label>
-                <input 
-                    type="tel" 
-                    class="form-control bg-light" 
-                    id="phone" 
-                    value="{{ $user->phone }}"
-                    readonly
-                    style="cursor: not-allowed;"
-                />
-                <small class="text-muted">Phone cannot be changed</small>
+                <label for="phone" class="form-label text-muted fw-medium">Phone (10 digits) 
+                    @if(empty($user->phone))
+                        <span class="text-danger">*</span>
+                    @endif
+                </label>
+                @if(empty($user->phone))
+                    <input 
+                        type="tel" 
+                        class="form-control @error('phone') is-invalid @enderror" 
+                        id="phone" 
+                        name="phone" 
+                        value="{{ old('phone') }}"
+                        placeholder="Enter 10-digit phone number"
+                        pattern="[0-9]{10}"
+                        maxlength="10"
+                        inputmode="numeric"
+                        required 
+                    />
+                    @error('phone')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                    <small class="text-muted">Please enter your phone number</small>
+                @else
+                    <input 
+                        type="tel" 
+                        class="form-control bg-light" 
+                        id="phone" 
+                        value="{{ $user->phone }}"
+                        readonly
+                        style="cursor: not-allowed;"
+                    />
+                    <small class="text-muted">Phone cannot be changed</small>
+                @endif
             </div>
 
             <div class="col-md-6 mb-3">
