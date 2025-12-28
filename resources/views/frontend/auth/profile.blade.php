@@ -136,8 +136,8 @@
                 @endif
                 @if($user->email_verified_at)
                     | <span class="text-success">Email Verified</span>
-                @else
-                    | <span class="text-warning">Email Not Verified</span>
+                {{-- @else
+                    | <span class="text-warning">Email Not Verified</span> --}}
                 @endif
             </small>
         </div>
