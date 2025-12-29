@@ -433,6 +433,29 @@ class AuthController extends Controller
     }
 
     /**
+     * Show a single enrolled course and its materials
+     */
+    public function enrolledCourseShow(\App\Models\Course $course)
+    {
+        $user = Auth::user();
+
+        // Ensure the user is enrolled in this course and the enrollment is active
+        $isEnrolled = \App\Models\CourseEnrolment::where('user_id', $user->id)
+            ->where('course_id', $course->id)
+            ->where('is_active', 1)
+            ->exists();
+
+        if (!$isEnrolled) {
+            abort(403, 'You are not enrolled in this course.');
+        }
+
+        // Load the course with its materials
+        $course->load('materials');
+
+        return view('frontend.auth.enrolled-course-show', compact('user', 'course'));
+    }
+
+    /**
      * Show forgot password form
      */
     public function showForgotPasswordForm()

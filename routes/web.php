@@ -97,6 +97,7 @@ Route::prefix('auth')->group(function () {
         Route::get('/change-password', [FrontendAuthController::class, 'showChangePasswordForm'])->name('auth.change-password');
         Route::post('/change-password', [FrontendAuthController::class, 'changePassword'])->name('auth.change-password.store');
         Route::get('/enrolled-courses', [FrontendAuthController::class, 'enrolledCourses'])->name('auth.enrolled-courses');
+        Route::get('/enrolled-courses/{course}', [FrontendAuthController::class, 'enrolledCourseShow'])->name('auth.enrolled-courses.show');
         Route::post('/logout', [FrontendAuthController::class, 'logout'])->name('auth.logout');
     });
 });

@@ -18,4 +18,10 @@ class Course extends Model
     {
         return $this->belongsTo(CourseCategory::class, 'category_id');
     }
+
+    // Relationship: A course has many materials
+    public function materials()
+    {
+        return $this->hasMany(CourseMaterial::class);
+    }
 }

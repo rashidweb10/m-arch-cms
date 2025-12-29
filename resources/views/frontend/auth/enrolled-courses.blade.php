@@ -43,7 +43,9 @@
                                 @endif
                             </td>
                             <td>
-                                -
+                                <a href="{{ route('auth.enrolled-courses.show', $enrolment->course_id) }}" class="btn btn-sm btn-primary">
+                                    <i class="fas fa-eye me-1"></i>View
+                                </a>
                             </td>
                         </tr>
                     @endforeach
