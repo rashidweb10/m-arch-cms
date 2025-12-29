@@ -23,15 +23,26 @@
     @if($course->materials->count() > 0)
         <div class="accordion" id="courseMaterialsAccordion">
             @foreach($course->materials as $index => $material)
+                @php 
+                    $attachments = array_filter(explode(',', $material->attachments ?? ''));
+                @endphp
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="heading-{{ $index }}">
                         <button class="accordion-button {{ $index !== 0 ? 'collapsed' : '' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{ $index }}" aria-expanded="{{ $index === 0 ? 'true' : 'false' }}" aria-controls="collapse-{{ $index }}">
-                            <strong>{{ $material->title }}</strong>
+                            <strong>{{ $index + 1 }}.  {{ $material->title }}</strong>
                         </button>
                     </h2>
                     <div id="collapse-{{ $index }}" class="accordion-collapse collapse {{ $index === 0 ? 'show' : '' }}" aria-labelledby="heading-{{ $index }}" data-bs-parent="#courseMaterialsAccordion">
                         <div class="accordion-body">
                             <p>{{ $material->description }}</p>
+
+                            @foreach($attachments as $index => $id)
+                            <div>
+                            <a target="_blank" href="{{ uploaded_asset($id) }}">
+                            {{ $index + 1 }}. {{ uploaded_asset_name($id) }}
+                            </a>
+                        </div>
+                            @endforeach
 
                             {{-- @if($material->file_path)
                                 <a href="{{ asset('storage/' . $material->file_path) }}" class="btn btn-primary btn-sm" target="_blank">
