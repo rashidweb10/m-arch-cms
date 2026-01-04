@@ -190,7 +190,10 @@ class UploadController extends Controller
             $uploads->where('user_id', User::where('company_id', $request->company)->value('id'));
         }        
         
-        $uploads->where('type', $request->type); //new
+        if($request->type != "all"){
+            $uploads->where('type', $request->type); //new
+        }
+         
 
         return $uploads->paginate(config('custom.pagination_per_media_page'))->appends(request()->query());
     }
