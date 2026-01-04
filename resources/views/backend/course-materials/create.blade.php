@@ -37,7 +37,7 @@
         <div class="col-sm-12">
             <div class="form-group mb-2">
                 <label for="description" class="form-label">Description</label>
-                <textarea name="description" class="form-control" rows="4" placeholder="Enter description"></textarea>
+                <textarea name="description" class="form-control text-editor" rows="4" placeholder="Enter description"></textarea>
             </div>
         </div>
 

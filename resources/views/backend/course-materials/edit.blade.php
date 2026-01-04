@@ -50,7 +50,7 @@
         <div class="col-sm-12">
             <div class="form-group mb-2">
                 <label for="description" class="form-label">Description</label>
-                <textarea name="description" class="form-control" rows="4" placeholder="Enter description">{{ old('description', $pageData->description) }}</textarea>
+                <textarea name="description" class="form-control text-editor" rows="4" placeholder="Enter description">{{ old('description', $pageData->description) }}</textarea>
             </div>
         </div>
 

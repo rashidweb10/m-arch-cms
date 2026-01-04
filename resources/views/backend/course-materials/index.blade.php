@@ -92,7 +92,7 @@
                                 <th>Category</th>
                                 <th>Course</th>
                                 <th>Title</th>
-                                <th>Description</th>
+                                {{-- <th>Description</th> --}}
                                 <th>Attachments</th>
                                 <th>Status</th>
                                 <th>Created At</th>
@@ -127,7 +127,7 @@
                                     @endif
                                 </td>
                                 <td>{{ $row->title ?? 'N/A' }}</td>
-                                <td>{{ Str::limit($row->description ?? 'N/A', 50) }}</td>
+                                {{-- <td>{{ Str::limit($row->description ?? 'N/A', 50) }}</td> --}}
                                 <td>
                                     @if($row->attachments)
                                         @php
