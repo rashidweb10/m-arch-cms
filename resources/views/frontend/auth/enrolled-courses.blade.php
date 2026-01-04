@@ -13,11 +13,11 @@
 
     @if($enrolledCourses->count() > 0)
         <div class="table-responsive">
-            <table class="table table-hover">
+            <table class="table table-hover" id="enrolledCoursesTable">
                 <thead>
                     <tr>
-                        <th>Course Name</th>
                         <th>Category</th>
+                        <th>Name</th>
                         <th>Enrolled Date</th>
                         <th>Validity</th>
                         <th>Action</th>
@@ -27,10 +27,10 @@
                     @foreach($enrolledCourses as $enrolment)
                         <tr>
                             <td>
-                                <strong>{{ $enrolment->course->name ?? 'N/A' }}</strong>
-                            </td>
-                            <td>
                                 {{ $enrolment->course->category->name ?? 'N/A' }}
+                            </td>                            
+                            <td>
+                                <strong>{{ $enrolment->course->name ?? 'N/A' }}</strong>
                             </td>
                             <td>
                                 {{ formatDate($enrolment->created_at) }}
@@ -48,7 +48,7 @@
                                     $validityDate = $enrolment->validity ? \Carbon\Carbon::parse($enrolment->validity) : null;
                                     $isExpired = $validityDate && $currentDate->greaterThan($validityDate);
                                 @endphp
-                                
+                                 
                                 @if($isExpired)
                                     <span class="text-danger fw-bold">Expired</span>
                                 @else
@@ -74,5 +74,20 @@
         </div>
     @endif
 </div>
+@endsection
+
+@section('scripts')
+<script>
+    $(document).ready(function() {
+        $('#enrolledCoursesTable').DataTable({
+            "paging": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "responsive": true,
+            pageLength: 50
+        });
+    });
+</script>
 @endsection
 
