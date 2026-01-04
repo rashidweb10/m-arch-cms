@@ -39,27 +39,49 @@
                     </h2>
                     <div id="collapse-{{ $index }}" class="accordion-collapse collapse" aria-labelledby="heading-{{ $index }}" data-bs-parent="#courseMaterialsAccordion">
                         <div class="accordion-body">
+                            @if($material->description)
+                            <p class="mb-0"><strong>Description:</strong></p>
                             <p>{{ $material->description }}</p>
-
-                            @foreach($attachments as $index => $id)
-                            <div>
-                            <a target="_blank" href="{{ uploaded_asset($id) }}">
-                            {{ $index + 1 }}. {{ uploaded_asset_name($id) }}
-                            </a>
-                        </div>
-                            @endforeach
-
-                            {{-- @if($material->file_path)
-                                <a href="{{ asset('storage/' . $material->file_path) }}" class="btn btn-primary btn-sm" target="_blank">
-                                    <i class="fas fa-download me-2"></i>Download Material
-                                </a>
                             @endif
 
-                             @if($material->video_url)
-                                <a href="{{ $material->video_url }}" class="btn btn-secondary btn-sm" target="_blank">
-                                    <i class="fas fa-video me-2"></i>Watch Video
-                                </a>
-                            @endif --}}
+                            @if($attachments)
+                               <p class="mb-0"><strong>Attachments:</strong></p>
+                                @foreach($attachments as $index => $id)
+                                    @php
+                                        $url  = uploaded_asset($id);
+                                        $name = uploaded_asset_name($id);
+                                        $type = uploaded_asset_type($id); // image | pdf | doc | etc
+                                    @endphp
+
+                                    <div class="attachment-item mb-2">
+                                        @if($type === 'image')
+                                            <!-- IMAGE THUMBNAIL -->
+                                            <div class="small mt-1">{{ $index + 1 }}. {{ $name }}</div>
+                                            <a href="{{ $url }}" target="_blank">
+                                            <img src="{{ $url }}" class="img-thumbnail" alt="{{ $name }}" width="150">
+                                            </a>
+                                        @else
+                                            <!-- DOCUMENT BLOCK -->
+                                            <a href="{{ $url }}" target="_blank">
+                                            <img src="{{ asset("assets/frontend/img/doc.png") }}" class="img-thumbnail" alt="{{ $name }}" width="150">
+                                            </a>
+                                            <div class="small mt-1">{{ $index + 1 }}. {{ $name }}</div>
+                                        @endif
+                                    </div>
+                                @endforeach
+                            @endif 
+
+                            @if($material->youtube_url)
+                            <p class="mb-0"><strong>Video:</strong></p>
+                            <div class="video-wrapper">
+                            <iframe
+                                src="{{$material->youtube_url}}?rel=0&modestbranding=1&playsinline=1"
+                                title="Demo Background Sample Video"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen>
+                            </iframe>
+                            </div>
+                            @endif                            
                         </div>
                     </div>
                 </div>

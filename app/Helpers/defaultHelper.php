@@ -334,6 +334,24 @@ if (!function_exists('uploaded_asset_name')) {
     }
 }
 
+if (!function_exists('uploaded_asset_type')) {
+    function uploaded_asset_type($id) {
+
+        $asset = Cache::rememberForever('uploaded_asset_type_'.$id , function() use ($id) {
+            return \App\Models\Upload::find($id);
+        });
+
+        $filename = 'Unknown';
+
+        if ($asset != null) {
+            $filename = $asset->type;
+        }
+    
+        // Capitalize each word
+        return $filename;
+    }
+}
+
 if (!function_exists('get_setting')) {
     function get_setting($metaKey, $default = null) {
         //return \Illuminate\Support\Facades\Cache::rememberForever("setting_" . config('custom.school_id') . "_{$metaKey}", function () use ($metaKey, $default) {
