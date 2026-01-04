@@ -452,7 +452,12 @@ class AuthController extends Controller
         }
 
         // Load the course with its materials
-        $course->load('materials');
+        $course->load([
+            'materials' => function ($q) {
+                $q->orderBy('sorting_id', 'asc')
+                ->orderBy('id', 'desc'); //
+            }
+        ]);
 
         return view('frontend.auth.enrolled-course-show', compact('user', 'course'));
     }
