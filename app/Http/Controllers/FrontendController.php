@@ -12,6 +12,7 @@ use App\Models\Campus;
 use App\Models\Gallery;
 use App\Models\Blog;
 use App\Models\BlogCategory;
+use \App\Models\CourseCategory;
 use Illuminate\Support\Facades\Cache;
 
 class FrontendController extends Controller
@@ -50,8 +51,12 @@ class FrontendController extends Controller
 
     public function courses()
     {
-        return view('frontend.pages.courses');
-    }    
+        $courseCategories = CourseCategory::where('is_active', 1)
+            ->orderBy('id', 'asc')
+            ->get();
+        
+        return view('frontend.pages.courses', compact('courseCategories'));
+    }
 
     public function faculties()
     {
