@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 class AuthController extends Controller
 {
@@ -442,6 +443,7 @@ class AuthController extends Controller
         // Ensure the user is enrolled in this course and the enrollment is active
         $isEnrolled = \App\Models\CourseEnrolment::where('user_id', $user->id)
             ->where('course_id', $course->id)
+            ->where('validity', '>', Carbon::now()->startOfDay())
             ->where('is_active', 1)
             ->exists();
 
