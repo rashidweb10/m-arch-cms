@@ -12,4 +12,10 @@ class CourseCategory extends Model
         'description',
         'is_active',
     ];
+
+    // Relationship: A course category has many courses
+    public function courses()
+    {
+        return $this->hasMany(Course::class, 'category_id');
+    }
 }

@@ -51,7 +51,8 @@ class FrontendController extends Controller
 
     public function courses()
     {
-        $courseCategories = CourseCategory::where('is_active', 1)
+        $courseCategories = CourseCategory::withCount('courses')
+            ->where('is_active', 1)
             ->orderBy('id', 'asc')
             ->get();
         

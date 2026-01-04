@@ -16,7 +16,7 @@
                   <img src="{{ uploaded_asset($category->image) }}"
                      alt="{{ $category->name }} training" class="hvr-bounce-in w-100 course-card-img">
                   <div class="position-absolute top-3 start-3">
-                     <span class="badge bg-primary text-white badge-count">4 Courses</span>
+                     <span class="badge bg-primary text-white badge-count">{{ $category->courses_count }} Courses</span>
                   </div>
                </div>
             </div>
