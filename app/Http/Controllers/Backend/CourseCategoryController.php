@@ -74,6 +74,7 @@ class CourseCategoryController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|min:3|max:200',
             'image' => 'required',
+            'description' => 'nullable|string',
             'is_active' => 'required|boolean',
         ]);
 
@@ -81,6 +82,7 @@ class CourseCategoryController extends Controller
         $CourseCategory = new CourseCategory();
         $CourseCategory->name = $request->input('name');
         $CourseCategory->image = $request->input('image');
+        $CourseCategory->description = $request->input('description');
         $CourseCategory->save();
 
         // Return JSON response for AJAX handling
@@ -116,12 +118,14 @@ class CourseCategoryController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|min:3|max:200',
             'image' => 'required',
+            'description' => 'nullable|string',
             'is_active' => 'required|boolean',
         ]);
-    
+
         // If validation passes, update the data
         $CourseCategory->name = $request->input('name');
         $CourseCategory->image = $request->input('image');
+        $CourseCategory->description = $request->input('description');
         $CourseCategory->is_active = $request->input('is_active');
         $CourseCategory->save();
     

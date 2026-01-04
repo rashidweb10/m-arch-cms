@@ -25,6 +25,14 @@
             </div>
         </div>     
      
+        <!-- Description -->
+        <div class="col-sm-12">
+            <div class="form-group mb-2">
+                <label for="description" class="form-label">Description</label>
+                <textarea name="description" class="form-control text-editor" data-toggle="text-editor">{{ old('description', $pageData->description) }}</textarea>
+            </div>
+        </div>
+
         <!-- Is Active (dropdown) -->
         <div class="col-sm-12">
             <div class="form-group mb-2">

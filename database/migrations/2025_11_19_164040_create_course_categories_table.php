@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('image')->nullable();  // store image path
-            $table->boolean('is_active')->default(1);            
+            $table->text('description')->nullable();  // store description
+            $table->boolean('is_active')->default(1);
             $table->timestamps();
         });
     }

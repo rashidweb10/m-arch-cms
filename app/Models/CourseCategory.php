@@ -9,6 +9,7 @@ class CourseCategory extends Model
     protected $fillable = [
         'name',
         'image',
+        'description',
         'is_active',
     ];
 }
