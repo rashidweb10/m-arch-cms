@@ -21,6 +21,11 @@
     </div>
 
     @if($course->materials->count() > 0)
+        <div class="mb-3">
+            <button class="btn btn-sm btn-primary" id="toggle-accordion" style1="float: right;position: relative;top: -50px;">
+                Expand All
+            </button>
+        </div>
         <div class="accordion" id="courseMaterialsAccordion">
             @foreach($course->materials as $index => $material)
                 @php 
@@ -28,11 +33,11 @@
                 @endphp
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="heading-{{ $index }}">
-                        <button class="accordion-button {{ $index !== 0 ? 'collapsed' : '' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{ $index }}" aria-expanded="{{ $index === 0 ? 'true' : 'false' }}" aria-controls="collapse-{{ $index }}">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{ $index }}" aria-expanded="false" aria-controls="collapse-{{ $index }}">
                             <strong>{{ $index + 1 }}.  {{ $material->title }}</strong>
                         </button>
                     </h2>
-                    <div id="collapse-{{ $index }}" class="accordion-collapse collapse {{ $index === 0 ? 'show' : '' }}" aria-labelledby="heading-{{ $index }}" data-bs-parent="#courseMaterialsAccordion">
+                    <div id="collapse-{{ $index }}" class="accordion-collapse collapse" aria-labelledby="heading-{{ $index }}" data-bs-parent="#courseMaterialsAccordion">
                         <div class="accordion-body">
                             <p>{{ $material->description }}</p>
 
@@ -67,4 +72,34 @@
         </div>
     @endif
 </div>
+@endsection
+
+@section('scripts')
+<script>
+$(document).ready(function () {
+    const $toggleButton = $('#toggle-accordion');
+    const $accordionItems = $('.accordion-collapse');
+    const $accordionButtons = $('.accordion-button');
+
+    // Set initial state for all accordions to be collapsed
+    $accordionItems.removeClass('show');
+    $accordionButtons.addClass('collapsed').attr('aria-expanded', 'false');
+
+    $toggleButton.on('click', function () {
+        const isAnyOpen = $accordionItems.hasClass('show');
+
+        if (isAnyOpen) {
+            // Collapse All
+            $accordionItems.removeClass('show');
+            $accordionButtons.addClass('collapsed').attr('aria-expanded', 'false');
+            $toggleButton.text('Expand All');
+        } else {
+            // Expand All
+            $accordionItems.addClass('show');
+            $accordionButtons.removeClass('collapsed').attr('aria-expanded', 'true');
+            $toggleButton.text('Collapse All');
+        }
+    });
+});
+</script>
 @endsection
