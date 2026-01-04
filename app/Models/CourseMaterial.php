@@ -12,6 +12,7 @@ class CourseMaterial extends Model
         'title',
         'description',
         'attachments',
+        'youtube_url',
         'sorting_id',
         'is_active',
     ];

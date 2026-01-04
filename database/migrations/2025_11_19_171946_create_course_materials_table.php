@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('title')->nullable();
             $table->text('description')->nullable();
             $table->text('attachments')->nullable(); // JSON or multiple file paths
+            $table->string('youtube_url')->nullable();
             $table->text('sorting_id')->nullable();
             $table->boolean('is_active')->default(1);
             $table->timestamps();

@@ -108,6 +108,7 @@ class CourseMaterialController extends Controller
         $courseMaterial->title = $request->input('title');
         $courseMaterial->description = $request->input('description');
         $courseMaterial->attachments = $request->input('attachments');
+        $courseMaterial->youtube_url = $request->input('youtube_url');
         $courseMaterial->sorting_id = $request->input('sorting_id');
         $courseMaterial->is_active = $request->input('is_active');
         $courseMaterial->save();
@@ -156,6 +157,7 @@ class CourseMaterialController extends Controller
             'title' => 'required|string|min:3|max:200',
             'description' => 'nullable|string',
             'attachments' => 'nullable|string',
+            'youtube_url' => 'nullable|string|url',
             'sorting_id' => 'nullable|integer',
             'is_active' => 'required|boolean',
         ]);
@@ -166,6 +168,7 @@ class CourseMaterialController extends Controller
         $courseMaterial->title = $request->input('title');
         $courseMaterial->description = $request->input('description');
         $courseMaterial->attachments = $request->input('attachments');
+        $courseMaterial->youtube_url = $request->input('youtube_url');
         $courseMaterial->sorting_id = $request->input('sorting_id');
         $courseMaterial->is_active = $request->input('is_active');
         $courseMaterial->save();

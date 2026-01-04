@@ -56,6 +56,14 @@
             </div>
         </div>
 
+        <!-- YouTube URL -->
+        <div class="col-sm-12">
+            <div class="form-group mb-2">
+                <label for="youtube_url" class="form-label">YouTube URL</label>
+                <input value="" name="youtube_url" type="url" class="form-control" placeholder="Enter YouTube URL">
+            </div>
+        </div>
+
         <!-- Sorting -->
         <div class="col-sm-12">
             <div class="form-group mb-2">
