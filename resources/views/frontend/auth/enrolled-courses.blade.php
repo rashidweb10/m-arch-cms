@@ -43,9 +43,19 @@
                                 @endif
                             </td>
                             <td>
-                                <a href="{{ route('auth.enrolled-courses.show', $enrolment->course_id) }}" class="btn btn-sm btn-primary">
-                                    <i class="fas fa-eye me-1"></i>View
-                                </a>
+                                @php
+                                    $currentDate = \Carbon\Carbon::now();
+                                    $validityDate = $enrolment->validity ? \Carbon\Carbon::parse($enrolment->validity) : null;
+                                    $isExpired = $validityDate && $currentDate->greaterThan($validityDate);
+                                @endphp
+                                
+                                @if($isExpired)
+                                    <span class="text-danger fw-bold">Expired</span>
+                                @else
+                                    <a href="{{ route('auth.enrolled-courses.show', $enrolment->course_id) }}" class="btn btn-sm btn-primary">
+                                        <i class="fas fa-eye me-1"></i>View
+                                    </a>
+                                @endif
                             </td>
                         </tr>
                     @endforeach
