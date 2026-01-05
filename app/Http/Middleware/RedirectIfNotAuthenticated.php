@@ -19,7 +19,7 @@ class RedirectIfNotAuthenticated
 
         // Check role (Admin = 1)
         if (Auth::user()->role_id != 1) {
-            return redirect()->route('backend.login');
+            abort(403, 'Unauthorized access');
         }        
 
         return $next($request);
