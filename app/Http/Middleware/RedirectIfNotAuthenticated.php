@@ -17,6 +17,11 @@ class RedirectIfNotAuthenticated
             return redirect()->route('backend.login');
         }
 
+        // Check role (Admin = 1)
+        if (Auth::user()->role_id != 1) {
+            return redirect()->route('backend.login');
+        }        
+
         return $next($request);
     }
 }
