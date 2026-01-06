@@ -138,6 +138,14 @@ class AuthController extends Controller
             \Log::error('Failed to send OTP email: ' . $e->getMessage());
         }
 
+        // Send notification to admin
+        try {
+            $adminEmail = config('custom.from_email');
+            Mail::to($adminEmail)->send(new \App\Mail\NewUserRegistrationMail($user, 'Registration Form'));
+        } catch (\Exception $e) {
+            \Log::error('Failed to send admin notification email: ' . $e->getMessage());
+        }
+
         // Store user ID in session for OTP verification
         session(['pending_verification_user_id' => $user->id]);
 
@@ -300,6 +308,14 @@ class AuthController extends Controller
                     'email_verified_at' => now(), // Gmail accounts are pre-verified
                     'is_active' => 1,
                 ]);
+
+                // Send notification to admin
+                try {
+                    $adminEmail = config('custom.from_email');
+                    Mail::to($adminEmail)->send(new \App\Mail\NewUserRegistrationMail($user, 'Google'));
+                } catch (\Exception $e) {
+                    \Log::error('Failed to send admin notification email: ' . $e->getMessage());
+                }
 
                 Auth::login($user, true);
             }
