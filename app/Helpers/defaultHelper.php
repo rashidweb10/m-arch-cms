@@ -585,6 +585,84 @@ if (!function_exists('fetchUploadFromUrl')) {
      * @param string $schoolId
      * @return string|false
      */
+    // function fetchUploadFromUrl(string $url, string $schoolId = 'media-old')
+    // {
+    //     try {
+
+    //         if (!filter_var($url, FILTER_VALIDATE_URL)) {
+    //             return false;
+    //         }
+
+    //         $type = [
+    //             "jpg" => "image",
+    //             "jpeg" => "image",
+    //             "png" => "image",
+    //             "svg" => "image",
+    //             "webp" => "image",
+    //             "gif" => "image",
+    //             "mp4" => "video",
+    //             "mpeg" => "video",
+    //             "webm" => "video",
+    //             "mov" => "video",
+    //             "avi" => "video",
+    //             "mp3" => "audio",
+    //             "wav" => "audio",
+    //             "pdf" => "document",
+    //             "doc" => "document",
+    //             "docx" => "document",
+    //             "xls" => "document",
+    //             "xlsx" => "document",
+    //             "csv" => "document",
+    //         ];
+
+    //         // Fetch file
+    //         $response = Http::timeout(20)->get($url);
+
+    //         if (!$response->successful()) {
+    //             return false;
+    //         }
+
+    //         $body = $response->body();
+
+    //         if ($body === null || strlen($body) === 0) {
+    //             return false;
+    //         }           
+
+    //         // Detect extension
+    //         $extension = strtolower(pathinfo(parse_url($url, PHP_URL_PATH), PATHINFO_EXTENSION));
+
+    //         if (!$extension || !isset($type[$extension])) {
+    //             return false;
+    //         }
+
+    //         // File name
+    //         $originalName = pathinfo(parse_url($url, PHP_URL_PATH), PATHINFO_FILENAME);
+    //         $fileName     = Str::random(20) . '.' . $extension;
+
+    //         // Path (same structure as your upload fn)
+    //         $path = 'uploads/'.$schoolId.'/'.date('Y').'/'.date('m').'/'.$fileName;
+
+    //         // Store file
+    //         Storage::disk('public')->put($path, $response->body());
+
+    //         // Save DB record (EXACT LIKE YOUR FUNCTION)
+    //         $upload = new Upload;
+    //         $upload->file_original_name = $originalName;
+    //         $upload->extension          = $extension;
+    //         $upload->file_name          = 'storage/'.$path;
+    //         $upload->user_id            = Auth::check() ? Auth::id() : null;
+    //         $upload->type               = $type[$extension];
+    //         $upload->file_size          = strlen($response->body());
+    //         $upload->save();
+
+    //         return $upload->id;
+    //         //return $upload->file_name;
+
+    //     } catch (\Exception $e) {
+    //         return false;
+    //     }
+    // }
+
     function fetchUploadFromUrl(string $url, string $schoolId = 'media-old')
     {
         try {
@@ -593,73 +671,74 @@ if (!function_exists('fetchUploadFromUrl')) {
                 return false;
             }
 
-            $type = [
-                "jpg" => "image",
-                "jpeg" => "image",
-                "png" => "image",
-                "svg" => "image",
-                "webp" => "image",
-                "gif" => "image",
-                "mp4" => "video",
-                "mpeg" => "video",
-                "webm" => "video",
-                "mov" => "video",
-                "avi" => "video",
-                "mp3" => "audio",
-                "wav" => "audio",
-                "pdf" => "document",
-                "doc" => "document",
-                "docx" => "document",
-                "xls" => "document",
-                "xlsx" => "document",
-                "csv" => "document",
+            $allowedMimeMap = [
+                'image/jpeg' => ['jpg', 'jpeg'],
+                'image/png'  => ['png'],
+                'image/webp' => ['webp'],
+                'image/gif'  => ['gif'],
+                'application/pdf' => ['pdf'],
             ];
 
-            // Fetch file
-            $response = Http::timeout(20)->get($url);
+            $response = Http::timeout(20)
+                ->withHeaders(['Accept' => '*/*'])
+                ->get($url);
 
             if (!$response->successful()) {
                 return false;
             }
 
-            $body = $response->body();
+            // 🚫 Block HTML explicitly
+            $contentType = strtolower($response->header('Content-Type', ''));
 
-            if ($body === null || strlen($body) === 0) {
-                return false;
-            }           
-
-            // Detect extension
-            $extension = strtolower(pathinfo(parse_url($url, PHP_URL_PATH), PATHINFO_EXTENSION));
-
-            if (!$extension || !isset($type[$extension])) {
+            if (
+                str_contains($contentType, 'text/html') ||
+                str_contains($contentType, 'text/plain')
+            ) {
                 return false;
             }
 
-            // File name
-            $originalName = pathinfo(parse_url($url, PHP_URL_PATH), PATHINFO_FILENAME);
-            $fileName     = Str::random(20) . '.' . $extension;
+            $body = $response->body();
+            if (!$body || strlen($body) < 100) {
+                return false;
+            }
 
-            // Path (same structure as your upload fn)
+            // 🧪 Real MIME detection
+            $finfo = new \finfo(FILEINFO_MIME_TYPE);
+            $realMime = $finfo->buffer($body);
+
+            if (!isset($allowedMimeMap[$realMime])) {
+                return false;
+            }
+
+            // Extension from REAL MIME (not URL)
+            $extension = $allowedMimeMap[$realMime][0];
+
+            // 🖼️ Extra check for images
+            if (str_starts_with($realMime, 'image/')) {
+                if (@getimagesizefromstring($body) === false) {
+                    return false;
+                }
+            }
+
+            $fileName = Str::random(20).'.'.$extension;
             $path = 'uploads/'.$schoolId.'/'.date('Y').'/'.date('m').'/'.$fileName;
 
-            // Store file
-            Storage::disk('public')->put($path, $response->body());
+            Storage::disk('public')->put($path, $body);
 
-            // Save DB record (EXACT LIKE YOUR FUNCTION)
             $upload = new Upload;
-            $upload->file_original_name = $originalName;
-            $upload->extension          = $extension;
-            $upload->file_name          = 'storage/'.$path;
-            $upload->user_id            = Auth::check() ? Auth::id() : null;
-            $upload->type               = $type[$extension];
-            $upload->file_size          = strlen($response->body());
+            $upload->file_original_name = pathinfo(parse_url($url, PHP_URL_PATH), PATHINFO_FILENAME);
+            $upload->extension = $extension;
+            $upload->file_name = 'storage/'.$path;
+            $upload->type = str_starts_with($realMime, 'image/') ? 'image' : 'document';
+            $upload->file_size = strlen($body);
+            $upload->user_id = Auth::id();
             $upload->save();
 
             return $upload->id;
-            //return $upload->file_name;
 
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             return false;
         }
     }
+
 }
