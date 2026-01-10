@@ -130,3 +130,26 @@
         </div>
     </div>
 </div>
+
+<!-- Login As Student Confirmation Modal -->
+<div class="modal fade" id="loginAsStudentModal" tabindex="-1" aria-labelledby="loginAsStudentModal-label" aria-modal="true" role="dialog" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <form method="POST" class="ajaxLoginAsStudentForm" action="" id="login_as_student_form">
+                    @csrf
+                    <i class="fa-solid fa-user-secret" style="font-size: 50px; color: #6c757d;"></i>
+                    <p class="mt-3">You are about to log in as this student. Your current superadmin session will end. Do you want to continue?</p>
+                    <div class="d-flex justify-content-center gap-2 mt-2">
+                        <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal" aria-label="Close">
+                            <i class="fa-solid fa-xmark"></i> Cancel
+                        </button>
+                        <button type="submit" class="btn btn-sm btn-success">
+                            <i class="fa-solid fa-arrow-right-from-bracket"></i> Continue
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

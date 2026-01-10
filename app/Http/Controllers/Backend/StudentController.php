@@ -256,7 +256,7 @@ class StudentController extends Controller
             
             if ($updated > 0) {
                 return response()->json([
-                    'status' => true, 
+                    'status' => true,
                     'notification' => $updated . ' record(s) deactivated successfully!'
                 ]);
             } else {
@@ -271,6 +271,36 @@ class StudentController extends Controller
 
             return response()->json(['status' => false, 'notification' => 'There was an error deactivating the records.']);
         }
-    }    
+    }
+
+    /**
+     * Login as a specific student
+     */
+    public function loginAsStudent($id)
+    {
+        try {
+            // Find the student by ID and ensure it's a student (role_id = 3)
+            $student = User::where('role_id', 3)->findOrFail($id);
+
+            // Check if the current user is a superadmin (role_id = 1)
+            if (auth()->user()->role_id != 1) {
+                return response()->json(['status' => false, 'notification' => 'Unauthorized action.']);
+            }
+
+            // Log in as the student
+            auth()->login($student);
+
+            // Redirect to the student dashboard or any other appropriate page
+            return response()->json(['status' => true, 'notification' => 'Logged in as student successfully!', 'redirect' => route('home')]);
+        } catch (\Exception $e) {
+            \Log::error('Error logging in as student', [
+                'error_message' => $e->getMessage(),
+                'stack_trace' => $e->getTraceAsString(),
+                'student_id' => $id
+            ]);
+
+            return response()->json(['status' => false, 'notification' => 'There was an error logging in as the student.']);
+        }
+    }
 }
 

@@ -195,7 +195,8 @@ Route::prefix('backend')->group(function () {
         Route::post('students/bulk-delete', [StudentController::class, 'bulkDelete'])->name('students.bulk-delete');
         Route::post('students/bulk-active', [StudentController::class, 'bulkActive'])->name('students.bulk-active');
         Route::post('students/bulk-inactive', [StudentController::class, 'bulkInactive'])->name('students.bulk-inactive');
-    });  
+        Route::get('students/login-as/{id}', [StudentController::class, 'loginAsStudent'])->name('students.login-as');
+    });
 
     Route::middleware('auth.backend')->group(function () {
         Route::resource('blog-categories', BlogCategoryController::class);

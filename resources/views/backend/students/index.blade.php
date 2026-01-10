@@ -104,6 +104,7 @@
                                     <a target="_blank" href="{{ route('course-enrolments.index', ['search' => $row->email]) }}" class="link-reset fs-20 p-1"><i class="ti ti-books"></i></a>
                                     <a href="javascript:void(0);" onclick="smallModal('{{url(route('students.edit', $row->id))}}', 'Edit')" class="link-reset fs-20 p-1"> <i class="ti ti-pencil"></i></a>
                                     <a href="javascript:void(0);" onclick="confirmModal('{{ route('students.destroy', $row->id) }}', callbackStudents )" class="link-reset fs-20 p-1"> <i class="ti ti-trash"></i></a>
+                                    <a href="javascript:void(0);" onclick="loginAsStudent('{{ $row->id }}')" class="link-reset fs-20 p-1"> <i class="ti ti-user-check"></i></a>
                                 </td>
                             </tr>
                             @endforeach
@@ -122,6 +123,41 @@ const callbackStudents = function(response) {
         location.reload();
     }, 1500);
 }
+
+// Login as student function
+function loginAsStudent(studentId) {
+    const url = '{{ route("students.login-as", ":id") }}'.replace(':id', studentId);
+    $('#loginAsStudentModal').modal('show');
+    $('#login_as_student_form').attr('action', url);
+}
+
+// Handle login as student form submission
+$(document).on('submit', '.ajaxLoginAsStudentForm', function(e) {
+    e.preventDefault();
+    var form = $(this);
+    var action = form.attr('action');
+    
+    $.ajax({
+        type: "GET",
+        url: action,
+        dataType: 'json',
+        success: function(response)
+        {
+            if (response.status) {
+                Command: toastr["success"](response.notification, "Success");
+                // Redirect to the specified URL after a delay
+                setTimeout(function() {
+                    window.location.href = response.redirect;
+                }, 1500);
+            } else {
+                Command: toastr["error"](response.notification, "Alert");
+            }
+        },
+        error: function(xhr) {
+            Command: toastr["error"]("An unexpected error occurred. Please try again later.", "Error");
+        }
+    });
+});
 
 // Bulk actions functions
 function toggleSelectAll() {
