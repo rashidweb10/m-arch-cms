@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Http\Request;
 
 class ImportController extends Controller
 {
@@ -229,9 +230,17 @@ class ImportController extends Controller
     // -----------------------------------------
     // 6) COURSE MATERIALS IMAGE IMPORT
     // -----------------------------------------
-    public function importCourseMaterialImages()
+    public function importCourseMaterialImages(Request $request)
     {
         $limit = 25;
+
+        // Get order from URL, default = asc
+        $order = strtolower($request->query('order', 'asc'));
+
+        // Allow only asc or desc (security)
+        if (!in_array($order, ['asc', 'desc'])) {
+            $order = 'asc';
+        }        
 
         // Total pending before process
         $totalPendingBefore = DB::table('tblcoursematerials')
@@ -241,7 +250,7 @@ class ImportController extends Controller
         // Fetch 10 pending records
         $materials = DB::table('tblcoursematerials')
             ->where('cm_status', 0)
-            ->orderBy('cm_id', 'asc')
+            ->orderBy('cm_id', $order)
             ->limit($limit)
             ->get();
 
