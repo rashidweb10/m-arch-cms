@@ -231,7 +231,7 @@ class ImportController extends Controller
     // -----------------------------------------
     public function importCourseMaterialImages()
     {
-        $limit = 20;
+        $limit = 25;
 
         // Total pending before process
         $totalPendingBefore = DB::table('tblcoursematerials')
@@ -297,12 +297,18 @@ class ImportController extends Controller
             ->where('cm_status', 0)
             ->count();
 
+        // Pending after process
+        $junks = DB::table('tblcoursematerials')
+            ->where('cm_status', 2)
+            ->count();            
+
         return response()->json([
-            'total_pending_before' => $totalPendingBefore,
-            'processed_this_run'   => $processed,
-            'uploaded_success'     => $uploaded,
-            'failed'               => $failed,
-            'pending_after'        => $pendingAfter,
+            //'total_pending_before' => $totalPendingBefore,
+            'attempted'     => $processed,
+            'success'       => $uploaded,
+            'failed'        => $failed,
+            'total_pending' => $pendingAfter,
+            'total_junks'   => $junks,
         ]);
     }   
 
