@@ -79,25 +79,25 @@ Route::post('/submit-form', [FormController::class, 'submit'])->middleware(['pro
 Route::prefix('auth')->group(function () {
     // Login
     Route::get('/login', [FrontendAuthController::class, 'showLoginForm'])->name('auth.login');
-    Route::post('/login', [FrontendAuthController::class, 'login'])->name('auth.login');
+    Route::post('/login', [FrontendAuthController::class, 'login'])->middleware(['protect.forms','recaptcha','throttle:4,1'])->name('auth.login');
     
     // Registration
     Route::get('/register', [FrontendAuthController::class, 'showRegisterForm'])->name('auth.register');
-    Route::post('/register', [FrontendAuthController::class, 'register'])->name('auth.register');
+    Route::post('/register', [FrontendAuthController::class, 'register'])->middleware(['protect.forms','recaptcha','throttle:4,1'])->name('auth.register');
     
     // OTP Verification
     Route::get('/verify-otp', [FrontendAuthController::class, 'showVerifyOtpForm'])->name('auth.verify-otp');
-    Route::post('/verify-otp', [FrontendAuthController::class, 'verifyOtp'])->name('auth.verify-otp');
-    Route::post('/resend-otp', [FrontendAuthController::class, 'resendOtp'])->name('auth.resend-otp');
+    Route::post('/verify-otp', [FrontendAuthController::class, 'verifyOtp'])->middleware(['protect.forms','recaptcha','throttle:4,1'])->name('auth.verify-otp');
+    Route::post('/resend-otp', [FrontendAuthController::class, 'resendOtp'])->middleware(['protect.forms','recaptcha','throttle:4,1'])->name('auth.resend-otp');
     
     // Forgot Password
     Route::get('/forgot-password', [FrontendAuthController::class, 'showForgotPasswordForm'])->name('auth.forgot-password');
-    Route::post('/forgot-password', [FrontendAuthController::class, 'forgotPassword'])->name('auth.forgot-password');
+    Route::post('/forgot-password', [FrontendAuthController::class, 'forgotPassword'])->middleware(['protect.forms','recaptcha','throttle:4,1'])->name('auth.forgot-password');
     
     // Reset Password
     Route::get('/reset-password', [FrontendAuthController::class, 'showResetPasswordForm'])->name('auth.reset-password');
-    Route::post('/reset-password', [FrontendAuthController::class, 'resetPassword'])->name('auth.reset-password');
-    Route::post('/resend-password-reset-otp', [FrontendAuthController::class, 'resendPasswordResetOtp'])->name('auth.resend-password-reset-otp');
+    Route::post('/reset-password', [FrontendAuthController::class, 'resetPassword'])->middleware(['protect.forms','recaptcha','throttle:4,1'])->name('auth.reset-password');
+    Route::post('/resend-password-reset-otp', [FrontendAuthController::class, 'resendPasswordResetOtp'])->middleware(['protect.forms','recaptcha','throttle:4,1'])->name('auth.resend-password-reset-otp');
     
     // Google OAuth
     Route::get('/google', [FrontendAuthController::class, 'redirectToGoogle'])->name('auth.google');
@@ -107,9 +107,9 @@ Route::prefix('auth')->group(function () {
     Route::middleware('auth')->group(function () {
         Route::get('/dashboard', [FrontendAuthController::class, 'dashboard'])->name('auth.dashboard');
         Route::get('/profile', [FrontendAuthController::class, 'profile'])->name('auth.profile');
-        Route::put('/profile', [FrontendAuthController::class, 'updateProfile'])->name('auth.profile.update');
+        Route::put('/profile', [FrontendAuthController::class, 'updateProfile'])->middleware(['protect.forms','recaptcha','throttle:4,1'])->name('auth.profile.update');
         Route::get('/change-password', [FrontendAuthController::class, 'showChangePasswordForm'])->name('auth.change-password');
-        Route::post('/change-password', [FrontendAuthController::class, 'changePassword'])->name('auth.change-password.store');
+        Route::post('/change-password', [FrontendAuthController::class, 'changePassword'])->middleware(['protect.forms','recaptcha','throttle:4,1'])->name('auth.change-password.store');
         Route::get('/enrolled-courses', [FrontendAuthController::class, 'enrolledCourses'])->name('auth.enrolled-courses');
         Route::get('/enrolled-courses/{course}', [FrontendAuthController::class, 'enrolledCourseShow'])->name('auth.enrolled-courses.show');
         Route::post('/logout', [FrontendAuthController::class, 'logout'])->name('auth.logout');

@@ -29,7 +29,7 @@
         </div>
     @endif
 
-    <form action="{{ route('auth.profile.update') }}" method="POST">
+    <form action="{{ route('auth.profile.update') }}" method="POST" onsubmit="protect_with_recaptcha_v3(this, 'update_profile')">
         @csrf
         @method('PUT')
         

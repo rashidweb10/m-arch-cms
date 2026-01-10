@@ -35,10 +35,10 @@ class ProtectForms
         }
 
         //🧩 3. Optional: Block non-browser requests (optional)
-        if (!$request->ajax() && !$request->expectsJson() && !$request->isMethod('post')) {
-            \Log::warning("Suspicious form access attempt from: $ip");
-            abort(403, 'Forbidden - Suspicious Request');
-        }
+        // if (!$request->ajax() && !$request->expectsJson() && !$request->isMethod('post')) {
+        //     \Log::warning("Suspicious form access attempt from: $ip");
+        //     abort(403, 'Forbidden - Suspicious Request');
+        // }
 
         // // ✅ 4. Filter for Suspicious Patterns Inputs
         $suspiciousPatterns = [

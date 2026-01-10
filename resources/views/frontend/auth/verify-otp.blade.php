@@ -43,7 +43,7 @@
                         We've sent a 6-digit OTP to your email address. Please enter it below to verify your account.
                     </p>
 
-                    <form action="{{ route('auth.verify-otp') }}" method="POST">
+                    <form action="{{ route('auth.verify-otp') }}" method="POST" onsubmit="protect_with_recaptcha_v3(this, 'verify_otp')">
                         @csrf
                         
                         <div class="mb-4">
@@ -75,7 +75,7 @@
 
                     <div class="text-center">
                         <p class="mb-2">Didn't receive the OTP?</p>
-                        <form action="{{ route('auth.resend-otp') }}" method="POST" class="d-inline">
+                        <form action="{{ route('auth.resend-otp') }}" method="POST" class="d-inline" onsubmit="protect_with_recaptcha_v3(this, 'resend_otp')">
                             @csrf
                             <button type="submit" class="btn btn-link p-0">Resend OTP</button>
                         </form>

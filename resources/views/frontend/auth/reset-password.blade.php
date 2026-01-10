@@ -43,7 +43,7 @@
                         Enter the OTP sent to your email and your new password.
                     </p>
 
-                    <form action="{{ route('auth.reset-password') }}" method="POST">
+                    <form action="{{ route('auth.reset-password') }}" method="POST" onsubmit="protect_with_recaptcha_v3(this, 'reset_password')">
                         @csrf
                         
                         <div class="mb-3">
@@ -105,7 +105,7 @@
 
                     <div class="text-center">
                         <p class="mb-2">Didn't receive the OTP?</p>
-                        <form action="{{ route('auth.resend-password-reset-otp') }}" method="POST" class="d-inline">
+                        <form action="{{ route('auth.resend-password-reset-otp') }}" method="POST" class="d-inline" onsubmit="protect_with_recaptcha_v3(this, 'resend_password_reset_otp')">
                             @csrf
                             <button type="submit" class="btn btn-link p-0">Resend OTP</button>
                         </form>
