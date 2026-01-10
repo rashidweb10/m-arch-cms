@@ -232,7 +232,7 @@ class ImportController extends Controller
     // -----------------------------------------
     public function importCourseMaterialImages(Request $request)
     {
-        $limit = 25;
+        $limit = 50;
 
         // Get order from URL, default = asc
         $order = strtolower($request->query('order', 'asc'));
