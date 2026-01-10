@@ -48,6 +48,7 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
+                        <th>#</th>
                         <th>Category</th>
                         <th>Name</th>
                         <th>Enrolled Date</th>
@@ -56,8 +57,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($enrolledCourses as $enrolment)
+                    @foreach($enrolledCourses as $index => $enrolment)
                         <tr>
+                            <td>{{ $enrolledCourses->firstItem() + $index }}</td>
                             <td>
                                 {{ $enrolment->course->category->name ?? 'N/A' }}
                             </td>
