@@ -438,15 +438,34 @@ class AuthController extends Controller
     /**
      * Show enrolled courses page
      */
-    public function enrolledCourses()
+    public function enrolledCourses(Request $request)
     {
         $user = Auth::user();
-        $enrolledCourses = \App\Models\CourseEnrolment::with('course.category')
+        
+        // Get search parameters
+        $search = $request->input('search');
+        
+        // Start building the query
+        $query = \App\Models\CourseEnrolment::with('course.category')
             ->where('user_id', $user->id)
-            ->where('is_active', 1)
-            ->orderBy('created_at', 'desc')
-            ->get();
-            //->paginate(100);
+            ->where('is_active', 1);
+        
+        // Add search filter for course and category name
+        if ($search) {
+            $query->whereHas('course', function ($q) use ($search) {
+                $q->where('name', 'like', '%'.$search.'%')
+                  ->orWhereHas('category', function ($q) use ($search) {
+                      $q->where('name', 'like', '%'.$search.'%');
+                  });
+            });
+        }
+        
+        // Set default sorting by enrolment ID
+        $query->orderBy('id', 'asc');
+        
+        // Implement Laravel pagination with 25 records per page
+        $enrolledCourses = $query->paginate(10);
+        
         return view('frontend.auth.enrolled-courses', compact('user', 'enrolledCourses'));
     }
 
