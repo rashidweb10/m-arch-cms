@@ -226,4 +226,84 @@ class ImportController extends Controller
         return "Users Imported Successfully";
     }
 
+    // -----------------------------------------
+    // 6) COURSE MATERIALS IMAGE IMPORT
+    // -----------------------------------------
+    public function importCourseMaterialImages()
+    {
+        $limit = 20;
+
+        // Total pending before process
+        $totalPendingBefore = DB::table('tblcoursematerials')
+            ->where('cm_status', 0)
+            ->count();
+
+        // Fetch 10 pending records
+        $materials = DB::table('tblcoursematerials')
+            ->where('cm_status', 0)
+            ->orderBy('cm_id', 'asc')
+            ->limit($limit)
+            ->get();
+
+        $processed = 0;
+        $uploaded  = 0;
+        $failed    = 0;
+
+        foreach ($materials as $material) {
+
+            $processed++;
+
+            // External URL
+            $externalUrl = "https://www.marinarch.in/uploads/" . trim($material->cm_file);
+
+            // Call helper
+            $uploadedPath = fetchUploadFromUrl($externalUrl);
+
+            if ($uploadedPath !== false) {
+
+                DB::table('tblcoursematerials')
+                    ->where('cm_id', $material->cm_id)
+                    ->update([
+                        //'cm_file'            => $uploadedPath,
+                        'cm_status'          => 1,
+                        'cm_modified_date'   => now()
+                    ]);
+
+                //upload image id in course_materials
+                DB::table('course_materials')
+                    ->where('id', $material->cm_id)
+                    ->update([
+                        'attachments'  => $uploadedPath,
+                        'updated_at'   => now(),
+                    ]);                
+
+                $uploaded++;
+
+            } else {
+
+                DB::table('tblcoursematerials')
+                    ->where('cm_id', $material->cm_id)
+                    ->update([
+                        'cm_status'          => 2,
+                        'cm_modified_date'  => now()
+                    ]);
+
+                $failed++;
+            }
+        }
+
+        // Pending after process
+        $pendingAfter = DB::table('tblcoursematerials')
+            ->where('cm_status', 0)
+            ->count();
+
+        return response()->json([
+            'total_pending_before' => $totalPendingBefore,
+            'processed_this_run'   => $processed,
+            'uploaded_success'     => $uploaded,
+            'failed'               => $failed,
+            'pending_after'        => $pendingAfter,
+        ]);
+    }   
+
 }

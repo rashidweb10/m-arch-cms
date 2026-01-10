@@ -98,3 +98,8 @@ LEFT JOIN users u ON ce.user_id = u.id
 LEFT JOIN courses c ON ce.course_id = c.id
 WHERE u.id IS NULL
    OR c.id IS NULL;
+
+
+------------------------
+When upload images material
+UPDATE `tblcoursematerials` SET `cm_status`=0

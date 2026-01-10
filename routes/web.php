@@ -212,11 +212,15 @@ Route::prefix('backend')->group(function () {
         Route::get('forms-by/{form_name}', [BackendFormController::class, 'index'])->name('forms.by');
     });
 
-    Route::get('/import-course-categories', [ImportController::class, 'importCourseCategories']);
-    Route::get('/import-courses', [ImportController::class, 'importCourses']);
-    Route::get('/import-course-enrolments', [ImportController::class, 'importCourseEnrolments']);
-    Route::get('/import-course-materials', [ImportController::class, 'importCourseMaterials']); 
-    Route::get('/import-users', [ImportController::class, 'importUsers']);   
+    Route::middleware('auth.backend')->group(function () {
+        Route::get('/import-course-categories', [ImportController::class, 'importCourseCategories']);
+        Route::get('/import-courses', [ImportController::class, 'importCourses']);
+        Route::get('/import-course-enrolments', [ImportController::class, 'importCourseEnrolments']);
+        Route::get('/import-course-materials', [ImportController::class, 'importCourseMaterials']);
+        Route::get('/import-users', [ImportController::class, 'importUsers']);
+        Route::get('/import-course-materials-images', [ImportController::class, 'importCourseMaterialImages']);
+    });
+  
 });
 
 

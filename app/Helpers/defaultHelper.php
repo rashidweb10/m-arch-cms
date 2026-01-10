@@ -585,7 +585,7 @@ if (!function_exists('fetchUploadFromUrl')) {
      * @param string $schoolId
      * @return string|false
      */
-    function fetchUploadFromUrl(string $url, string $schoolId = 'media')
+    function fetchUploadFromUrl(string $url, string $schoolId = 'media-old')
     {
         try {
 
@@ -622,6 +622,12 @@ if (!function_exists('fetchUploadFromUrl')) {
                 return false;
             }
 
+            $body = $response->body();
+
+            if ($body === null || strlen($body) === 0) {
+                return false;
+            }           
+
             // Detect extension
             $extension = strtolower(pathinfo(parse_url($url, PHP_URL_PATH), PATHINFO_EXTENSION));
 
@@ -649,7 +655,8 @@ if (!function_exists('fetchUploadFromUrl')) {
             $upload->file_size          = strlen($response->body());
             $upload->save();
 
-            return $upload->file_name;
+            return $upload->id;
+            //return $upload->file_name;
 
         } catch (\Exception $e) {
             return false;
