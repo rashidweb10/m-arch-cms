@@ -27,6 +27,20 @@ use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\Frontend\AuthController as FrontendAuthController;
 use App\Http\Controllers\FormController;
 
+Route::get('/fetch-image', function () {
+
+    $url = 'https://www.marinarch.in/uploads/22012020003330_about_inner.jpg';
+
+    $path = fetchUploadFromUrl($url);
+
+    if ($path === false) {
+        return 'Image not found or invalid';
+    }
+
+    return asset($path);
+});
+
+
 Route::prefix('command')->group(function () {
     Route::get('cache-clear', [CommandController::class, 'cacheClear']);
     Route::get('config-clear', [CommandController::class, 'configClear']);

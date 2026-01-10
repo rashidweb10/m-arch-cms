@@ -8,6 +8,11 @@ use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Cache;
 use App\Models\TinyMCEKey;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use App\Models\Upload;
+use Illuminate\Support\Facades\Auth;
 
 if (!function_exists('truncate_text')) {
     /**
@@ -570,3 +575,84 @@ if (!function_exists('text_limit')) {
 }
 
 /*End - tiny MCE Helper*/
+
+if (!function_exists('fetchUploadFromUrl')) {
+
+    /**
+     * Fetch file from external URL, store & insert into uploads table
+     *
+     * @param string $url
+     * @param string $schoolId
+     * @return string|false
+     */
+    function fetchUploadFromUrl(string $url, string $schoolId = 'media')
+    {
+        try {
+
+            if (!filter_var($url, FILTER_VALIDATE_URL)) {
+                return false;
+            }
+
+            $type = [
+                "jpg" => "image",
+                "jpeg" => "image",
+                "png" => "image",
+                "svg" => "image",
+                "webp" => "image",
+                "gif" => "image",
+                "mp4" => "video",
+                "mpeg" => "video",
+                "webm" => "video",
+                "mov" => "video",
+                "avi" => "video",
+                "mp3" => "audio",
+                "wav" => "audio",
+                "pdf" => "document",
+                "doc" => "document",
+                "docx" => "document",
+                "xls" => "document",
+                "xlsx" => "document",
+                "csv" => "document",
+            ];
+
+            // Fetch file
+            $response = Http::timeout(20)->get($url);
+
+            if (!$response->successful()) {
+                return false;
+            }
+
+            // Detect extension
+            $extension = strtolower(pathinfo(parse_url($url, PHP_URL_PATH), PATHINFO_EXTENSION));
+
+            if (!$extension || !isset($type[$extension])) {
+                return false;
+            }
+
+            // File name
+            $originalName = pathinfo(parse_url($url, PHP_URL_PATH), PATHINFO_FILENAME);
+            $fileName     = Str::random(20) . '.' . $extension;
+
+            // Path (same structure as your upload fn)
+            $path = 'uploads/'.$schoolId.'/'.date('Y').'/'.date('m').'/'.$fileName;
+
+            // Store file
+            Storage::disk('public')->put($path, $response->body());
+
+            // Save DB record (EXACT LIKE YOUR FUNCTION)
+            $upload = new Upload;
+            $upload->file_original_name = $originalName;
+            $upload->extension          = $extension;
+            $upload->file_name          = 'storage/'.$path;
+            $upload->user_id            = Auth::check() ? Auth::id() : null;
+            $upload->type               = $type[$extension];
+            $upload->file_size          = strlen($response->body());
+            $upload->save();
+
+            return $upload->file_name;
+
+        } catch (\Exception $e) {
+            return false;
+        }
+    }
+}
