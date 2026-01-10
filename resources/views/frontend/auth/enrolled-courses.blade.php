@@ -26,7 +26,7 @@
                 <tbody>
                     @foreach($enrolledCourses as $enrolment)
                         <tr>
-                            <td>
+                            <td data-order="{{ $enrolment->id }}">
                                 {{ $enrolment->course->category->name ?? 'N/A' }}
                             </td>                            
                             <td>
@@ -64,7 +64,7 @@
         </div>
 
         <div class="mt-4">
-            {{ $enrolledCourses->links() }}
+            {{-- {{ $enrolledCourses->links() }} --}}
         </div>
     @else
         <div class="text-center py-5">
@@ -85,7 +85,8 @@
             "ordering": true,
             "info": true,
             "responsive": true,
-            pageLength: 50
+            pageLength: 25,
+            "order": [[0, "asc"]]
         });
     });
 </script>

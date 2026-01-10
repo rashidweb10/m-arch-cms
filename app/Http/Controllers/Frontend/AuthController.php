@@ -445,7 +445,8 @@ class AuthController extends Controller
             ->where('user_id', $user->id)
             ->where('is_active', 1)
             ->orderBy('created_at', 'desc')
-            ->paginate(12);
+            ->get();
+            //->paginate(100);
         return view('frontend.auth.enrolled-courses', compact('user', 'enrolledCourses'));
     }
 
