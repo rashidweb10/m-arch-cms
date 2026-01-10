@@ -104,8 +104,8 @@
     @else
         <div class="text-center py-5">
             <i class="fas fa-graduation-cap fa-3x text-muted mb-3"></i>
-            <p class="text-muted">You haven't enrolled in any courses yet.</p>
-            <a href="" class="btn btn-primary mt-3">Browse Courses</a>
+            <p class="text-muted">No courses found.</p>
+            {{-- <a href="" class="btn btn-primary mt-3">Browse Courses</a> --}}
         </div>
     @endif
 </div>
