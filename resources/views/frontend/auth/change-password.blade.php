@@ -29,7 +29,7 @@
         </div>
     @endif
 
-    <form action="{{ route('auth.change-password.store') }}" method="POST">
+    <form action="{{ route('auth.change-password.store') }}" method="POST" onsubmit="protect_with_recaptcha_v3(this, 'change_password')">
         @csrf
         
         <div class="mb-3">

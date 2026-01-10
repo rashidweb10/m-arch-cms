@@ -39,7 +39,7 @@
                         </div>
                     @endif
 
-                    <form action="{{ route('auth.login') }}" method="POST">
+                    <form action="{{ route('auth.login') }}" method="POST" onsubmit="protect_with_recaptcha_v3(this, 'login')">
                         @csrf
                         
                         <div class="mb-3">

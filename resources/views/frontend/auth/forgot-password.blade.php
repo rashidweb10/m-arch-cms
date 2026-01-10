@@ -43,7 +43,7 @@
                         Enter your email address and we'll send you an OTP to reset your password.
                     </p>
 
-                    <form action="{{ route('auth.forgot-password') }}" method="POST">
+                    <form action="{{ route('auth.forgot-password') }}" method="POST" onsubmit="protect_with_recaptcha_v3(this, 'forgot_password')">
                         @csrf
                         
                         <div class="mb-4">
