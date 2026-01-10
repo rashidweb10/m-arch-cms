@@ -10,10 +10,42 @@
 @section('profile-content')
 <div class="bg-light p-4 p-md-5 rounded-3 shadow-sm">
     <h3 class="fw-bold mb-4 robot_slab">My Enrolled Courses</h3>
+    
+    <!-- Search Filter -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <form method="GET" action="{{ route('auth.enrolled-courses') }}">
+                <div class="row g-2 align-items-center">
+                    
+                    <div class="col-md-7 col-12">
+                        <input type="text" name="search"
+                            class="form-control"
+                            placeholder="Search by course or category name..."
+                            value="{{ request()->get('search') }}">
+                    </div>
+
+                    <div class="col-md-3 col-6">
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="fas fa-search me-1"></i> Search
+                        </button>
+                    </div>
+
+                    @if(request()->get('search'))
+                    <div class="col-md-2 col-6">
+                        <a href="{{ route('auth.enrolled-courses') }}" class="btn btn-outline-secondary w-100">
+                            <i class="fas fa-times me-1"></i> Clear
+                        </a>
+                    </div>
+                    @endif
+
+                </div>
+            </form>
+        </div>
+    </div>
 
     @if($enrolledCourses->count() > 0)
         <div class="table-responsive">
-            <table class="table table-hover" id="enrolledCoursesTable">
+            <table class="table table-hover">
                 <thead>
                     <tr>
                         <th>Category</th>
@@ -26,9 +58,9 @@
                 <tbody>
                     @foreach($enrolledCourses as $enrolment)
                         <tr>
-                            <td data-order="{{ $enrolment->id }}">
+                            <td>
                                 {{ $enrolment->course->category->name ?? 'N/A' }}
-                            </td>                            
+                            </td>
                             <td>
                                 <strong>{{ $enrolment->course->name ?? 'N/A' }}</strong>
                             </td>
@@ -48,7 +80,7 @@
                                     $validityDate = $enrolment->validity ? \Carbon\Carbon::parse($enrolment->validity) : null;
                                     $isExpired = $validityDate && $currentDate->greaterThan($validityDate);
                                 @endphp
-                                 
+                                  
                                 @if($isExpired)
                                     <span class="text-danger fw-bold">Expired</span>
                                 @else
@@ -63,8 +95,9 @@
             </table>
         </div>
 
+        <!-- Laravel Pagination -->
         <div class="mt-4">
-            {{-- {{ $enrolledCourses->links() }} --}}
+            {{ $enrolledCourses->appends(request()->input())->links() }}
         </div>
     @else
         <div class="text-center py-5">
@@ -77,18 +110,6 @@
 @endsection
 
 @section('scripts')
-<script>
-    $(document).ready(function() {
-        $('#enrolledCoursesTable').DataTable({
-            "paging": true,
-            "searching": true,
-            "ordering": true,
-            "info": true,
-            "responsive": true,
-            pageLength: 25,
-            "order": [[0, "asc"]]
-        });
-    });
-</script>
+<!-- No DataTable script needed - using Laravel pagination -->
 @endsection
 
