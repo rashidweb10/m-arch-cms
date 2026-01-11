@@ -17,18 +17,18 @@ class AllowBackendAccess
     {
 
         // Check if the app is in production
-        if (app()->environment('production')) {
-            // Get the allowed domain from config
-            $allowedDomain = config('custom.backend_access_domain');
+        // if (app()->environment('production')) {
+        //     // Get the allowed domain from config
+        //     $allowedDomain = config('custom.backend_access_domain');
 
-            // Get the current request host
-            $currentHost = $request->getHost();
+        //     // Get the current request host
+        //     $currentHost = $request->getHost();
 
-            // Deny access if the current host is not the allowed domain
-            if ($allowedDomain && $currentHost !== $allowedDomain) {
-                abort(403, 'Unauthorized access.');
-            }
-        }
+        //     // Deny access if the current host is not the allowed domain
+        //     if ($allowedDomain && $currentHost !== $allowedDomain) {
+        //         abort(403, 'Unauthorized access.');
+        //     }
+        // }
 
         return $next($request);
     }
