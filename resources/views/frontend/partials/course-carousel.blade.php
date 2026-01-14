@@ -1,5 +1,5 @@
 @php 
-    $categories = DB::table('course_categories')->where('is_active', '1')->get();
+    $categories = DB::table('course_categories')->where('is_active', '1')->where('id', '!=', 1)->get();
 @endphp
 
 <section class="courses_we_offered pt-4 pt-md-5 pb-md-5 pb-4 position-relative" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
