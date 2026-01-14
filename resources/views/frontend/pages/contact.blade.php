@@ -12,7 +12,7 @@
       <div class="row g-5">
          <!-- Left Side -->
          <div class="col-lg-6">
-            <h2 class="fw-bold mb-4 robot_slab ">Get in touch</h2>
+            <h3 class=" mb-4 robot_slab ">Get in touch</h3>
             <!-- Head Office -->
             <div class="d-flex border_bottoms icon_hovers">
                <div class="icon-circle me-3" style="width: 54px;">
@@ -44,21 +44,26 @@
                   <p class="mb-0 text-muted">{{get_setting('phone')}}</p>
                </div>
             </div>
+            
+            
+            {!! get_setting('google_map') !!}
+            
+            
             <!-- Social Media -->
-            <div class="mt-5">
-               <h5 class="fw-semibold mb-3 robot_slab ">Follow our social media</h5>
-               <div class="d-flex gap-2">
-                  <a href="{{ get_setting('facebook_url') }}" class="icon-circle"><i class="fa-brands fa-facebook"></i></a>
-                  <a href="{{ get_setting('instagram_url') }}" class="icon-circle"><i class="fa-brands fa-instagram"></i></a>
-                  <a href="{{ get_setting('x_url') }}" class="icon-circle"><i class="fa-brands fa-twitter"></i></a>
-                  <a href="{{ get_setting('youtube_url') }}" class="icon-circle"><i class="fa-brands fa-youtube"></i></a>
-               </div>
-            </div>
+            <!--<div class="mt-5">-->
+            <!--   <h5 class="fw-semibold mb-3 robot_slab ">Follow our social media</h5>-->
+            <!--   <div class="d-flex gap-2">-->
+            <!--      <a href="{{ get_setting('facebook_url') }}" class="icon-circle"><i class="fa-brands fa-facebook"></i></a>-->
+            <!--      <a href="{{ get_setting('instagram_url') }}" class="icon-circle"><i class="fa-brands fa-instagram"></i></a>-->
+            <!--      <a href="{{ get_setting('x_url') }}" class="icon-circle"><i class="fa-brands fa-twitter"></i></a>-->
+            <!--      <a href="{{ get_setting('youtube_url') }}" class="icon-circle"><i class="fa-brands fa-youtube"></i></a>-->
+            <!--   </div>-->
+            <!--</div>-->
          </div>
          <!-- Right Side - Contact Form -->
          <div class="col-lg-6">
             <div class="bg-light p-4 p-md-5 rounded-3 shadow-sm">
-               <h3 class="fw-bold mb-4 robot_slab ">Send us a message</h3>
+               <h3 class=" mb-4 robot_slab ">Send us a message</h3>
 
 <form class="needs-validation" id="contactForm" action="{{route('form.submit')}}" method="POST" onsubmit="protect_with_recaptcha_v3(this, 'contact')">
   @include('frontend.components.form-alert')
@@ -136,7 +141,7 @@
   <!-- Submit Button -->
   <button 
     type="submit"
-    class="btn btn-primary w-100 py-2 mt-4 fs-5"
+    class="cnotact_btns btn btn-primary py-2 mt-1 fs-5"
   >
     Send
   </button>
@@ -148,5 +153,5 @@
       </div>
    </div>
 </section>
-{!! get_setting('google_map') !!}
+
 @endsection

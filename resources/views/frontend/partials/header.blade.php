@@ -128,7 +128,7 @@
 
                                     <li class="nav-item">
                                         <a class="nav-link robot_slab" href="{{ route('home') }}">
-                                            Home
+                                            Home.
                                         </a>
                                     </li>
 
@@ -139,23 +139,12 @@
                                         </a>
                                         <ul class="submenu">
                                             <li>
-                                                <a href="{{ route('about') }}">
+                                                <a href="/about-us">
                                                     <i class="fa-regular fa-address-card"></i>
                                                     About Us
                                                 </a>
                                             </li>
-                                            <li>
-                                                <a href="{{ route('courses') }}">
-                                                    <i class="fa-brands fa-discourse"></i>
-                                                    Courses
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="{{ route('faculties') }}">
-                                                    <i class="fa-regular fa-address-card"></i>
-                                                    Faculties
-                                                </a>
-                                            </li>
+                                            
                                         </ul>
                                     </li>
 
@@ -166,23 +155,70 @@
                                         </a>
                                         <ul class="submenu">
                                             <li>
-                                                <a href="{{ route('about') }}">
-                                                    <i class="fa-regular fa-address-card"></i>
-                                                    About Us
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="{{ route('courses') }}">
-                                                    <i class="fa-brands fa-discourse"></i>
-                                                    Courses
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="{{ route('faculties') }}">
-                                                    <i class="fa-regular fa-address-card"></i>
-                                                    Faculties
-                                                </a>
-                                            </li>
+                                                  <a href="{{ route('courses') }}">
+                                                    <i class="fa-solid fa-microphone-lines"></i> MEO CLASS I ORALS
+                                                  </a>
+                                                </li>
+                                                
+                                                <li>
+                                                  <a href="{{ route('courses') }}">
+                                                    <i class="fa-solid fa-pen-to-square"></i> MEO CLASS I WRITTENS
+                                                  </a>
+                                                </li>
+                                                
+                                                <li>
+                                                  <a href="{{ route('courses') }}">
+                                                    <i class="fa-solid fa-award"></i> EXTRA FIRST CLASS
+                                                  </a>
+                                                </li>
+                                                
+                                                <li>
+                                                  <a href="{{ route('courses') }}">
+                                                    <i class="fa-solid fa-microphone"></i> MEO CLASS 2 ORALS
+                                                  </a>
+                                                </li>
+                                                
+                                                <li>
+                                                  <a href="{{ route('courses') }}">
+                                                    <i class="fa-solid fa-file-lines"></i> MEO CLASS 2 WRITTENS
+                                                  </a>
+                                                </li>
+                                                
+                                                <li>
+                                                  <a href="{{ route('courses') }}">
+                                                    <i class="fa-solid fa-comments"></i> MEO CLASS 4 ORALS
+                                                  </a>
+                                                </li>
+                                                
+                                                <li>
+                                                  <a href="{{ route('courses') }}">
+                                                    <i class="fa-solid fa-bolt"></i> ELECTRICAL
+                                                  </a>
+                                                </li>
+                                                
+                                                <li>
+                                                  <a href="{{ route('courses') }}">
+                                                    <i class="fa-solid fa-shield-halved"></i> SAFETY
+                                                  </a>
+                                                </li>
+                                                
+                                                <li>
+                                                  <a href="{{ route('courses') }}">
+                                                    <i class="fa-solid fa-gear"></i> MEP
+                                                  </a>
+                                                </li>
+                                                
+                                                <li>
+                                                  <a href="{{ route('courses') }}">
+                                                    <i class="fa-solid fa-user-graduate"></i> NISA DELIYANTI
+                                                  </a>
+                                                </li>
+                                                
+                                                <li>
+                                                  <a href="{{ route('courses') }}">
+                                                    <i class="fa-solid fa-skull-crossbones"></i> THE D3ATHSEC
+                                                  </a>
+                                                </li>
                                         </ul>
                                     </li>
 
@@ -192,24 +228,47 @@
                                             Faculties
                                         </a>
                                         <ul class="submenu">
-                                            <li>
-                                                <a href="{{ route('about') }}">
-                                                    <i class="fa-regular fa-address-card"></i>
-                                                    About Us
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="{{ route('courses') }}">
-                                                    <i class="fa-brands fa-discourse"></i>
-                                                    Courses
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="{{ route('faculties') }}">
-                                                    <i class="fa-regular fa-address-card"></i>
-                                                    Faculties
-                                                </a>
-                                            </li>
+                                           <li>
+                                                  <a href="{{ route('faculties') }}">
+                                                    <i class="fa-solid fa-user-graduate"></i> Ms. Archana Saxena
+                                                  </a>
+                                                </li>
+                                                
+                                                <li>
+                                                  <a href="{{ route('faculties') }}">
+                                                    <i class="fa-solid fa-user-tie"></i> Mr. Vivek Sangal
+                                                  </a>
+                                                </li>
+                                                
+                                                <li>
+                                                  <a href="{{ route('faculties') }}">
+                                                    <i class="fa-solid fa-user-doctor"></i> Dr. Brijendra Kumar
+                                                  </a>
+                                                </li>
+                                                
+                                                <li>
+                                                  <a href="{{ route('faculties') }}">
+                                                    <i class="fa-solid fa-chalkboard-user"></i> Mr. Pravendra Singh
+                                                  </a>
+                                                </li>
+                                                
+                                                <li>
+                                                  <a href="{{ route('faculties') }}">
+                                                    <i class="fa-solid fa-user"></i> Mr. I. K. Basu
+                                                  </a>
+                                                </li>
+                                                
+                                                <li>
+                                                  <a href="{{ route('faculties') }}">
+                                                    <i class="fa-solid fa-anchor"></i> Capt. Vishwanath Shenoy
+                                                  </a>
+                                                </li>
+                                                
+                                                <li>
+                                                  <a href="{{ route('faculties') }}">
+                                                    <i class="fa-solid fa-briefcase"></i> Mr. Arun O. Mahajan
+                                                  </a>
+                                                </li>
                                         </ul>
                                     </li>
 

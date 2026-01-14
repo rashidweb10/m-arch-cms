@@ -21,7 +21,7 @@
                </div>
             </div>
             <div class="col-lg-6" data-aos="fade-left" data-aos-duration="1000" data-aos-once="true">
-               <h2 class="h2 robot_slab">{{ $category->name }}</h2>
+               <h3 class=" robot_slab">{{ $category->name }}</h3>
                <p>{!! $category->description !!}</p>
             </div>
          </div>

@@ -30,8 +30,11 @@
   $quicklinks = json_decode($pageData->meta->where('meta_key', 'home_quicklinks')->first()->meta_value ?? '[]', true);
 @endphp
 
-<video width="100%" height="100%" class="elVideo" loop="loop" autoplay="" playsinline="" muted=""
+<div class="banner_height">
+    <video width="100%" height="100%" class="elVideo" loop="loop" autoplay="" playsinline="" muted=""
    src="{{ uploaded_asset($banner_images) }}" id="video-slider-1"></video>
+</div>
+
 <!--about us section start-->
 <section class="about_section pt-0 pt-md-5 pb-md-5 position-relative">
    <div class="container">
@@ -121,44 +124,47 @@
 </section>
 
 @if(isset($home_awards['itration']) && is_array($home_awards['itration']))
-<section class="awards_achievements pt-4 pt-md-5 pb-0 position-relative" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
-   <div class="container">
-      <div class="row justify-content-center">
-         <div class="col-lg-12 aos-init aos-animate">
-            <div class="text-start mb-md-4 mb-2 pt-2">
-               <h3 class="roboto text_color text-center robot_slab">Awards & Accolades</h3>
-            </div>
-         </div>
-         <div class="row">
+<!--<section class="awards_achievements pt-4 pt-md-5 pb-0 position-relative" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">-->
+<!--   <div class="container">-->
+<!--      <div class="row justify-content-center">-->
+<!--         <div class="col-lg-12 aos-init aos-animate">-->
+<!--            <div class="text-start mb-md-4 mb-2 pt-2">-->
+<!--               <h3 class="roboto text_color text-center robot_slab">Awards & Accolades</h3>-->
+<!--            </div>-->
+<!--         </div>-->
+<!--         <div class="row">-->
 
-            @foreach($home_awards['itration'] as $index => $itration)
-            <div class="col-md-3">
-               <div class="aos-init aos-animate position-relative">
-                  <div class="about_border border_9 position-relative">
-                     <a href="{{ uploaded_asset($home_awards['image'][$index]) }}" data-fancybox="gallery1">
-                     <img class="jbox-img rotate w-100 hvr-bounce-in" src="{{ uploaded_asset($home_awards['image'][$index]) }}" alt="{{ central_asset(uploaded_asset($home_awards['title'][$index])) }}">
-                     </a>
-                  </div>
-               </div>
-            </div>
-            @endforeach
+<!--            @foreach($home_awards['itration'] as $index => $itration)-->
+<!--            <div class="col-md-3">-->
+<!--               <div class="aos-init aos-animate position-relative">-->
+<!--                  <div class="about_border border_9 position-relative">-->
+<!--                     <a href="{{ uploaded_asset($home_awards['image'][$index]) }}" data-fancybox="gallery1">-->
+<!--                     <img class="jbox-img rotate w-100 hvr-bounce-in" src="{{ uploaded_asset($home_awards['image'][$index]) }}" alt="{{ central_asset(uploaded_asset($home_awards['title'][$index])) }}">-->
+<!--                     </a>-->
+<!--                  </div>-->
+<!--               </div>-->
+<!--            </div>-->
+<!--            @endforeach-->
 
-         </div>
-         {{-- <div class="read-more text-center mt-4">
-            <a href="/" class="btn-2 robot_slab">View All</a>
-         </div> --}}
-      </div>
-   </div>
-</section>
+<!--         </div>-->
+<!--         {{-- <div class="read-more text-center mt-4">-->
+<!--            <a href="/" class="btn-2 robot_slab">View All</a>-->
+<!--         </div> --}}-->
+<!--      </div>-->
+<!--   </div>-->
+<!--</section>-->
 @endif
 
 @if(!empty($video))
 <section class="awards_achievements pt-4 pt-md-5 pb-0 position-relative" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
    <div class="container">
       <div class="row justify-content-center">
-         <div class="col-md-7">
-            <iframe width="100%" height="345" src="{{ $video }}" title="Royal Caribbean Odyssey of the Seas | Full Walkthrough Ship Tour" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-         </div>
+         <div class="col-md-12">
+            <!--<iframe width="100%" height="345" src="{{ $video }}" title="Royal Caribbean Odyssey of the Seas | Full Walkthrough Ship Tour" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>-->
+            <video controls style="width:100%;">
+    <source src="/assets/frontend/img/marine_video.mp4" type="video/mp4">
+  </video>
+            </div>
          <div class="col-md-5">
             <div class="owl-carousel achievements">
                <div class="item">
