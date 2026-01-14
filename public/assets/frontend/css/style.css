@@ -2876,3 +2876,15 @@ background: rgb(29 29 29 / 90%);
 .position_tops li.nav-item.active a {
     background: #bde3fa;
 }
+.hero_content {
+    position: absolute;
+    left: 38%;
+    top: 70%;
+}
+.hero_content h1 {
+    text-align: left;
+    font-size: 34px;
+    text-shadow: 10px 10px 10px #0000006e;
+    font-family: "Roboto Slab", serif !important;
+    font-weight: 400 !important;
+}

@@ -30,9 +30,15 @@
   $quicklinks = json_decode($pageData->meta->where('meta_key', 'home_quicklinks')->first()->meta_value ?? '[]', true);
 @endphp
 
-<div class="banner_height">
+<div class="banner_height position-relative">
     <video width="100%" height="100%" class="elVideo" loop="loop" autoplay="" playsinline="" muted=""
    src="{{ uploaded_asset($banner_images) }}" id="video-slider-1"></video>
+    <div class="position-absolute hero_content translate-middle text-center text-white" style="z-index: 10;">
+        <h1 class="display-4 fw-bold mb-3">
+           Train today to become tomorrow’s maritime leader, MarinArch Consultants offers a strong career at sea and beyond.
+        </h1>
+        
+    </div>
 </div>
 
 <!--about us section start-->
