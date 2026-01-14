@@ -128,7 +128,7 @@
 
                                     <li class="nav-item">
                                         <a class="nav-link robot_slab" href="{{ route('home') }}">
-                                            Home.
+                                            Home
                                         </a>
                                     </li>
 
