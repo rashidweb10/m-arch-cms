@@ -70,7 +70,7 @@
       <div class="row justify-content-center">
          <div class="col-lg-10 text-center" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
             <div class="text-start mb-md-4 mb-2 pt-md-0">
-               <h3 class="roboto text_color text-center fw-normal">{{ $about_title2 }}</h3>
+               <h3 class="robot_slab  text_color text-center fw-normal">{{ $about_title2 }}</h3>
             </div>
             <p class="text-center padd190">
             {!! $about_description2 !!}

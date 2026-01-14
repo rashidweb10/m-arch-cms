@@ -149,7 +149,7 @@ header li.nav-item.dropdown li:last-child a {
           border-radius: 0px;
     position: relative;
     color: #000 !important;
-    font-weight: 300;
+    font-weight: 400;
     padding-left: 15px !important;
     padding-right: 15px !important;
 }
@@ -2865,4 +2865,10 @@ background: rgb(29 29 29 / 90%);
     .blog-card-img {
         height: 200px;
     }
+}
+
+
+.courses_we_offered .owl-nav {
+    display: flex;
+    gap: 10px;
 }

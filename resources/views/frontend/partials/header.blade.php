@@ -198,7 +198,7 @@
                                                 
                                                 <li>
                                                   <a href="{{ route('courses') }}">
-                                                    <i class="fa-solid fa-shield-halved"></i> SAFETY
+                                                    <i class="fa-solid fa-helmet-safety"></i> SAFETY
                                                   </a>
                                                 </li>
                                                 
@@ -216,7 +216,7 @@
                                                 
                                                 <li>
                                                   <a href="{{ route('courses') }}">
-                                                    <i class="fa-solid fa-skull-crossbones"></i> THE D3ATHSEC
+                                                    <i class="fa-solid fa-user-secret"></i> THE D3ATHSEC
                                                   </a>
                                                 </li>
                                         </ul>
