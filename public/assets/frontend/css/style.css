@@ -2871,6 +2871,7 @@ background: rgb(29 29 29 / 90%);
 .courses_we_offered .owl-nav {
     display: flex;
     gap: 10px;
+    margin-top:20px;
 }
 
 .position_tops li.nav-item.active a {
