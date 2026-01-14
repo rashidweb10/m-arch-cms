@@ -2872,3 +2872,7 @@ background: rgb(29 29 29 / 90%);
     display: flex;
     gap: 10px;
 }
+
+.position_tops li.nav-item.active a {
+    background: #bde3fa;
+}

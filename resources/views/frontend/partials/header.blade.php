@@ -126,20 +126,20 @@
                             <div class="d-md-flex">
                                 <ul class="navbar-nav ms-md-auto mb-0 position_tops">
 
-                                    <li class="nav-item">
+                                    <li class="nav-item {{ request()->routeIs('home') ? 'active' : '' }}">
                                         <a class="nav-link robot_slab" href="{{ route('home') }}">
                                             Home
                                         </a>
                                     </li>
 
                                     <!-- MarineArch Menu -->
-                                    <li class="nav-item menu">
+                                    <li class="nav-item menu {{ request()->is('about-us') ? 'active' : '' }}">
                                         <a href="#" class="nav-link robot_slab">
                                             MarineArch
                                         </a>
                                         <ul class="submenu">
                                             <li>
-                                                <a href="/about-us">
+                                                <a href="/about-us" class="{{ request()->is('about-us') ? 'active' : '' }}">
                                                     <i class="fa-regular fa-address-card"></i>
                                                     About Us
                                                 </a>
@@ -149,73 +149,73 @@
                                     </li>
 
                                     <!-- Courses Menu -->
-                                    <li class="nav-item menu">
+                                    <li class="nav-item menu {{ request()->routeIs('courses') ? 'active' : '' }}">
                                         <a href="#" class="nav-link robot_slab">
                                             Courses
                                         </a>
                                         <ul class="submenu">
                                             <li>
-                                                  <a href="{{ route('courses') }}">
+                                                  <a href="{{ route('courses') }}" class="{{ request()->routeIs('courses') ? 'active' : '' }}">
                                                     <i class="fa-solid fa-microphone-lines"></i> MEO CLASS I ORALS
                                                   </a>
                                                 </li>
                                                 
                                                 <li>
-                                                  <a href="{{ route('courses') }}">
+                                                  <a href="{{ route('courses') }}" class="{{ request()->routeIs('courses') ? 'active' : '' }}">
                                                     <i class="fa-solid fa-pen-to-square"></i> MEO CLASS I WRITTENS
                                                   </a>
                                                 </li>
                                                 
                                                 <li>
-                                                  <a href="{{ route('courses') }}">
+                                                  <a href="{{ route('courses') }}" class="{{ request()->routeIs('courses') ? 'active' : '' }}">
                                                     <i class="fa-solid fa-award"></i> EXTRA FIRST CLASS
                                                   </a>
                                                 </li>
                                                 
                                                 <li>
-                                                  <a href="{{ route('courses') }}">
+                                                  <a href="{{ route('courses') }}" class="{{ request()->routeIs('courses') ? 'active' : '' }}">
                                                     <i class="fa-solid fa-microphone"></i> MEO CLASS 2 ORALS
                                                   </a>
                                                 </li>
                                                 
                                                 <li>
-                                                  <a href="{{ route('courses') }}">
+                                                  <a href="{{ route('courses') }}" class="{{ request()->routeIs('courses') ? 'active' : '' }}">
                                                     <i class="fa-solid fa-file-lines"></i> MEO CLASS 2 WRITTENS
                                                   </a>
                                                 </li>
                                                 
                                                 <li>
-                                                  <a href="{{ route('courses') }}">
+                                                  <a href="{{ route('courses') }}" class="{{ request()->routeIs('courses') ? 'active' : '' }}">
                                                     <i class="fa-solid fa-comments"></i> MEO CLASS 4 ORALS
                                                   </a>
                                                 </li>
                                                 
                                                 <li>
-                                                  <a href="{{ route('courses') }}">
+                                                  <a href="{{ route('courses') }}" class="{{ request()->routeIs('courses') ? 'active' : '' }}">
                                                     <i class="fa-solid fa-bolt"></i> ELECTRICAL
                                                   </a>
                                                 </li>
                                                 
                                                 <li>
-                                                  <a href="{{ route('courses') }}">
+                                                  <a href="{{ route('courses') }}" class="{{ request()->routeIs('courses') ? 'active' : '' }}">
                                                     <i class="fa-solid fa-helmet-safety"></i> SAFETY
                                                   </a>
                                                 </li>
                                                 
                                                 <li>
-                                                  <a href="{{ route('courses') }}">
+                                                  <a href="{{ route('courses') }}" class="{{ request()->routeIs('courses') ? 'active' : '' }}">
                                                     <i class="fa-solid fa-gear"></i> MEP
                                                   </a>
                                                 </li>
                                                 
                                                 <li>
-                                                  <a href="{{ route('courses') }}">
+                                                  <a href="{{ route('courses') }}" class="{{ request()->routeIs('courses') ? 'active' : '' }}">
                                                     <i class="fa-solid fa-user-graduate"></i> NISA DELIYANTI
                                                   </a>
                                                 </li>
                                                 
                                                 <li>
-                                                  <a href="{{ route('courses') }}">
+                                                  <a href="{{ route('courses') }}" class="{{ request()->routeIs('courses') ? 'active' : '' }}">
                                                     <i class="fa-solid fa-user-secret"></i> THE D3ATHSEC
                                                   </a>
                                                 </li>
@@ -223,68 +223,68 @@
                                     </li>
 
                                     <!-- Faculties Menu -->
-                                    <li class="nav-item menu">
+                                    <li class="nav-item menu {{ request()->routeIs('faculties') ? 'active' : '' }}">
                                         <a href="#" class="nav-link robot_slab">
                                             Faculties
                                         </a>
                                         <ul class="submenu">
                                            <li>
-                                                  <a href="{{ route('faculties') }}">
+                                                  <a href="{{ route('faculties') }}" class="{{ request()->routeIs('faculties') ? 'active' : '' }}">
                                                     <i class="fa-solid fa-user-graduate"></i> Ms. Archana Saxena
                                                   </a>
                                                 </li>
                                                 
                                                 <li>
-                                                  <a href="{{ route('faculties') }}">
+                                                  <a href="{{ route('faculties') }}" class="{{ request()->routeIs('faculties') ? 'active' : '' }}">
                                                     <i class="fa-solid fa-user-tie"></i> Mr. Vivek Sangal
                                                   </a>
                                                 </li>
                                                 
                                                 <li>
-                                                  <a href="{{ route('faculties') }}">
+                                                  <a href="{{ route('faculties') }}" class="{{ request()->routeIs('faculties') ? 'active' : '' }}">
                                                     <i class="fa-solid fa-user-doctor"></i> Dr. Brijendra Kumar
                                                   </a>
                                                 </li>
                                                 
                                                 <li>
-                                                  <a href="{{ route('faculties') }}">
+                                                  <a href="{{ route('faculties') }}" class="{{ request()->routeIs('faculties') ? 'active' : '' }}">
                                                     <i class="fa-solid fa-chalkboard-user"></i> Mr. Pravendra Singh
                                                   </a>
                                                 </li>
                                                 
                                                 <li>
-                                                  <a href="{{ route('faculties') }}">
+                                                  <a href="{{ route('faculties') }}" class="{{ request()->routeIs('faculties') ? 'active' : '' }}">
                                                     <i class="fa-solid fa-user"></i> Mr. I. K. Basu
                                                   </a>
                                                 </li>
                                                 
                                                 <li>
-                                                  <a href="{{ route('faculties') }}">
+                                                  <a href="{{ route('faculties') }}" class="{{ request()->routeIs('faculties') ? 'active' : '' }}">
                                                     <i class="fa-solid fa-anchor"></i> Capt. Vishwanath Shenoy
                                                   </a>
                                                 </li>
                                                 
                                                 <li>
-                                                  <a href="{{ route('faculties') }}">
+                                                  <a href="{{ route('faculties') }}" class="{{ request()->routeIs('faculties') ? 'active' : '' }}">
                                                     <i class="fa-solid fa-briefcase"></i> Mr. Arun O. Mahajan
                                                   </a>
                                                 </li>
                                         </ul>
                                     </li>
 
-                                    <li class="nav-item">
+                                    <li class="nav-item {{ request()->routeIs('testimonials') ? 'active' : '' }}">
                                         <a class="nav-link robot_slab" href="{{ route('testimonials') }}">
                                             Student Speak
                                         </a>
                                     </li>
 
-                                    <li class="nav-item">
+                                    <li class="nav-item {{ request()->routeIs('blog.index') ? 'active' : '' }}">
                                         <a class="nav-link robot_slab" href="{{ route('blog.index') }}">
                                             Blogs
                                         </a>
                                     </li>
 
-                                    <li class="nav-item">
+                                    <li class="nav-item {{ request()->routeIs('contact') ? 'active' : '' }}">
                                         <a class="nav-link robot_slab" href="{{ route('contact') }}">
                                             Contact Us
                                         </a>
