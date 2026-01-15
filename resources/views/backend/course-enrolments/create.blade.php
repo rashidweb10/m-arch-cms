@@ -32,6 +32,10 @@
         <div class="col-sm-12">
             <div class="form-group mb-2">
                 <label class="form-label">Courses <span class="text-danger">*</span></label>
+                <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" id="select-all-courses">
+                    <label class="form-check-label" for="select-all-courses">Select All</label>
+                </div>
                 <div id="courses-container">
                     <!-- Courses will be loaded here via AJAX -->
                 </div>
@@ -92,7 +96,7 @@ $(document).ready(function() {
                 if (Array.isArray(response) && response.length) {
                     response.forEach(function (course) {
                         checkboxes += '<div class="form-check">' +
-                            '<input class="form-check-input" type="checkbox" name="course_ids[]" value="' + course.id + '" id="course_' + course.id + '">' +
+                            '<input class="form-check-input course-checkbox" type="checkbox" name="course_ids[]" value="' + course.id + '" id="course_' + course.id + '">' +
                             '<label class="form-check-label" for="course_' + course.id + '">' + course.name + '</label>' +
                             '</div>';
                     });
@@ -107,6 +111,12 @@ $(document).ready(function() {
                 $coursesContainer.html('<p>Error loading courses.</p>');
             }
         });
+    });
+
+    // Select All functionality
+    $('#select-all-courses').on('change', function() {
+        const isChecked = $(this).is(':checked');
+        $('.course-checkbox').prop('checked', isChecked);
     });
 
     $("#create").submit(function(e) {
