@@ -12,7 +12,7 @@
       <div class="row g-5">
          <!-- Left Side -->
          <div class="col-lg-6">
-            <h3 class=" mb-4 robot_slab ">Get in touch</h3>
+            <h3 class=" mb-5 robot_slab ">Get in touch</h3>
             <!-- Head Office -->
             <div class="d-flex border_bottoms icon_hovers">
                <div class="icon-circle me-3" style="width: 54px;">
@@ -49,7 +49,7 @@
            
             
 			
-			<div class="bg-light p-4 p-md-5 rounded-3 shadow-sm">
+			<div class="bg-light p-4 p-md-5 rounded-3 shadow-sm mt-3">
                <h3 class=" mb-4 robot_slab ">Send us a message</h3>
 
 <form class="needs-validation" id="contactForm" action="{{route('form.submit')}}" method="POST" onsubmit="protect_with_recaptcha_v3(this, 'contact')">

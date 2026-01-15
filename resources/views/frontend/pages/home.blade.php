@@ -51,7 +51,7 @@
    <div class="container">
       <div class="row">
          <div class="col-lg-8 ">
-            <div class="text-start mb-md-4 mb-2 pt-md-4">
+            <div class="text-start">
                <div class="skew-box ">
                   <p class="robot_slab text_color">{{ $banner_title }}</p>
                </div>

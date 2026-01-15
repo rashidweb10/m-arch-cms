@@ -41,9 +41,9 @@
    </div>
 </section>
 
-@include('frontend.partials.course-carousel')
+<!-- @include('frontend.partials.course-carousel') -->
 
- @if(isset($milestones['itration']) && is_array($milestones['itration']))
+ <!-- @if(isset($milestones['itration']) && is_array($milestones['itration']))
 <section id="counter" class="statistics-section about-us" >
    <div class="container">
       <div class="row">
@@ -58,7 +58,7 @@
       </div>
    </div>
 </section>
-@endif
+@endif -->
 
 @if(isset($quicklinks['itration']) && is_array($quicklinks['itration']))
 <section class="gallery_section">

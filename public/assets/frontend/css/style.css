@@ -1790,7 +1790,7 @@ ul.about_listing li img {
 
 .skew-box {
   position: absolute;
-      top: -35px;
+      top: -73px;
   background-color: #83d0f4; /* Yellow background */
   color: #fff;
       padding: 10px 40px 15px;
@@ -1804,7 +1804,7 @@ ul.about_listing li img {
    margin: 0;
     font-size: 22px;
     font-weight: 400;
-    color: #fff;
+    color: #000;
     line-height: 43px;
 }
 
@@ -1812,7 +1812,7 @@ ul.about_listing li img {
   margin: 0;
     font-size: 22px;
     font-weight: 400;
-    color: #fff;
+    color: #000;
 }
 
 .mrg_35
@@ -2399,7 +2399,7 @@ ul.submenu.p-2 li ul.submenu li a:hover {
 
 .whatsapp {
     position: fixed;
-    right: 19px;
+    right: 30px;
     bottom: 56px;
     text-align: right;
     z-index:99;
@@ -2597,8 +2597,8 @@ background: rgb(29 29 29 / 90%);
 }
 .border_bottoms {
     border-bottom: 1px dotted #00000033;
-    margin-bottom: 20px;
-    padding-bottom: 20px;
+    margin-bottom: 35px;
+    padding-bottom: 35px;
 }
 
 .icon_hovers:hover .icon-circle {
@@ -2742,7 +2742,7 @@ background: rgb(29 29 29 / 90%);
 .aboutimgss {
     width: 250px !important;
     margin-left: auto;
-    padding-top:50px;
+    padding-top:0px;
     margin-right: auto;
     display: block !important;
 }
