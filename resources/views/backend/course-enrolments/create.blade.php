@@ -80,6 +80,11 @@ $(document).ready(function() {
         const categoryId = $(this).val();
         const $coursesContainer = $('#courses-container');
 
+        if(categoryId == '') {
+            $coursesContainer.html('Please select category first.');
+            return false;
+        }
+
         // Show a temporary loading message
         $coursesContainer.html('<p>Loading...</p>');
 
