@@ -109,34 +109,52 @@ class CourseEnrolmentController extends Controller
         $validated = $request->validate([
             'user_id' => 'required|exists:users,id',
             'category_id' => 'nullable|exists:course_categories,id',
-            'course_id' => 'required|exists:courses,id',
+            'course_ids' => 'required|array',
+            'course_ids.*' => 'exists:courses,id',
             'validity' => 'nullable|date',
             'is_active' => 'required|boolean',
         ]);
 
-        // Check if student is already enrolled in the same course
-        $existingEnrolment = CourseEnrolment::where('user_id', $request->input('user_id'))
-            ->where('course_id', $request->input('course_id'))
-            ->first();
+        $courseIds = $request->input('course_ids', []);
+        $userId = $request->input('user_id');
+        $validity = $request->input('validity');
+        $isActive = $request->input('is_active');
 
-        if ($existingEnrolment) {
+        $successCount = 0;
+        $errorMessages = [];
+
+        foreach ($courseIds as $courseId) {
+            // Check if student is already enrolled in the same course
+            $existingEnrolment = CourseEnrolment::where('user_id', $userId)
+                ->where('course_id', $courseId)
+                ->first();
+
+            if ($existingEnrolment) {
+                $errorMessages[] = 'This student is already enrolled in the course: ' . Course::find($courseId)->name;
+                continue;
+            }
+
+            // If validation passes, proceed to saving the data
+            $courseEnrolment = new CourseEnrolment();
+            $courseEnrolment->user_id = $userId;
+            $courseEnrolment->course_id = $courseId;
+            $courseEnrolment->validity = $validity;
+            $courseEnrolment->is_active = $isActive;
+            $courseEnrolment->save();
+
+            $successCount++;
+        }
+
+        if (!empty($errorMessages)) {
             return response()->json([
-                'status' => false, 
-                'notification' => 'This student is already enrolled in this course!'
+                'status' => false,
+                'notification' => implode('<br>', $errorMessages)
             ], 422);
         }
 
-        // If validation passes, proceed to saving the data
-        $courseEnrolment = new CourseEnrolment();
-        $courseEnrolment->user_id = $request->input('user_id');
-        $courseEnrolment->course_id = $request->input('course_id');
-        $courseEnrolment->validity = $request->input('validity');
-        $courseEnrolment->is_active = $request->input('is_active');
-        $courseEnrolment->save();
-
         // Return JSON response for AJAX handling
-        return response()->json(['status' => true, 'notification' => 'Record created successfully!']);
-    }       
+        return response()->json(['status' => true, 'notification' => $successCount . ' course(s) enrolled successfully!']);
+    }
 
     /**
      * Display the specified resource.

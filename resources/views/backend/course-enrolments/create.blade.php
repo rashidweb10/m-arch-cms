@@ -28,13 +28,13 @@
             </div>
         </div>
 
-        <!-- Course -->
+        <!-- Courses (Checkboxes) -->
         <div class="col-sm-12">
             <div class="form-group mb-2">
-                <label for="course_id" class="form-label">Course <span class="text-danger">*</span></label>
-                <select name="course_id" id="course_id" class="form-select select2" required>
-                    <option value="">--Select Course--</option>
-                </select>
+                <label class="form-label">Courses <span class="text-danger">*</span></label>
+                <div id="courses-container">
+                    <!-- Courses will be loaded here via AJAX -->
+                </div>
             </div>
         </div>
 
@@ -74,11 +74,10 @@ $(document).ready(function() {
     // When category changes, fetch courses for that category via AJAX
     $('#category_id').on('change', function () {
         const categoryId = $(this).val();
-        const $courseSelect = $('#course_id');
-        const currentCourseId = $courseSelect.val();
+        const $coursesContainer = $('#courses-container');
 
-        // Show a temporary loading option
-        $courseSelect.html('<option value="">Loading...</option>');
+        // Show a temporary loading message
+        $coursesContainer.html('<p>Loading...</p>');
 
         $.ajax({
             url: '{{ route('courses.by-category') }}',
@@ -88,19 +87,24 @@ $(document).ready(function() {
             },
             success: function (response) {
                 // Reset options
-                let options = '<option value="">--Select Course--</option>';
+                let checkboxes = '';
 
                 if (Array.isArray(response) && response.length) {
                     response.forEach(function (course) {
-                        options += '<option value="' + course.id + '">' + course.name + '</option>';
+                        checkboxes += '<div class="form-check">' +
+                            '<input class="form-check-input" type="checkbox" name="course_ids[]" value="' + course.id + '" id="course_' + course.id + '">' +
+                            '<label class="form-check-label" for="course_' + course.id + '">' + course.name + '</label>' +
+                            '</div>';
                     });
+                } else {
+                    checkboxes = '<p>No courses found for this category.</p>';
                 }
 
-                $courseSelect.html(options).trigger('change.select2');
+                $coursesContainer.html(checkboxes);
             },
             error: function () {
                 // On error, just reset to default option
-                $courseSelect.html('<option value="">--Select Course--</option>').trigger('change.select2');
+                $coursesContainer.html('<p>Error loading courses.</p>');
             }
         });
     });
