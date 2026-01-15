@@ -17,10 +17,10 @@
    <div class="container">
       <!-- Header -->
       <div class="text-center mb-5">
-         <h2 class="fw-bold display-5 text-primary mb-3 robot_slab " style="background: linear-gradient(90deg, #0077b6, #00b4d8); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+         <h3 class=" mb-3 robot_slab " >
             {!! $about_title !!}
-         </h2>
-         <div class="section-divider mb-3"></div>
+         </h3>
+         
          <p class="text-muted mx-auto" style="max-width: 700px;">
             {!! $about_description !!}
          </p>

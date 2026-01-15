@@ -19,7 +19,7 @@
 @include('frontend.partials.breadcrumb', ['title' => $pageData->title, 'image' => $banner_images])
 
 <!--about us section start-->
-<section class="about_section pt-0 pt-md-5 pb-md-5 position-relative">
+<section class="aboutpg_section pt-0 pt-md-5 pb-md-5 position-relative">
    <div class="container position-relative">
       <div class="row">
         

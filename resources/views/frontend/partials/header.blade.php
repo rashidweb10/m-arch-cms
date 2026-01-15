@@ -134,18 +134,9 @@
 
                                     <!-- MarineArch Menu -->
                                     <li class="nav-item menu {{ request()->is('about-us') ? 'active' : '' }}">
-                                        <a href="#" class="nav-link robot_slab">
+                                        <a href="/about-us" class="nav-link robot_slab">
                                             MarineArch
                                         </a>
-                                        <ul class="submenu">
-                                            <li>
-                                                <a href="/about-us" class="{{ request()->is('about-us') ? 'active' : '' }}">
-                                                    <i class="fa-regular fa-address-card"></i>
-                                                    About Us
-                                                </a>
-                                            </li>
-                                            
-                                        </ul>
                                     </li>
 
                                     <!-- Courses Menu -->
