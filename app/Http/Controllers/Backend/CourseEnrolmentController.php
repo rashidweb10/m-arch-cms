@@ -149,7 +149,7 @@ class CourseEnrolmentController extends Controller
             return response()->json([
                 'status' => false,
                 'notification' => implode('<br>', $errorMessages)
-            ], 422);
+            ], 200);
         }
 
         // Return JSON response for AJAX handling
@@ -211,7 +211,7 @@ class CourseEnrolmentController extends Controller
             return response()->json([
                 'status' => false, 
                 'notification' => 'This student is already enrolled in this course!'
-            ], 422);
+            ], 200);
         }
     
         // If validation passes, update the data
