@@ -87,7 +87,7 @@
             <div class="row align-items-center">
 
                 <!-- Logo -->
-                <div class="col-md-1 col-3 order-md-1 order-2">
+                <div class="col-md-1 col-6 order-md-1 order-2">
                     <div class="logo_width">
                         <a class="navbar-brand" href="/">
                             <img
@@ -101,7 +101,7 @@
                 </div>
 
                 <!-- Mobile Toggle -->
-                <div class="col-md-4 col-1 order-md-2 order-3 d-lg-none d-block">
+                <div class="col-md-4 col-6 order-md-2 order-3 d-lg-none d-block">
                     <button
                         class="navbar-toggler"
                         type="button"

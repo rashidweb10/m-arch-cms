@@ -33,15 +33,15 @@
 <div class="banner_height position-relative">
     <video width="100%" height="100%" class="elVideo" loop="loop" autoplay="" playsinline="" muted=""
    src="{{ uploaded_asset($banner_images) }}" id="video-slider-1"></video>
-    <div class="position-absolute hero_content translate-middle text-center text-white" style="z-index: 10;">
+    <div class="position-absolute hero_content text-center text-white" style="z-index: 10;">
         <h1 class="display-4 fw-bold mb-3">
-           Train today to become <span>tomorrow’s maritime leader,</span>
+           Train today to become <span>tomorrow's maritime leader,</span>
          
         </h1>
         <h4>
          
         MarinArch Consultants offers <span>a strong career at sea and beyond. </span></h4>
-        <a href="https://www.google.com/search?sca_esv=eb783835d62ec6f7&rlz=1C1SLLM_enIN1120IN1120&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOSOXx31BNcQ1ajSXd2D9ZuQC7kMPdaCdKMY0Xm0lPIgc-R5Jf8M93s6HO0-qu1rqhvw0o8RUmQBjbCy-SEAqrlroqq_Q&q=Marin+Arch+Reviews&sa=X&ved=2ahUKEwimyJPhso2SAxWoUGwGHWLJC_8Q0bkNegQIIhAH&biw=1600&bih=731&dpr=1&aic=0" target="_blank"><img src="/assets/frontend/img/review_img.jpeg" /></a>
+        <a href="https://www.google.com/search?sca_esv=eb783835d62ec6f7&rlz=1C1SLLM_enIN1120IN1120&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOSOXx31BNcQ1ajSXd2D9ZuQC7kMPdaCdKMY0Xm0lPIgc-R5Jf8M93s6HO0-qu1rqhvw0o8RUmQBjbCy-SEAqrlroqq_Q&q=Marin+Arch+Reviews&sa=X&ved=2ahUKEwimyJPhso2SAxWoUGwGHWLJC_8Q0bkNegQIIhAH&biw=1600&bih=731&dpr=1&aic=0" target="_blank"><img src="/assets/frontend/img/review_img.jpeg" class="img-fluid" alt="Reviews" /></a>
         
     </div>
 </div>
@@ -58,7 +58,7 @@
             </div>
          </div>
          <div class="col-lg-8 paddngrgt80" data-aos="fade-right" data-aos-duration="1000" data-aos-once="true">
-            <div class="text-start mb-md-4 mb-2 pt-4">
+            <div class="text-start mb-md-4 mb-2 pt-md-4 pt-0">
                <h3 class=" text_color robot_slab fw-normal">{{ $about_title }}</h3>
             </div>
             <div>
