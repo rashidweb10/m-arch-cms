@@ -75,15 +75,16 @@ $(document).ready(function() {
     initValidate('#create'); // Initializes validation for the form
     initSelect2('.select2');
 
-    // When category changes, fetch courses for that category via AJAX
-    $('#category_id').on('change', function () {
-        const categoryId = $(this).val();
+    // When category or student changes, fetch courses via AJAX
+    $('#category_id, #user_id').on('change', function () {
+        const categoryId = $('#category_id').val();
         const userId = $('#user_id').val();
         const $coursesContainer = $('#courses-container');
         const $selectAllContainer = $('#select-all-container');
 
-        if(categoryId == '') {
-            $coursesContainer.html('Please select category first.');
+        // Check if both category and student are selected
+        if(categoryId == '' || userId == '') {
+            $coursesContainer.html('Please select both category and student first.');
             $selectAllContainer.hide();
             return false;
         }
