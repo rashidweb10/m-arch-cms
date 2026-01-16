@@ -131,7 +131,7 @@ $(document).ready(function() {
     // Select All functionality
     $('#select-all-courses').on('change', function() {
         const isChecked = $(this).is(':checked');
-        $('.course-checkbox').prop('checked', isChecked);
+        $('.course-checkbox:not(:disabled)').prop('checked', isChecked);
     });
 
     $("#create").submit(function(e) {
