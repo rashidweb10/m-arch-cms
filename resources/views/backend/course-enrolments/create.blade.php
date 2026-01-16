@@ -32,7 +32,7 @@
         <div class="col-sm-12">
             <div class="form-group mb-2">
                 <label class="form-label">Courses <span class="text-danger">*</span></label>
-                <div class="form-check mb-2">
+                <div class="form-check mb-2" id="select-all-container" style="display: none;">
                     <input class="form-check-input" type="checkbox" id="select-all-courses">
                     <label class="form-check-label" for="select-all-courses">Select All</label>
                 </div>
@@ -80,14 +80,17 @@ $(document).ready(function() {
         const categoryId = $(this).val();
         const userId = $('#user_id').val();
         const $coursesContainer = $('#courses-container');
+        const $selectAllContainer = $('#select-all-container');
 
         if(categoryId == '') {
             $coursesContainer.html('Please select category first.');
+            $selectAllContainer.hide();
             return false;
         }
 
         // Show a temporary loading message
         $coursesContainer.html('<p>Loading...</p>');
+        $selectAllContainer.hide();
 
         $.ajax({
             url: '{{ route('courses.by-category') }}',
@@ -109,8 +112,10 @@ $(document).ready(function() {
                             '<label class="form-check-label" for="course_' + course.id + '">' + course.name + disabledText + '</label>' +
                             '</div>';
                     });
+                    $selectAllContainer.show();
                 } else {
                     checkboxes = '<p>No courses found for this category.</p>';
+                    $selectAllContainer.hide();
                 }
 
                 $coursesContainer.html(checkboxes);
@@ -118,6 +123,7 @@ $(document).ready(function() {
             error: function () {
                 // On error, just reset to default option
                 $coursesContainer.html('<p>Error loading courses.</p>');
+                $selectAllContainer.hide();
             }
         });
     });
