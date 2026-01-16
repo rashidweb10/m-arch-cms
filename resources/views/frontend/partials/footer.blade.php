@@ -11,8 +11,8 @@
          <div class="col-md-10">
             <div class="row">
                <div class="col-md-12">
-                  <div class="footer_link1">
-                     <h5 class="robot_slab">Quick Link</h5>
+                  <div class="footer_link1 " >
+                     <h5 class="robot_slab pb-4">Quick Link</h5>
                      <ul class="footer-menu">
                         <li>
                            <a href="{{ route('home') }}">Home </a>

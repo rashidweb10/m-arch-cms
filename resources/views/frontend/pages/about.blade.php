@@ -60,6 +60,54 @@
 </section>
 @endif -->
 
+<!-- Features Section -->
+<section class="features_section pt-5 pb-5" id="features_section">
+   <div class="container">
+      <div class="row g-4">
+         
+         <!-- Career Achievements -->
+         <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
+            <div class="feature_card">
+               <div class="feature_icon">
+                  <i class="fas fa-trophy"></i>
+               </div>
+               <h3 class="feature_title robot_slab">Career Achievements</h3>
+               <p class="feature_description">
+                  Career achievements reflect the milestones that define professional growth, showcasing dedication, expertise, and impact in one's field. They highlight accomplishments such as successful projects, leadership roles, awards, certifications, and contributions that drive measurable results. Beyond recognition, career achievements demonstrate resilience, innovation, and the ability to adapt to challenges, serving as proof of both personal excellence and value to organizations. Ultimately, they inspire confidence, open doors to new opportunities, and establish a lasting professional legacy.
+               </p>
+            </div>
+         </div>
+
+         <!-- Flexibility -->
+         <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true" data-aos-delay="100">
+            <div class="feature_card">
+               <div class="feature_icon">
+                  <i class="fas fa-sync-alt"></i>
+               </div>
+               <h3 class="feature_title robot_slab">Flexibility</h3>
+               <p class="feature_description">
+                  Flexibility is the ability to adapt seamlessly to changing circumstances, challenges, and opportunities while maintaining focus on goals. It reflects openness to new ideas, willingness to adjust strategies, and resilience in dynamic environments. Whether in professional or personal contexts, flexibility enables individuals and organizations to respond effectively to evolving needs, embrace innovation, and sustain growth. By fostering adaptability, it ensures long-term success and builds confidence in navigating uncertainty with ease.
+               </p>
+            </div>
+         </div>
+
+         <!-- Cost Effective -->
+         <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true" data-aos-delay="200">
+            <div class="feature_card">
+               <div class="feature_icon">
+                  <i class="fas fa-dollar-sign"></i>
+               </div>
+               <h3 class="feature_title robot_slab">Cost Effective</h3>
+               <p class="feature_description">
+                  Cost-effective solutions focus on delivering maximum value while minimizing expenses, ensuring that resources are used efficiently without compromising quality. By balancing affordability with performance, they help individuals and organizations achieve their goals within budget, making smart investments that generate measurable returns. Cost-effectiveness also reflects strategic planning, where every decision is optimized to reduce waste, enhance productivity, and sustain long-term growth. Ultimately, it empowers businesses and professionals to remain competitive while offering clients reliable services at the best possible value.
+               </p>
+            </div>
+         </div>
+
+      </div>
+   </div>
+</section>
+
 @if(isset($quicklinks['itration']) && is_array($quicklinks['itration']))
 <section class="gallery_section">
    <div class="bgcolor pb-4 pt-4 pb-md-5 pt-md-5">
