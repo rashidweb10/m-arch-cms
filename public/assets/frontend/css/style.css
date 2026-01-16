@@ -1,4 +1,7 @@
 
+html {
+    scroll-behavior: smooth;
+}
 
 body
 {
@@ -1796,7 +1799,6 @@ ul.about_listing li img {
       padding: 10px 40px 15px;
   font-size: 16px;
   font-family: Arial, sans-serif;
-  transform: skew(-10deg); /* Skew the box */
   display: inline-block;
 }
 
@@ -2373,6 +2375,12 @@ ul.why_we_origin li {
 ul.submenu.p-2 li ul.submenu li a {
     color: #000 !important;
 }
+.margingaps:nth-child(even) {
+    padding-left: 40px;
+}
+.margingaps:nth-child(odd) {
+    padding-right: 40px !important;
+}
 
 ul.submenu.p-2 li ul.submenu li a:hover {
     color: #fff !important;
@@ -2736,6 +2744,44 @@ background: rgb(29 29 29 / 90%);
     margin-bottom: 20px;
 }
 
+.course-list {
+    margin: 0;
+    padding: 0;
+}
+
+.course-item {
+    padding: 15px 0;
+    border-bottom: 1px solid #e0e0e0 !important;
+}
+
+.course-item:last-child {
+    border-bottom: none !important;
+}
+
+.course-name {
+    font-size: 16px;
+    color: #333;
+    flex: 1;
+    padding-right: 15px;
+}
+
+.course-item .btn-outline-primary {
+    border-color: #e63221;
+    color: #e63221;
+    white-space: nowrap;
+}
+
+.course-item .btn-outline-primary:hover {
+    background-color: #e63221;
+    color: #fff;
+    border-color: #e63221;
+}
+
+#online-course,
+#offline-course {
+    scroll-margin-top: 100px;
+}
+
 .testiminials_box img {
     width: 100%;
 }
@@ -2891,11 +2937,11 @@ background: rgb(29 29 29 / 90%);
 .hero_content img {
     width: 416px;
     margin-top: 35px;
+    box-shadow: 2px 0px 18px -5px #000;
 }
 .hero_content h1 {
     text-align: left;
     font-size: 26px;
-    text-shadow: 10px 10px 10px #0000006e;
     font-family: "Roboto Slab", serif !important;
     font-weight: 500 !important;
     line-height: 40px;
@@ -2903,7 +2949,6 @@ background: rgb(29 29 29 / 90%);
 .hero_content h1 span{
     text-align: left;
     font-size: 26px;
-    text-shadow: 10px 10px 10px #0000006e;
     font-family: "Roboto Slab", serif !important;
     font-weight: 500 !important;
     display: block;
@@ -2911,7 +2956,6 @@ background: rgb(29 29 29 / 90%);
 .hero_content h4 {
         text-align: left;
     font-size: 26px;
-    text-shadow: 10px 10px 10px #0000006e;
     font-family: "Roboto Slab", serif !important;
     font-weight: 500 !important;
     line-height: 40px;
@@ -2920,7 +2964,6 @@ background: rgb(29 29 29 / 90%);
 .hero_content h4 span{
     text-align: left;
     font-size: 26px;
-    text-shadow: 10px 10px 10px #0000006e;
     font-family: "Roboto Slab", serif !important;
     font-weight: 500 !important;
     display: block; 

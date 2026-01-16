@@ -42,8 +42,8 @@
 	position: relative;
 	margin-left: 0px !important;
 	border-bottom: 1px dashed #888;
-	padding-top: 7px;
-	padding-bottom: 7px;
+	padding-top: 0px;
+	padding-bottom: 0px;
 }
 
 .submenu li:last-child {
@@ -58,6 +58,8 @@
 	padding: 10px 15px;
 	color: #000 !important;
 	text-decoration: none;
+	display:block;
+	width:100%;
 }
 
 .submenu li:hover a {

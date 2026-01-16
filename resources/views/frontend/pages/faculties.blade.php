@@ -30,7 +30,7 @@
       <div class="row g-5">
 
       @foreach($faculties['itration'] as $index => $itration)
-      <div class="col-lg-6 mb-4">
+      <div class="col-lg-6 mb-4 margingaps">
          <div class="card faculty-card p-4">
             <div class="d-flex align-items-start gap-3">
 
