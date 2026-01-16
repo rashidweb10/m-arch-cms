@@ -12,27 +12,27 @@
             <div class="row">
                <div class="col-md-12">
                   <div class="footer_link1 " >
-                     <h5 class="robot_slab pb-4">Quick Link</h5>
+                     <h5 class="robot_slab pb-2">Quick Link</h5>
                      <ul class="footer-menu">
-                        <li>
+                        <li class="footer-nav-item">
                            <a href="{{ route('home') }}">Home </a>
                         </li>
-                        <li>
+                        <li class="footer-nav-item">
                            <a href="{{ route('about') }}">Marine Arch</a>
                         </li>
-                        <li>
+                        <li class="footer-nav-item">
                            <a href="{{ route('courses') }}">Courses</a>
                         </li>
-                        <li>
+                        <li class="footer-nav-item">
                            <a href="{{ route('faculties') }}">Faculties</a>
                         </li>
-                        <li>
+                        <li class="footer-nav-item">
                            <a href="{{ route('testimonials') }}">Student Speak</a>
                         </li>
-                        <li>
+                        <li class="footer-nav-item">
                            <a href="{{ route('blog.index') }}">Blogs</a>
                         </li>                        
-                        <li>
+                        <li class="footer-nav-item">
                            <a href="{{ route('contact') }}">Contact Us</a>
                         </li>
                      </ul>
