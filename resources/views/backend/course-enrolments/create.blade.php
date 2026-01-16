@@ -78,6 +78,7 @@ $(document).ready(function() {
     // When category changes, fetch courses for that category via AJAX
     $('#category_id').on('change', function () {
         const categoryId = $(this).val();
+        const userId = $('#user_id').val();
         const $coursesContainer = $('#courses-container');
 
         if(categoryId == '') {
@@ -92,7 +93,8 @@ $(document).ready(function() {
             url: '{{ route('courses.by-category') }}',
             method: 'GET',
             data: {
-                category_id: categoryId
+                category_id: categoryId,
+                user_id: userId
             },
             success: function (response) {
                 // Reset options
@@ -100,9 +102,11 @@ $(document).ready(function() {
 
                 if (Array.isArray(response) && response.length) {
                     response.forEach(function (course) {
+                        const isDisabled = course.is_enrolled ? 'disabled' : '';
+                        const disabledText = course.is_enrolled ? ' (Already Enrolled)' : '';
                         checkboxes += '<div class="form-check">' +
-                            '<input class="form-check-input course-checkbox" type="checkbox" name="course_ids[]" value="' + course.id + '" id="course_' + course.id + '">' +
-                            '<label class="form-check-label" for="course_' + course.id + '">' + course.name + '</label>' +
+                            '<input class="form-check-input course-checkbox" type="checkbox" name="course_ids[]" value="' + course.id + '" id="course_' + course.id + '" ' + isDisabled + '>' +
+                            '<label class="form-check-label" for="course_' + course.id + '">' + course.name + disabledText + '</label>' +
                             '</div>';
                     });
                 } else {

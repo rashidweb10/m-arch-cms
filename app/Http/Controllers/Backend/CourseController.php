@@ -64,6 +64,7 @@ class CourseController extends Controller
     public function getByCategory(Request $request)
     {
         $categoryId = $request->input('category_id');
+        $userId = $request->input('user_id');
 
         $query = Course::where('is_active', 1);
 
@@ -72,6 +73,18 @@ class CourseController extends Controller
         }
 
         $courses = $query->orderBy('name', 'asc')->get(['id', 'name']);
+
+        // If user_id is provided, check for already enrolled courses
+        if ($userId) {
+            $enrolledCourses = \App\Models\CourseEnrolment::where('user_id', $userId)
+                ->pluck('course_id')
+                ->toArray();
+
+            // Add enrolled status to each course
+            $courses->each(function ($course) use ($enrolledCourses) {
+                $course->is_enrolled = in_array($course->id, $enrolledCourses);
+            });
+        }
 
         return response()->json($courses);
     }
