@@ -27,7 +27,7 @@
                            <a href="{{ route('faculties') }}">Faculties</a>
                         </li>
                         <li class="footer-nav-item">
-                           <a href="{{ route('testimonials') }}">Student Speak</a>
+                           <a href="{{ route('testimonials') }}">Students Review</a>
                         </li>
                         <li class="footer-nav-item">
                            <a href="{{ route('blog.index') }}">Blogs</a>

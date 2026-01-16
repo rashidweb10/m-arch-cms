@@ -804,6 +804,25 @@ section.about_section .container {
     .feature_description {
         font-size: 13px !important;
     }
+    
+    /* Courses Page Responsive */
+    .courses_section .col-lg-6 {
+        margin-bottom: 30px;
+    }
+    
+    .course-bullet {
+        width: 6px !important;
+        height: 6px !important;
+    }
+    
+    .enroll-btn {
+        padding: 12px 30px !important;
+        font-size: 16px !important;
+    }
+    
+    #enrollModal .modal-dialog {
+        margin: 15px;
+    }
 }
 
 @media (min-width: 768px) and (max-width: 991px) {

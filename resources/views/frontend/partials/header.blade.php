@@ -214,7 +214,7 @@
 
                                     <li class="nav-item {{ request()->routeIs('testimonials') ? 'active' : '' }}">
                                         <a class="nav-link robot_slab" href="{{ route('testimonials') }}">
-                                            Student Speak
+                                        Students Review
                                         </a>
                                     </li>
 
