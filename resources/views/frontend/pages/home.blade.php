@@ -33,7 +33,7 @@
 <div class="banner_height position-relative">
     <video width="100%" height="100%" class="elVideo" loop="loop" autoplay="" playsinline="" muted=""
    src="{{ uploaded_asset($banner_images) }}" id="video-slider-1"></video>
-    <div class="position-absolute hero_content .translate-middle text-center text-white" style="z-index: 10;">
+    <div class="position-absolute hero_content translate-middle text-center text-white" style="z-index: 10;">
         <h1 class="display-4 fw-bold mb-3">
            Train today to become <span>tomorrow's maritime leader,</span>
          
