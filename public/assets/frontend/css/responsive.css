@@ -807,6 +807,10 @@ section.about_section .container {
     .navbar-toggler-icon {
         width: 20px;
         height: 20px;
+    }.header_section_top {
+        background: #bde3fa;
+        padding-bottom: 5px;
+        padding-top: 5px;
     }
     
     /* Offcanvas Side Menu Styles */
@@ -821,8 +825,7 @@ section.about_section .container {
     }
     
     .offcanvas-title {
-        color: #0a8f7a;
-        font-weight: 600;
+        font-weight: 500;
         font-size: 20px;
     }
     
@@ -836,15 +839,17 @@ section.about_section .container {
     
     .offcanvas-body .nav-item {
         border-bottom: 1px solid #e0e0e0;
-        padding: 12px 0;
+        padding: 8px 0;
     }
     
     .offcanvas-body .nav-item:last-child {
         border-bottom: none;
     }
-    
+    .offcanvas-body .nav-link span {
+        font-size: 16px;
+    }
     .offcanvas-body .nav-link {
-        padding: 8px 0;
+        padding: 2px 0;
         color: #000;
         font-size: 16px;
     }
@@ -853,20 +858,27 @@ section.about_section .container {
         color: #0a8f7a;
     }
     
+    .offcanvas-body .nav-link i.fa-chevron-down {
+        font-size: 12px;
+        transition: transform 0.3s ease;
+    }
+    
+    .offcanvas-body .nav-link[aria-expanded="true"] i.fa-chevron-down {
+        transform: rotate(180deg);
+    }
+    
     .offcanvas-body .mobile-submenu {
         position: static !important;
-        display: block !important;
         background: #f8f9fa;
-        padding: 10px 0 10px 20px;
-        margin-top: 10px;
+        padding: 8px 0 8px 20px;
+        margin-top: 5px;
+        margin-bottom: 0;
         box-shadow: none;
-        opacity: 1 !important;
-        visibility: visible !important;
         border-radius: 5px;
     }
     
     .offcanvas-body .mobile-submenu li {
-        padding: 8px 0;
+        padding: 5px 0;
         border-bottom: 1px solid #e0e0e0;
     }
     
@@ -875,7 +887,7 @@ section.about_section .container {
     }
     
     .offcanvas-body .mobile-submenu li a {
-        padding: 5px 0;
+        padding: 4px 0;
         color: #666;
         font-size: 14px;
     }

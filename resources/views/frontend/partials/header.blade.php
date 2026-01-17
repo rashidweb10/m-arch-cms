@@ -311,10 +311,11 @@
                     </li>
 
                     <li class="nav-item menu {{ request()->routeIs('courses') ? 'active' : '' }}">
-                        <a href="#" class="nav-link robot_slab">
-                            Courses
+                        <a href="#" class="nav-link robot_slab d-flex justify-content-between align-items-center" data-bs-toggle="collapse" data-bs-target="#coursesSubmenu" aria-expanded="false">
+                            <span>Courses</span>
+                            <i class="fas fa-chevron-down ms-2"></i>
                         </a>
-                        <ul class="submenu mobile-submenu">
+                        <ul class="submenu mobile-submenu collapse" id="coursesSubmenu">
                             <li>
                                 <a href="{{ route('courses') }}#online-course" class="{{ request()->routeIs('faculties') ? 'active' : '' }}">
                                     <i class="fa-solid fa-laptop"></i> {{ \App\Models\CourseCategory::where('id', 33)->where('is_active', 1)->value('name') ?? 'Online Courses' }}
@@ -330,10 +331,11 @@
 
                     <!-- Faculties Menu -->
                     <li class="nav-item menu {{ request()->routeIs('faculties') ? 'active' : '' }}">
-                        <a href="#" class="nav-link robot_slab">
-                            Faculties
+                        <a href="#" class="nav-link robot_slab d-flex justify-content-between align-items-center" data-bs-toggle="collapse" data-bs-target="#facultiesSubmenu" aria-expanded="false">
+                            <span>Faculties</span>
+                            <i class="fas fa-chevron-down ms-2"></i>
                         </a>
-                        <ul class="submenu mobile-submenu">
+                        <ul class="submenu mobile-submenu collapse" id="facultiesSubmenu">
                             <li>
                                 <a href="{{ route('faculties') }}" class="{{ request()->routeIs('faculties') ? 'active' : '' }}">
                                     <i class="fa-solid fa-user-graduate"></i> Ms. Archana Saxena
