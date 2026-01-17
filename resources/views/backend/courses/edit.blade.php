@@ -37,7 +37,22 @@
                 </div>
                 <div class="file-preview box sm"></div>
             </div>
-        </div>     
+        </div>
+
+        <!-- Brochure -->
+        <div class="col-sm-12">
+            <div class="form-group mb-2">
+                <label for="brochure" class="form-label">Brochure</label>
+                <div class="input-group" data-toggle="aizuploader" data-type="document" data-multiple="false">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text bg-soft-secondary font-weight-medium">{{ __('Browse') }}</div>
+                    </div>
+                    <div class="form-control file-amount">{{ __('Choose File') }}</div>
+                    <input type="hidden" name="brochure" class="selected-files" value="{{ $pageData->brochure }}">
+                </div>
+                <div class="file-preview box sm"></div>
+            </div>
+        </div>
      
         <!-- Is Active (dropdown) -->
         <div class="col-sm-12">
