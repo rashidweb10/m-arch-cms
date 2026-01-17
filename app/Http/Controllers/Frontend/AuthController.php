@@ -461,7 +461,7 @@ class AuthController extends Controller
         }
         
         // Set default sorting by enrolment ID
-        $query->orderBy('id', 'asc');
+        $query->orderBy('id', 'desc');
         
         // Implement Laravel pagination with 25 records per page
         $enrolledCourses = $query->paginate(10);
@@ -490,8 +490,8 @@ class AuthController extends Controller
         // Load the course with its materials
         $course->load([
             'materials' => function ($q) {
-                $q->orderBy('sorting_id', 'asc')
-                ->orderBy('id', 'desc'); //
+                $q->orderBy('id', 'desc');
+                //->orderBy('sorting_id', 'asc'); //
             }
         ]);
 
