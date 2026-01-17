@@ -841,6 +841,11 @@ section.about_section .container {
         border-bottom: 1px solid #e0e0e0;
         padding: 8px 0;
     }
+    .services-scroll-item {
+        flex-shrink: 0;
+        width: 220px;
+        padding: 0 0px;
+    }
     
     .offcanvas-body .nav-item:last-child {
         border-bottom: none;
