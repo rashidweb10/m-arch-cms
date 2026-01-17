@@ -16,6 +16,7 @@
 
     @include('frontend.partials.scripts')
     @yield('scripts')
+    @stack('components.scripts')
 
 </body>
 </html>
