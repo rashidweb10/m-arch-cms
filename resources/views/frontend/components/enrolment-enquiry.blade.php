@@ -105,7 +105,7 @@
     <!-- Submit Button -->
     <div class="text-center">
         <button type="submit" class="btn btn-primary robot_slab">
-            Request for Enrolment
+            Enroll Now
         </button>
     </div>
 
