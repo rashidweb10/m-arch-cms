@@ -78,10 +78,34 @@
    <div class="container">
       <div class="row">
          <div class="col-12 text-center">
-            @include('frontend.components.enrolment-enquiry')
+            <button type="button" class="btn btn-primary btn-lg enroll-btn robot_slab" data-bs-toggle="modal" data-bs-target="#enrollModal">
+               ENROLL NOW
+            </button>            
          </div>
       </div>
    </div>
 </section>
+
+<!-- Enroll Modal -->
+<div class="modal fade" id="enrollModal" tabindex="-1" aria-labelledby="enrollModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h5 class="modal-title robot_slab" id="enrollModalLabel">
+                    Enroll in Course
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body">
+               @include('frontend.components.enrolment-enquiry')
+            </div>
+
+        </div>
+    </div>
+</div>
 
 @endsection
