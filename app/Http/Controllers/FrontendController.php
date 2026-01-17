@@ -57,7 +57,16 @@ class FrontendController extends Controller
             ->orderBy('id', 'asc')
             ->get();
         
-        return view('frontend.pages.courses', compact('courseCategories'));
+        // Fetch courses for specific categories (33 for Online, 34 for Offline)
+        $onlineCategory = CourseCategory::with(['courses' => function($query) {
+            $query->where('is_active', 1)->orderBy('id', 'asc');
+        }])->find(33);
+        
+        $offlineCategory = CourseCategory::with(['courses' => function($query) {
+            $query->where('is_active', 1)->orderBy('id', 'asc');
+        }])->find(34);
+        
+        return view('frontend.pages.courses', compact('courseCategories', 'onlineCategory', 'offlineCategory'));
     }
 
     public function faculties()
