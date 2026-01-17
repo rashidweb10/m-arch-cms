@@ -707,6 +707,12 @@ section.about_section .col-lg-4 {
 .enroll-form-box .btn-primary {
     width: 58% !important;
 }
+
+.offcanvas-body {
+    flex-grow: 1;
+    padding: 1rem 0rem;
+    overflow-y: auto;
+}
 .padd190 {
     padding: 0px 15px !important;
 }
@@ -848,7 +854,7 @@ section.about_section .container {
     
     .offcanvas-body .nav-item {
         border-bottom: 1px solid #e0e0e0;
-        padding: 8px 0;
+        padding: 8px 20px;
     }
     .services-scroll-item {
         flex-shrink: 0;
@@ -883,7 +889,7 @@ section.about_section .container {
     
     .offcanvas-body .mobile-submenu {
         position: static !important;
-        background: #f8f9fa;
+        background: transparent !important;
         padding: 8px 0 8px 20px;
         margin-top: 5px;
         margin-bottom: 0;
