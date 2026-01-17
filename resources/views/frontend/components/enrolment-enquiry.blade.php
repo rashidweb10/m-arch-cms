@@ -24,8 +24,10 @@
 
             <!-- Modal Body -->
             <div class="modal-body">
-                <form id="enrollForm" style="text-align: left;">
-
+                <form style="text-align: left;" class="needs-validation" id="contactForm" action="{{route('form.submit')}}" method="POST" onsubmit="protect_with_recaptcha_v3(this, 'contact')">
+                    @include('frontend.components.form-alert')
+                    @csrf                    
+                    <input type="hidden" name="form_name" value="enrolments">
                 <!-- User Details -->
                 <div class="row mb-4">
                     <div class="col-md-6">
