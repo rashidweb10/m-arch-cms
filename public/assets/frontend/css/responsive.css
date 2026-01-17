@@ -317,6 +317,15 @@ header {
     padding-right: 15px !important;
     padding-left: 30px !important;
 }
+.footer_link1 ul li {
+    float: left;
+    list-style: none;
+    padding-right: 10px;
+}
+.footer_logo img {
+    width: 90px !important;
+    margin-bottom: 15px;
+}
 .education_box {
     padding: 20px 20px;
     border-radius: 20px;
@@ -750,7 +759,7 @@ section.about_section .container {
 
 @media (max-width: 576px) {
     .banner_height {
-        height: 50vh;
+        height: 60vh;
         min-height: 300px;
     }
     
@@ -922,5 +931,80 @@ section.about_section .container {
     .feature_description {
         font-size: 14px !important;
         line-height: 1.6 !important;
+    }
+    
+    /* Footer Mobile Styles */
+    .footer .container .row {
+        text-align: center !important;
+    }
+    
+    .footer_logo {
+        text-align: center !important;
+        margin-bottom: 20px;
+    }
+    
+    .footer_link1 {
+        text-align: center !important;
+    }
+    
+    .footer_link1 h5 {
+        text-align: center !important;
+    }
+    
+    .footer-menu {
+        text-align: center !important;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .footer-menu li {
+        text-align: center !important;
+    }
+    
+    /* Hide desktop playstore on mobile */
+    .desktop-playstore {
+        display: none !important;
+    }
+    
+    /* Show mobile playstore */
+    .mobile-playstore {
+        display: inline-block;
+    }
+    
+    .mobile-playstore .playstore_size {
+        width: 100px !important;
+        height: auto;
+        margin-left: 10px;
+    }
+    
+    .footer .col-lg-10 h4 {
+        text-align: center !important;
+    }
+    
+    .footer .col-lg-10 .d-flex {
+        justify-content: center !important;
+    }
+    
+    /* Center align copyright and powered by */
+    .footer .col-md-2:empty {
+        display: none;
+    }
+    
+    .footer .col-md-7 {
+        text-align: center !important;
+        margin-bottom: 10px;
+    }
+    
+    .footer .col-md-3 {
+        text-align: center !important;
+    }
+    
+    .footer-copyright {
+        text-align: center !important;
+    }
+    
+    .copyrighr2 {
+        text-align: center !important;
     }
 }

@@ -2631,6 +2631,16 @@ background: rgb(29 29 29 / 90%);
     display: block;
 }
 
+/* Hide mobile playstore on desktop */
+.mobile-playstore {
+    display: none;
+}
+
+/* Show desktop playstore on desktop */
+.desktop-playstore {
+    display: block;
+}
+
 .offered_box p {
         position: absolute;
     text-align: left !important;

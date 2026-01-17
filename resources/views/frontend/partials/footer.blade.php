@@ -1,4 +1,4 @@
-<footer class="footer pt-md-5 pt-4 pb-md-2 pb-5">
+<footer class="footer pt-md-5 pt-4 pb-md-2 pb-4">
    <div class="container">
       <div class="row">
          <div class="col-md-2">
@@ -40,7 +40,7 @@
                </div>
                <div class="col-lg-10  pt-4 pb-4">
                   <h4 class="text-md-start robot_slab">Go Social</h4>
-                  <div class="d-flex gap-2 justify-content-md-start">
+                  <div class="d-flex gap-2 justify-content-md-start align-items-center flex-wrap">
                      <a target="_blank" href="{{ get_setting('facebook_url') }}">
                      <img class="w-20 hvr-bounce-in" src="{{ asset('assets/frontend/img/fb.png') }}">
                      </a>
@@ -53,9 +53,12 @@
                      <a target="_blank" href="{{ get_setting('youtube_url') }}">
                      <img class="w-20 hvr-bounce-in" src="{{ asset('assets/frontend/img/yt.png') }}">
                      </a>
+                     <div class="mobile-playstore">
+                        <img class="playstore_size" src="{{ asset('assets/frontend/img/icon-play-store.png') }}" />
+                     </div>
                   </div>
                </div>
-               <div class="col-lg-2 pt-5 pb-4">
+               <div class="col-lg-2 pt-5 pb-4 desktop-playstore">
                   <img class="playstore_size" src="{{ asset('assets/frontend/img/icon-play-store.png') }}" />
                </div>
             </div>
@@ -65,7 +68,7 @@
             <p class="footer-copyright mb-0">© {{date("Y")}} MarineArch Online Academy. All Rights Reserved.</p>
          </div>
          <div class="col-md-3 text-end">
-            <p class="footer-copyright mb-0 copyrighr2 text-end">Powered by <a href="{{config('custom.author_url')}}" target="_blank" style="font-weight:bold">Maptek</a>
+            <p class="footer-copyright mb-0 copyrighr2 text-md-end text-center">Powered by <a href="{{config('custom.author_url')}}" target="_blank" style="font-weight:bold">Maptek</a>
             </p>
          </div>
       </div>

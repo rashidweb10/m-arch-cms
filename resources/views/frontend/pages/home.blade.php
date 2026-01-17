@@ -65,7 +65,7 @@
                {!! $about_description !!}
             </div>
          </div>
-         <div class="col-lg-4 col-12 pt-5" data-aos="fade-left" data-aos-duration="1000" data-aos-once="true">
+         <div class="col-lg-4 col-12 pt-md-5 pt-2" data-aos="fade-left" data-aos-duration="1000" data-aos-once="true">
             <div class="about_border border_6 position-relative">
                <img class="hvr-bounce-in aboutimgss" src="{{ uploaded_asset($about_image) }}" alt="img" />
             </div>
