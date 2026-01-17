@@ -145,14 +145,16 @@
                                         </a>
                                         <ul class="submenu">
                                            <li>
-                                                  <a href="{{ route('courses') }}#online-course" class="{{ request()->routeIs('faculties') ? 'active' : '' }}">
-                                                  <i class="fa-solid fa-laptop"></i> Online Courses
+                                                  <a href="{{ route('courses') }}" class="{{ request()->routeIs('faculties') ? 'active' : '' }}">
+                                                  <i class="fa-solid fa-laptop"></i> {{ \App\Models\CourseCategory::where('id', 33)->where('is_active', 1)->value('name') ?? 'Online Courses' }}
+
                                                   </a>
                                                 </li>
                                                 
                                                 <li>
-                                                  <a href="{{ route('courses') }}#offline-course" class="{{ request()->routeIs('courses') ? 'active' : '' }}">
-                                                  <i class="fa-solid fa-chalkboard"></i> Offline Courses
+                                                  <a href="{{ route('courses') }}" class="{{ request()->routeIs('courses') ? 'active' : '' }}">
+                                                  <i class="fa-solid fa-chalkboard"></i> {{ \App\Models\CourseCategory::where('id', 34)->where('is_active', 1)->value('name') ?? 'Offline Courses' }}
+
                                                   </a>
                                                 </li>
                                                 
