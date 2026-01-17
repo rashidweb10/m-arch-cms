@@ -61,15 +61,17 @@
 @endif -->
 
 <!-- Features Section -->
-<section class="features_section pt-5 pb-5" id="features_section">
+<section class="features_section pt-5 pb-5 mb-md-5" id="features_section">
    <div class="container">
       <div class="row g-4">
-         
+      <div class="text-start mb-md-2 mb-2 pt-2">
+            <h3 class="robot_slab text_color text-center">Why MarinArch</h3>
+         </div>
          <!-- Career Achievements -->
          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
             <div class="feature_card">
                <div class="feature_icon">
-                  <i class="fas fa-trophy"></i>
+               <img class="jbox-img rotate w-100" src="/assets/frontend/img/career.jpg" alt="">
                </div>
                <h3 class="feature_title robot_slab">Career Achievements</h3>
                <p class="feature_description">
@@ -82,7 +84,7 @@
          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true" data-aos-delay="100">
             <div class="feature_card">
                <div class="feature_icon">
-                  <i class="fas fa-sync-alt"></i>
+               <img class="jbox-img rotate w-100" src="/assets/frontend/img/flexibility.jpg" alt="">
                </div>
                <h3 class="feature_title robot_slab">Flexibility</h3>
                <p class="feature_description">
@@ -95,7 +97,7 @@
          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true" data-aos-delay="200">
             <div class="feature_card">
                <div class="feature_icon">
-                  <i class="fas fa-dollar-sign"></i>
+               <img class="jbox-img rotate w-100" src="/assets/frontend/img/cost-effective.jpg" alt="">
                </div>
                <h3 class="feature_title robot_slab">Cost Effective</h3>
                <p class="feature_description">
@@ -108,13 +110,11 @@
    </div>
 </section>
 
-@if(isset($quicklinks['itration']) && is_array($quicklinks['itration']))
+<!-- @if(isset($quicklinks['itration']) && is_array($quicklinks['itration']))
 <section class="gallery_section">
    <div class="bgcolor pb-4 pt-4 pb-md-5 pt-md-5">
       <div class="container">
-         <div class="text-start mb-md-4 mb-2 pt-2">
-            <h3 class="robot_slab text_color text-center">Why MarinArch</h3>
-         </div>
+       
          <div class="row">
 
             @foreach($quicklinks['itration'] as $index => $itration)  
@@ -134,6 +134,6 @@
       </div>
    </div>
 </section>
-@endif
+@endif -->
 
 @endsection
