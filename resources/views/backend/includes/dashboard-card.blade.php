@@ -1,4 +1,4 @@
-<div class="col-3">
+<div class="col-12 col-sm-3 col-md-3 col-lg-3">
     <div class="card overflow-hidden">
         <div class="card-body">
             <a href="{{ $url }}">

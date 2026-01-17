@@ -36,415 +36,61 @@
       <div class="row g-4">
          <!-- Online Courses Section -->
          <div class="col-lg-6 pe-lg-5" id="online-course">
-            <h2 class="robot_slab text_color mb-4">
-               <i class="fa-solid fa-laptop me-2"></i> Online Course
+            <h2 class="robot_slab text_color mb-4 text-capitalize">
+               <i class="fa-solid fa-laptop me-2"></i> {{ $onlineCategory->name ?? 'Online Course' }}
             </h2>
             <ul class="course-list list-unstyled">
-               <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center justify-content-between">
+               @if(isset($onlineCategory) && $onlineCategory->courses->count() > 0)
+                  @foreach($onlineCategory->courses as $course)
+                     <li class="course-item pb-3 border-bottom">
+                        <div class="d-flex align-items-center justify-content-between">
+                           <span class="course-bullet me-3"></span>
+                           <span class="course-name">{{ $course->name }}</span>
+                           @if($course->brochure)
+                           <a href="{{ uploaded_asset($course->brochure) }}" class="btn btn-sm btn-outline-primary ms-2" download>
+                              <i class="fas fa-file-pdf"></i>
+                           </a>
+                           @endif
+                        </div>
+                     </li>
+                  @endforeach
+               @else
+                  <li class="course-item pb-3">
                      <div class="d-flex align-items-center">
                         <span class="course-bullet me-3"></span>
-                        <span class="course-name">ME engine course simulator training</span>
+                        <span class="course-name">No online courses available</span>
                      </div>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
-                        <i class="fas fa-file-pdf"></i>
-                     </a>
-                  </div>
-               </li>
-               <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center justify-content-between">
-                     <div class="d-flex align-items-center">
-                        <span class="course-bullet me-3"></span>
-                        <span class="course-name">Mental health for seafarers course</span>
-                     </div>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
-                        <i class="fas fa-file-pdf"></i>
-                     </a>
-                  </div>
-               </li>
-               <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center justify-content-between">
-                     <div class="d-flex align-items-center">
-                        <span class="course-bullet me-3"></span>
-                        <span class="course-name">Advanced hydraulics course                     </span>
-                     </div>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
-                        <i class="fas fa-file-pdf"></i>
-                     </a>
-                  </div>
-               </li>
-               <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center justify-content-between">
-                     <div class="d-flex align-items-center">
-                        <span class="course-bullet me-3"></span>
-                        <span class="course-name">Basic hydraulic course                     </span>
-                     </div>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
-                        <i class="fas fa-file-pdf"></i>
-                     </a>
-                  </div>
-               </li>
-               <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center justify-content-between">
-                     <div class="d-flex align-items-center">
-                        <span class="course-bullet me-3"></span>
-                        <span class="course-name">Automation and instrumentation course                     </span>
-                     </div>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
-                        <i class="fas fa-file-pdf"></i>
-                     </a>
-                  </div>
-               </li>
-               <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center justify-content-between">
-                     <div class="d-flex align-items-center">
-                        <span class="course-bullet me-3"></span>
-                        <span class="course-name">Framo hydraulic cargo pumping system course                     </span>
-                     </div>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
-                        <i class="fas fa-file-pdf"></i>
-                     </a>
-                  </div>
-               </li>
-               <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center justify-content-between">
-                     <div class="d-flex align-items-center">
-                        <span class="course-bullet me-3"></span>
-                        <span class="course-name">Training program for gas engineer                     </span>
-                     </div>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
-                        <i class="fas fa-file-pdf"></i>
-                     </a>
-                  </div>
-               </li>
-               <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center justify-content-between">
-                     <div class="d-flex align-items-center">
-                        <span class="course-bullet me-3"></span>
-                        <span class="course-name">Bridge team resource management                     </span>
-                     </div>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
-                        <i class="fas fa-file-pdf"></i>
-                     </a>
-                  </div>
-               </li>
-               <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center justify-content-between">
-                     <div class="d-flex align-items-center">
-                        <span class="course-bullet me-3"></span>
-                        <span class="course-name">Electrical drawing course                     </span>
-                     </div>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
-                        <i class="fas fa-file-pdf"></i>
-                     </a>
-                  </div>
-               </li>
-               <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center justify-content-between">
-                     <div class="d-flex align-items-center">
-                        <span class="course-bullet me-3"></span>
-                        <span class="course-name">Risk management and accident investigation course                     </span>
-                     </div>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
-                        <i class="fas fa-file-pdf"></i>
-                     </a>
-                  </div>
-               </li>
-               <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center justify-content-between">
-                     <div class="d-flex align-items-center">
-                        <span class="course-bullet me-3"></span>
-                        <span class="course-name">Sire 2.0                     </span>
-                     </div>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
-                        <i class="fas fa-file-pdf"></i>
-                     </a>
-                  </div>
-               </li>
-               <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center justify-content-between">
-                     <div class="d-flex align-items-center">
-                        <span class="course-bullet me-3"></span>
-                        <span class="course-name">Auxiliary diesel engine maintenance course                     </span>
-                     </div>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
-                        <i class="fas fa-file-pdf"></i>
-                     </a>
-                  </div>
-               </li>
-               <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center justify-content-between">
-                     <div class="d-flex align-items-center">
-                        <span class="course-bullet me-3"></span>
-                        <span class="course-name">Chief engineer command course                     </span>
-                     </div>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
-                        <i class="fas fa-file-pdf"></i>
-                     </a>
-                  </div>
-               </li>
-               <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center justify-content-between">
-                     <div class="d-flex align-items-center">
-                        <span class="course-bullet me-3"></span>
-                        <span class="course-name">Ship security officer                     </span>
-                     </div>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
-                        <i class="fas fa-file-pdf"></i>
-                     </a>
-                  </div>
-               </li>
-               <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center justify-content-between">
-                     <div class="d-flex align-items-center">
-                        <span class="course-bullet me-3"></span>
-                        <span class="course-name">Gender sensitization course                     </span>
-                     </div>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
-                        <i class="fas fa-file-pdf"></i>
-                     </a>
-                  </div>
-               </li>
-               <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center justify-content-between">
-                     <div class="d-flex align-items-center">
-                        <span class="course-bullet me-3"></span>
-                        <span class="course-name">Engine room simulator refresher and engine room team resource management                     </span>
-                     </div>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
-                        <i class="fas fa-file-pdf"></i>
-                     </a>
-                  </div>
-               </li>
-               <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center justify-content-between">
-                     <div class="d-flex align-items-center">
-                        <span class="course-bullet me-3"></span>
-                        <span class="course-name">Tanker cargo operation                     </span>
-                     </div>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
-                        <i class="fas fa-file-pdf"></i>
-                     </a>
-                  </div>
-               </li>
-               <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center justify-content-between">
-                     <div class="d-flex align-items-center">
-                        <span class="course-bullet me-3"></span>
-                        <span class="course-name">Onboard seafarer's assessment                     </span>
-                     </div>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
-                        <i class="fas fa-file-pdf"></i>
-                     </a>
-                  </div>
-               </li>
-               <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center justify-content-between">
-                     <div class="d-flex align-items-center">
-                        <span class="course-bullet me-3"></span>
-                        <span class="course-name">Hull Structure Inspection Course                     </span>
-                     </div>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
-                        <i class="fas fa-file-pdf"></i>
-                     </a>
-                  </div>
-               </li>
-               <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center justify-content-between">
-                     <div class="d-flex align-items-center">
-                        <span class="course-bullet me-3"></span>
-                        <span class="course-name">ME - GI course                     </span>
-                     </div>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
-                        <i class="fas fa-file-pdf"></i>
-                     </a>
-                  </div>
-               </li>
-               <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center justify-content-between">
-                     <div class="d-flex align-items-center">
-                        <span class="course-bullet me-3"></span>
-                        <span class="course-name">Training Program for Gas Engineers                     </span>
-                     </div>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
-                        <i class="fas fa-file-pdf"></i>
-                     </a>
-                  </div>
-               </li>
-               <li class="course-item mb-3 border-bottom">
-                  <div class="d-flex align-items-center justify-content-between">
-                     <div class="d-flex align-items-center">
-                        <span class="course-bullet me-3"></span>
-                        <span class="course-name">CII Rating Training                     </span>
-                     </div>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
-                        <i class="fas fa-file-pdf"></i>
-                     </a>
-                  </div>
-               </li>
+                  </li>
+               @endif
             </ul>
          </div>
 
          <!-- Offline Courses Section -->
          <div class="col-lg-6 ps-lg-5" id="offline-course">
-            <h2 class="robot_slab text_color mb-4">
-               <i class="fa-solid fa-chalkboard me-2"></i> Offline Course
+            <h2 class="robot_slab text_color mb-4 text-capitalize">
+               <i class="fa-solid fa-chalkboard me-2"></i> {{ $offlineCategory->name ?? 'Offline Course' }}
             </h2>
             <ul class="course-list list-unstyled">
-               <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center justify-content-between">
+               @if(isset($offlineCategory) && $offlineCategory->courses->count() > 0)
+                  @foreach($offlineCategory->courses as $course)
+                     <li class="course-item pb-3 border-bottom">
+                        <div class="d-flex align-items-center justify-content-between">
+                           <span class="course-bullet me-3"></span>
+                           <span class="course-name">{{ $course->name }}</span>
+                           <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary ms-2" download>
+                              <i class="fas fa-file-pdf"></i>
+                           </a>
+                        </div>
+                     </li>
+                  @endforeach
+               @else
+                  <li class="course-item pb-3">
                      <div class="d-flex align-items-center">
                         <span class="course-bullet me-3"></span>
-                        <span class="course-name">Framo hydraulic cargo pumping system course                     </span>
+                        <span class="course-name">No offline courses available</span>
                      </div>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
-                        <i class="fas fa-file-pdf"></i>
-                     </a>
-                  </div>
-               </li>
-               <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center justify-content-between">
-                     <div class="d-flex align-items-center">
-                        <span class="course-bullet me-3"></span>
-                        <span class="course-name">Risk management and accident investigation course                     </span>
-                     </div>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
-                        <i class="fas fa-file-pdf"></i>
-                     </a>
-                  </div>
-               </li>
-               <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center justify-content-between">
-                     <div class="d-flex align-items-center">
-                        <span class="course-bullet me-3"></span>
-                        <span class="course-name">Chief engineer command course                     </span>
-                     </div>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
-                        <i class="fas fa-file-pdf"></i>
-                     </a>
-                  </div>
-               </li>
-               <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center justify-content-between">
-                     <div class="d-flex align-items-center">
-                        <span class="course-bullet me-3"></span>
-                        <span class="course-name">Gender sensitization course                     </span>
-                     </div>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
-                        <i class="fas fa-file-pdf"></i>
-                     </a>
-                  </div>
-               </li>
-               <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center justify-content-between">
-                     <div class="d-flex align-items-center">
-                        <span class="course-bullet me-3"></span>
-                        <span class="course-name">Mental health for seafarers course</span>
-                     </div>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
-                        <i class="fas fa-file-pdf"></i>
-                     </a>
-                  </div>
-               </li>
-               <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center justify-content-between">
-                     <div class="d-flex align-items-center">
-                        <span class="course-bullet me-3"></span>
-                        <span class="course-name">Engine room simulator refresher and engine room team resource management                     </span>
-                     </div>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
-                        <i class="fas fa-file-pdf"></i>
-                     </a>
-                  </div>
-               </li>
-               <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center justify-content-between">
-                     <div class="d-flex align-items-center">
-                        <span class="course-bullet me-3"></span>
-                        <span class="course-name">Basic hydraulic workshop                     </span>
-                     </div>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
-                        <i class="fas fa-file-pdf"></i>
-                     </a>
-                  </div>
-               </li>
-               <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center justify-content-between">
-                     <div class="d-flex align-items-center">
-                        <span class="course-bullet me-3"></span>
-                        <span class="course-name">Advanced hydraulics workshop                     </span>
-                     </div>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
-                        <i class="fas fa-file-pdf"></i>
-                     </a>
-                  </div>
-               </li>
-               <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center justify-content-between">
-                     <div class="d-flex align-items-center">
-                        <span class="course-bullet me-3"></span>
-                        <span class="course-name">Pneumatics and manoeuvring system course                     </span>
-                     </div>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
-                        <i class="fas fa-file-pdf"></i>
-                     </a>
-                  </div>
-               </li>
-               <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center justify-content-between">
-                     <div class="d-flex align-items-center">
-                        <span class="course-bullet me-3"></span>
-                        <span class="course-name">NK-O3 ballast water treatment system (BWTS) operations and troubleshooting course                     </span>
-                     </div>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
-                        <i class="fas fa-file-pdf"></i>
-                     </a>
-                  </div>
-               </li>
-               <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center justify-content-between">
-                     <div class="d-flex align-items-center">
-                        <span class="course-bullet me-3"></span>
-                        <span class="course-name">Samsung Purimar ballast water treatment system (BWTS) operations and troubleshooting course                     </span>
-                     </div>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
-                        <i class="fas fa-file-pdf"></i>
-                     </a>
-                  </div>
-               </li>
-               <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center justify-content-between">
-                     <div class="d-flex align-items-center">
-                        <span class="course-bullet me-3"></span>
-                        <span class="course-name">Hyundai HiBallast water treatment system (BWTS) operations and troubleshooting course                     </span>
-                     </div>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
-                        <i class="fas fa-file-pdf"></i>
-                     </a>
-                  </div>
-               </li>
-               <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center justify-content-between">
-                     <div class="d-flex align-items-center">
-                        <span class="course-bullet me-3"></span>
-                        <span class="course-name">Hull Structure Inspection Course                     </span>
-                     </div>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
-                        <i class="fas fa-file-pdf"></i>
-                     </a>
-                  </div>
-               </li>
-               <li class="course-item mb-3 border-bottom">
-                  <div class="d-flex align-items-center justify-content-between">
-                     <div class="d-flex align-items-center">
-                        <span class="course-bullet me-3"></span>
-                        <span class="course-name">CII Rating Training                     </span>
-                     </div>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
-                        <i class="fas fa-file-pdf"></i>
-                     </a>
-                  </div>
-               </li>
+                  </li>
+               @endif
             </ul>
          </div>
       </div>
@@ -515,44 +161,22 @@
                   <select class="form-select" id="courseSelect" name="course" required>
                      <option value="">-- Select a course --</option>
                      <optgroup label="Online Courses">
-                        <option value="ME engine course simulator training">ME engine course simulator training</option>
-                        <option value="Mental health for seafarers course">Mental health for seafarers course</option>
-                        <option value="Advanced hydraulics course">Advanced hydraulics course</option>
-                        <option value="Basic hydraulic course">Basic hydraulic course</option>
-                        <option value="Automation and instrumentation course">Automation and instrumentation course</option>
-                        <option value="Framo hydraulic cargo pumping system course">Framo hydraulic cargo pumping system course</option>
-                        <option value="Training program for gas engineer">Training program for gas engineer</option>
-                        <option value="Bridge team resource management">Bridge team resource management</option>
-                        <option value="Electrical drawing course">Electrical drawing course</option>
-                        <option value="Risk management and accident investigation course">Risk management and accident investigation course</option>
-                        <option value="Sire 2.0">Sire 2.0</option>
-                        <option value="Auxiliary diesel engine maintenance course">Auxiliary diesel engine maintenance course</option>
-                        <option value="Chief engineer command course">Chief engineer command course</option>
-                        <option value="Ship security officer">Ship security officer</option>
-                        <option value="Gender sensitization course">Gender sensitization course</option>
-                        <option value="Engine room simulator refresher and engine room team resource management">Engine room simulator refresher and engine room team resource management</option>
-                        <option value="Tanker cargo operation">Tanker cargo operation</option>
-                        <option value="Onboard seafarer's assessment">Onboard seafarer's assessment</option>
-                        <option value="Hull Structure Inspection Course">Hull Structure Inspection Course</option>
-                        <option value="ME - GI course">ME - GI course</option>
-                        <option value="Training Program for Gas Engineers">Training Program for Gas Engineers</option>
-                        <option value="CII Rating Training">CII Rating Training</option>
+                        @if(isset($onlineCategory) && $onlineCategory->courses->count() > 0)
+                           @foreach($onlineCategory->courses as $course)
+                              <option value="{{ $course->name }}">{{ $course->name }}</option>
+                           @endforeach
+                        @else
+                           <option value="">No online courses available</option>
+                        @endif
                      </optgroup>
                      <optgroup label="Offline Courses">
-                        <option value="Framo hydraulic cargo pumping system course">Framo hydraulic cargo pumping system course</option>
-                        <option value="Risk management and accident investigation course">Risk management and accident investigation course</option>
-                        <option value="Chief engineer command course">Chief engineer command course</option>
-                        <option value="Gender sensitization course">Gender sensitization course</option>
-                        <option value="Mental health for seafarers course">Mental health for seafarers course</option>
-                        <option value="Engine room simulator refresher and engine room team resource management">Engine room simulator refresher and engine room team resource management</option>
-                        <option value="Basic hydraulic workshop">Basic hydraulic workshop</option>
-                        <option value="Advanced hydraulics workshop">Advanced hydraulics workshop</option>
-                        <option value="Pneumatics and manoeuvring system course">Pneumatics and manoeuvring system course</option>
-                        <option value="NK-O3 ballast water treatment system (BWTS) operations and troubleshooting course">NK-O3 ballast water treatment system (BWTS) operations and troubleshooting course</option>
-                        <option value="Samsung Purimar ballast water treatment system (BWTS) operations and troubleshooting course">Samsung Purimar ballast water treatment system (BWTS) operations and troubleshooting course</option>
-                        <option value="Hyundai HiBallast water treatment system (BWTS) operations and troubleshooting course">Hyundai HiBallast water treatment system (BWTS) operations and troubleshooting course</option>
-                        <option value="Hull Structure Inspection Course">Hull Structure Inspection Course</option>
-                        <option value="CII Rating Training">CII Rating Training</option>
+                        @if(isset($offlineCategory) && $offlineCategory->courses->count() > 0)
+                           @foreach($offlineCategory->courses as $course)
+                              <option value="{{ $course->name }}">{{ $course->name }}</option>
+                           @endforeach
+                        @else
+                           <option value="">No offline courses available</option>
+                        @endif
                      </optgroup>
                   </select>
                </div>
