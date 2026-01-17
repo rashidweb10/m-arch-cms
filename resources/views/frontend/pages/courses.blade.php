@@ -102,7 +102,7 @@
    <div class="container">
       <div class="row">
          <div class="col-12 text-center">
-            <button type="button" class="btn btn-primary btn-lg enroll-btn robot_slab" data-bs-toggle="modal" data-bs-target="#enrollModal">
+            <button type="button" class=" enroll-btn robot_slab" data-bs-toggle="modal" data-bs-target="#enrollModal">
                ENROLL NOW
             </button>
          </div>

@@ -2836,16 +2836,19 @@ body .course-bullet {
 .enroll-btn {
     background: #bde3fa !important;
     border: none;
-    padding: 15px 50px;
+    padding: 10px 25px;
+        border: 0 !important;
     font-size: 18px !important;
     font-weight: 600;
     border-radius: 50px;
     color: #000 !important;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(10, 143, 122, 0.3);
+    box-shadow: none;
     margin-bottom: 30px;
 }
-
+.enroll-btn:hover {
+    background: #00a0e3 !important;
+}
 
 
 /* Enroll Modal */
@@ -2892,6 +2895,143 @@ body .course-bullet {
 #enrollModal .form-select:focus {
     border-color: #83d0f4;
     box-shadow: 0 0 0 0.2rem rgba(131, 208, 244, 0.25);
+}
+
+/* Enroll Section with Images */
+
+.enroll-images-section h4 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #0a8f7a;
+    margin-bottom: 15px;
+}
+
+.enroll-images-section h4 i {
+    color: #83d0f4;
+}
+
+.enroll-image-box {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.enroll-image-box:hover {
+    transform: translateY(-5px);
+}
+
+.enroll-images-section a {
+    display: block;
+    text-decoration: none;
+}
+
+.enroll-images-section a:hover {
+    text-decoration: none;
+}
+
+.enroll-image-box img {
+    height: 400px;
+    object-fit: cover;
+    border-radius: 15px;
+    width: 100%;
+    display: block;
+}
+
+.enroll-images-stacked .enroll-image-box img {
+    height: 400px;
+}
+
+.image-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 15px 20px;
+    text-align: center;
+}
+
+.image-label span {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+.enroll-image-box {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.enroll-image-box img {
+    transition: transform 0.3s ease;
+}
+
+.enroll-image-box:hover img {
+    transform: scale(1.05);
+}
+
+.enroll-form-box {
+    background: #fff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    height: 100%;
+}
+
+.enroll-form-box h3 {
+    color: #000;
+    text-align:center;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.enroll-form-box .form-check {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.enroll-form-box .form-check:hover {
+    background-color: #f8f9fa;
+    border-color: #83d0f4;
+}
+
+.enroll-form-box .form-check-input:checked {
+    background-color: #0a8f7a;
+    border-color: #0a8f7a;
+}
+
+.enroll-form-box .form-select {
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    padding: 10px;
+}
+
+.enroll-form-box .form-select:focus {
+    border-color: #83d0f4;
+    box-shadow: 0 0 0 0.2rem rgba(131, 208, 244, 0.25);
+}
+
+.enroll-form-box .btn-primary {
+    background: #bde3fa !important;
+    border: none;
+    padding: 10px 30px;
+    font-weight: 600;
+    color: #000 !important;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    width: 45% !important;
+}
+
+.enroll-form-box .btn-primary:hover {
+    background-color: #00a0e3 !important;
 }
 
 .testiminials_box img {

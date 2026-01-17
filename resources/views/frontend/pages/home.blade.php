@@ -74,6 +74,120 @@
    </div>
 </section>
 
+<!-- Enroll Section with Images -->
+<section class="enroll-images-section pt-5 pb-5">
+   <div class="container">
+      <div class="row g-4 align-items-center">
+         <!-- Single Image Column - Online Course -->
+         <div class="col-md-4" data-aos="fade-right" data-aos-duration="1000" data-aos-once="true">
+            <a href="{{ route('courses') }}#online-course" class="text-decoration-none">
+               <div class="enroll-image-box position-relative">
+                  <img class="w-100 hvr-bounce-in" src="/assets/frontend/img/course-1.jpg" alt="MarinArch Training">
+                  <div class="image-label">
+                     <span class="robot_slab">Online Course</span>
+                  </div>
+               </div>
+            </a>
+         </div>
+         
+         <!-- Two Images Column - Offline Course -->
+         <div class="col-md-4" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
+            <a href="{{ route('courses') }}#offline-course" class="text-decoration-none">
+               <div class="enroll-images-stacked">
+                  <div class="enroll-image-box position-relative">
+                     <img class="w-100 hvr-bounce-in" src="/assets/frontend/img/course-2.jpg" alt="MarinArch Training">
+                     <div class="image-label">
+                        <span class="robot_slab">Offline Course</span>
+                     </div>
+                  </div>
+               </div>
+            </a>
+         </div>
+         
+         <!-- Enroll Form Column -->
+         <div class="col-md-4" data-aos="fade-left" data-aos-duration="1000" data-aos-once="true">
+            <div class="enroll-form-box">
+               <h3 class="robot_slab text_color mb-4">Enroll Now</h3>
+               <form id="homeEnrollForm">
+                  <div class="mb-4">
+                     <label class="form-label robot_slab fw-bold">Select Course Type:</label>
+                     <div class="row">
+                        <div class="col-6">
+                           <div class="form-check">
+                              <input class="form-check-input" type="radio" name="courseType" id="homeOnlineType" value="online" checked>
+                              <label class="form-check-label" for="homeOnlineType">
+                                 <i class="fa-solid fa-laptop me-2"></i> Online
+                              </label>
+                           </div>
+                        </div>
+                        <div class="col-6">
+                           <div class="form-check">
+                              <input class="form-check-input" type="radio" name="courseType" id="homeOfflineType" value="offline">
+                              <label class="form-check-label" for="homeOfflineType">
+                                 <i class="fa-solid fa-chalkboard me-2"></i> Offline
+                              </label>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  
+                  <div class="mb-4">
+                     <label for="homeCourseSelect" class="form-label robot_slab fw-bold">Select Course:</label>
+                     <select class="form-select" id="homeCourseSelect" name="course" required>
+                        <option value="">-- Select a course --</option>
+                        <optgroup label="Online Courses">
+                           <option value="ME engine course simulator training">ME engine course simulator training</option>
+                           <option value="Mental health for seafarers course">Mental health for seafarers course</option>
+                           <option value="Advanced hydraulics course">Advanced hydraulics course</option>
+                           <option value="Basic hydraulic course">Basic hydraulic course</option>
+                           <option value="Automation and instrumentation course">Automation and instrumentation course</option>
+                           <option value="Framo hydraulic cargo pumping system course">Framo hydraulic cargo pumping system course</option>
+                           <option value="Training program for gas engineer">Training program for gas engineer</option>
+                           <option value="Bridge team resource management">Bridge team resource management</option>
+                           <option value="Electrical drawing course">Electrical drawing course</option>
+                           <option value="Risk management and accident investigation course">Risk management and accident investigation course</option>
+                           <option value="Sire 2.0">Sire 2.0</option>
+                           <option value="Auxiliary diesel engine maintenance course">Auxiliary diesel engine maintenance course</option>
+                           <option value="Chief engineer command course">Chief engineer command course</option>
+                           <option value="Ship security officer">Ship security officer</option>
+                           <option value="Gender sensitization course">Gender sensitization course</option>
+                           <option value="Engine room simulator refresher and engine room team resource management">Engine room simulator refresher and engine room team resource management</option>
+                           <option value="Tanker cargo operation">Tanker cargo operation</option>
+                           <option value="Onboard seafarer's assessment">Onboard seafarer's assessment</option>
+                           <option value="Hull Structure Inspection Course">Hull Structure Inspection Course</option>
+                           <option value="ME - GI course">ME - GI course</option>
+                           <option value="Training Program for Gas Engineers">Training Program for Gas Engineers</option>
+                           <option value="CII Rating Training">CII Rating Training</option>
+                        </optgroup>
+                        <optgroup label="Offline Courses">
+                           <option value="Framo hydraulic cargo pumping system course">Framo hydraulic cargo pumping system course</option>
+                           <option value="Risk management and accident investigation course">Risk management and accident investigation course</option>
+                           <option value="Chief engineer command course">Chief engineer command course</option>
+                           <option value="Gender sensitization course">Gender sensitization course</option>
+                           <option value="Mental health for seafarers course">Mental health for seafarers course</option>
+                           <option value="Engine room simulator refresher and engine room team resource management">Engine room simulator refresher and engine room team resource management</option>
+                           <option value="Basic hydraulic workshop">Basic hydraulic workshop</option>
+                           <option value="Advanced hydraulics workshop">Advanced hydraulics workshop</option>
+                           <option value="Pneumatics and manoeuvring system course">Pneumatics and manoeuvring system course</option>
+                           <option value="NK-O3 ballast water treatment system (BWTS) operations and troubleshooting course">NK-O3 ballast water treatment system (BWTS) operations and troubleshooting course</option>
+                           <option value="Samsung Purimar ballast water treatment system (BWTS) operations and troubleshooting course">Samsung Purimar ballast water treatment system (BWTS) operations and troubleshooting course</option>
+                           <option value="Hyundai HiBallast water treatment system (BWTS) operations and troubleshooting course">Hyundai HiBallast water treatment system (BWTS) operations and troubleshooting course</option>
+                           <option value="Hull Structure Inspection Course">Hull Structure Inspection Course</option>
+                           <option value="CII Rating Training">CII Rating Training</option>
+                        </optgroup>
+                     </select>
+                  </div>
+                  
+                  <div class="text-center">
+                     <button type="submit" class="btn btn-primary robot_slab w-100">Enroll Now</button>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+
 @include('frontend.partials.course-carousel')
 
 <section class="scholar_section mt-lg-5 pb-lg-5 position-relative z-index-9">
@@ -227,5 +341,32 @@
    </div>
 </section>
 @endif
+
+@push('scripts')
+<script>
+   $(document).ready(function() {
+      // Handle home enroll form submission
+      $('#homeEnrollForm').on('submit', function(e) {
+         e.preventDefault();
+         
+         var courseType = $('input[name="courseType"]:checked').val();
+         var course = $('#homeCourseSelect').val();
+         
+         if (!course) {
+            alert('Please select a course');
+            return;
+         }
+         
+         // Here you can add AJAX call to submit enrollment
+         // For now, just show an alert
+         alert('Enrollment request submitted for: ' + course + ' (' + courseType + ')');
+         
+         // Reset form
+         $('#homeEnrollForm')[0].reset();
+         $('#homeOnlineType').prop('checked', true);
+      });
+   });
+</script>
+@endpush
 
 @endsection

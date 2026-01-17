@@ -823,6 +823,39 @@ section.about_section .container {
     #enrollModal .modal-dialog {
         margin: 15px;
     }
+    
+    /* Enroll Images Section Responsive */
+    .enroll-images-section .col-md-4 {
+        margin-bottom: 20px;
+    }
+    
+    .enroll-image-box img {
+        height: 300px !important;
+    }
+    
+    .enroll-images-stacked .enroll-image-box {
+        margin-bottom: 15px !important;
+    }
+    
+    .enroll-images-stacked .enroll-image-box img {
+        height: 300px !important;
+    }
+    
+    .image-label {
+        padding: 12px 15px !important;
+    }
+    
+    .image-label span {
+        font-size: 16px !important;
+    }
+    
+    .enroll-form-box {
+        padding: 20px !important;
+    }
+    
+    .enroll-form-box h3 {
+        font-size: 20px !important;
+    }
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
