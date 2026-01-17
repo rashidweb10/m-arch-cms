@@ -37,203 +37,247 @@
          <!-- Online Courses Section -->
          <div class="col-lg-6 pe-lg-5" id="online-course">
             <h2 class="robot_slab text_color mb-4">
-               <i class="fa-solid fa-laptop me-2"></i> ONLINE COURSE
+               <i class="fa-solid fa-laptop me-2"></i> Online Course
             </h2>
             <ul class="course-list list-unstyled">
                <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center">
-                     <span class="course-bullet me-3"></span>
-                     <span class="course-name">ME engine course simulator training</span>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary ms-2" download>
+                  <div class="d-flex align-items-center justify-content-between">
+                     <div class="d-flex align-items-center">
+                        <span class="course-bullet me-3"></span>
+                        <span class="course-name">ME engine course simulator training</span>
+                     </div>
+                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
                         <i class="fas fa-file-pdf"></i>
                      </a>
                   </div>
                </li>
                <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center">
-                     <span class="course-bullet me-3"></span>
-                     <span class="course-name">Mental health for seafarers course</span>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary ms-2" download>
+                  <div class="d-flex align-items-center justify-content-between">
+                     <div class="d-flex align-items-center">
+                        <span class="course-bullet me-3"></span>
+                        <span class="course-name">Mental health for seafarers course</span>
+                     </div>
+                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
                         <i class="fas fa-file-pdf"></i>
                      </a>
                   </div>
                </li>
                <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center">
-                     <span class="course-bullet me-3"></span>
-                     <span class="course-name">Advanced hydraulics course</span>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary ms-2" download>
+                  <div class="d-flex align-items-center justify-content-between">
+                     <div class="d-flex align-items-center">
+                        <span class="course-bullet me-3"></span>
+                        <span class="course-name">Advanced hydraulics course                     </span>
+                     </div>
+                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
                         <i class="fas fa-file-pdf"></i>
                      </a>
                   </div>
                </li>
                <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center">
-                     <span class="course-bullet me-3"></span>
-                     <span class="course-name">Basic hydraulic course</span>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary ms-2" download>
+                  <div class="d-flex align-items-center justify-content-between">
+                     <div class="d-flex align-items-center">
+                        <span class="course-bullet me-3"></span>
+                        <span class="course-name">Basic hydraulic course                     </span>
+                     </div>
+                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
                         <i class="fas fa-file-pdf"></i>
                      </a>
                   </div>
                </li>
                <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center">
-                     <span class="course-bullet me-3"></span>
-                     <span class="course-name">Automation and instrumentation course</span>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary ms-2" download>
+                  <div class="d-flex align-items-center justify-content-between">
+                     <div class="d-flex align-items-center">
+                        <span class="course-bullet me-3"></span>
+                        <span class="course-name">Automation and instrumentation course                     </span>
+                     </div>
+                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
                         <i class="fas fa-file-pdf"></i>
                      </a>
                   </div>
                </li>
                <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center">
-                     <span class="course-bullet me-3"></span>
-                     <span class="course-name">Framo hydraulic cargo pumping system course</span>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary ms-2" download>
+                  <div class="d-flex align-items-center justify-content-between">
+                     <div class="d-flex align-items-center">
+                        <span class="course-bullet me-3"></span>
+                        <span class="course-name">Framo hydraulic cargo pumping system course                     </span>
+                     </div>
+                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
                         <i class="fas fa-file-pdf"></i>
                      </a>
                   </div>
                </li>
                <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center">
-                     <span class="course-bullet me-3"></span>
-                     <span class="course-name">Training program for gas engineer</span>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary ms-2" download>
+                  <div class="d-flex align-items-center justify-content-between">
+                     <div class="d-flex align-items-center">
+                        <span class="course-bullet me-3"></span>
+                        <span class="course-name">Training program for gas engineer                     </span>
+                     </div>
+                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
                         <i class="fas fa-file-pdf"></i>
                      </a>
                   </div>
                </li>
                <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center">
-                     <span class="course-bullet me-3"></span>
-                     <span class="course-name">Bridge team resource management</span>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary ms-2" download>
+                  <div class="d-flex align-items-center justify-content-between">
+                     <div class="d-flex align-items-center">
+                        <span class="course-bullet me-3"></span>
+                        <span class="course-name">Bridge team resource management                     </span>
+                     </div>
+                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
                         <i class="fas fa-file-pdf"></i>
                      </a>
                   </div>
                </li>
                <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center">
-                     <span class="course-bullet me-3"></span>
-                     <span class="course-name">Electrical drawing course</span>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary ms-2" download>
+                  <div class="d-flex align-items-center justify-content-between">
+                     <div class="d-flex align-items-center">
+                        <span class="course-bullet me-3"></span>
+                        <span class="course-name">Electrical drawing course                     </span>
+                     </div>
+                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
                         <i class="fas fa-file-pdf"></i>
                      </a>
                   </div>
                </li>
                <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center">
-                     <span class="course-bullet me-3"></span>
-                     <span class="course-name">Risk management and accident investigation course</span>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary ms-2" download>
+                  <div class="d-flex align-items-center justify-content-between">
+                     <div class="d-flex align-items-center">
+                        <span class="course-bullet me-3"></span>
+                        <span class="course-name">Risk management and accident investigation course                     </span>
+                     </div>
+                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
                         <i class="fas fa-file-pdf"></i>
                      </a>
                   </div>
                </li>
                <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center">
-                     <span class="course-bullet me-3"></span>
-                     <span class="course-name">Sire 2.0</span>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary ms-2" download>
+                  <div class="d-flex align-items-center justify-content-between">
+                     <div class="d-flex align-items-center">
+                        <span class="course-bullet me-3"></span>
+                        <span class="course-name">Sire 2.0                     </span>
+                     </div>
+                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
                         <i class="fas fa-file-pdf"></i>
                      </a>
                   </div>
                </li>
                <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center">
-                     <span class="course-bullet me-3"></span>
-                     <span class="course-name">Auxiliary diesel engine maintenance course</span>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary ms-2" download>
+                  <div class="d-flex align-items-center justify-content-between">
+                     <div class="d-flex align-items-center">
+                        <span class="course-bullet me-3"></span>
+                        <span class="course-name">Auxiliary diesel engine maintenance course                     </span>
+                     </div>
+                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
                         <i class="fas fa-file-pdf"></i>
                      </a>
                   </div>
                </li>
                <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center">
-                     <span class="course-bullet me-3"></span>
-                     <span class="course-name">Chief engineer command course</span>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary ms-2" download>
+                  <div class="d-flex align-items-center justify-content-between">
+                     <div class="d-flex align-items-center">
+                        <span class="course-bullet me-3"></span>
+                        <span class="course-name">Chief engineer command course                     </span>
+                     </div>
+                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
                         <i class="fas fa-file-pdf"></i>
                      </a>
                   </div>
                </li>
                <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center">
-                     <span class="course-bullet me-3"></span>
-                     <span class="course-name">Ship security officer</span>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary ms-2" download>
+                  <div class="d-flex align-items-center justify-content-between">
+                     <div class="d-flex align-items-center">
+                        <span class="course-bullet me-3"></span>
+                        <span class="course-name">Ship security officer                     </span>
+                     </div>
+                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
                         <i class="fas fa-file-pdf"></i>
                      </a>
                   </div>
                </li>
                <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center">
-                     <span class="course-bullet me-3"></span>
-                     <span class="course-name">Gender sensitization course</span>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary ms-2" download>
+                  <div class="d-flex align-items-center justify-content-between">
+                     <div class="d-flex align-items-center">
+                        <span class="course-bullet me-3"></span>
+                        <span class="course-name">Gender sensitization course                     </span>
+                     </div>
+                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
                         <i class="fas fa-file-pdf"></i>
                      </a>
                   </div>
                </li>
                <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center">
-                     <span class="course-bullet me-3"></span>
-                     <span class="course-name">Engine room simulator refresher and engine room team resource management</span>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary ms-2" download>
+                  <div class="d-flex align-items-center justify-content-between">
+                     <div class="d-flex align-items-center">
+                        <span class="course-bullet me-3"></span>
+                        <span class="course-name">Engine room simulator refresher and engine room team resource management                     </span>
+                     </div>
+                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
                         <i class="fas fa-file-pdf"></i>
                      </a>
                   </div>
                </li>
                <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center">
-                     <span class="course-bullet me-3"></span>
-                     <span class="course-name">Tanker cargo operation</span>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary ms-2" download>
+                  <div class="d-flex align-items-center justify-content-between">
+                     <div class="d-flex align-items-center">
+                        <span class="course-bullet me-3"></span>
+                        <span class="course-name">Tanker cargo operation                     </span>
+                     </div>
+                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
                         <i class="fas fa-file-pdf"></i>
                      </a>
                   </div>
                </li>
                <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center">
-                     <span class="course-bullet me-3"></span>
-                     <span class="course-name">Onboard seafarer's assessment</span>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary ms-2" download>
+                  <div class="d-flex align-items-center justify-content-between">
+                     <div class="d-flex align-items-center">
+                        <span class="course-bullet me-3"></span>
+                        <span class="course-name">Onboard seafarer's assessment                     </span>
+                     </div>
+                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
                         <i class="fas fa-file-pdf"></i>
                      </a>
                   </div>
                </li>
                <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center">
-                     <span class="course-bullet me-3"></span>
-                     <span class="course-name">Hull Structure Inspection Course</span>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary ms-2" download>
+                  <div class="d-flex align-items-center justify-content-between">
+                     <div class="d-flex align-items-center">
+                        <span class="course-bullet me-3"></span>
+                        <span class="course-name">Hull Structure Inspection Course                     </span>
+                     </div>
+                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
                         <i class="fas fa-file-pdf"></i>
                      </a>
                   </div>
                </li>
                <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center">
-                     <span class="course-bullet me-3"></span>
-                     <span class="course-name">ME - GI course</span>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary ms-2" download>
+                  <div class="d-flex align-items-center justify-content-between">
+                     <div class="d-flex align-items-center">
+                        <span class="course-bullet me-3"></span>
+                        <span class="course-name">ME - GI course                     </span>
+                     </div>
+                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
                         <i class="fas fa-file-pdf"></i>
                      </a>
                   </div>
                </li>
                <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center">
-                     <span class="course-bullet me-3"></span>
-                     <span class="course-name">Training Program for Gas Engineers</span>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary ms-2" download>
+                  <div class="d-flex align-items-center justify-content-between">
+                     <div class="d-flex align-items-center">
+                        <span class="course-bullet me-3"></span>
+                        <span class="course-name">Training Program for Gas Engineers                     </span>
+                     </div>
+                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
                         <i class="fas fa-file-pdf"></i>
                      </a>
                   </div>
                </li>
                <li class="course-item mb-3 border-bottom">
-                  <div class="d-flex align-items-center">
-                     <span class="course-bullet me-3"></span>
-                     <span class="course-name">CII Rating Training</span>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary ms-2" download>
+                  <div class="d-flex align-items-center justify-content-between">
+                     <div class="d-flex align-items-center">
+                        <span class="course-bullet me-3"></span>
+                        <span class="course-name">CII Rating Training                     </span>
+                     </div>
+                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
                         <i class="fas fa-file-pdf"></i>
                      </a>
                   </div>
@@ -244,131 +288,159 @@
          <!-- Offline Courses Section -->
          <div class="col-lg-6 ps-lg-5" id="offline-course">
             <h2 class="robot_slab text_color mb-4">
-               <i class="fa-solid fa-chalkboard me-2"></i> OFFLINE COURSE
+               <i class="fa-solid fa-chalkboard me-2"></i> Offline Course
             </h2>
             <ul class="course-list list-unstyled">
                <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center">
-                     <span class="course-bullet me-3"></span>
-                     <span class="course-name">Framo hydraulic cargo pumping system course</span>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary ms-2" download>
+                  <div class="d-flex align-items-center justify-content-between">
+                     <div class="d-flex align-items-center">
+                        <span class="course-bullet me-3"></span>
+                        <span class="course-name">Framo hydraulic cargo pumping system course                     </span>
+                     </div>
+                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
                         <i class="fas fa-file-pdf"></i>
                      </a>
                   </div>
                </li>
                <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center">
-                     <span class="course-bullet me-3"></span>
-                     <span class="course-name">Risk management and accident investigation course</span>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary ms-2" download>
+                  <div class="d-flex align-items-center justify-content-between">
+                     <div class="d-flex align-items-center">
+                        <span class="course-bullet me-3"></span>
+                        <span class="course-name">Risk management and accident investigation course                     </span>
+                     </div>
+                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
                         <i class="fas fa-file-pdf"></i>
                      </a>
                   </div>
                </li>
                <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center">
-                     <span class="course-bullet me-3"></span>
-                     <span class="course-name">Chief engineer command course</span>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary ms-2" download>
+                  <div class="d-flex align-items-center justify-content-between">
+                     <div class="d-flex align-items-center">
+                        <span class="course-bullet me-3"></span>
+                        <span class="course-name">Chief engineer command course                     </span>
+                     </div>
+                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
                         <i class="fas fa-file-pdf"></i>
                      </a>
                   </div>
                </li>
                <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center">
-                     <span class="course-bullet me-3"></span>
-                     <span class="course-name">Gender sensitization course</span>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary ms-2" download>
+                  <div class="d-flex align-items-center justify-content-between">
+                     <div class="d-flex align-items-center">
+                        <span class="course-bullet me-3"></span>
+                        <span class="course-name">Gender sensitization course                     </span>
+                     </div>
+                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
                         <i class="fas fa-file-pdf"></i>
                      </a>
                   </div>
                </li>
                <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center">
-                     <span class="course-bullet me-3"></span>
-                     <span class="course-name">Mental health for seafarers course</span>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary ms-2" download>
+                  <div class="d-flex align-items-center justify-content-between">
+                     <div class="d-flex align-items-center">
+                        <span class="course-bullet me-3"></span>
+                        <span class="course-name">Mental health for seafarers course</span>
+                     </div>
+                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
                         <i class="fas fa-file-pdf"></i>
                      </a>
                   </div>
                </li>
                <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center">
-                     <span class="course-bullet me-3"></span>
-                     <span class="course-name">Engine room simulator refresher and engine room team resource management</span>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary ms-2" download>
+                  <div class="d-flex align-items-center justify-content-between">
+                     <div class="d-flex align-items-center">
+                        <span class="course-bullet me-3"></span>
+                        <span class="course-name">Engine room simulator refresher and engine room team resource management                     </span>
+                     </div>
+                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
                         <i class="fas fa-file-pdf"></i>
                      </a>
                   </div>
                </li>
                <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center">
-                     <span class="course-bullet me-3"></span>
-                     <span class="course-name">Basic hydraulic workshop</span>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary ms-2" download>
+                  <div class="d-flex align-items-center justify-content-between">
+                     <div class="d-flex align-items-center">
+                        <span class="course-bullet me-3"></span>
+                        <span class="course-name">Basic hydraulic workshop                     </span>
+                     </div>
+                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
                         <i class="fas fa-file-pdf"></i>
                      </a>
                   </div>
                </li>
                <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center">
-                     <span class="course-bullet me-3"></span>
-                     <span class="course-name">Advanced hydraulics workshop</span>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary ms-2" download>
+                  <div class="d-flex align-items-center justify-content-between">
+                     <div class="d-flex align-items-center">
+                        <span class="course-bullet me-3"></span>
+                        <span class="course-name">Advanced hydraulics workshop                     </span>
+                     </div>
+                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
                         <i class="fas fa-file-pdf"></i>
                      </a>
                   </div>
                </li>
                <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center">
-                     <span class="course-bullet me-3"></span>
-                     <span class="course-name">Pneumatics and manoeuvring system course</span>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary ms-2" download>
+                  <div class="d-flex align-items-center justify-content-between">
+                     <div class="d-flex align-items-center">
+                        <span class="course-bullet me-3"></span>
+                        <span class="course-name">Pneumatics and manoeuvring system course                     </span>
+                     </div>
+                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
                         <i class="fas fa-file-pdf"></i>
                      </a>
                   </div>
                </li>
                <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center">
-                     <span class="course-bullet me-3"></span>
-                     <span class="course-name">NK-O3 ballast water treatment system (BWTS) operations and troubleshooting course</span>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary ms-2" download>
+                  <div class="d-flex align-items-center justify-content-between">
+                     <div class="d-flex align-items-center">
+                        <span class="course-bullet me-3"></span>
+                        <span class="course-name">NK-O3 ballast water treatment system (BWTS) operations and troubleshooting course                     </span>
+                     </div>
+                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
                         <i class="fas fa-file-pdf"></i>
                      </a>
                   </div>
                </li>
                <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center">
-                     <span class="course-bullet me-3"></span>
-                     <span class="course-name">Samsung Purimar ballast water treatment system (BWTS) operations and troubleshooting course</span>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary ms-2" download>
+                  <div class="d-flex align-items-center justify-content-between">
+                     <div class="d-flex align-items-center">
+                        <span class="course-bullet me-3"></span>
+                        <span class="course-name">Samsung Purimar ballast water treatment system (BWTS) operations and troubleshooting course                     </span>
+                     </div>
+                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
                         <i class="fas fa-file-pdf"></i>
                      </a>
                   </div>
                </li>
                <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center">
-                     <span class="course-bullet me-3"></span>
-                     <span class="course-name">Hyundai HiBallast water treatment system (BWTS) operations and troubleshooting course</span>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary ms-2" download>
+                  <div class="d-flex align-items-center justify-content-between">
+                     <div class="d-flex align-items-center">
+                        <span class="course-bullet me-3"></span>
+                        <span class="course-name">Hyundai HiBallast water treatment system (BWTS) operations and troubleshooting course                     </span>
+                     </div>
+                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
                         <i class="fas fa-file-pdf"></i>
                      </a>
                   </div>
                </li>
                <li class="course-item pb-3 border-bottom">
-                  <div class="d-flex align-items-center">
-                     <span class="course-bullet me-3"></span>
-                     <span class="course-name">Hull Structure Inspection Course</span>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary ms-2" download>
+                  <div class="d-flex align-items-center justify-content-between">
+                     <div class="d-flex align-items-center">
+                        <span class="course-bullet me-3"></span>
+                        <span class="course-name">Hull Structure Inspection Course                     </span>
+                     </div>
+                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
                         <i class="fas fa-file-pdf"></i>
                      </a>
                   </div>
                </li>
                <li class="course-item mb-3 border-bottom">
-                  <div class="d-flex align-items-center">
-                     <span class="course-bullet me-3"></span>
-                     <span class="course-name">CII Rating Training</span>
-                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary ms-2" download>
+                  <div class="d-flex align-items-center justify-content-between">
+                     <div class="d-flex align-items-center">
+                        <span class="course-bullet me-3"></span>
+                        <span class="course-name">CII Rating Training                     </span>
+                     </div>
+                     <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary" download>
                         <i class="fas fa-file-pdf"></i>
                      </a>
                   </div>

@@ -11,51 +11,56 @@
    <div class="container">
       <div class="row g-5">
          <!-- Left Side -->
-         <div class="col-lg-6">
+         <div class="col-lg-12">
             <h3 class=" mb-5 robot_slab ">Get in touch</h3>
-            <!-- Head Office -->
-            <div class="d-flex border_bottoms icon_hovers">
-               <div class="icon-circle me-3" style="width: 54px;">
-                  <i class="fa-solid fa-map"></i>
+            <div class="row g-0">
+               <!-- Address -->
+               <div class="col-md-6 border-end pe-4">
+                  <div class="d-flex icon_hovers h-100">
+                     <div class="icon-circle me-3" style="width: 54px;">
+                        <i class="fa-solid fa-map"></i>
+                     </div>
+                     <div>
+                        <h5 class="fw-semibold mb-1">MarinArch – Online Coaching Classes</h5>
+                        <p class="mb-0 "><strong>Address:</strong> {!! get_setting('address') !!}
+                        </p>
+                     </div>
+                  </div>
                </div>
-               <div>
-                  <h5 class="fw-semibold mb-1">MarinArch – Online Coaching Classes</h5>
-                  <p class="mb-0 "><strong>Address:</strong> {!! get_setting('address') !!}
-                  </p>
+               <!-- Email -->
+               <div class="col-md-3 border-end ps-5 pe-5">
+                  <div class="d-flex icon_hovers h-100">
+                     <div class="icon-circle me-3">
+                        <i class="fa-solid fa-envelope"></i>
+                     </div>
+                     <div>
+                        <h5 class="fw-semibold mb-1">Email Us</h5>
+                        <p class="mb-0">{{get_setting('email')}}</p>
+                     </div>
+                  </div>
                </div>
-            </div>
-            <!-- Email Us -->
-            <div class="d-flex pb-4 icon_hovers">
-              <div class="display_dlex1">
-                 <div class="icon-circle me-3">
-                  <i class="fa-solid fa-envelope"></i>
+               <!-- Phone -->
+               <div class="col-md-3 ps-5">
+                  <div class="d-flex icon_hovers h-100">
+                     <div class="icon-circle me-3">
+                        <i class="fa-solid fa-phone"></i>
+                     </div>
+                     <div>
+                        <h5 class="fw-semibold mb-1">Call Us</h5>
+                        <p class="mb-0 ">{{get_setting('phone')}}</p>
+                     </div>
+                  </div>
                </div>
-               <div>
-                  <h5 class="fw-semibold mb-1">Email Us</h5>
-                  <p class="mb-0">{{get_setting('email')}}</p>
-               </div>
-              </div>
-              <div class="display_dlex1">
-                <div class="icon-circle me-3">
-                  <i class="fa-solid fa-phone"></i>
-               </div>
-               <div>
-                  <h5 class="fw-semibold mb-1">Call Us</h5>
-                  <p class="mb-0 ">{{get_setting('phone')}}</p>
-               </div>
-              </div>
-              
             </div>
            
             
 			
-			<div class="bg-light p-4 p-md-5 rounded-3 shadow-sm mt-3">
+			<!-- <div class="bg-light p-4 p-md-5 rounded-3 shadow-sm mt-3">
                <h3 class=" mb-4 robot_slab ">Send us a message</h3>
 
 <form class="needs-validation" id="contactForm" action="{{route('form.submit')}}" method="POST" onsubmit="protect_with_recaptcha_v3(this, 'contact')">
   @include('frontend.components.form-alert')
   @csrf
-  <!-- Name & Company -->
   <div class="row mb-3">
     <div class="col-md-6 mb-3 mb-md-0">
       <input type="hidden" name="form_name" value="contact">
@@ -81,7 +86,6 @@
     </div>
   </div>
 
-  <!-- Phone & Email -->
   <div class="row mb-3">
     <div class="col-md-6 mb-3 mb-md-0">
       <label for="phone" class="form-label fw-medium">Phone</label>
@@ -102,7 +106,6 @@
     </div>
   </div>
 
-  <!-- Subject -->
   <div class="mb-3">
     <label for="subject" class="form-label fw-medium">Subject</label>
     <input 
@@ -113,7 +116,6 @@
     />
   </div>
 
-  <!-- Message -->
   <div class="mb-4">
     <label for="message" class="form-label fw-medium">Message</label>
     <textarea 
@@ -125,7 +127,6 @@
     <div class="invalid-feedback">Please enter your message.</div>
   </div>
 
-  <!-- Submit Button -->
   <button 
     type="submit"
     class="cnotact_btns btn btn-primary py-2 mt-1 fs-5"
@@ -135,7 +136,7 @@
 </form>
 
 
-            </div>
+            </div> -->
 			
 			
            
@@ -153,7 +154,7 @@
             <!--</div>-->
          </div>
          <!-- Right Side - Contact Form -->
-         <div class="col-lg-6">
+         <div class="col-lg-12">
              {!! get_setting('google_map') !!}
          </div>
       </div>
