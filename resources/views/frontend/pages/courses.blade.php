@@ -108,4 +108,10 @@
     </div>
 </div>
 
+@if (session('success') || session('error') || $errors->any())
+<script defer>
+   setTimeout(() => $('.enroll-btn').trigger('click'), 500);
+</script>
+@endif
+
 @endsection
