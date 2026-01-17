@@ -137,7 +137,7 @@
         </li>         
         
         <li class="side-nav-item">
-            <a href="{{ route('forms.by', ['form_name' => (auth()->user()->company_id == 1) ? 'contact' : 'contact']) }}" class="side-nav-link">
+            <a href="{{ route('forms.by', ['form_name' => (auth()->user()->company_id == 1) ? 'enrolments' : 'enrolments']) }}" class="side-nav-link">
                 <span class="menu-icon"><i class="ti ti-message-question"></i></span>
                 <span class="menu-text"> Form Submissions </span>
             </a>
