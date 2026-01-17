@@ -149,7 +149,14 @@ html {
 }
 
 .classroom_box p {
-    margin-bottom: 40px;
+    margin-bottom: 0px;
+}
+.classroom_box img {
+    padding: 0px 0px;
+    width: 100% !important;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
 }
 .counter-value {
     font-size: 34px;
@@ -697,13 +704,15 @@ section.about_section .col-lg-4 {
     padding-left: 15px;
     padding-right: 15px;
 }
-
+.enroll-form-box .btn-primary {
+    width: 58% !important;
+}
 .padd190 {
     padding: 0px 15px !important;
 }
 
 #counter {
-    padding: 30px 15px !important;
+    padding: 30px 15px 0px 15px !important;
 }
 
 #counter .col-md-3 {
@@ -984,7 +993,9 @@ section.about_section .container {
     
     /* Enroll Images Section Responsive */
     .enroll-images-section .col-md-4 {
-        margin-bottom: 20px;
+        margin-bottom: 0px;
+    }.border_10:before {
+        border: 0px solid #ccc;
     }
     
     .enroll-image-box img {

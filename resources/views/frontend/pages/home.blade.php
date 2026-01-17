@@ -57,7 +57,7 @@
                </div>
             </div>
          </div>
-         <div class="col-lg-8 paddngrgt80" data-aos="fade-right" data-aos-duration="1000" data-aos-once="true">
+         <div class="col-lg-8 order-md-1 order-2 paddngrgt80" data-aos="fade-right" data-aos-duration="1000" data-aos-once="true">
             <div class="text-start mb-md-4 mb-2 pt-md-4 pt-0">
                <h3 class=" text_color robot_slab fw-normal">{{ $about_title }}</h3>
             </div>
@@ -65,7 +65,7 @@
                {!! $about_description !!}
             </div>
          </div>
-         <div class="col-lg-4 col-12 pt-md-5 pt-2" data-aos="fade-left" data-aos-duration="1000" data-aos-once="true">
+         <div class="col-lg-4 col-12 pt-md-5 pb-md-0 pb-4 pt-2 order-md-2 order-1" data-aos="fade-left" data-aos-duration="1000" data-aos-once="true">
             <div class="about_border border_6 position-relative">
                <img class="hvr-bounce-in aboutimgss" src="{{ uploaded_asset($about_image) }}" alt="img" />
             </div>
@@ -75,7 +75,7 @@
 </section>
 
 <!-- Enroll Section with Images -->
-<section class="enroll-images-section pt-5 pb-5">
+<section class="enroll-images-section pt-md-5 pb-md-5  pt-4 pb-4">
    <div class="container">
       <div class="row g-4 align-items-center">
          <!-- Single Image Column - Online Course -->
@@ -191,7 +191,7 @@
 <!-- @include('frontend.partials.course-carousel') -->
 
       
-<section class="client_section1 py-lg-5 py-4" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
+<section class="client_section1 py-lg-5" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
           <div class="">
             
                 <div class="text-center ">
@@ -329,7 +329,7 @@
             <p class="text-center padd190">
             {!! $about_description2 !!}
             </p>
-            <div class="read-more text-center mb-5">
+            <div class="read-more text-center mb-md-5">
                <a href="{{ route('about') }}" class="btn-2 robot_slab">Read More</a>
             </div>
          </div>
@@ -457,7 +457,7 @@
                <a class="text-decoration-none text-dark" href="{{$quicklinks['url'][$index]}}">
                   <div class="classroom_box border_2 position-relative">
                      <img class="hvr-bounce-in w-100" src="{{ uploaded_asset($quicklinks['icon'][$index]) }}" alt="Image {{ $index }}">
-                     <div class=" text-center pt-3">
+                     <div class=" text-center pt-md-3">
                         <p class="robot_slab centered-text">{{$quicklinks['title'][$index]}}</p>
                      </div>
                   </div>
