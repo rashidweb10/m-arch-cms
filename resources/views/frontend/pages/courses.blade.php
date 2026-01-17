@@ -44,8 +44,8 @@
                   @foreach($onlineCategory->courses as $course)
                      <li class="course-item pb-3 border-bottom">
                         <div class="d-flex align-items-center justify-content-between">
-                           <span class="course-bullet me-3"></span>
-                           <span class="course-name">{{ $course->name }}</span>
+                           
+                           <span class="course-name"><span class="course-bullet me-3"></span> {{ $course->name }}</span>
                            @if($course->brochure)
                            <a href="{{ uploaded_asset($course->brochure) }}" class="btn btn-sm btn-outline-primary ms-2" download>
                               <i class="fas fa-file-pdf"></i>
@@ -57,8 +57,8 @@
                @else
                   <li class="course-item pb-3">
                      <div class="d-flex align-items-center">
-                        <span class="course-bullet me-3"></span>
-                        <span class="course-name">No online courses available</span>
+                        
+                        <span class="course-name"> <span class="course-bullet me-3"></span> No online courses available</span>
                      </div>
                   </li>
                @endif
@@ -75,8 +75,8 @@
                   @foreach($offlineCategory->courses as $course)
                      <li class="course-item pb-3 border-bottom">
                         <div class="d-flex align-items-center justify-content-between">
-                           <span class="course-bullet me-3"></span>
-                           <span class="course-name">{{ $course->name }}</span>
+                           
+                           <span class="course-name"><span class="course-bullet me-3"></span> {{ $course->name }}</span>
                            <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary ms-2" download>
                               <i class="fas fa-file-pdf"></i>
                            </a>
@@ -86,8 +86,8 @@
                @else
                   <li class="course-item pb-3">
                      <div class="d-flex align-items-center">
-                        <span class="course-bullet me-3"></span>
-                        <span class="course-name">No offline courses available</span>
+                       
+                        <span class="course-name"> <span class="course-bullet me-3"></span> No offline courses available</span>
                      </div>
                   </li>
                @endif
