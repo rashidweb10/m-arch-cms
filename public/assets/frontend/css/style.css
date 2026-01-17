@@ -3238,6 +3238,77 @@ body .features_section {
     overflow: hidden;
     border: 1px solid #f0f0f0;
 }
+/* Services Horizontal Scroll */
+.services-scroll-container {
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+    padding: 7px 0;
+}
+
+.services-scroll-wrapper {
+    width: 100%;
+}
+.earth_image img {
+    box-shadow: 0px 11px 14px #0000003b;
+    padding: 12px;
+    cursor:pointer;
+}
+.services-scroll-list {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: fit-content;
+    animation: scroll-horizontal 30s linear infinite;
+    gap: 20px;
+}
+
+.services-scroll-container:hover .services-scroll-list {
+    animation-play-state: paused;
+}
+
+.services-scroll-item {
+    flex-shrink: 0;
+    width: 444px;
+    padding: 0 10px;
+}
+
+.services-scroll-item .services_boxs {
+    margin: 0;
+}
+
+.services-box-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.3s ease;
+}
+
+.services-box-link:hover {
+    text-decoration: none;
+    color: inherit;
+    transform: scale(1.05);
+}
+
+.services-box-link:focus {
+    text-decoration: none;
+    color: inherit;
+    outline: none;
+}
+.services-scroll-list {
+    animation: scroll-horizontal 70s linear infinite;
+}
+@keyframes scroll-horizontal {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
 
 .feature_card::before {
     content: "";

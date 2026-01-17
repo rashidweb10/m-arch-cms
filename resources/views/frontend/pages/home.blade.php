@@ -188,7 +188,136 @@
    </div>
 </section>
 
-@include('frontend.partials.course-carousel')
+<!-- @include('frontend.partials.course-carousel') -->
+
+      
+<section class="client_section1 py-lg-5 py-4" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
+          <div class="">
+            
+                <div class="text-center ">
+                  <h3 class="robot_slab text_color  mb-md-4 mb-2 pt-2">Students Review</h3>
+                </div>
+              
+          
+          <div class="services-scroll-container">
+            <div class="services-scroll-wrapper">
+              <ul class="services-scroll-list">
+                <li class="services-scroll-item">
+               
+                   <a href="/assets/frontend/img/testiimg_1.jpeg"
+                 data-fancybox="album1"
+                 data-caption=""
+                 class="d-block position-relative services-box-link">
+                       <div class="services_boxs">
+                        <img class="jbox-img rotate w-100" src="/assets/frontend/img/testiimg_1.jpeg" alt="">
+                       
+                      </div>
+              </a>
+                </li>
+                
+                 <li class="services-scroll-item">
+               
+                   <a href="/assets/frontend/img/testiimg_2.jpeg"
+                 data-fancybox="album1"
+                 data-caption=""
+                 class="d-block position-relative services-box-link">
+                       <div class="services_boxs">
+                        <img class="jbox-img rotate w-100" src="/assets/frontend/img/testiimg_2.jpeg" alt="">
+                       
+                      </div>
+              </a>
+                </li>
+                
+                 <li class="services-scroll-item">
+               
+                   <a href="/assets/frontend/img/testiimg_3.jpeg"
+                 data-fancybox="album1"
+                 data-caption=""
+                 class="d-block position-relative services-box-link">
+                       <div class="services_boxs">
+                        <img class="jbox-img rotate w-100" src="/assets/frontend/img/testiimg_3.jpeg" alt="">
+                       
+                      </div>
+              </a>
+                </li>
+                
+                 <li class="services-scroll-item">
+               
+                   <a href="/assets/frontend/img/testiimg_4.jpeg"
+                 data-fancybox="album1"
+                 data-caption=""
+                 class="d-block position-relative services-box-link">
+                       <div class="services_boxs">
+                        <img class="jbox-img rotate w-100" src="/assets/frontend/img/testiimg_4.jpeg" alt="">
+                       
+                      </div>
+              </a>
+                </li>
+                
+                 <li class="services-scroll-item">
+               
+                   <a href="/assets/frontend/img/testiimg_5.jpeg"
+                 data-fancybox="album1"
+                 data-caption=""
+                 class="d-block position-relative services-box-link">
+                       <div class="services_boxs">
+                        <img class="jbox-img rotate w-100" src="/assets/frontend/img/testiimg_5.jpeg" alt="">
+                       
+                      </div>
+              </a>
+                </li>
+                
+                 <li class="services-scroll-item">
+               
+                   <a href="/assets/frontend/img/testiimg_6.jpeg"
+                 data-fancybox="album1"
+                 data-caption=""
+                 class="d-block position-relative services-box-link">
+                       <div class="services_boxs">
+                        <img class="jbox-img rotate w-100" src="/assets/frontend/img/testiimg_6.jpeg" alt="">
+                       
+                      </div>
+              </a>
+                </li>
+                
+                
+                 <li class="services-scroll-item">
+               
+                   <a href="/assets/frontend/img/testiimg_7.jpeg"
+                 data-fancybox="album1"
+                 data-caption=""
+                 class="d-block position-relative services-box-link">
+                       <div class="services_boxs">
+                        <img class="jbox-img rotate w-100" src="/assets/frontend/img/testiimg_7.jpeg" alt="">
+                       
+                      </div>
+              </a>
+                </li>
+                <li class="services-scroll-item">
+               
+               <a href="/assets/frontend/img/testiimg_8.jpeg"
+             data-fancybox="album1"
+             data-caption=""
+             class="d-block position-relative services-box-link">
+                   <div class="services_boxs">
+                    <img class="jbox-img rotate w-100" src="/assets/frontend/img/testiimg_8.jpeg" alt="">
+                   
+                  </div>
+          </a>
+            </li>
+               
+               
+              </ul>
+            </div>
+            
+            
+
+          </div>
+          
+          </div>
+        </section>
+
+
 
 <section class="scholar_section mt-lg-5 pb-lg-5 position-relative z-index-9">
    <div class="container">
