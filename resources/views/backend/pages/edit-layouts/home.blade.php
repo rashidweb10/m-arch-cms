@@ -18,8 +18,6 @@ $achievement_title = $pageData->meta->where('meta_key', 'achievement_title')->fi
 $achievement_description = $pageData->meta->where('meta_key', 'achievement_description')->first()->meta_value ?? '';
 $achievement_image = $pageData->meta->where('meta_key', 'achievement_image')->first()->meta_value ?? '';
 
-$home_awards = json_decode($pageData->meta->where('meta_key', 'home_awards')->first()->meta_value ?? '[]', true);
-
 $video = $pageData->meta->where('meta_key', 'video')->first()->meta_value ?? '';
 
 $home_quicklinks = json_decode($pageData->meta->where('meta_key', 'home_quicklinks')->first()->meta_value ?? '[]', true);
@@ -199,96 +197,6 @@ $home_quicklinks = json_decode($pageData->meta->where('meta_key', 'home_quicklin
         <textarea name="meta[achievement_description]" class="form-control text-editor" rows="4" required>{{$achievement_description}}</textarea>
     </div>     
 </div>
-
-<div class="row">
-    <div class="col-md-12">
-        <hr>
-        <h4 class="text-primary">Awards & Achievements Section</h4>
-    </div>    
-    <div class="awards-target">
-        @if(isset($home_awards['itration']) && is_array($home_awards['itration']))
-            @foreach($home_awards['itration'] as $index => $itration)
-                <div class="row remove-parent">
-                    <div class="col-md-12">
-                        <label for="name" class="form-label">Awards & Achievements <span class="text-danger">*</span></label>
-                        <input value="{{ $index }}" name="meta[home_awards][itration][]" type="hidden" required>
-                    </div> 
-                    <div class="col-md">
-                        <div class="form-group mb-2">
-                            <div class="input-group" data-toggle="aizuploader" data-type="image" data-multiple="false">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text bg-soft-secondary font-weight-medium">{{ __('Browse') }}</div>
-                                </div>
-                                <div class="form-control file-amount">{{ __('Choose File') }}</div>
-                                <input type="hidden" 
-                                    name="meta[home_awards][image][]" 
-                                    class="selected-files" 
-                                    value="{{ $home_awards['image'][$index] ?? '' }}" 
-                                    required>
-                            </div>
-                            <div class="file-preview box sm"></div>
-                        </div>
-                    </div>
-                    <div class="col-md">
-                        <div class="form-group mb-2">
-                            <input value="{{ $home_awards['title'][$index] ?? '' }}" 
-                                name="meta[home_awards][title][]" 
-                                type="text" 
-                                class="form-control" 
-                                minlength="3" 
-                                maxlength="200" 
-                                placeholder="Enter Title" 
-                                required>
-                        </div>
-                    </div>                                      
-                    <div class="col-md-auto">
-                        <button type="button" class="btn btn-icon btn-circle btn-soft-danger" data-toggle="remove-parent" data-parent=".remove-parent">
-                            <i class="ti ti-x"></i>
-                        </button>
-                    </div>         
-                </div>
-            @endforeach
-        @endif
-    </div>
-    <button
-        type="button"
-        class="mt-1 btn btn-soft-success btn-icon w-100"
-        data-toggle="add-more"
-        data-content='
-            <div class="row remove-parent">
-                <div class="col-md-12">
-                    <label for="name" class="form-label">Awards & Achievements <span class="text-danger">*</span></label>
-                    <input value="data" name="meta[home_awards][itration][]" type="hidden" required>
-                </div> 
-                <div class="col-md">
-                    <div class="form-group mb-2">
-                        <div class="input-group" data-toggle="aizuploader" data-type="image" data-multiple="false">
-                            <div class="input-group-prepend">
-                                <div class="input-group-text bg-soft-secondary font-weight-medium">{{ __('Browse') }}</div>
-                            </div>
-                            <div class="form-control file-amount">{{ __('Choose File') }}</div>
-                            <input type="hidden" name="meta[home_awards][image][]" class="selected-files" required>
-                        </div>
-                        <div class="file-preview box sm"></div>
-                    </div>
-                </div> 
-                <div class="col-md">
-                    <div class="form-group mb-2">
-                        <input value="" name="meta[home_awards][title][]" type="text" class="form-control" minlength="3" maxlength="200" placeholder="Enter Title" required>
-                    </div>
-                </div>                              
-                <div class="col-md-auto">
-                    <button type="button" class="btn btn-icon btn-circle btn-soft-danger" data-toggle="remove-parent" data-parent=".remove-parent">
-                        <i class="ti ti-x"></i>
-                    </button>
-                </div>               
-            </div>   
-        '
-        data-target=".awards-target">
-        <i class="ti ti-plus"></i>
-        <span class="ml-2">Add More</span>
-    </button>     
-</div> 
 
 <div class="row">
     <div class="col-md-12">
