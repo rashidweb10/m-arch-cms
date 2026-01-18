@@ -861,7 +861,7 @@ section.about_section .container {
     }
 
     .offcanvas-body li.nav-item.menu.active {
-        background: #2098d13b;
+        background: #daf3ff;
     }
     .services-scroll-item {
         flex-shrink: 0;
@@ -948,27 +948,27 @@ section.about_section .container {
     .offcanvas-body li.nav-item.active {
         background: #2098d126;
     }
-    .course-item {
-        padding: 10px 0;
-    }
-     
+     .course-item {
+         padding: 10px 0;
+     }
+      
      .row.g-0 .col-md-6.border-end,
      .row.g-0 .col-md-3.border-end {
          border-right: none !important;
          border-bottom: 1px solid #dee2e6 !important;
      }
-    
-     
+      
+      
      .row.g-0 .col-md-3:last-child {
          border-bottom: none !important;
          margin-bottom: 0;
      }
-     
+      
      .icon_hovers {
          align-items: center;
          flex-wrap: nowrap;
      }
-     
+      
      .icon-circle {
          min-width: 45px;
          width: 45px !important;
@@ -977,6 +977,63 @@ section.about_section .container {
          margin-bottom: 0;
          margin-right: 15px !important;
      }
+     
+     /* Faculties Page Responsive */
+     section.py-5.px-3 {
+         padding: 30px 15px !important;
+     }
+     
+    
+     
+     section.py-5.px-3 .text-muted {
+         font-size: 14px;
+         line-height: 1.6;
+         padding: 0 10px;
+     }
+     
+     .col-lg-6.margingaps {
+        margin-bottom: 0px !important;
+        margin-top: 20px;
+    }
+     
+     .faculty-card {
+         padding: 20px !important;
+         margin-bottom: 0 !important;
+     }
+     
+     .faculty-card .d-flex {
+         flex-direction: column;
+         align-items: center;
+         text-align: center;
+     }
+     
+     .faculty-image {
+        width: 120px !important;
+        height: 120px !important;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+     }
+     
+     .faculty-name {
+         font-size: 18px !important;
+         margin-bottom: 10px !important;
+         text-align: center;
+     }
+     
+     .faculty-description {
+         font-size: 14px !important;
+         line-height: 1.6;
+         text-align: center;
+     }
+     .margingaps:nth-child(odd) {
+        padding-right: 15px !important;
+        padding-left: 15px;
+    }
+    .margingaps:nth-child(even) {
+        padding-left: 15px;
+        padding-right: 15px !important;
+    }
      
 }
 
