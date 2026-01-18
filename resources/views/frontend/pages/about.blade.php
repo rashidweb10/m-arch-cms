@@ -11,7 +11,7 @@
    $about_image = $pageData->meta->where('meta_key', 'about_image')->first()->meta_value ?? '';
    $about_title = $pageData->meta->where('meta_key', 'about_title')->first()->meta_value ?? '';
 
-   $milestones = json_decode($pageData->meta->where('meta_key', 'home_milestones')->first()->meta_value ?? '[]', true);
+   //$milestones = json_decode($pageData->meta->where('meta_key', 'home_milestones')->first()->meta_value ?? '[]', true);
 
    $quicklinks = json_decode($pageData->meta->where('meta_key', 'home_quicklinks')->first()->meta_value ?? '[]', true);
 @endphp
@@ -41,9 +41,9 @@
    </div>
 </section>
 
-<!-- @include('frontend.partials.course-carousel') -->
+{{-- @include('frontend.partials.course-carousel') --}}
 
- <!-- @if(isset($milestones['itration']) && is_array($milestones['itration']))
+ {{-- @if(isset($milestones['itration']) && is_array($milestones['itration']))
 <section id="counter" class="statistics-section about-us" >
    <div class="container">
       <div class="row">
@@ -58,7 +58,7 @@
       </div>
    </div>
 </section>
-@endif -->
+@endif --}}
 
 <!-- Features Section -->
 <section class="features_section pt-5 pb-5 mb-md-5" id="features_section">
@@ -110,7 +110,7 @@
    </div>
 </section>
 
-<!-- @if(isset($quicklinks['itration']) && is_array($quicklinks['itration']))
+@if(isset($quicklinks['itration']) && is_array($quicklinks['itration']))
 <section class="gallery_section">
    <div class="bgcolor pb-4 pt-4 pb-md-5 pt-md-5">
       <div class="container">
@@ -134,6 +134,6 @@
       </div>
    </div>
 </section>
-@endif -->
+@endif
 
 @endsection

@@ -6,7 +6,7 @@ $about_title = $pageData->meta->where('meta_key', 'about_title')->first()->meta_
 $about_description = $pageData->meta->where('meta_key', 'about_description')->first()->meta_value ?? '';
 $about_image = $pageData->meta->where('meta_key', 'about_image')->first()->meta_value ?? '';
 
-$home_milestones = json_decode($pageData->meta->where('meta_key', 'home_milestones')->first()->meta_value ?? '[]', true);
+//$home_milestones = json_decode($pageData->meta->where('meta_key', 'home_milestones')->first()->meta_value ?? '[]', true);
 
 $home_quicklinks = json_decode($pageData->meta->where('meta_key', 'home_quicklinks')->first()->meta_value ?? '[]', true);
 
@@ -60,7 +60,7 @@ $home_quicklinks = json_decode($pageData->meta->where('meta_key', 'home_quicklin
     </div>     
 </div> 
 
-<div class="row">
+{{-- <div class="row">
     <div class="col-md-12">
         <hr>
         <h4 class="text-primary">Milestones</h4>
@@ -137,7 +137,7 @@ $home_quicklinks = json_decode($pageData->meta->where('meta_key', 'home_quicklin
         <i class="ti ti-plus"></i>
         <span class="ml-2">Add More</span>
     </button>     
-</div> 
+</div>  --}}
 
 <div class="row">
     <div class="col-md-12">
