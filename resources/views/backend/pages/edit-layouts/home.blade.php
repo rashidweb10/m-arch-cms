@@ -12,6 +12,7 @@ $about_image = $pageData->meta->where('meta_key', 'about_image')->first()->meta_
 $about_school_title = $pageData->meta->where('meta_key', 'about_school_title')->first()->meta_value ?? '';
 $about_school_description = $pageData->meta->where('meta_key', 'about_school_description')->first()->meta_value ?? '';
 
+$testimonial_images = $pageData->meta->where('meta_key', 'testimonial_images')->first()->meta_value ?? '';
 
 $home_milestones = json_decode($pageData->meta->where('meta_key', 'home_milestones')->first()->meta_value ?? '[]', true);
 
@@ -94,6 +95,26 @@ $home_quicklinks = json_decode($pageData->meta->where('meta_key', 'home_quicklin
         <label for="content" class="form-label">Description <span class="text-danger">*</span></label>
         <textarea name="meta[about_school_description]" class="form-control text-editor" rows="4" required>{{$about_school_description}}</textarea>
     </div>     
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <hr>
+        <h4 class="text-primary">Testimonials Section</h4>
+    </div>      
+    <div class="col-md-12">
+        <label for="name" class="form-label">Images <span class="text-danger">*</span></label>
+        <div class="form-group mb-2">
+            <div class="input-group" data-toggle="aizuploader" data-type="image" data-multiple="true">
+                <div class="input-group-prepend">
+                    <div class="input-group-text bg-soft-secondary font-weight-medium">{{ __('Browse') }}</div>
+                </div>
+                <div class="form-control file-amount">{{ __('Choose File') }}</div>
+                <input value="{{$testimonial_images}}" type="hidden" name="meta[testimonial_images]" class="selected-files" required>
+            </div>
+            <div class="file-preview box sm"></div>
+        </div>
+    </div>    
 </div>
 
 <div class="row">

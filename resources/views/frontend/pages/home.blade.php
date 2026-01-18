@@ -20,6 +20,8 @@
 
   $categories = \App\Models\CourseCategory::where('is_active', 1)->whereIn('id', [33, 34])->get();
 
+  $testimonial_images = array_filter(explode(',', $pageData->meta->where('meta_key', 'testimonial_images')->first()->meta_value ?? ''));
+
   $milestones = json_decode($pageData->meta->where('meta_key', 'home_milestones')->first()->meta_value ?? '[]', true);
 
   $achievement_title = $pageData->meta->where('meta_key', 'achievement_title')->first()->meta_value ?? '';
@@ -99,7 +101,7 @@
    </div>
 </section>
 
-<!-- @include('frontend.partials.course-carousel') -->
+{{-- <!-- @include('frontend.partials.course-carousel') --> --}}
 
       
 <section class="client_section1 py-lg-5" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
@@ -113,110 +115,19 @@
           <div class="services-scroll-container">
             <div class="services-scroll-wrapper">
               <ul class="services-scroll-list">
-                <li class="services-scroll-item">
-               
-                   <a href="/assets/frontend/img/testiimg_1.jpeg"
-                 data-fancybox="album1"
-                 data-caption=""
-                 class="d-block position-relative services-box-link">
-                       <div class="services_boxs">
-                        <img class="jbox-img rotate w-100" src="/assets/frontend/img/testiimg_1.jpeg" alt="">
-                       
-                      </div>
-              </a>
-                </li>
-                
-                 <li class="services-scroll-item">
-               
-                   <a href="/assets/frontend/img/testiimg_2.jpeg"
-                 data-fancybox="album1"
-                 data-caption=""
-                 class="d-block position-relative services-box-link">
-                       <div class="services_boxs">
-                        <img class="jbox-img rotate w-100" src="/assets/frontend/img/testiimg_2.jpeg" alt="">
-                       
-                      </div>
-              </a>
-                </li>
-                
-                 <li class="services-scroll-item">
-               
-                   <a href="/assets/frontend/img/testiimg_3.jpeg"
-                 data-fancybox="album1"
-                 data-caption=""
-                 class="d-block position-relative services-box-link">
-                       <div class="services_boxs">
-                        <img class="jbox-img rotate w-100" src="/assets/frontend/img/testiimg_3.jpeg" alt="">
-                       
-                      </div>
-              </a>
-                </li>
-                
-                 <li class="services-scroll-item">
-               
-                   <a href="/assets/frontend/img/testiimg_4.jpeg"
-                 data-fancybox="album1"
-                 data-caption=""
-                 class="d-block position-relative services-box-link">
-                       <div class="services_boxs">
-                        <img class="jbox-img rotate w-100" src="/assets/frontend/img/testiimg_4.jpeg" alt="">
-                       
-                      </div>
-              </a>
-                </li>
-                
-                 <li class="services-scroll-item">
-               
-                   <a href="/assets/frontend/img/testiimg_5.jpeg"
-                 data-fancybox="album1"
-                 data-caption=""
-                 class="d-block position-relative services-box-link">
-                       <div class="services_boxs">
-                        <img class="jbox-img rotate w-100" src="/assets/frontend/img/testiimg_5.jpeg" alt="">
-                       
-                      </div>
-              </a>
-                </li>
-                
-                 <li class="services-scroll-item">
-               
-                   <a href="/assets/frontend/img/testiimg_6.jpeg"
-                 data-fancybox="album1"
-                 data-caption=""
-                 class="d-block position-relative services-box-link">
-                       <div class="services_boxs">
-                        <img class="jbox-img rotate w-100" src="/assets/frontend/img/testiimg_6.jpeg" alt="">
-                       
-                      </div>
-              </a>
-                </li>
-                
-                
-                 <li class="services-scroll-item">
-               
-                   <a href="/assets/frontend/img/testiimg_7.jpeg"
-                 data-fancybox="album1"
-                 data-caption=""
-                 class="d-block position-relative services-box-link">
-                       <div class="services_boxs">
-                        <img class="jbox-img rotate w-100" src="/assets/frontend/img/testiimg_7.jpeg" alt="">
-                       
-                      </div>
-              </a>
-                </li>
-                <li class="services-scroll-item">
-               
-               <a href="/assets/frontend/img/testiimg_8.jpeg"
-             data-fancybox="album1"
-             data-caption=""
-             class="d-block position-relative services-box-link">
-                   <div class="services_boxs">
-                    <img class="jbox-img rotate w-100" src="/assets/frontend/img/testiimg_8.jpeg" alt="">
-                   
-                  </div>
-          </a>
-            </li>
-               
+
+                  @foreach($testimonial_images as $img)
+                  <li class="services-scroll-item">
+                     <a href="{{ uploaded_asset($img) }}"
+                     data-fancybox="album1"
+                     data-caption=""
+                     class="d-block position-relative services-box-link">
+                        <div class="services_boxs">
+                           <img class="jbox-img rotate w-100" src="{{ uploaded_asset($img) }}" alt="">
+                        </div>
+                     </a>
+                  </li>
+                  @endforeach
                
               </ul>
             </div>
