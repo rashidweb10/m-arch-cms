@@ -387,6 +387,20 @@ function initDatatable(selector){
     });   
 }
 
+/**
+ * Allow TinyMCE popups to receive focus inside Bootstrap 5 modals
+ * Safe for pages, modals, dropdowns, and dynamic content
+ */
+document.addEventListener('focusin', function (e) {
+    if (
+        e.target.closest('.tox-dialog') ||
+        e.target.closest('.tox-menu') ||
+        e.target.closest('.tox-tinymce-aux')
+    ) {
+        e.stopImmediatePropagation();
+    }
+});
+
 function initTextEditor() {
     tinymce.init({
         selector: '.text-editor',
