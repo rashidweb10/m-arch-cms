@@ -930,11 +930,49 @@ section.about_section .container {
     .offcanvas-backdrop {
         background-color: rgba(0, 0, 0, 0.5);
     }
-    section.aboutpg_section {
-  
-        padding-left: 0;
-        padding-right: 0;
+     section.aboutpg_section {
+   
+         padding-left: 0;
+         padding-right: 0;
+     }
+     
+     .icon_hovers:hover .icon-circle {
+        transform: scale(1.0);
+        transition: 0.5s all;
     }
+    .d-flex.icon_hovers.h-100 {
+        padding-bottom: 20px;
+    }
+    .offcanvas-body li.nav-item.active {
+        background: #2098d126;
+    }
+     
+     .row.g-0 .col-md-6.border-end,
+     .row.g-0 .col-md-3.border-end {
+         border-right: none !important;
+         border-bottom: 1px solid #dee2e6 !important;
+     }
+    
+     
+     .row.g-0 .col-md-3:last-child {
+         border-bottom: none !important;
+         margin-bottom: 0;
+     }
+     
+     .icon_hovers {
+         align-items: center;
+         flex-wrap: nowrap;
+     }
+     
+     .icon-circle {
+         min-width: 45px;
+         width: 45px !important;
+         height: 45px;
+         flex-shrink: 0;
+         margin-bottom: 0;
+         margin-right: 15px !important;
+     }
+     
 }
 
 @media (max-width: 576px) {

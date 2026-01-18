@@ -154,7 +154,7 @@
             <!--</div>-->
          </div>
          <!-- Right Side - Contact Form -->
-         <div class="col-lg-12">
+         <div class="col-lg-12 mt-md-5 mt-4">
              {!! get_setting('google_map') !!}
          </div>
       </div>
