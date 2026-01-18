@@ -18,6 +18,8 @@
   $about_title2 = $pageData->meta->where('meta_key', 'about_school_title')->first()->meta_value ?? '';
   $about_description2 = $pageData->meta->where('meta_key', 'about_school_description')->first()->meta_value ?? '';
 
+  $categories = \App\Models\CourseCategory::where('is_active', 1)->whereIn('id', [33, 34])->get();
+
   $milestones = json_decode($pageData->meta->where('meta_key', 'home_milestones')->first()->meta_value ?? '[]', true);
 
   $achievement_title = $pageData->meta->where('meta_key', 'achievement_title')->first()->meta_value ?? '';
@@ -73,30 +75,18 @@
    <div class="container">
       <div class="row g-4 align-items-center">
          <!-- Single Image Column - Online Course -->
+         @foreach($categories as $category)
          <div class="col-md-4" data-aos="fade-right" data-aos-duration="1000" data-aos-once="true">
-            <a href="{{ route('courses') }}#online-course" class="text-decoration-none">
+            <a href="{{ route('courses') }}" class="text-decoration-none">
                <div class="enroll-image-box position-relative">
-                  <img class="w-100 hvr-bounce-in" src="/assets/frontend/img/course-1.jpg" alt="MarinArch Training">
+                  <img class="w-100 hvr-bounce-in" src="{{ uploaded_asset($category->image) }}" alt="{{ $category->name }}">
                   <div class="image-label">
-                     <span class="robot_slab">Online Course</span>
+                     <span class="robot_slab">{{ $category->name }}</span>
                   </div>
                </div>
             </a>
          </div>
-         
-         <!-- Two Images Column - Offline Course -->
-         <div class="col-md-4" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
-            <a href="{{ route('courses') }}#offline-course" class="text-decoration-none">
-               <div class="enroll-images-stacked">
-                  <div class="enroll-image-box position-relative">
-                     <img class="w-100 hvr-bounce-in" src="/assets/frontend/img/course-2.jpg" alt="MarinArch Training">
-                     <div class="image-label">
-                        <span class="robot_slab">Offline Course</span>
-                     </div>
-                  </div>
-               </div>
-            </a>
-         </div>
+         @endforeach
          
          <!-- Enroll Form Column -->
          <div class="col-md-4" data-aos="fade-left" data-aos-duration="1000" data-aos-once="true">
