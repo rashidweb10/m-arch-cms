@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('image')->nullable();
+            $table->string('brochure')->nullable();
             $table->unsignedBigInteger('category_id');
-            $table->boolean('is_active')->default(1);            
+            $table->boolean('is_active')->default(1);
             $table->timestamps();
         });
 

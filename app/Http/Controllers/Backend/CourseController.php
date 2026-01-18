@@ -107,6 +107,7 @@ class CourseController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|min:3|max:200',
             'image' => 'required',
+            'brochure' => 'nullable|string',
             'category_id' => 'required|exists:course_categories,id',
             'is_active' => 'required|boolean',
         ]);
@@ -115,6 +116,7 @@ class CourseController extends Controller
         $course = new Course();
         $course->name = $request->input('name');
         $course->image = $request->input('image');
+        $course->brochure = $request->input('brochure');
         $course->category_id = $request->input('category_id');
         $course->is_active = $request->input('is_active');
         $course->save();
@@ -153,13 +155,15 @@ class CourseController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|min:3|max:200',
             'image' => 'required',
+            'brochure' => 'nullable|string',
             'category_id' => 'required|exists:course_categories,id',
             'is_active' => 'required|boolean',
         ]);
-    
+
         // If validation passes, update the data
         $course->name = $request->input('name');
         $course->image = $request->input('image');
+        $course->brochure = $request->input('brochure');
         $course->category_id = $request->input('category_id');
         $course->is_active = $request->input('is_active');
         $course->save();

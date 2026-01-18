@@ -2,8 +2,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&amp;family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&amp;display=swap" rel="stylesheet">
 
 <!-- Local Stylesheets -->
-<link rel="stylesheet" href="{{ asset('assets/frontend/css/style.css') }}?v=1.0.7">
-<link rel="stylesheet" href="{{ asset('assets/frontend/css/responsive.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/frontend/css/style.css') }}?v=1.1.4">
+<link rel="stylesheet" href="{{ asset('assets/frontend/css/responsive.css') }}?v=1.1.5">
 <link rel="stylesheet" href="{{ asset('assets/frontend/css/bootstrap.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/frontend/css/owl.carousel.min.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/frontend/css/owl.theme.default.min.css') }}">
@@ -42,8 +42,8 @@
 	position: relative;
 	margin-left: 0px !important;
 	border-bottom: 1px dashed #888;
-	padding-top: 7px;
-	padding-bottom: 7px;
+	padding-top: 0px;
+	padding-bottom: 0px;
 }
 
 .submenu li:last-child {
@@ -58,6 +58,8 @@
 	padding: 10px 15px;
 	color: #000 !important;
 	text-decoration: none;
+	display:block;
+	width:100%;
 }
 
 .submenu li:hover a {

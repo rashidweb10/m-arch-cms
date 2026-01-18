@@ -113,7 +113,7 @@
                                         {{ $row->category->name ?? 'N/A' }}
                                     </a>
                                 </td>
-                                <td>{{ $row->name }}</td>
+                                <td>{{ text_limit($row->name, 50) }}</td>
                                 <td>
                                 <span class="badge {{ $row->is_active ? 'bg-success' : 'bg-danger' }}">
                                     {{ $row->is_active ? 'Active' : 'Inactive' }}
