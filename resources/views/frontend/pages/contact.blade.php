@@ -11,11 +11,11 @@
    <div class="container">
       <div class="row g-5">
          <!-- Left Side -->
-         <div class="col-lg-12">
-            <h3 class=" mb-5 robot_slab ">Get in touch</h3>
+         <div class="col-lg-12 mt-0 pt-md-5 pt-4">
+            <h3 class=" mb-md-5 mb-4 robot_slab ">Get in touch</h3>
             <div class="row g-0">
                <!-- Address -->
-               <div class="col-md-6 border-end pe-4">
+               <div class="col-md-6 border-end pe-md-4  mb-md-0 mb-4">
                   <div class="d-flex icon_hovers h-100">
                      <div class="icon-circle me-3" style="width: 54px;">
                         <i class="fa-solid fa-map"></i>
@@ -28,7 +28,7 @@
                   </div>
                </div>
                <!-- Email -->
-               <div class="col-md-3 border-end ps-5 pe-5">
+               <div class="col-md-3 border-end ps-md-5 pe-md-5 mb-md-0 mb-4">
                   <div class="d-flex icon_hovers h-100">
                      <div class="icon-circle me-3">
                         <i class="fa-solid fa-envelope"></i>
@@ -40,7 +40,7 @@
                   </div>
                </div>
                <!-- Phone -->
-               <div class="col-md-3 ps-5">
+               <div class="col-md-3 ps-md-5">
                   <div class="d-flex icon_hovers h-100">
                      <div class="icon-circle me-3">
                         <i class="fa-solid fa-phone"></i>

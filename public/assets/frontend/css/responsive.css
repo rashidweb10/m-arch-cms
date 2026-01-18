@@ -908,7 +908,11 @@ section.about_section .container {
         padding: 5px 0;
         border-bottom: 1px solid #2098d13b;
     }
-    
+    .form-check .form-check-input {
+        float: left;
+        margin-left: 0em !important;
+        margin-right: 10px !important;
+    }
     .offcanvas-body .mobile-submenu li:last-child {
         border-bottom: none;
     }
@@ -925,6 +929,11 @@ section.about_section .container {
     
     .offcanvas-backdrop {
         background-color: rgba(0, 0, 0, 0.5);
+    }
+    section.aboutpg_section {
+  
+        padding-left: 0;
+        padding-right: 0;
     }
 }
 
@@ -1082,14 +1091,17 @@ section.about_section .container {
     }
 
     .feature_card {
-        padding: 30px 20px !important;
+        padding: 0px 20px 10px 20px!important;
         margin-bottom: 20px;
     }
-
+    .about_banner img {
+        height: 120px;
+        object-fit: cover;
+    }
     .feature_icon {
-        width: 70px !important;
-        height: 70px !important;
-        margin-bottom: 20px !important;
+        width: 130px !important;
+        height: auto !important;
+        margin-bottom: 0px !important;
     }
 
     .feature_icon i {

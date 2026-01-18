@@ -64,7 +64,7 @@
 <section class="features_section pt-5 pb-5 mb-md-5" id="features_section">
    <div class="container">
       <div class="row g-4">
-      <div class="text-start mb-md-2 mb-2 pt-2">
+      <div class="text-start mb-md-2 mb-0 pt-2">
             <h3 class="robot_slab text_color text-center">Why MarinArch</h3>
          </div>
          <!-- Career Achievements -->

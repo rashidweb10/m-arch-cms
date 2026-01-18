@@ -11,7 +11,7 @@
     $testimonial_images = array_filter(explode(',', $pageData->meta->where('meta_key', 'testimonial_images')->first()->meta_value ?? ''));
 
 @endphp
-<section class="courses_we_offered pt-4 pt-md-5 pb-5 position-relative" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
+<section class="courses_we_offered pt-4 pt-md-5 pb-4 position-relative" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
    <div class="container">
       <div class="row justify-content-center">
          <div class="col-lg-12 aos-init aos-animate" >
