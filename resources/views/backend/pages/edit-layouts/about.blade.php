@@ -182,14 +182,7 @@ $home_quicklinks = json_decode($pageData->meta->where('meta_key', 'home_quicklin
                     </div>
                     <div class="col-md">
                         <div class="form-group mb-2">
-                            <input value="{{ $home_quicklinks['url'][$index] ?? '' }}" 
-                                name="meta[home_quicklinks][url][]" 
-                                type="text" 
-                                class="form-control" 
-                                minlength="1" 
-                                maxlength="200" 
-                                placeholder="Enter URL" 
-                                required>
+                            <textarea rows="5" name="meta[home_quicklinks][description][]" type="text" class="form-control" placeholder="Enter Description" required>{{ $home_quicklinks['description'][$index] ?? '' }}</textarea>
                         </div>
                     </div>                                       
                     <div class="col-md-auto">
@@ -230,7 +223,7 @@ $home_quicklinks = json_decode($pageData->meta->where('meta_key', 'home_quicklin
                 </div>
                 <div class="col-md">
                     <div class="form-group mb-2">
-                        <input value="" name="meta[home_quicklinks][url][]" type="text" class="form-control" minlength="1" maxlength="200" placeholder="Enter URL" required>
+                        <textarea rows="5" name="meta[home_quicklinks][description][]" type="text" class="form-control" placeholder="Enter Description" required></textarea>
                     </div>
                 </div>                              
                 <div class="col-md-auto">
