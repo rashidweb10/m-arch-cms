@@ -1,6 +1,7 @@
 
 @php
 $banner_title = $pageData->meta->where('meta_key', 'banner_title')->first()->meta_value ?? '';
+$banner_description = $pageData->meta->where('meta_key', 'banner_description')->first()->meta_value ?? '';
 $banner_images = $pageData->meta->where('meta_key', 'banner_images')->first()->meta_value ?? '';
 
 $about_title = $pageData->meta->where('meta_key', 'about_title')->first()->meta_value ?? '';
@@ -45,7 +46,11 @@ $home_quicklinks = json_decode($pageData->meta->where('meta_key', 'home_quicklin
             </div>
             <div class="file-preview box sm"></div>
         </div>
-    </div>    
+    </div>   
+    <div class="col-md-12 form-group mb-2">
+        <label for="content" class="form-label">Description <span class="text-danger">*</span></label>
+        <textarea name="meta[banner_description]" class="form-control text-editor" rows="4" required>{{$banner_description}}</textarea>
+    </div>     
 </div> 
 
 <div class="row">
