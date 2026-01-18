@@ -17,7 +17,7 @@
    <div class="container">
       <!-- Header -->
       <div class="text-center mb-5">
-         <h3 class=" mb-3 robot_slab " >
+         <h3 class=" mb-md-3 robot_slab " >
             {!! $about_title !!}
          </h3>
          

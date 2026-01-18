@@ -7,12 +7,12 @@
 
 @include('frontend.partials.breadcrumb', ['title' => "Courses"])
 
-<section class="courses_section pb-5 pt-5">
+<section class="courses_section pb-md-5 pt-md-5 pb-4 pt-4">
    <div class="container">
       <div class="row g-4">
          <!-- Online Courses Section -->
          <div class="col-lg-6 pe-lg-5" id="online-course">
-            <h2 class="robot_slab text_color mb-4 text-capitalize">
+            <h2 class="robot_slab text_color mb-md-4 text-capitalize">
                <i class="fa-solid fa-laptop me-2"></i> {{ $onlineCategory->name ?? 'Online Course' }}
             </h2>
             <ul class="course-list list-unstyled">
@@ -43,7 +43,7 @@
 
          <!-- Offline Courses Section -->
          <div class="col-lg-6 ps-lg-5" id="offline-course">
-            <h2 class="robot_slab text_color mb-4 text-capitalize">
+            <h2 class="robot_slab text_color mb-md-4 text-capitalize">
                <i class="fa-solid fa-chalkboard me-2"></i> {{ $offlineCategory->name ?? 'Offline Course' }}
             </h2>
             <ul class="course-list list-unstyled">
@@ -74,7 +74,7 @@
 </section>
 
 <!-- Enroll Now Button Section -->
-<section class="enroll-section pb-5 pt-4">
+<section class="enroll-section pb-md-5 pb-4 pt-md-4">
    <div class="container">
       <div class="row">
          <div class="col-12 text-center">

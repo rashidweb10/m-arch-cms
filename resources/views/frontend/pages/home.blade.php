@@ -281,19 +281,21 @@
 </section>
 @endif
 
-<section class="pt-5 pt-md-5 pb-md-5">
+<section class="pt-4 pt-md-5 pb-md-5">
    <div class="container paddlft50 pt-md-5">
       <div class="row align-items-center justify-content-center">
-         <div class="col-lg-4">
+         <div class="col-lg-4 d-lg-block d-none">
             <div class="about_border border_10" data-aos="fade-right" data-aos-duration="1000" data-aos-once="true">
                <img class="hvr-bounce-in w-100" src="{{ uploaded_asset($achievement_image) }}" alt="img" />
             </div>
          </div>
          <div class="col-lg-8 ps-md-4" data-aos="fade-left" data-aos-duration="1000" data-aos-once="true">
             <div class="education_box">
-               <div class="text-start mb-md-3 mb-2 pt-2">
+               <div class="text-start mb-md-3 mb-2 pt-2 ">
                   <h3 class="roboto text_color robot_slab">{{ $achievement_title }}</h3>
                </div>
+
+               <img class="hvr-bounce-in w-100 d-lg-none d-block pt-2 pb-1 ps-2 pe-2" src="{{ uploaded_asset($achievement_image) }}" alt="img" />
                <p>
                <p>
                   {!! $achievement_description !!}
