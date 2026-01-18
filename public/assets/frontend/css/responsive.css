@@ -874,6 +874,7 @@ section.about_section .container {
     }
     .offcanvas-body .nav-link span {
         font-size: 16px;
+        font-family: "Roboto Slab", serif !important;
     }
     .offcanvas-body .nav-link {
         padding: 2px 20px !important;
@@ -919,8 +920,9 @@ section.about_section .container {
     
     .offcanvas-body .mobile-submenu li a {
         padding: 4px 20px !important;
-        color: #666;
+        color: #000;
         font-size: 14px;
+        font-family: "Roboto Slab", serif !important;
     }
     
     .offcanvas-body .mobile-submenu li a:hover {
@@ -945,6 +947,9 @@ section.about_section .container {
     }
     .offcanvas-body li.nav-item.active {
         background: #2098d126;
+    }
+    .course-item {
+        padding: 10px 0;
     }
      
      .row.g-0 .col-md-6.border-end,
