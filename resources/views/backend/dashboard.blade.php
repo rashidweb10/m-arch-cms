@@ -89,7 +89,7 @@
 
     @include('backend.includes.dashboard-card', [
         'name' => 'Form Submissions',
-        'icon' => 'ti ti-message-question',
+        'icon' => 'ti ti-forms',
         'count' => $formCount,
         'url' => route('forms.by', ['form_name' => (auth()->user()->company_id == 1) ? 'admission' : 'contact']),
         'bgColor' => '#f59e0b',
@@ -105,7 +105,7 @@
 
     @include('backend.includes.dashboard-card', [
         'name' => 'courses',
-        'icon' => 'ti ti-books',
+        'icon' => 'ti ti-school',
         'count' => $coursesCount,
         'url' => route('courses.index'),
         'bgColor' => '#ef4444',
@@ -113,7 +113,7 @@
 
     @include('backend.includes.dashboard-card', [
         'name' => 'course categories',
-        'icon' => 'ti ti-category',
+        'icon' => 'ti ti-layout-grid',
         'count' => $courseCategoriesCount,
         'url' => route('course-categories.index'),
         'bgColor' => '#06b6d4',

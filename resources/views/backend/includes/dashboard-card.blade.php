@@ -6,7 +6,7 @@
         <div class="card-body">
             <a href="{{ $url }}">
             <h5 class="dashboard-card-heading text-uppercase" title="{{ $name }}" style="font-size: 15px; color: {{ $bgColor }};">{{ $name }}</h5>
-            <div class="d-flex align-items-center gap-2 my-2 py-1">
+            <div class="d-flex align-items-center gap-2 mt-2 py-1">
                 <div class="user-img fs-42 flex-shrink-0">
                     <span class="avatar-title rounded-circle fs-22 dashboard-icon" style="background-color: {{ $bgColor }}; color: #fff;">
                         <i class="{{ $icon }}"></i>
