@@ -76,6 +76,7 @@
         'icon' => 'ti ti-pencil',
         'count' => $pageCount,
         'url' => route('pages.index'),
+        'bgColor' => '#2098d1',
     ])
 
     @include('backend.includes.dashboard-card', [
@@ -83,6 +84,7 @@
         'icon' => 'ti ti-file-upload',
         'count' => $mediaCount,
         'url' => route('uploaded-files.index'),
+        'bgColor' => '#10b981',
     ])
 
     @include('backend.includes.dashboard-card', [
@@ -90,6 +92,7 @@
         'icon' => 'ti ti-message-question',
         'count' => $formCount,
         'url' => route('forms.by', ['form_name' => (auth()->user()->company_id == 1) ? 'admission' : 'contact']),
+        'bgColor' => '#f59e0b',
     ])
 
     @include('backend.includes.dashboard-card', [
@@ -97,6 +100,7 @@
         'icon' => 'ti ti-world',
         'count' => $visitors,
         'url' => '',
+        'bgColor' => '#8b5cf6',
     ])   
 
     @include('backend.includes.dashboard-card', [
@@ -104,6 +108,7 @@
         'icon' => 'ti ti-books',
         'count' => $coursesCount,
         'url' => route('courses.index'),
+        'bgColor' => '#ef4444',
     ])   
 
     @include('backend.includes.dashboard-card', [
@@ -111,6 +116,7 @@
         'icon' => 'ti ti-category',
         'count' => $courseCategoriesCount,
         'url' => route('course-categories.index'),
+        'bgColor' => '#06b6d4',
     ])   
 
     @include('backend.includes.dashboard-card', [
@@ -118,6 +124,7 @@
         'icon' => 'ti ti-file-text',
         'count' => $courseMaterialsCount,
         'url' => route('course-materials.index'),
+        'bgColor' => '#ec4899',
     ])  
 
     @include('backend.includes.dashboard-card', [
@@ -125,6 +132,7 @@
         'icon' => 'ti ti-user-plus',
         'count' => $courseEnrolmentsCount,
         'url' => route('course-enrolments.index'),
+        'bgColor' => '#14b8a6',
     ])   
 
     @include('backend.includes.dashboard-card', [
@@ -132,6 +140,7 @@
         'icon' => 'ti ti-user-check',
         'count' => $activeStudentsCount,
         'url' => route('students.index', ['status' => 1]),
+        'bgColor' => '#22c55e',
     ])
 
     @include('backend.includes.dashboard-card', [
@@ -139,6 +148,7 @@
         'icon' => 'ti ti-user-x',
         'count' => $inactiveStudentsCount,
         'url' => route('students.index', ['status' => 0]),
+        'bgColor' => '#64748b',
     ])
    
 </div>
