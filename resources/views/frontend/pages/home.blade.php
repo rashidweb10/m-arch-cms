@@ -40,7 +40,7 @@
 
 
         {!! $banner_description !!}
-        <a href="https://www.google.com/search?sca_esv=eb783835d62ec6f7&rlz=1C1SLLM_enIN1120IN1120&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOSOXx31BNcQ1ajSXd2D9ZuQC7kMPdaCdKMY0Xm0lPIgc-R5Jf8M93s6HO0-qu1rqhvw0o8RUmQBjbCy-SEAqrlroqq_Q&q=Marin+Arch+Reviews&sa=X&ved=2ahUKEwimyJPhso2SAxWoUGwGHWLJC_8Q0bkNegQIIhAH&biw=1600&bih=731&dpr=1&aic=0" target="_blank"><img src="/assets/frontend/img/review_img.jpeg" class="img-fluid" alt="Reviews" /></a> 
+        <a href="https://www.google.com/search?sca_esv=eb783835d62ec6f7&rlz=1C1SLLM_enIN1120IN1120&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOSOXx31BNcQ1ajSXd2D9ZuQC7kMPdaCdKMY0Xm0lPIgc-R5Jf8M93s6HO0-qu1rqhvw0o8RUmQBjbCy-SEAqrlroqq_Q&q=Marin+Arch+Reviews&sa=X&ved=2ahUKEwimyJPhso2SAxWoUGwGHWLJC_8Q0bkNegQIIhAH&biw=1600&bih=731&dpr=1&aic=0" target="_blank"><img src="/assets/frontend/img/review_img.jpeg" class="img-fluid" alt="Reviews" title="Check our students review" /></a> 
     </div>
 </div>
 

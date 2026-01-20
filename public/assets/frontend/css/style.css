@@ -102,7 +102,7 @@ header .container{
 .header_section_top p {
     color: #000;
     font-size: 14px;
-    font-weight: 300;
+    font-weight: 400;
     margin-bottom: 7px;
     padding-top: 17px;
 }
@@ -2946,7 +2946,7 @@ body .course-bullet {
 }
 
 .enroll-image-box img {
-    height: 400px;
+    height: 510px;
     object-fit: cover;
     border-radius: 15px;
     width: 100%;
@@ -2991,7 +2991,7 @@ body .course-bullet {
 
 .enroll-form-box {
     background: #fff;
-    padding: 40px;
+    padding: 25px;
     border-radius: 15px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
     height: 100%;
