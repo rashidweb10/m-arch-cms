@@ -3,7 +3,7 @@
 <!-- Brand Logo -->
 <a href="" class="logo">
     <span class="logo-light">
-        <span class="logo-lg"><img src="{{ asset('assets/backend/img/logo.png') }}" alt="logo"></span>
+        <span class="logo-lg"><img src="{{ asset('assets/backend/img/logo_new.png') }}" alt="logo"></span>
         <span class="logo-sm"><img src="{{ asset('assets/backend/img/logo-sm.png') }}" alt="small logo"></span>
     </span>
 
