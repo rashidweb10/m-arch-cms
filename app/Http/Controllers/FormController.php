@@ -15,7 +15,21 @@ class FormController extends Controller
         $formName = $request->input('form_name');
 
         $validationRules = $this->getValidationRules($formName);
-        $validatedData = $request->validate($validationRules);
+        
+        // Validate the request data
+        $validator = \Illuminate\Support\Facades\Validator::make($request->all(), $validationRules);
+        
+        if ($validator->fails()) {
+            if ($request->ajax() || $request->wantsJson()) {
+                return response()->json([
+                    'success' => false,
+                    'errors' => $validator->errors()
+                ], 422);
+            }
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $validatedData = $validator->validated();
         $formData = collect($validatedData)->except(['form_name', 'name', 'email', 'phone'])->toArray();
 
         $companyId = $request->input('company_id') ?? 1;
@@ -41,6 +55,13 @@ class FormController extends Controller
             logger('Mail send failed: ' . $e->getMessage());
             //dd($e->getMessage()); // or return response()->json(['error' => $e->getMessage()]);
         }    
+        
+        if ($request->ajax() || $request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Enquiry submitted successfully'
+            ]);
+        }
         
         return redirect()->back()->with('success', 'Enquiry submitted successfully');
     }
