@@ -73,12 +73,35 @@
             </div>
         </li>        
 
-        <li class="side-nav-item">
+        {{-- <li class="side-nav-item">
             <a href="{{ route('students.index') }}" class="side-nav-link">
                 <span class="menu-icon"><i class="ti ti-users"></i></span>
                 <span class="menu-text"> Students </span>
             </a>
-        </li>    
+        </li>     --}}
+
+        <li class="side-nav-item">
+            <a data-bs-toggle="collapse" href="#users" aria-expanded="false" aria-controls="sidebarTables"
+                class="side-nav-link">
+                <span class="menu-icon"><i class="ti ti-users"></i></span>
+                <span class="menu-text"> Student Management </span>
+                <span class="menu-arrow"></span>
+            </a>
+            <div class="collapse" id="users">
+                <ul class="sub-menu">
+                    <li class="side-nav-item">
+                        <a href="{{ route('students.index') }}" class="side-nav-link">
+                            <span class="menu-text">Registrations</span>
+                        </a>
+                    </li>
+                    <li class="side-nav-item">
+                        <a href="{{ route('forms.by', ['form_name' => (auth()->user()->company_id == 1) ? 'enrolments' : 'enrolments']) }}" class="side-nav-link">
+                            <span class="menu-text">Enquiries</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </li>        
         
         <li class="side-nav-item">
             <a data-bs-toggle="collapse" href="#courses" aria-expanded="false" aria-controls="sidebarTables"
@@ -136,12 +159,12 @@
             </div>
         </li>
     
-        <li class="side-nav-item">
+        {{-- <li class="side-nav-item">
             <a href="{{ route('forms.by', ['form_name' => (auth()->user()->company_id == 1) ? 'enrolments' : 'enrolments']) }}" class="side-nav-link">
                 <span class="menu-icon"><i class="ti ti-message-question"></i></span>
                 <span class="menu-text"> Form Submissions </span>
             </a>
-        </li>   
+        </li>    --}}
         <li class="side-nav-item">
             <a target="_blank" href="{{ url('') . '/command/optimize-clear?back=true' }}" class="side-nav-link text-danger fw-bold">
                 <span class="menu-icon"><i class="ti ti-refresh"></i></span>
