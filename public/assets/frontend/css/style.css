@@ -2445,7 +2445,10 @@ ul.submenu.p-2 li ul.submenu li a:hover {
     }
 }
 
-
+.couses_icons {
+    display: flex;
+    justify-content: end;
+}
 .whatsapp {
     position: fixed;
     right: 30px;
