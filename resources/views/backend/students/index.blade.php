@@ -61,6 +61,7 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive-sm">
+                    <h5>Total: <b>{{ $pageData->total() }}</b></h5>
                     <table class="table table-striped">
                         <thead>
                             <tr>
