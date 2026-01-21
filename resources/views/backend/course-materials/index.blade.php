@@ -136,7 +136,9 @@
                                             $attachmentCount = is_array($attachments) ? count($attachments) : 0;
                                         @endphp
                                         @if($attachmentCount > 0)
+                                            <a target="_blank" href="{{ uploaded_asset($attachments[0]) }}">
                                             <span class="badge bg-secondary">{{ $attachmentCount }} file(s)</span>
+                                            </a>
                                         @else
                                             No files
                                         @endif
