@@ -135,6 +135,10 @@
             
 
           </div>
+
+          <div class="read-more text-center mt-md-4 mt-3">
+               <a href="/testimonials" class="btn-2 robot_slab">View All</a>
+            </div>
           
           </div>
         </section>
