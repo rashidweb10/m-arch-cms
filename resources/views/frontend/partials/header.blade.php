@@ -177,10 +177,10 @@
                                         </a>
                                     </li>
 
-                                    <!-- MarineArch Menu -->
+                                    <!-- Marinarch Menu -->
                                     <li class="nav-item menu {{ request()->is('about-us') ? 'active' : '' }}">
                                         <a href="/about-us" class="nav-link robot_slab">
-                                            MarineArch
+                                        Marinarch
                                         </a>
                                     </li>
 
@@ -303,10 +303,10 @@
                         </a>
                     </li>
 
-                    <!-- MarineArch Menu -->
+                    <!-- Marinarch Menu -->
                     <li class="nav-item menu {{ request()->is('about-us') ? 'active' : '' }}">
                         <a href="/about-us" class="nav-link robot_slab">
-                            MarineArch
+                        Marinarch
                         </a>
                     </li>
 
