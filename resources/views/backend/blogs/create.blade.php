@@ -11,19 +11,19 @@
 
         <div class="col-sm-12">
             <div class="form-group mb-2">
-                <label for="slug" class="form-label">Slug <span class="text-danger">*</span></label>
-                <input value="" name="slug" type="text" class="form-control" maxlength="255" required>
-            </div>
-        </div>
-
-        <div class="col-sm-12">
-            <div class="form-group mb-2">
                 <label for="category_ids" class="form-label">Categories <span class="text-danger">*</span></label>
                 <select name="category_ids[]" class="form-select select2" multiple required>
                     @foreach ($categoryList as $index => $row)
                         <option value="{{ $row->id }}">{{ $row->name }}</option>
                     @endforeach
                 </select>
+            </div>
+        </div>        
+
+        <div class="col-sm-12">
+            <div class="form-group mb-2">
+                <label for="slug" class="form-label">Slug <span class="text-danger">*</span></label>
+                <input value="" name="slug" type="text" class="form-control" maxlength="255" required>
             </div>
         </div>
 
