@@ -51,6 +51,29 @@
         </li> 
 
         <li class="side-nav-item">
+            <a data-bs-toggle="collapse" href="#blog" aria-expanded="false" aria-controls="sidebarTables"
+                class="side-nav-link">
+                <span class="menu-icon"><i class="ti ti-notebook"></i></span>
+                <span class="menu-text"> Blogs </span>
+                <span class="menu-arrow"></span>
+            </a>
+            <div class="collapse" id="blog">
+                <ul class="sub-menu">
+                    <li class="side-nav-item">
+                        <a href="{{ route('blog-categories.index') }}" class="side-nav-link">
+                            <span class="menu-text">Categories</span>
+                        </a>
+                    </li>
+                    <li class="side-nav-item">
+                        <a href="{{ route('blogs.index') }}" class="side-nav-link">
+                            <span class="menu-text">Blogs</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <li class="side-nav-item">
             <a data-bs-toggle="collapse" href="#sidebarUploads" aria-expanded="false" aria-controls="sidebarTables"
                 class="side-nav-link">
                 <span class="menu-icon"><i class="ti ti-file-upload"></i></span>
@@ -89,16 +112,17 @@
             </a>
             <div class="collapse" id="users">
                 <ul class="sub-menu">
-                    <li class="side-nav-item">
-                        <a href="{{ route('students.index') }}" class="side-nav-link">
-                            <span class="menu-text">Registrations</span>
-                        </a>
-                    </li>
-                    <li class="side-nav-item">
+                <li class="side-nav-item">
                         <a href="{{ route('forms.by', ['form_name' => (auth()->user()->company_id == 1) ? 'enrolments' : 'enrolments']) }}" class="side-nav-link">
                             <span class="menu-text">Enquiries</span>
                         </a>
                     </li>
+                    <li class="side-nav-item">
+                        <a href="{{ route('students.index') }}" class="side-nav-link">
+                            <span class="menu-text">Registered Students</span>
+                        </a>
+                    </li>
+                    
                 </ul>
             </div>
         </li>        
@@ -129,35 +153,14 @@
                     </li>     
                     <li class="side-nav-item">
                         <a href="{{ route('course-enrolments.index') }}" class="side-nav-link">
-                            <span class="menu-text">Enrolments</span>
+                            <span class="menu-text">Assign Course</span>
                         </a>
                     </li>                                                    
                 </ul>
             </div>
         </li>         
 
-        <li class="side-nav-item">
-            <a data-bs-toggle="collapse" href="#blog" aria-expanded="false" aria-controls="sidebarTables"
-                class="side-nav-link">
-                <span class="menu-icon"><i class="ti ti-notebook"></i></span>
-                <span class="menu-text"> Blog Management </span>
-                <span class="menu-arrow"></span>
-            </a>
-            <div class="collapse" id="blog">
-                <ul class="sub-menu">
-                    <li class="side-nav-item">
-                        <a href="{{ route('blog-categories.index') }}" class="side-nav-link">
-                            <span class="menu-text">Categories</span>
-                        </a>
-                    </li>
-                    <li class="side-nav-item">
-                        <a href="{{ route('blogs.index') }}" class="side-nav-link">
-                            <span class="menu-text">Blogs</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </li>
+        
     
         {{-- <li class="side-nav-item">
             <a href="{{ route('forms.by', ['form_name' => (auth()->user()->company_id == 1) ? 'enrolments' : 'enrolments']) }}" class="side-nav-link">
