@@ -22,11 +22,20 @@
                         <div class="d-flex align-items-center justify-content-between">
                            
                            <span class="course-name"><span class="course-bullet me-3"></span> {{ $course->name }}</span>
+                           
+                           <div class="couses_icons">
+
+                           <a href="/" class="btn btn-sm btn-outline-primary ms-2" download>
+                           <i class="fa-brands fa-youtube"></i>
+                           </a>
+                           
                            @if($course->brochure)
                            <a href="{{ uploaded_asset($course->brochure) }}" class="btn btn-sm btn-outline-primary ms-2" download>
                               <i class="fas fa-file-pdf"></i>
                            </a>
                            @endif
+                           </div>
+                           
                         </div>
                      </li>
                   @endforeach
@@ -53,9 +62,15 @@
                         <div class="d-flex align-items-center justify-content-between">
                            
                            <span class="course-name"><span class="course-bullet me-3"></span> {{ $course->name }}</span>
+                           <div class="couses_icons">
+                           <a href="/" class="btn btn-sm btn-outline-primary ms-2" download>
+                           <i class="fa-brands fa-youtube"></i>
+                           </a>
+                           
                            <a href="assets/frontend/img/courses_pdf.pdf" class="btn btn-sm btn-outline-primary ms-2" download>
                               <i class="fas fa-file-pdf"></i>
                            </a>
+                        </div>
                         </div>
                      </li>
                   @endforeach

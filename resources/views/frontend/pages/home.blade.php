@@ -108,7 +108,7 @@
           <div class="">
             
                 <div class="text-center ">
-                  <h3 class="robot_slab text_color  mb-md-4 mb-2 pt-2">Students Review</h3>
+                  <h3 class="robot_slab text_color  mb-md-4 mb-2 pt-2 pb-md-3">Students Review</h3>
                 </div>
               
           
@@ -136,7 +136,7 @@
 
           </div>
 
-          <div class="read-more text-center mt-md-4 mt-3">
+          <div class="read-more text-center mt-md-5 mt-4">
                <a href="/testimonials" class="btn-2 robot_slab">View All</a>
             </div>
           
