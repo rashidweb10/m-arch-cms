@@ -73,6 +73,7 @@
                         ->toArray();
                 @endphp              
                 <div class="table-responsive-sm table-responsive">
+                    <h5>Total: <b>{{ $pageData->total() }}</b></h5>
                     <table class="table table-striped text-truncate">
                         <thead>
                             <tr>
