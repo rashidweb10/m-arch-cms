@@ -65,7 +65,7 @@
          </div>
          <div class="col-md-2"></div>
          <div class="col-md-7">
-            <p class="footer-copyright mb-0">© {{date("Y")}} MarineArch Online Academy. All Rights Reserved.</p>
+            <p class="footer-copyright mb-0">© {{date("Y")}} Marinarch Online Academy. All Rights Reserved.</p>
          </div>
          <div class="col-md-3 text-end">
             <p class="footer-copyright mb-0 copyrighr2 text-md-end text-center">Powered by <a href="{{config('custom.author_url')}}" target="_blank" style="font-weight:bold">Maptek</a>
