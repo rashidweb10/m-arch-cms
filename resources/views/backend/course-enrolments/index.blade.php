@@ -14,7 +14,7 @@
                 <div class="row">
                     <div class="col-md-10">
                         <form class="row g-3 align-items-center">
-                            <div class="col-md">
+                            <div class="col-md d-none">
                                 <select name="category" class="form-select select2" id="category-select">
                                     <option value="" selected>All Categories</option>
                                     @if(isset($categoryList))
@@ -27,7 +27,7 @@
                                     @endif
                                 </select>
                             </div>
-                            <div class="col-md">
+                            <div class="col-md d-none">
                                 <select name="course" class="form-select select2" id="course-select">
                                     <option value="" selected>All Courses</option>
                                     @if(isset($courseList) && request()->get('category'))
@@ -40,7 +40,7 @@
                                     @endif
                                 </select>
                             </div>
-                            <div class="col-md">
+                            <div class="col-md d-none">
                                 <select name="status" class="form-select select2" id="status-select">
                                     <option value="" selected>All Status</option>
                                     <option value="1" @if(request()->get('status') == '1') selected @endif>Active</option>
@@ -103,9 +103,9 @@
                                     </div>
                                 </th>
                                 <th>#</th>
-                                <th>Name</th>
+                                {{-- <th>Name</th>
                                 <th>Email</th>
-                                <th>Phone</th>
+                                <th>Phone</th> --}}
                                 <th>Course</th>
                                 <th>Validity</th>
                                 <th>Status</th>
@@ -123,7 +123,7 @@
                                     </div>
                                 </td>
                                 <td>{{ $pageData->firstItem() + $index }}</td>
-                                <td>{{ $row->user->name ?? 'N/A' }}</td>
+                                {{-- <td>{{ $row->user->name ?? 'N/A' }}</td>
                                 <td>
                                     @if(!empty($row->user->email))
                                         <a href="{{ route('students.index', ['search' => $row->user->email]) }}"
@@ -135,7 +135,7 @@
                                         N/A
                                     @endif
                                 </td>
-                                <td>{{ $row->user->phone ?? 'N/A' }}</td>
+                                <td>{{ $row->user->phone ?? 'N/A' }}</td> --}}
                                 <td>
                                     @if($row->course)
                                         <a href="{{ url('backend/courses?search=' . urlencode($row->course->name)) }}" 
