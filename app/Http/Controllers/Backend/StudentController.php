@@ -47,7 +47,7 @@ class StudentController extends Controller
     
         $query->orderBy('id', 'desc');
     
-        $pageData = $query->paginate(config('custom.pagination_per_page'));
+        $pageData = $query->withCount('courseEnrolments')->paginate(config('custom.pagination_per_page'));
     
         // Return the view with data
         return view('backend.students.index', compact('pageData'));

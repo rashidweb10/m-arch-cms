@@ -76,6 +76,7 @@
                                 <th>Phone</th>
                                 <th>Location</th>
                                 <th>Status</th>
+                                <th>Enrolments</th>
                                 <th>Created At</th>
                                 <th>Updated At</th>                                
                                 <th>Actions</th>
@@ -99,6 +100,7 @@
                                     {{ $row->is_active ? 'Active' : 'Inactive' }}
                                 </span>                                    
                                 </td>
+                                <td>{{ $row->course_enrolments_count ?? 0 }}</td>
                                 <td>{{ formatDatetime($row->created_at) }}</td>
                                 <td>{{ formatDatetime($row->updated_at) }}</td>                                
                                 <td>

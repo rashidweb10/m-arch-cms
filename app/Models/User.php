@@ -58,4 +58,14 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }    
+    
+    public function courseEnrolments()
+    {
+        return $this->hasMany(CourseEnrolment::class, 'user_id');
+    }
+    
+    public function getEnrolmentCountAttribute()
+    {
+        return $this->courseEnrolments()->count();
+    }
 }
