@@ -106,9 +106,9 @@
                                     </a>
                                 </td>
                                 <td>{{ formatDatetime($row->created_at) }}</td>
-                                <td>{{ formatDatetime($row->updated_at) }}</td>                                
+                                <td>{{ formatDatetime($row->updated_at) }}111</td>                                
                                 <td>
-                                    {{-- <a target="_blank" href="{{ route('course-enrolments.index', ['search' => $row->email]) }}" class="link-reset fs-20 p-1"><i class="ti ti-books"></i></a> --}}
+                                    <a onclick="smallModal('{{url(route('course-enrolments.create'))}}?student_id={{ $row->id }}', 'Add New')" href="javascript:void(0);" class="link-reset fs-20 p-1"><i class="ti ti-books"></i></a>
                                     <a href="javascript:void(0);" onclick="smallModal('{{url(route('students.edit', $row->id))}}', 'Edit')" class="link-reset fs-20 p-1"> <i class="ti ti-pencil"></i></a>
                                     <a href="javascript:void(0);" onclick="confirmModal('{{ route('students.destroy', $row->id) }}', callbackStudents )" class="link-reset fs-20 p-1"> <i class="ti ti-trash"></i></a>
                                     <a href="javascript:void(0);" onclick="loginAsStudent('{{ $row->id }}')" class="link-reset fs-20 p-1"> <i class="ti ti-user-check"></i></a>

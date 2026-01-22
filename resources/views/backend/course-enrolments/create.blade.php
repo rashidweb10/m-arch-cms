@@ -1,15 +1,22 @@
+@php 
+
+$student_id = request()->get('student_id');
+
+@endphp
+
+
 <form id="create" action="{{ route('course-enrolments.store') }}" method="POST">
     @csrf
     <div class="row">
 
         <!-- Student (User with role_id = 3) -->
-        <div class="col-sm-12">
+        <div class="col-sm-12 @if(!empty($student_id)) d-none @endif">
             <div class="form-group mb-2">
                 <label for="user_id" class="form-label">Student <span class="text-danger">*</span></label>
                 <select name="user_id" id="user_id" class="form-select select2" required>
                     <option value="">--Select Student--</option>
                     @foreach ($students as $index => $row)
-                        <option value="{{ $row->id }}">{{ $row->name }} ({{ $row->email }})</option>
+                        <option value="{{ $row->id }}" @if($student_id == $row->id) selected @endif>{{ $row->name }} ({{ $row->email }})</option>
                     @endforeach
                 </select>
             </div>
