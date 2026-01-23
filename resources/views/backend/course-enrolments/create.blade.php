@@ -1,6 +1,8 @@
 @php 
 
 $student_id = request()->get('student_id');
+$email = request()->get('email');
+$category = request()->get('category');
 
 @endphp
 
@@ -10,13 +12,13 @@ $student_id = request()->get('student_id');
     <div class="row">
 
         <!-- Student (User with role_id = 3) -->
-        <div class="col-sm-12 @if(!empty($student_id)) d-none @endif">
+        <div class="col-sm-12">
             <div class="form-group mb-2">
                 <label for="user_id" class="form-label">Student <span class="text-danger">*</span></label>
                 <select name="user_id" id="user_id" class="form-select select2" required>
                     <option value="">--Select Student--</option>
                     @foreach ($students as $index => $row)
-                        <option value="{{ $row->id }}" @if($student_id == $row->id) selected @endif>{{ $row->name }} ({{ $row->email }})</option>
+                        <option value="{{ $row->id }}" @if($student_id == $row->id || $email == $row->email) selected @endif>{{ $row->name }} ({{ $row->email }})</option>
                     @endforeach
                 </select>
             </div>
@@ -29,7 +31,7 @@ $student_id = request()->get('student_id');
                 <select name="category_id" id="category_id" class="form-select select2" required>
                     <option value="">--Select Category--</option>
                     @foreach ($categoryList as $index => $row)
-                        <option value="{{ $row->id }}">{{ $row->name }}</option>
+                        <option value="{{ $row->id }}" @if($category == $row->name) selected @endif>{{ $row->name }}</option>
                     @endforeach
                 </select>
             </div>
@@ -81,6 +83,13 @@ $student_id = request()->get('student_id');
 $(document).ready(function() {
     initValidate('#create'); // Initializes validation for the form
     initSelect2('.select2');
+
+    setTimeout(function () {
+        // Auto trigger when coming from URL
+        if ($('#category_id').val() && $('#user_id').val()) {
+            $('#category_id').trigger('change');
+        }   
+    }, 1000);
 
     // When category or student changes, fetch courses via AJAX
     $('#category_id, #user_id').on('change', function () {

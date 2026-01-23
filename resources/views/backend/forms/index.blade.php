@@ -125,6 +125,8 @@
                                 <td>{{ formatDatetime($row->updated_at) }}</td>
                                 <td>
                                     @if($row->is_registered)
+
+                                        <a onclick="smallModal('{{url(route('course-enrolments.create'))}}?email={{ $row->email }}&category={{ $formData['course_category'] }}', 'Add New')" href="javascript:void(0);" class="link-reset fs-20 p-1"><i class="ti ti-books"></i></a>
                                     
                                     @else
 
