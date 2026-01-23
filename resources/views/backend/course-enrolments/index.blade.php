@@ -14,7 +14,7 @@
                 <div class="row">
                     <div class="col-md-10">
                         <form class="row g-3 align-items-center">
-                            <div class="col-md d-none">
+                            <div class="col-md">
                                 <select name="category" class="form-select select2" id="category-select">
                                     <option value="" selected>All Categories</option>
                                     @if(isset($categoryList))
@@ -27,7 +27,7 @@
                                     @endif
                                 </select>
                             </div>
-                            <div class="col-md d-none">
+                            <div class="col-md">
                                 <select name="course" class="form-select select2" id="course-select">
                                     <option value="" selected>All Courses</option>
                                     @if(isset($courseList) && request()->get('category'))
@@ -40,7 +40,7 @@
                                     @endif
                                 </select>
                             </div>
-                            <div class="col-md d-none">
+                            <div class="col-md">
                                 <select name="status" class="form-select select2" id="status-select">
                                     <option value="" selected>All Status</option>
                                     <option value="1" @if(request()->get('status') == '1') selected @endif>Active</option>
@@ -69,7 +69,7 @@
                             </div>
                         </form>
                     </div>
-                    <div class="col-md-2 text-end">
+                    <div class="col-md-2 text-end d-none">
                         <button onclick="smallModal('{{url(route('course-enrolments.create'))}}', 'Add New')"
                         class="btn btn-primary btn-icon w-100"><i class="ti ti-plus"></i> Add New</button>        
                     </div>
