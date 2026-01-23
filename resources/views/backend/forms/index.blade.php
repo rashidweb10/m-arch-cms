@@ -124,6 +124,12 @@
 
                                 <td>{{ formatDatetime($row->updated_at) }}</td>
                                 <td>
+                                    @if($row->is_registered)
+                                    E
+                                    @else
+                                    R
+                                    @endif
+
                                     <a href="javascript:void(0);" onclick="confirmModal('{{ route('forms.destroy', ['form_name' => request()->segment(3), 'id' => $row->id]) }}', callbackForms )" class="link-reset fs-20 p-1"> <i class="ti ti-trash"></i></a>
                                 </td>
                             </tr>

@@ -20,4 +20,14 @@ class Form extends Model
     protected $casts = [
         'form_data' => 'array',
     ];
+
+    /**
+     * Check if user with this email is registered.
+     *
+     * @return bool
+     */
+    public function getIsRegisteredAttribute()
+    {
+        return User::where('email', $this->email)->exists();
+    }
 }
