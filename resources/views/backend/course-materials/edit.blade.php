@@ -58,7 +58,7 @@
         <div class="col-sm-12">
             <div class="form-group mb-2">
                 <label for="attachments" class="form-label">Attachments</label>
-                <div class="input-group" data-toggle="aizuploader" data-type="all" data-multiple="true">
+                <div class="input-group" data-toggle="aizuploader" data-type="all" data-multiple="false">
                     <div class="input-group-prepend">
                         <div class="input-group-text bg-soft-secondary font-weight-medium">{{ __('Browse') }}</div>
                     </div>
