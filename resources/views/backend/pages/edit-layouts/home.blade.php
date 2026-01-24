@@ -97,7 +97,7 @@ $home_quicklinks = json_decode($pageData->meta->where('meta_key', 'home_quicklin
     </div>     
 </div>
 
-<div class="row">
+<div class="row d-none">
     <div class="col-md-12">
         <hr>
         <h4 class="text-primary">Testimonials Section</h4>

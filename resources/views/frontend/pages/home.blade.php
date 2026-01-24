@@ -20,8 +20,13 @@
 
   $categories = \App\Models\CourseCategory::where('is_active', 1)->whereIn('id', [33, 34])->get();
 
-  $testimonial_images = array_filter(explode(',', $pageData->meta->where('meta_key', 'testimonial_images')->first()->meta_value ?? ''));
-
+  $testimonial_images = array_slice(
+    array_filter(
+        explode(',', $pageData1->meta->where('meta_key', 'testimonial_images')->first()->meta_value ?? '')
+    ),
+    -10
+);
+  
   $milestones = json_decode($pageData->meta->where('meta_key', 'home_milestones')->first()->meta_value ?? '[]', true);
 
   $achievement_title = $pageData->meta->where('meta_key', 'achievement_title')->first()->meta_value ?? '';
