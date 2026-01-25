@@ -6,7 +6,7 @@
     </div>
 
     <button
-        onclick="smallModal('http://127.0.0.1:8000/backend/quizzes/1/questions/create', 'Add New Question')"
+        onclick="smallModal('{{ route('quizzes.questions.create', $quiz->id) }}', 'Add New Question')"
         class="btn btn-primary d-flex align-items-center gap-1 flex-shrink-0"
     >
         <i class="ti ti-plus"></i>
