@@ -62,7 +62,7 @@ class QuizQuestionController extends Controller
             QuizOption::create([
                 'question_id' => $question->id,
                 'option_text' => $optionData['option_text'],
-                'is_correct' => isset($optionData['is_correct']) ? 1 : 0,
+                'is_correct' => !empty($optionData['is_correct']) ? 1 : 0,
             ]);
         }
 
@@ -105,14 +105,14 @@ class QuizQuestionController extends Controller
                 // Update existing option
                 QuizOption::where('id', $optionData['id'])->where('question_id', $questionId)->update([
                     'option_text' => $optionData['option_text'],
-                    'is_correct' => isset($optionData['is_correct']) ? 1 : 0,
+                    'is_correct' => !empty($optionData['is_correct']) ? 1 : 0,
                 ]);
             } else {
                 // Create new option
                 QuizOption::create([
                     'question_id' => $questionId,
                     'option_text' => $optionData['option_text'],
-                    'is_correct' => isset($optionData['is_correct']) ? 1 : 0,
+                    'is_correct' => !empty($optionData['is_correct']) ? 1 : 0,
                 ]);
             }
         }

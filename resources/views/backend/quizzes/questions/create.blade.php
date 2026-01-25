@@ -91,14 +91,14 @@ $(document).ready(function() {
         e.preventDefault();
         
         // Convert radio button value to options is_correct flag
-        const correctIndex = $("input[name='correct_option']:checked").val();
+        const correctIndex = parseInt($("input[name='correct_option']:checked").val());
         const options = [];
         
         $(".option-row").each(function(index) {
             const optionText = $(this).find("input[name^='options']").val();
             options.push({
                 option_text: optionText,
-                is_correct: index == correctIndex ? 1 : 0
+                is_correct: index === correctIndex ? 1 : 0
             });
         });
 
