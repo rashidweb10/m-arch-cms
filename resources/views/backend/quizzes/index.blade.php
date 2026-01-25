@@ -77,6 +77,7 @@
                                 <td>{{ formatDatetime($row->created_at) }}</td>
                                 <td>{{ formatDatetime($row->updated_at) }}</td>                                
                                 <td>
+                                    <a href="javascript:void(0);" onclick="largeModal('{{url(route('quizzes.questions.index', $row->id))}}', 'Questions - {{ $row->title }}')" class="link-reset fs-20 p-1"> <i class="ti ti-message-question"></i></a>
                                     <a href="javascript:void(0);" onclick="smallModal('{{url(route('quizzes.edit', $row->id))}}', 'Edit')" class="link-reset fs-20 p-1"> <i class="ti ti-pencil"></i></a>
                                     <a href="javascript:void(0);" onclick="confirmModal('{{ route('quizzes.destroy', $row->id) }}', callbackQuizzes )" class="link-reset fs-20 p-1"> <i class="ti ti-trash"></i></a>
                                 </td>

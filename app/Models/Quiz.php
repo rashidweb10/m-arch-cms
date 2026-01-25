@@ -19,4 +19,10 @@ class Quiz extends Model
     {
         return $this->belongsTo(Course::class, 'course_id');
     }
+
+    // Relationship: A quiz has many questions
+    public function questions()
+    {
+        return $this->hasMany(QuizQuestion::class);
+    }
 }

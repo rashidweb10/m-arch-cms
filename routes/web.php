@@ -22,6 +22,7 @@ use App\Http\Controllers\Backend\PageController;
 use App\Http\Controllers\Backend\FormController as BackendFormController;
 use App\Http\Controllers\Backend\ImportController;
 use App\Http\Controllers\Backend\QuizController;
+use App\Http\Controllers\Backend\QuizQuestionController;
 
 //Frontend
 use App\Http\Controllers\FrontendController;
@@ -213,6 +214,9 @@ Route::prefix('backend')->group(function () {
 
     Route::middleware('auth.backend')->group(function () {
         Route::resource('quizzes', QuizController::class);
+        Route::prefix('quizzes')->group(function () {
+            Route::resource('{quiz}/questions', QuizQuestionController::class, ['as' => 'quizzes']);
+        });
     });
     
     Route::middleware('auth.backend')->group(function () {
