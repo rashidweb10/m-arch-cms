@@ -18,8 +18,8 @@
 
 <div class="row">
     <div class="col-xl-12">
-        <div class="card">
-            <div class="card-body">
+        <div class="">
+            <div class="">
                 <div class="table-responsive-sm">
                     <h5>Total Questions: <b>{{ $questions->count() }}</b></h5>
                     <table class="table table-striped">
