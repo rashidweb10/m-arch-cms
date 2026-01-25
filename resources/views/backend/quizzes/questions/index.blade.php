@@ -29,7 +29,7 @@
                                 <th>Question</th>
                                 <th>Marks</th>
                                 <th>Options</th>
-                                <th>Correct Answers</th>
+                                <th>Correct Answer</th>
                                 <th>Created At</th>
                                 <th>Actions</th>
                             </tr>
@@ -40,8 +40,19 @@
                                 <td>{{ $index + 1 }}</td>
                                 <td>{{ $question->question }}</td>
                                 <td>{{ $question->marks }}</td>
-                                <td>{{ $question->options->count() }}</td>
-                                <td>{{ $question->options->where('is_correct', 1)->count() }}</td>
+                                <td>
+                                    <ul class="list-unstyled mb-0">
+                                        @foreach ($question->options as $option)
+                                        <li>{{ $option->option_text }}</li>
+                                        @endforeach
+                                    </ul>
+                                </td>
+                                <td>
+                                    @php
+                                        $correctOption = $question->options->firstWhere('is_correct', 1);
+                                    @endphp
+                                    {{ $correctOption ? $correctOption->option_text : 'N/A' }}
+                                </td>
                                 <td>{{ formatDatetime($question->created_at) }}</td>
                                 <td>
                                     <a href="javascript:void(0);" onclick="smallModal('{{ route('quizzes.questions.edit', [$quiz->id, $question->id]) }}', 'Edit Question')" class="link-reset fs-20 p-1"> <i class="ti ti-pencil"></i></a>
