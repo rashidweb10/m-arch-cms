@@ -151,6 +151,11 @@
                             <span class="menu-text">Materials</span>
                         </a>
                     </li>     
+                    <li class="side-nav-item">
+                        <a href="{{ route('quizzes.index') }}" class="side-nav-link">
+                            <span class="menu-text">Quizzes</span>
+                        </a>
+                    </li>
                     {{-- <li class="side-nav-item">
                         <a href="{{ route('course-enrolments.index') }}" class="side-nav-link">
                             <span class="menu-text">Assign Course</span>

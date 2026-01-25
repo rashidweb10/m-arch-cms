@@ -21,6 +21,7 @@ use App\Http\Controllers\Backend\GalleryController;
 use App\Http\Controllers\Backend\PageController;
 use App\Http\Controllers\Backend\FormController as BackendFormController;
 use App\Http\Controllers\Backend\ImportController;
+use App\Http\Controllers\Backend\QuizController;
 
 //Frontend
 use App\Http\Controllers\FrontendController;
@@ -208,6 +209,10 @@ Route::prefix('backend')->group(function () {
         Route::post('blogs/bulk-delete', [BlogController::class, 'bulkDelete'])->name('blogs.bulk-delete');
         Route::post('blogs/bulk-active', [BlogController::class, 'bulkActive'])->name('blogs.bulk-active');
         Route::post('blogs/bulk-inactive', [BlogController::class, 'bulkInactive'])->name('blogs.bulk-inactive');
+    });
+
+    Route::middleware('auth.backend')->group(function () {
+        Route::resource('quizzes', QuizController::class);
     });
     
     Route::middleware('auth.backend')->group(function () {
