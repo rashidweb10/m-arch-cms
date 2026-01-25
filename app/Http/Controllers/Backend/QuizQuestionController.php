@@ -42,6 +42,13 @@ class QuizQuestionController extends Controller
      */
     public function store(Request $request, $quizId)
     {
+        // Parse options if it's a JSON string
+        $options = $request->input('options');
+        if (is_string($options)) {
+            $options = json_decode($options, true);
+            $request->merge(['options' => $options]);
+        }
+        
         $validated = $request->validate([
             'question' => 'required|string|max:500',
             'marks' => 'required|integer|min:1',
@@ -84,6 +91,13 @@ class QuizQuestionController extends Controller
      */
     public function update(Request $request, $quizId, $questionId)
     {
+        // Parse options if it's a JSON string
+        $options = $request->input('options');
+        if (is_string($options)) {
+            $options = json_decode($options, true);
+            $request->merge(['options' => $options]);
+        }
+        
         $validated = $request->validate([
             'question' => 'required|string|max:500',
             'marks' => 'required|integer|min:1',

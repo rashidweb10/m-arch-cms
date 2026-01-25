@@ -102,44 +102,14 @@ $(document).ready(function() {
             });
         });
 
-        // Submit form using AJAX with proper data format
-        $.ajax({
-            url: $(this).attr('action'),
-            method: 'POST',
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            data: {
-                question: $("textarea[name='question']").val(),
-                marks: $("input[name='marks']").val(),
-                options: options
-            },
-            success: function(response) {
-                if (response.status === true) {
-                    // Show success notification
-                    toastr.success(response.notification);
-                    // Close the modal after 1.5 seconds
-                    setTimeout(function() {
-                        $(".modal").modal('hide');
-                        // Refresh the page if needed
-                        location.reload();
-                    }, 1500);
-                } else {
-                    toastr.error(response.notification);
-                }
-            },
-            error: function(xhr) {
-                // Handle validation errors
-                if (xhr.status === 422) {
-                    const errors = xhr.responseJSON.errors;
-                    $.each(errors, function(field, messages) {
-                        toastr.error(messages[0]);
-                    });
-                } else {
-                    toastr.error('An error occurred while processing your request.');
-                }
-            }
-        });
+        // Remove any existing options input and add the serialized options
+        $("input[name='options']").remove();
+        const optionsInput = $("<input type='hidden' name='options'>").val(JSON.stringify(options));
+        $(this).append(optionsInput);
+
+        // Use the existing ajaxSubmit function to handle the form submission
+        var form = $(this);
+        ajaxSubmit(e, form, callbackCreateForm);
     });
 
     const callbackCreateForm = function(response) {
