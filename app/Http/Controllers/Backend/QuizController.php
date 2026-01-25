@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Quiz;
 use App\Models\Course;
+use App\Models\CourseCategory;
 
 class QuizController extends Controller
 {
@@ -64,9 +65,10 @@ class QuizController extends Controller
      */
     public function create()
     {
-        // Get dropdown data for courses
-        $courseList = Course::where('is_active', 1)->pluck('name', 'id')->toArray();
-        return view('backend.quizzes.create', compact('courseList'));
+        // Get dropdown data for categories and courses
+        $categoryList = CourseCategory::where('is_active', 1)->orderBy('name', 'asc')->get();
+        $courseList = Course::where('is_active', 1)->orderBy('name', 'asc')->get();
+        return view('backend.quizzes.create', compact('courseList', 'categoryList'));
     }
 
     /**
@@ -109,9 +111,16 @@ class QuizController extends Controller
      */
     public function edit(string $id)
     {
-        $pageData = Quiz::findOrFail($id);
-        $courseList = Course::where('is_active', 1)->pluck('name', 'id')->toArray();
-        return view('backend.quizzes.edit', compact('pageData', 'courseList'));
+        $pageData = Quiz::with('course')->findOrFail($id);
+        $categoryList = CourseCategory::where('is_active', 1)->orderBy('name', 'asc')->get();
+        
+        // Get courses - include the current course even if inactive, and all active courses
+        $courseList = Course::where('is_active', 1)
+            ->orWhere('id', $pageData->course_id)
+            ->orderBy('name', 'asc')
+            ->get();
+            
+        return view('backend.quizzes.edit', compact('pageData', 'courseList', 'categoryList'));
     }
 
     /**

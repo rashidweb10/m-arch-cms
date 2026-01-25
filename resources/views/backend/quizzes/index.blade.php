@@ -15,7 +15,7 @@
                     <div class="col-md-8">
                         <form class="row g-3 align-items-center">
                             <div class="col-md-4">
-                                <select name="course" class="form-select">
+                                <select name="course" class="form-select select2">
                                     <option value="">All Courses</option>
                                     @foreach($courseList as $id => $name)
                                         <option value="{{ $id }}" {{ request()->get('course') == $id ? 'selected' : '' }}>{{ $name }}</option>
@@ -97,5 +97,9 @@ const callbackQuizzes = function(response) {
         location.reload();
     }, 1500);
 }
+
+$(document).ready(function() {
+    initSelect2('.select2');
+});
 </script>
 @endsection

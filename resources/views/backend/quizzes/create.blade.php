@@ -1,14 +1,27 @@
 <form id="create" action="{{ route('quizzes.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="row">
+        <!-- Category -->
+        <div class="col-sm-12">
+            <div class="form-group mb-2">
+                <label for="category_id" class="form-label">Course Category</label>
+                <select name="category_id" id="category_id" class="form-select select2">
+                    <option value="">--Select Category--</option>
+                    @foreach ($categoryList as $index => $row)
+                        <option value="{{ $row->id }}">{{ $row->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+
         <!-- Course -->
         <div class="col-sm-12">
             <div class="form-group mb-2">
                 <label for="course_id" class="form-label">Course <span class="text-danger">*</span></label>
-                <select name="course_id" class="form-select" required>
-                    <option value="">Select Course</option>
-                    @foreach($courseList as $id => $name)
-                        <option value="{{ $id }}">{{ $name }}</option>
+                <select name="course_id" id="course_id" class="form-select select2" required>
+                    <option value="">--Select Course--</option>
+                    @foreach($courseList as $index => $row)
+                        <option value="{{ $row->id }}">{{ $row->name }}</option>
                     @endforeach
                 </select>
             </div>
@@ -61,6 +74,41 @@
 <script>
 $(document).ready(function() {
     initValidate('#create'); // Initializes validation for the form
+    initSelect2('.select2');
+
+    // When category changes, fetch courses for that category via AJAX
+    $('#category_id').on('change', function () {
+        const categoryId = $(this).val();
+        const $courseSelect = $('#course_id');
+        const currentCourseId = $courseSelect.val();
+
+        // Show a temporary loading option
+        $courseSelect.html('<option value="">Loading...</option>');
+
+        $.ajax({
+            url: '{{ route('courses.by-category') }}',
+            method: 'GET',
+            data: {
+                category_id: categoryId
+            },
+            success: function (response) {
+                // Reset options
+                let options = '<option value="">--Select Course--</option>';
+
+                if (Array.isArray(response) && response.length) {
+                    response.forEach(function (course) {
+                        options += '<option value="' + course.id + '">' + course.name + '</option>';
+                    });
+                }
+
+                $courseSelect.html(options).trigger('change.select2');
+            },
+            error: function () {
+                // On error, just reset to default option
+                $courseSelect.html('<option value="">--Select Course--</option>').trigger('change.select2');
+            }
+        });
+    });
 
     $("#create").submit(function(e) {
         var form = $(this);
