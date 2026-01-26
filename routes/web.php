@@ -116,6 +116,12 @@ Route::prefix('auth')->group(function () {
         Route::get('/enrolled-courses', [FrontendAuthController::class, 'enrolledCourses'])->name('auth.enrolled-courses');
         Route::get('/enrolled-courses/{course}', [FrontendAuthController::class, 'enrolledCourseShow'])->name('auth.enrolled-courses.show');
         Route::post('/logout', [FrontendAuthController::class, 'logout'])->name('auth.logout');
+
+        // Quiz Attempt Routes
+        Route::get('/quiz-attempt/{quiz}', [\App\Http\Controllers\Frontend\QuizAttemptController::class, 'showQuizAttempt'])->name('auth.quiz-attempt');
+        Route::post('/quiz-attempt/{quiz}', [\App\Http\Controllers\Frontend\QuizAttemptController::class, 'storeQuizAttempt'])->name('auth.quiz-attempt.store');
+        Route::get('/quiz-result/{attempt}', [\App\Http\Controllers\Frontend\QuizAttemptController::class, 'showQuizResult'])->name('auth.quiz-result');
+        Route::get('/certificate/{certificate}', [\App\Http\Controllers\Frontend\QuizAttemptController::class, 'downloadCertificate'])->name('auth.certificate.download');
     });
 });
 

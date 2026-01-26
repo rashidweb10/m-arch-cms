@@ -64,6 +64,11 @@ class User extends Authenticatable
         return $this->hasMany(CourseEnrolment::class, 'user_id');
     }
     
+    public function enrolledCourses()
+    {
+        return $this->hasMany(CourseEnrolment::class, 'user_id');
+    }
+
     public function getEnrolmentCountAttribute()
     {
         return $this->courseEnrolments()->count();

@@ -31,4 +31,10 @@ class Course extends Model
     {
         return $this->hasMany(Quiz::class);
     }
+
+    // Relationship: A course has one active quiz
+    public function quiz()
+    {
+        return $this->hasOne(Quiz::class)->where('is_active', 1);
+    }
 }

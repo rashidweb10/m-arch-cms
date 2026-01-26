@@ -86,9 +86,16 @@
                                 @if($isExpired)
                                     <span class="text-danger fw-bold">Expired</span>
                                 @else
-                                    <a href="{{ route('auth.enrolled-courses.show', $enrolment->course_id) }}" class="btn btn-sm btn-primary">
-                                        <i class="fas fa-eye me-1"></i>View
-                                    </a>
+                                    <div class="d-flex gap-2">
+                                        <a href="{{ route('auth.enrolled-courses.show', $enrolment->course_id) }}" class="btn btn-sm btn-primary">
+                                            <i class="fas fa-eye me-1"></i>View
+                                        </a>
+                                        @if($enrolment->course->quiz && $enrolment->course->quiz->is_active)
+                                            <a href="{{ route('auth.quiz-attempt', $enrolment->course->quiz->id) }}" class="btn btn-sm btn-success">
+                                                <i class="fas fa-clipboard-list me-1"></i>Attempt Quiz
+                                            </a>
+                                        @endif
+                                    </div>
                                 @endif
                             </td>
                         </tr>
