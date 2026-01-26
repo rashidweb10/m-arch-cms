@@ -141,14 +141,14 @@ class QuizQuestionController extends Controller
     {
         try {
             QuizQuestion::destroy($questionId);
-            return response()->json(['status' => true, 'notification' => 'Question deleted successfully!']);
+            return redirect()->route('quizzes.index')->with('success', 'Question deleted successfully!');
         } catch (\Exception $e) {
             \Log::error('Error deleting QuizQuestion record', [
                 'error_message' => $e->getMessage(),
                 'stack_trace' => $e->getTraceAsString(),
                 'question_id' => $questionId
             ]);
-            return response()->json(['status' => false, 'notification' => 'There was an error deleting the question.']);
+            return redirect()->route('quizzes.questions.index', $quizId)->with('error', 'There was an error deleting the question.');
         }
     }
 }
