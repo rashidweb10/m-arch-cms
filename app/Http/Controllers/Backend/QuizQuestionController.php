@@ -57,6 +57,20 @@ class QuizQuestionController extends Controller
             'options.*.is_correct' => 'boolean',
         ]);
 
+        // Get the quiz
+        $quiz = Quiz::findOrFail($quizId);
+        
+        // Calculate the total marks of existing questions
+        $existingTotalMarks = QuizQuestion::where('quiz_id', $quizId)->sum('marks');
+        
+        // Check if adding the new question's marks exceeds the quiz's total_marks
+        if ($existingTotalMarks + $request->input('marks') > $quiz->total_marks) {
+            return response()->json([
+                'status' => false,
+                'notification' => 'The total marks of all questions cannot exceed the quiz total marks of ' . $quiz->total_marks
+            ], 422);
+        }
+
         // Create the question
         $question = QuizQuestion::create([
             'quiz_id' => $quizId,
@@ -106,8 +120,24 @@ class QuizQuestionController extends Controller
             'options.*.is_correct' => 'boolean',
         ]);
 
-        // Update the question
+        // Get the quiz
+        $quiz = Quiz::findOrFail($quizId);
+        
+        // Get the current question
         $question = QuizQuestion::findOrFail($questionId);
+        
+        // Calculate the total marks of all questions except the current one
+        $otherQuestionsTotalMarks = QuizQuestion::where('quiz_id', $quizId)->where('id', '!=', $questionId)->sum('marks');
+        
+        // Check if updating the current question's marks exceeds the quiz's total_marks
+        if ($otherQuestionsTotalMarks + $request->input('marks') > $quiz->total_marks) {
+            return response()->json([
+                'status' => false,
+                'notification' => 'The total marks of all questions cannot exceed the quiz total marks of ' . $quiz->total_marks
+            ], 422);
+        }
+
+        // Update the question
         $question->update([
             'question' => $request->input('question'),
             'marks' => $request->input('marks'),
