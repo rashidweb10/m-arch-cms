@@ -68,7 +68,7 @@ class QuizQuestionController extends Controller
             return response()->json([
                 'status' => false,
                 'notification' => 'The total marks of all questions cannot exceed the quiz total marks of ' . $quiz->total_marks
-            ], 422);
+            ], 200);
         }
 
         // Create the question
@@ -134,7 +134,7 @@ class QuizQuestionController extends Controller
             return response()->json([
                 'status' => false,
                 'notification' => 'The total marks of all questions cannot exceed the quiz total marks of ' . $quiz->total_marks
-            ], 422);
+            ], 200);
         }
 
         // Update the question
