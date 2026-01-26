@@ -89,6 +89,13 @@ $(document).ready(function() {
     $("#edit").submit(function(e) {
         e.preventDefault();
         
+        // Validate that a correct option is selected
+        const correctOptionSelected = $("input[name='correct_option']:checked").length > 0;
+        if (!correctOptionSelected) {
+            toastr.error('Please select the correct option');
+            return;
+        }
+        
         // Convert radio button value to options is_correct flag
         const correctIndex = parseInt($("input[name='correct_option']:checked").val());
         const options = [];
