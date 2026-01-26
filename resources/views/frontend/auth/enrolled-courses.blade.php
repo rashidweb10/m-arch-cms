@@ -91,9 +91,21 @@
                                             <i class="fas fa-eye me-1"></i>View
                                         </a>
                                         @if($enrolment->course->quiz && $enrolment->course->quiz->is_active)
-                                            <a href="{{ route('auth.quiz-attempt', $enrolment->course->quiz->id) }}" class="btn btn-sm btn-success">
-                                                <i class="fas fa-clipboard-list me-1"></i>Attempt Quiz
-                                            </a>
+                                            @php
+                                                $hasPassed = \App\Models\QuizAttempt::where('user_id', auth()->id())
+                                                    ->where('quiz_id', $enrolment->course->quiz->id)
+                                                    ->where('is_passed', 1)
+                                                    ->exists();
+                                            @endphp
+                                            @if($hasPassed)
+                                                <a href="{{ route('auth.certificate.download', ['certificate' => \App\Models\Certificate::where('user_id', auth()->id())->where('quiz_id', $enrolment->course->quiz->id)->first()->id]) }}" class="btn btn-sm btn-info">
+                                                    <i class="fas fa-certificate me-1"></i>Certificate
+                                                </a>
+                                            @else
+                                                <a href="{{ route('auth.quiz-attempt', $enrolment->course->quiz->id) }}" class="btn btn-sm btn-success">
+                                                    <i class="fas fa-clipboard-list me-1"></i>Attempt Quiz
+                                                </a>
+                                            @endif
                                         @endif
                                     </div>
                                 @endif
