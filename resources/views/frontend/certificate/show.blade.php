@@ -20,7 +20,7 @@
 
                         <div class="text-center mb-5">
                             <h1 class="display-4 fw-bold text-primary">
-                                {{ $certificate->user->name ?? 'Student Name' }}
+                                {{ ucwords($certificate->user->name) ?? 'Student Name' }}
                             </h1>
                         </div>
 
@@ -49,7 +49,13 @@
                             </div>
                             <div class="col-md-6 text-center">
                                 <p class="mb-0"><strong>Date Issued:</strong></p>
-                                <p class="fw-bold">{{ $certificate->issued_at ? $certificate->issued_at->format('F j, Y') : 'N/A' }}</p>
+                                <p class="fw-bold">
+                                    @if($certificate->issued_at)
+                                        {{ is_string($certificate->issued_at) ? date('F j, Y', strtotime($certificate->issued_at)) : $certificate->issued_at->format('F j, Y') }}
+                                    @else
+                                        N/A
+                                    @endif
+                                </p>
                             </div>
                         </div>
 
