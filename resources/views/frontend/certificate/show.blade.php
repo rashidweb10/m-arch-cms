@@ -70,16 +70,15 @@
                                 This certificate is awarded for demonstrating excellence in learning and commitment to personal growth.
                             </p>
                         </div>
-
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-5">
-                            <button onclick="window.print()" class="btn btn-primary me-md-2">
-                                <i class="fas fa-print me-2"></i>Print Certificate
-                            </button>
-                            <a href="{{ route('auth.enrolled-courses') }}" class="btn btn-outline-secondary">
-                                <i class="fas fa-arrow-left me-2"></i>Back to Courses
-                            </a>
-                        </div>
                     </div>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-5">
+                        <button onclick="window.print()" class="btn btn-primary me-md-2">
+                            <i class="fas fa-print me-2"></i>Print Certificate
+                        </button>
+                        <a href="{{ route('auth.enrolled-courses') }}" class="btn btn-outline-secondary">
+                            <i class="fas fa-arrow-left me-2"></i>Back to Courses
+                        </a>
+                    </div>                    
                 </div>
             </div>
         </div>
@@ -114,24 +113,41 @@
     }
     
     @media print {
+
+        /* Hide everything */
+        body * {
+            visibility: hidden;
+        }
+
+        /* Show only certificate */
+        .certificate-container,
+        .certificate-container * {
+            visibility: visible;
+        }
+
+        /* Position certificate properly */
         .certificate-container {
-            background: white;
-            border: none;
-            box-shadow: none;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            background: white !important;
+            border: none !important;
+            box-shadow: none !important;
         }
-        
+
+        /* Remove watermark / overlay */
         .certificate-container::before {
-            display: none;
+            display: none !important;
         }
-        
-        .btn, .card-header {
-            display: none;
-        }
-        
-        body {
-            padding: 20mm;
+
+        /* Page settings */
+        @page {
+            size: A4;
+            margin: 20mm;
         }
     }
+
 </style>
 @endsection
 
