@@ -164,7 +164,13 @@ class QuizAttemptController extends Controller
 
         // Load certificate with related data
         $certificate->load(['user', 'course', 'quiz']);
-
-        return view('frontend.certificate.show', compact('certificate'));
+        
+        // Get the quiz attempt that earned this certificate
+        $quizAttempt = QuizAttempt::where('user_id', $certificate->user_id)
+            ->where('quiz_id', $certificate->quiz_id)
+            ->where('is_passed', 1)
+            ->first();
+            
+        return view('frontend.certificate.show', compact('certificate', 'quizAttempt'));
     }
 }

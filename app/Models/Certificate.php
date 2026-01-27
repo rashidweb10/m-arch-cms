@@ -33,4 +33,12 @@ class Certificate extends Model
     {
         return $this->belongsTo(Quiz::class, 'quiz_id');
     }
+
+    // Relationship: A certificate has one quiz attempt (the one that earned it)
+    public function quizAttempt()
+    {
+        return $this->hasOne(QuizAttempt::class, 'quiz_id', 'quiz_id')
+            ->whereColumn('user_id', 'certificates.user_id')
+            ->where('is_passed', 1);
+    }
 }

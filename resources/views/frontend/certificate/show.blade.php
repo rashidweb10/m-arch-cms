@@ -37,7 +37,7 @@
                             <p class="lead">
                                 With quiz score: 
                                 <span class="fw-bold">
-                                    {{ $certificate->quiz->pass_marks ?? 0 }}/{{ $certificate->quiz->total_marks ?? 0 }}
+                                    {{ $quizAttempt->obtained_marks ?? 0 }}/{{ $quizAttempt->total_marks ?? 0 }}
                                 </span>
                             </p>
                         </div>
