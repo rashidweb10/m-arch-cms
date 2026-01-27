@@ -13,18 +13,18 @@
                 </div>
                 <div class="card-body">
                     <div class="certificate-container bg-white p-5 rounded-3 shadow-sm border">
-                        <div class="text-center mb-5">
-                            <h2 class="text-uppercase fw-bold text-primary mb-3">Certificate of Completion</h2>
+                        <div class="text-center mb-4">
+                            <h2 class="text-uppercase fw-bold text-primary mb-2">Certificate of Completion</h2>
                             <p class="text-muted">This certificate is proudly presented to</p>
                         </div>
 
-                        <div class="text-center mb-5">
+                        <div class="text-center mb-4">
                             <h1 class="display-4 fw-bold text-primary">
                                 {{ ucwords($certificate->user->name) ?? 'Student Name' }}
                             </h1>
                         </div>
 
-                        <div class="text-center mb-4">
+                        <div class="text-center mb-3">
                             <p class="lead">
                                 For successfully completing the course:
                             </p>
@@ -33,7 +33,7 @@
                             </h3>
                         </div>
 
-                        <div class="text-center mb-4">
+                        <div class="text-center mb-3">
                             <p class="lead">
                                 With quiz score: 
                                 <span class="fw-bold">
@@ -42,7 +42,7 @@
                             </p>
                         </div>
 
-                        <div class="row mb-4">
+                        <div class="row mb-3">
                             <div class="col-md-6 text-center">
                                 <p class="mb-0"><strong>Certificate Number:</strong></p>
                                 <p class="fw-bold text-primary">{{ $certificate->certificate_no ?? 'N/A' }}</p>
@@ -59,8 +59,8 @@
                             </div>
                         </div>
 
-                        <div class="text-center mt-5">
-                            <div class="mb-4">
+                        <div class="text-center mt-4">
+                            <div class="mb-3">
                                 <img src="{{ asset('assets/backend/img/logo.png') }}" 
                                      alt="Institution Logo" 
                                      class="certificate-logo" 
@@ -71,8 +71,8 @@
                             </p>
                         </div>
                     </div>
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-5">
-                        <button onclick="window.print()" class="btn btn-primary me-md-2">
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                        <button onclick="printCertificate()" class="btn btn-primary me-md-2">
                             <i class="fas fa-print me-2"></i>Print Certificate
                         </button>
                         <a href="{{ route('auth.enrolled-courses') }}" class="btn btn-outline-secondary">
@@ -153,8 +153,42 @@
 
 @section('scripts')
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Add any certificate-specific JavaScript here
-    });
+function printCertificate() {
+    const cert = document.querySelector('.certificate-container');
+
+    if (!cert) {
+        alert('Certificate section not found');
+        return;
+    }
+
+    // Save original page
+    const originalHTML = document.body.innerHTML;
+
+    // Clone certificate HTML
+    document.body.innerHTML = `
+        <html>
+            <head>
+                <title>Print Certificate</title>
+                <style>
+                    body {
+                        margin: 0;
+                        padding: 20mm;
+                        font-family: Arial, sans-serif;
+                        background: white;
+                    }
+                </style>
+            </head>
+            <body>
+                ${cert.outerHTML}
+            </body>
+        </html>
+    `;
+
+    window.print();
+
+    // Restore page
+    document.body.innerHTML = originalHTML;
+    location.reload(); // ensure JS & styles reload correctly
+}
 </script>
 @endsection
