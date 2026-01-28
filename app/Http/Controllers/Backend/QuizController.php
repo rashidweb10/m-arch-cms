@@ -78,7 +78,7 @@ class QuizController extends Controller
     {
         // Validate the incoming data
         $validated = $request->validate([
-            'course_id' => 'required|exists:courses,id',
+            'course_id' => 'required|exists:courses,id|unique:quizzes,course_id',
             'title' => 'required|string|min:3|max:200',
             'total_marks' => 'required|integer|min:1',
             'pass_marks' => 'required|integer|min:1|lte:total_marks',
@@ -133,7 +133,7 @@ class QuizController extends Controller
     
         // Validate the incoming data
         $validated = $request->validate([
-            'course_id' => 'required|exists:courses,id',
+            'course_id' => 'required|exists:courses,id|unique:quizzes,course_id,' . $id,
             'title' => 'required|string|min:3|max:200',
             'total_marks' => 'required|integer|min:1',
             'pass_marks' => 'required|integer|min:1|lte:total_marks',
