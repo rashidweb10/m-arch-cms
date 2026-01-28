@@ -8,6 +8,8 @@ use App\Models\CourseEnrolment;
 use App\Models\Course;
 use App\Models\CourseCategory;
 use App\Models\User;
+use App\Models\Certificate;
+use App\Models\QuizAttempt;
 use Carbon\Carbon;
 
 class CourseEnrolmentController extends Controller
@@ -74,6 +76,13 @@ class CourseEnrolmentController extends Controller
         $query->orderBy('id', 'desc');
     
         $pageData = $query->paginate(config('custom.pagination_per_page'));
+    
+        // Load certificates manually for each enrolment
+        foreach ($pageData as $enrolment) {
+            $enrolment->certificate = Certificate::where('user_id', $enrolment->user_id)
+                ->where('course_id', $enrolment->course_id)
+                ->first();
+        }
     
         // Get dropdown data for categories and courses
         $categoryList = CourseCategory::where('is_active', 1)->orderBy('name', 'asc')->get();
@@ -347,5 +356,22 @@ class CourseEnrolmentController extends Controller
             return response()->json(['status' => false, 'notification' => 'There was an error deactivating the records.']);
         }
     }    
+
+    /**
+     * View certificate
+     */
+    public function viewCertificate(Certificate $certificate)
+    {
+        // Load certificate with related data
+        $certificate->load(['user', 'course', 'quiz']);
+        
+        // Get the quiz attempt that earned this certificate
+        $quizAttempt = QuizAttempt::where('user_id', $certificate->user_id)
+            ->where('quiz_id', $certificate->quiz_id)
+            ->where('is_passed', 1)
+            ->first();
+            
+        return view('frontend.certificate.show', compact('certificate', 'quizAttempt'));
+    }
 }
 

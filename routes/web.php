@@ -197,6 +197,7 @@ Route::prefix('backend')->group(function () {
         Route::post('course-enrolments/bulk-delete', [CourseEnrolmentController::class, 'bulkDelete'])->name('course-enrolments.bulk-delete');
         Route::post('course-enrolments/bulk-active', [CourseEnrolmentController::class, 'bulkActive'])->name('course-enrolments.bulk-active');
         Route::post('course-enrolments/bulk-inactive', [CourseEnrolmentController::class, 'bulkInactive'])->name('course-enrolments.bulk-inactive');
+        Route::get('course-enrolments/certificate/{certificate}', [CourseEnrolmentController::class, 'viewCertificate'])->name('course-enrolments.certificate');
     });  
 
     Route::middleware('auth.backend')->group(function () {
