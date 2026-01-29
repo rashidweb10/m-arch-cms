@@ -234,25 +234,39 @@
 
 .logout-item {
     color: #dc3545 !important;
-    border-left-color: transparent !important;
+    border: 0px;
+    background: transparent;
+    margin-top: 5px;
+    border-radius: 0 0 0 0;
 }
 
 .logout-item:hover {
-    background: #fff5f5 !important;
+    background: linear-gradient(90deg, #ffe5e5 0%, rgba(255, 229, 229, 0.8) 100%) !important;
     color: #dc3545 !important;
     border-left-color: #dc3545 !important;
+    transform: translateX(3px);
+    box-shadow: 0 2px 8px rgba(220, 53, 69, 0.15);
 }
 
 .logout-item .nav-item-icon {
-    background: #ffe5e5;
+    background: linear-gradient(135deg, #ffcccc 0%, #ff9999 100%);
+    box-shadow: 0 2px 8px rgba(220, 53, 69, 0.2);
 }
 
 .logout-item .nav-item-icon i {
     color: #dc3545;
+    font-weight: 600;
 }
 
 .logout-item:hover .nav-item-icon {
-    background: #ffcccc;
+    background: linear-gradient(135deg, #ff9999 0%, #ff6666 100%);
+    transform: scale(1.1) rotate(-5deg);
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+}
+
+.logout-item .nav-item-text {
+    font-weight: 600;
+    color: #dc3545;
 }
 
 /* Sidebar Divider */
