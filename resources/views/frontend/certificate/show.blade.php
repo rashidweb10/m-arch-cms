@@ -4,22 +4,31 @@
 @section('meta.description', 'View your course completion certificate')
 
 @section('content')
+
+<style>
+   
+</style>
 <div class="container py-5">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center" style="margin-top:120px;">
         <div class="col-lg-10">
-            <div class="card shadow-sm">
-                <div class="card-header bg-primary text-white">
-                    <h3 class="mb-0">Certificate of Completion</h3>
-                </div>
-                <div class="card-body">
+            <div class="cirtificate_main">
+               
+                <div class="" style="border: 9px double #83d0f4;">
                     <div class="certificate-container bg-white p-5 rounded-3 shadow-sm border">
-                        <div class="text-center mb-4">
-                            <h2 class="text-uppercase fw-bold text-primary mb-2">Certificate of Completion</h2>
+                    <div class="text-center" style="text-align:center; margin-bottom:30px;">
+                                <img src="{{ asset('assets/backend/img/logo.png') }}" 
+                                     alt="Institution Logo" 
+                                     class="certificate-logo" 
+                                     style="max-height: 80px;">
+                            </div>
+                            
+                            <div class="text-center mb-4">
+                            <h2 class="text-uppercase fw-bold mb-2" style="color:#00a0e3; font-size:22px;">Certificate of Completion</h2>
                             <p class="text-muted">This certificate is proudly presented to</p>
                         </div>
 
                         <div class="text-center mb-4">
-                            <h1 class="display-4 fw-bold text-primary">
+                            <h1 class="" style="color:#00a0e3; font-size:48px; font-weight:bold">
                                 {{ ucwords($certificate->user->name) ?? 'Student Name' }}
                             </h1>
                         </div>
@@ -28,24 +37,34 @@
                             <p class="lead">
                                 For successfully completing the course:
                             </p>
-                            <h3 class="fw-bold text-primary">
+                            <h3 style="color:#00a0e3; font-size:18px; font-weight:700 !important">
                                 {{ $certificate->course->name ?? 'Course Name' }}
                             </h3>
                         </div>
 
-                        <div class="text-center mb-3">
-                            <p class="lead">
-                                With quiz score: 
-                                <span class="fw-bold">
+                        <div class="text-center mb-3" style="padding: 10px 30px;
+    border: 2px solid #2098d1;
+    border-radius: 50px;
+    margin-top: 15px;
+    width: 210px;
+    margin-left: auto;
+    margin-right: auto;">
+                            <div class="lead" style="margin-bottom:0px;">
+                                 <span style="    font-size: 16px;
+    color: #555;
+    font-weight: 500;">Quiz Score:</span> 
+                                <span class="fw-bold" style="    font-size: 24px;
+    font-weight: 700;
+    color: #2098d1;">
                                     {{ $quizAttempt->obtained_marks ?? 0 }}/{{ $quizAttempt->total_marks ?? 0 }}
                                 </span>
-                            </p>
+</div>
                         </div>
 
                         <div class="row mb-3">
                             <div class="col-md-6 text-center">
                                 <p class="mb-0"><strong>Certificate Number:</strong></p>
-                                <p class="fw-bold text-primary">{{ $certificate->certificate_no ?? 'N/A' }}</p>
+                                <p class="fw-bold">{{ $certificate->certificate_no ?? 'N/A' }}</p>
                             </div>
                             <div class="col-md-6 text-center">
                                 <p class="mb-0"><strong>Date Issued:</strong></p>
@@ -60,26 +79,22 @@
                         </div>
 
                         <div class="text-center mt-4">
-                            <div class="mb-3">
-                                <img src="{{ asset('assets/backend/img/logo.png') }}" 
-                                     alt="Institution Logo" 
-                                     class="certificate-logo" 
-                                     style="max-height: 80px;">
-                            </div>
+                            
                             <p class="text-muted">
                                 This certificate is awarded for demonstrating excellence in learning and commitment to personal growth.
                             </p>
                         </div>
                     </div>
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                                     
+                </div>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
                         <button onclick="printCertificate()" class="btn btn-primary me-md-2">
                             <i class="fas fa-print me-2"></i>Print Certificate
                         </button>
                         <a href="{{ route('auth.enrolled-courses') }}" class="btn btn-outline-secondary">
                             <i class="fas fa-arrow-left me-2"></i>Back to Courses
                         </a>
-                    </div>                    
-                </div>
+                    </div>  
             </div>
         </div>
     </div>
