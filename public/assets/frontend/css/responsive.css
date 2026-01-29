@@ -668,6 +668,19 @@ p.qr_text {
     display: block;
 }
 
+.hero-square-box {
+    width: 200px !important;
+    height: 200px !important;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-square-heading {
+    font-size: 16px !important;
+}
+}
+
 section.about_section {
     padding-left: 15px !important;
     padding-right: 15px !important;

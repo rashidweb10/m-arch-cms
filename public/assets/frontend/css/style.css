@@ -2454,7 +2454,7 @@ ul.submenu.p-2 li ul.submenu li a:hover {
     right: 30px;
     top: 48px;
     text-align: right;
-    z-index:999;
+    z-index:9999;
 }
 .whatsapp img{
    animation: zoomInOut 2s infinite ease-in-out;
@@ -3207,6 +3207,69 @@ body .course-bullet {
     width: 416px;
     margin-top: 35px;
     box-shadow: 2px 0px 18px -5px #000;
+}
+
+/* Hero Square Box - Same height as review banner */
+.hero-square-box {
+    width: 116px;
+    height: 116px;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 0px;
+    /* box-shadow: 2px 0px 18px -5px #000; */
+    position: absolute;
+    margin-top: 33px;
+    right: -201%;
+}
+
+.hero-square-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+    margin-top: 0px !important;
+    width: 120px !important;
+    height: 120px !important;
+    animation: zoomInOut 2s infinite ease-in-out;
+    transform-origin: center;
+}
+.hero-square-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.hero-square-box:hover .hero-square-overlay {
+    opacity: 1;
+}
+
+.hero-square-box:hover .hero-square-img {
+    transform: scale(1.1);
+}
+
+.hero-square-heading {
+    color: #fff;
+    font-size: 18px;
+    text-align: center;
+    padding: 20px;
+}
+
+.hero-banner-container {
+    flex-wrap: wrap;
+}
+
+.review-banner-img {
+    height: 416px;
+    width: auto;
+    object-fit: contain;
 }
 .hero_content h1 {
     text-align: left;
