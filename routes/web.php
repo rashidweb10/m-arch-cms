@@ -212,6 +212,8 @@ Route::prefix('backend')->group(function () {
     
     Route::middleware('auth.backend')->group(function () {
         Route::get('forms-by/{form_name}', [BackendFormController::class, 'index'])->name('forms.by');
+        Route::get('forms-by/{form_name}/destroy/{id}', [BackendFormController::class, 'destroy'])->name('forms.destroy');
+        Route::post('forms-by/bulk-delete', [BackendFormController::class, 'bulkDelete'])->name('forms.bulk-delete');
     });
 
     Route::middleware('auth.backend')->group(function () {

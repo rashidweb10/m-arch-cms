@@ -53,6 +53,16 @@
                         @endif     
                     </div>
                 </div>
+                <div class="row mt-3" id="bulkActionsContainer" style="display: none;">
+                    <div class="col-md-12">
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="text-muted" id="selectedCount">0 items selected</span>
+                            <button type="button" class="btn btn-xs btn-danger" onclick="bulkDeleteForms()">
+                                <i class="ti ti-trash"></i> Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="card-body">
                 @php
@@ -77,6 +87,11 @@
                     <table class="table table-striped text-truncate">
                         <thead>
                             <tr>
+                                <th width="50" class="text-center">
+                                    <div class="form-check d-flex justify-content-center">
+                                        <input class="form-check-input" type="checkbox" id="selectAll" onchange="toggleSelectAll()" style="cursor: pointer; width: 1.2em; height: 1.2em; margin-top: 0.25em;">
+                                    </div>
+                                </th>
                                 <th class="w-10">#</th>
                                 <th class="w-10">Name</th>
                                 <th class="w-10">Email</th>
@@ -85,6 +100,7 @@
                                     <th class="w-10">{{ ucfirst(str_replace('_', ' ', $col)) }}</th>
                                 @endforeach                                 
                                 <th class="w-10">Date</th>
+                                <th class="w-10">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -93,6 +109,11 @@
                                 $formData = is_array($row->form_data) ? $row->form_data : json_decode($row->form_data, true);
                             @endphp                            
                             <tr>
+                                <td class="text-center">
+                                    <div class="form-check d-flex justify-content-center">
+                                        <input class="form-check-input row-checkbox" type="checkbox" value="{{ $row->id }}" onchange="updateBulkActions()" style="cursor: pointer; width: 1.2em; height: 1.2em; margin-top: 0.25em;">
+                                    </div>
+                                </td>
                                 <td>{{ $index + 1 }}</td>                           
                                 <td>{{ $row->name }}</td>                                                           
                                 <td>{{ $row->email }}</td>    
@@ -102,6 +123,27 @@
                                 @endforeach                                  
 
                                 <td>{{ formatDatetime($row->updated_at) }}</td>
+                                <td>
+                                    @if($row->is_registered)
+
+                                        <a onclick="smallModal('{{url(route('course-enrolments.create'))}}?email={{ $row->email }}&category={{ $formData['course_category'] }}', 'Add New')" href="javascript:void(0);" class="link-reset fs-20 p-1"><i class="ti ti-books"></i></a>
+                                    
+                                    @else
+
+                                        <a href="javascript:void(0);" 
+                                        onclick="smallModal('{{ route('students.create', [
+                                                'name'  => $row->name,
+                                                'email' => $row->email,
+                                                'phone' => $row->phone,
+                                        ]) }}', 'Add New')" 
+                                        class="link-reset fs-20 p-1">
+                                        <i class="ti ti-user-plus"></i>
+                                        </a>
+
+                                    @endif
+
+                                    <a href="javascript:void(0);" onclick="confirmModal('{{ route('forms.destroy', ['form_name' => request()->segment(3), 'id' => $row->id]) }}', callbackForms )" class="link-reset fs-20 p-1"> <i class="ti ti-trash"></i></a>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -114,10 +156,75 @@
 </div><!-- end row-->
 
 <script defer>
-const callbackTeams = function(response) {
+const callbackForms = function(response) {
     setTimeout(function() {
         location.reload();
     }, 1500);
+}
+
+// Bulk actions functions
+function toggleSelectAll() {
+    const selectAll = document.getElementById('selectAll');
+    const checkboxes = document.querySelectorAll('.row-checkbox');
+    checkboxes.forEach(checkbox => {
+        checkbox.checked = selectAll.checked;
+    });
+    updateBulkActions();
+}
+
+function updateBulkActions() {
+    const checkboxes = document.querySelectorAll('.row-checkbox:checked');
+    const selectedCount = checkboxes.length;
+    const bulkActionsContainer = document.getElementById('bulkActionsContainer');
+    const selectedCountSpan = document.getElementById('selectedCount');
+    
+    if (selectedCount > 0) {
+        bulkActionsContainer.style.display = 'block';
+        selectedCountSpan.textContent = selectedCount + ' item(s) selected';
+    } else {
+        bulkActionsContainer.style.display = 'none';
+    }
+    
+    // Update select all checkbox state
+    const allCheckboxes = document.querySelectorAll('.row-checkbox');
+    const selectAll = document.getElementById('selectAll');
+    if (allCheckboxes.length > 0) {
+        selectAll.checked = selectedCount === allCheckboxes.length;
+    }
+}
+
+function getSelectedIds() {
+    const checkboxes = document.querySelectorAll('.row-checkbox:checked');
+    const ids = Array.from(checkboxes).map(checkbox => checkbox.value);
+    return ids;
+}
+
+function bulkDeleteForms() {
+    const ids = getSelectedIds();
+    if (ids.length === 0) {
+        toastr.error('Please select at least one item');
+        return;
+    }
+    
+    const message = 'Are you sure you want to delete ' + ids.length + ' selected item(s)?';
+    document.getElementById('bulk_delete_message').textContent = message;
+    document.getElementById('bulk_delete_ids').value = ids.join(',');
+    document.getElementById('bulk_delete_form').setAttribute('action', '{{ route("forms.bulk-delete") }}');
+    callBackFunction = callbackBulkForms;
+    $('#bulkDeleteModal').modal('show');
+}
+
+// Callback function for bulk actions
+const callbackBulkForms = function(response) {
+    // Close all bulk modals
+    $('#bulkDeleteModal').modal('hide');
+    
+    // Only reload on success
+    if (response && response.status) {
+        setTimeout(function() {
+            location.reload();
+        }, 1500);
+    }
 }
 </script>
 @endsection

@@ -1,3 +1,11 @@
+@php 
+    $name = request()->name ?? null;
+    $email = request()->email ?? null;
+    $phone = request()->phone ?? null;
+    //dd($name, $email, $phone);
+@endphp
+
+
 <form id="create" action="{{ route('students.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="row">
@@ -6,7 +14,7 @@
         <div class="col-sm-12">
             <div class="form-group mb-2">
                 <label for="name" class="form-label">Name <span class="text-danger">*</span></label>
-                <input value="" name="name" type="text" class="form-control" minlength="3" maxlength="200" required>
+                <input value="{{ $name }}" name="name" type="text" class="form-control" minlength="3" maxlength="200" required>
             </div>
         </div>
 
@@ -14,7 +22,7 @@
         <div class="col-sm-12">
             <div class="form-group mb-2">
                 <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
-                <input value="" name="email" type="email" class="form-control" required>
+                <input value="{{ $email }}" name="email" type="email" class="form-control" required>
             </div>
         </div>
 
@@ -22,7 +30,7 @@
         <div class="col-sm-12">
             <div class="form-group mb-2">
                 <label for="phone" class="form-label">Phone</label>
-                <input value="" name="phone" type="text" class="form-control" maxlength="20" placeholder="Enter phone number">
+                <input value="{{ $phone }}" name="phone" type="text" class="form-control" maxlength="20" placeholder="Enter phone number">
             </div>
         </div>
 

@@ -63,4 +63,61 @@ class FormController extends Controller
 
         return view('backend.' . $this->folderName . '.index', compact('pageData', 'companyList', 'formNames'));
     }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy($id)
+    {
+        try {
+            // Attempt to delete the record
+            Form::destroy($id);
+    
+            // Redirect back with a success message
+            return redirect()->back()->with('success', 'Record deleted successfully!');
+        } catch (\Exception $e) {
+            // Log the error message and stack trace
+            \Log::error('Error deleting Form record', [
+                'error_message' => $e->getMessage(),
+                'stack_trace' => $e->getTraceAsString(),
+                'form_id' => $id
+            ]);
+    
+            // Redirect back with an error message
+            return redirect()->back()->with('error', 'There was an error deleting the record.');
+        }
+    }
+
+    /**
+     * Bulk delete forms
+     */
+    public function bulkDelete(Request $request)
+    {
+        try {
+            $ids = explode(',', $request->input('ids'));
+            
+            if (empty($ids) || !is_array($ids)) {
+                return response()->json(['status' => false, 'notification' => 'No items selected for deletion.']);
+            }
+
+            $deleted = Form::whereIn('id', $ids)->delete();
+            
+            if ($deleted > 0) {
+                return response()->json([
+                    'status' => true, 
+                    'notification' => $deleted . ' record(s) deleted successfully!'
+                ]);
+            } else {
+                return response()->json(['status' => false, 'notification' => 'No records were deleted.']);
+            }
+        } catch (\Exception $e) {
+            \Log::error('Error bulk deleting Form records', [
+                'error_message' => $e->getMessage(),
+                'stack_trace' => $e->getTraceAsString(),
+                'ids' => $request->input('ids')
+            ]);
+
+            return response()->json(['status' => false, 'notification' => 'There was an error deleting the records.']);
+        }
+    }
 }

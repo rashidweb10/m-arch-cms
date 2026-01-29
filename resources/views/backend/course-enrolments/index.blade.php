@@ -69,7 +69,7 @@
                             </div>
                         </form>
                     </div>
-                    <div class="col-md-2 text-end">
+                    <div class="col-md-2 text-end d-none">
                         <button onclick="smallModal('{{url(route('course-enrolments.create'))}}', 'Add New')"
                         class="btn btn-primary btn-icon w-100"><i class="ti ti-plus"></i> Add New</button>        
                     </div>
@@ -103,9 +103,9 @@
                                     </div>
                                 </th>
                                 <th>#</th>
-                                <th>Name</th>
+                                {{-- <th>Name</th>
                                 <th>Email</th>
-                                <th>Phone</th>
+                                <th>Phone</th> --}}
                                 <th>Course</th>
                                 <th>Validity</th>
                                 <th>Status</th>
@@ -123,7 +123,7 @@
                                     </div>
                                 </td>
                                 <td>{{ $pageData->firstItem() + $index }}</td>
-                                <td>{{ $row->user->name ?? 'N/A' }}</td>
+                                {{-- <td>{{ $row->user->name ?? 'N/A' }}</td>
                                 <td>
                                     @if(!empty($row->user->email))
                                         <a href="{{ route('students.index', ['search' => $row->user->email]) }}"
@@ -135,7 +135,7 @@
                                         N/A
                                     @endif
                                 </td>
-                                <td>{{ $row->user->phone ?? 'N/A' }}</td>
+                                <td>{{ $row->user->phone ?? 'N/A' }}</td> --}}
                                 <td>
                                     @if($row->course)
                                         <a href="{{ url('backend/courses?search=' . urlencode($row->course->name)) }}" 

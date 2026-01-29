@@ -23,7 +23,11 @@ class FrontendController extends Controller
         ->where('slug', 'home')
         ->firstOrFail();
 
-        return view('frontend.pages.home', compact('pageData'));
+        $pageData1 = Page::with('meta')->where('is_active', 1)
+        ->where('slug', 'testimonials')
+        ->firstOrFail();
+
+        return view('frontend.pages.home', compact('pageData', 'pageData1'));
     }
 
     public function about()

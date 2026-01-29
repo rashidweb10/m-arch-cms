@@ -68,6 +68,7 @@
                     </div>
 
                     <div class="card-body">
+                        <h5>Total: <b>{{ $all_uploads->total() }}</b></h5>
                         <div class="form-group mb-3">
                             <div class="form-check">
                                 <input type="checkbox" class="form-check-input check-all" id="select-all">
