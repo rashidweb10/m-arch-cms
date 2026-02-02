@@ -19,6 +19,8 @@
   $about_description2 = $pageData->meta->where('meta_key', 'about_school_description')->first()->meta_value ?? '';
 
   $categories = \App\Models\CourseCategory::where('is_active', 1)->whereIn('id', [33, 34])->get();
+  $onlineCategory = \App\Models\CourseCategory::where('id', 33)->where('is_active', 1)->first();
+  $offlineCategory = \App\Models\CourseCategory::where('id', 34)->where('is_active', 1)->first();
 
   $testimonial_images = array_slice(
     array_filter(
@@ -81,27 +83,41 @@
 <section class="enroll-images-section pt-md-5 pb-md-5  pt-4 pb-4">
    <div class="container">
       <div class="row g-4 align-items-center">
-         <!-- Single Image Column - Online Course -->
-         @foreach($categories as $category)
+         <!-- Offline Course - First -->
+         @if($offlineCategory)
          <div class="col-md-4" data-aos="fade-right" data-aos-duration="1000" data-aos-once="true">
-            <a href="{{ route('courses') }}" class="text-decoration-none">
+            <a href="{{ route('courses') }}#offline-course" class="text-decoration-none">
                <div class="enroll-image-box position-relative">
-                  <img class="w-100 hvr-bounce-in" src="{{ uploaded_asset($category->image) }}" alt="{{ $category->name }}">
+                  <img class="w-100 hvr-bounce-in" src="{{ uploaded_asset($offlineCategory->image) }}" alt="{{ $offlineCategory->name }}">
                   <div class="image-label">
-                     <span class="robot_slab">{{ $category->name }}</span>
+                     <span class="robot_slab">{{ $offlineCategory->name }}</span>
                   </div>
                </div>
             </a>
          </div>
-         @endforeach
+         @endif
          
-         <!-- Enroll Form Column -->
-         <div class="col-md-4" data-aos="fade-left" data-aos-duration="1000" data-aos-once="true">
+         <!-- Enroll Form Column - Middle -->
+         <div class="col-md-4" data-aos="fade-up" data-aos-duration="1000" data-aos-once="true">
             <div class="enroll-form-box">
                <h3 class="robot_slab text_color mb-4">Enroll Now</h3>
                @include('frontend.components.enrolment-enquiry')
             </div>
          </div>
+         
+         <!-- Online Course - Last -->
+         @if($onlineCategory)
+         <div class="col-md-4" data-aos="fade-left" data-aos-duration="1000" data-aos-once="true">
+            <a href="{{ route('courses') }}#online-course" class="text-decoration-none">
+               <div class="enroll-image-box position-relative">
+                  <img class="w-100 hvr-bounce-in" src="{{ uploaded_asset($onlineCategory->image) }}" alt="{{ $onlineCategory->name }}">
+                  <div class="image-label">
+                     <span class="robot_slab">{{ $onlineCategory->name }}</span>
+                  </div>
+               </div>
+            </a>
+         </div>
+         @endif
       </div>
    </div>
 </section>
