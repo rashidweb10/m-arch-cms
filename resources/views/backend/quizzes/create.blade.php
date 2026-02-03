@@ -51,6 +51,14 @@
             </div>
         </div>
 
+        <!-- Duration -->
+        <div class="col-sm-12">
+            <div class="form-group mb-2">
+                <label for="duration" class="form-label">Duration (minutes) <span class="text-danger">*</span></label>
+                <input value="" name="duration" type="number" class="form-control" min="1" max="300" required>
+            </div>
+        </div>
+
         <!-- Is Active (dropdown) -->
         <div class="col-sm-12">
             <div class="form-group mb-2">

@@ -83,6 +83,7 @@ class QuizController extends Controller
             'total_marks' => 'required|integer|min:1',
             'pass_marks' => 'required|integer|min:1|lte:total_marks',
             'is_active' => 'required|boolean',
+            'duration' => 'required|integer|min:1|max:300', // Duration in minutes (1-300 minutes)
         ]);
 
         // If validation passes, proceed to saving the data
@@ -92,6 +93,7 @@ class QuizController extends Controller
         $Quiz->total_marks = $request->input('total_marks');
         $Quiz->pass_marks = $request->input('pass_marks');
         $Quiz->is_active = $request->input('is_active');
+        $Quiz->duration = $request->input('duration');
         $Quiz->save();
 
         // Return JSON response for AJAX handling
@@ -138,6 +140,7 @@ class QuizController extends Controller
             'total_marks' => 'required|integer|min:1',
             'pass_marks' => 'required|integer|min:1|lte:total_marks',
             'is_active' => 'required|boolean',
+            'duration' => 'required|integer|min:1|max:300', // Duration in minutes (1-300 minutes)
         ]);
 
         // If validation passes, update the data
@@ -146,6 +149,7 @@ class QuizController extends Controller
         $Quiz->total_marks = $request->input('total_marks');
         $Quiz->pass_marks = $request->input('pass_marks');
         $Quiz->is_active = $request->input('is_active');
+        $Quiz->duration = $request->input('duration');
         $Quiz->save();
     
         // Return JSON response for AJAX handling

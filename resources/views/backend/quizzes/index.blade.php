@@ -55,6 +55,7 @@
                                 <th>Title</th>
                                 <th>Total Marks</th>
                                 <th>Pass Marks</th>
+                                <th>Duration (min)</th>
                                 <th>Status</th>
                                 <th>Created At</th>
                                 <th>Updated At</th>                                
@@ -69,6 +70,7 @@
                                 <td>{{ $row->title }}</td>
                                 <td>{{ $row->total_marks }}</td>
                                 <td>{{ $row->pass_marks }}</td>
+                                <td>{{ $row->duration ?? 60 }}</td>
                                 <td>
                                 <span class="badge {{ $row->is_active ? 'bg-success' : 'bg-danger' }}">
                                     {{ $row->is_active ? 'Active' : 'Inactive' }}

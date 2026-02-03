@@ -19,14 +19,29 @@
                         </div>
                     @endif
 
-                    <form method="POST" action="{{ route('auth.quiz-attempt.store', $quiz->id) }}">
+                    <form id="quiz-form" method="POST" action="{{ route('auth.quiz-attempt.store', $quiz->id) }}">
                         @csrf
 
-                        <div class="mb-4">
-                            <h5>Course: {{ $quiz->course->name ?? 'N/A' }}</h5>
-                            <p class="text-muted">Total Marks: {{ $quiz->total_marks ?? 0 }}</p>
-                            <p class="text-muted">Pass Marks: {{ $quiz->pass_marks ?? 0 }}</p>
+                    <div class="mb-4">
+                        <h5>Course: {{ $quiz->course->name ?? 'N/A' }}</h5>
+                        <p class="text-muted">Total Marks: {{ $quiz->total_marks ?? 0 }}</p>
+                        <p class="text-muted">Pass Marks: {{ $quiz->pass_marks ?? 0 }}</p>
+                        <p class="text-muted">Duration: {{ $quiz->duration ?? 60 }} minutes</p>
+                    </div>
+
+                    <!-- Countdown Timer -->
+                    <div class="mb-4">
+                        <div class="card bg-warning text-white">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <i class="fas fa-clock me-2"></i>Time Remaining
+                                </h5>
+                                <div id="countdown" class="display-4 font-weight-bold">
+                                    {{ gmdate('H:i:s', ($quiz->duration ?? 60) * 60) }}
+                                </div>
+                            </div>
                         </div>
+                    </div>
 
                         @foreach($quiz->questions as $index => $question)
                             <div class="question-card mb-4 p-4 bg-light rounded">
@@ -69,9 +84,49 @@
 
 @section('scripts')
 <script>
-    // Add any quiz-specific JavaScript here
     document.addEventListener('DOMContentLoaded', function() {
-        // You can add form validation or other interactive features here
+        // Countdown timer functionality
+        const durationInSeconds = {{ $quiz->duration ?? 60 }} * 60;
+        let timeRemaining = durationInSeconds;
+        const countdownElement = document.getElementById('countdown');
+        const quizForm = document.querySelector('#quiz-form');
+
+        // Update countdown display
+        function updateCountdown() {
+            const hours = Math.floor(timeRemaining / 3600);
+            const minutes = Math.floor((timeRemaining % 3600) / 60);
+            const seconds = timeRemaining % 60;
+
+            // Format as HH:MM:SS
+            const formattedTime = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            
+            countdownElement.textContent = formattedTime;
+
+            // Change color when time is running low
+            if (timeRemaining <= 60) {
+                countdownElement.classList.remove('text-white');
+                countdownElement.classList.add('text-danger');
+            }
+        }
+
+        // Auto-submit form when time is up
+        function autoSubmitForm() {
+            quizForm.submit();
+        }
+
+        // Countdown timer interval
+        const countdownInterval = setInterval(() => {
+            timeRemaining--;
+            updateCountdown();
+
+            if (timeRemaining <= 0) {
+                clearInterval(countdownInterval);
+                autoSubmitForm();
+            }
+        }, 1000);
+
+        // Initialize countdown
+        updateCountdown();
     });
 </script>
 @endsection

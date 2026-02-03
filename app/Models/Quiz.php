@@ -12,6 +12,7 @@ class Quiz extends Model
         'total_marks',
         'pass_marks',
         'is_active',
+        'duration',
     ];
 
     // Relationship: A quiz belongs to a course
