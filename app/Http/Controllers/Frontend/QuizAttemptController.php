@@ -26,6 +26,16 @@ class QuizAttemptController extends Controller
             return redirect()->route('auth.enrolled-courses')->with('error', 'You are not enrolled in this course.');
         }
 
+        // Check if user has already attempted this quiz
+        $existingAttempt = QuizAttempt::where('user_id', $user->id)
+            ->where('quiz_id', $quiz->id)
+            ->where('is_attempt', 1)
+            ->first();
+
+        if ($existingAttempt) {
+            return redirect()->route('auth.quiz-result', $existingAttempt->id);
+        }
+
         // Check if user has already passed this quiz
         $hasPassed = QuizAttempt::where('user_id', $user->id)
             ->where('quiz_id', $quiz->id)
@@ -106,6 +116,7 @@ class QuizAttemptController extends Controller
             'obtained_marks' => $obtainedMarks,
             'is_passed' => $isPassed,
             'attempted_at' => now(),
+            'is_attempt' => 1, // Set to 1 when quiz is submitted
         ]);
 
         // Create quiz attempt answers

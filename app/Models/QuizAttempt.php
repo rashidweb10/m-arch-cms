@@ -13,6 +13,7 @@ class QuizAttempt extends Model
         'obtained_marks',
         'is_passed',
         'attempted_at',
+        'is_attempt',
     ];
 
     // Relationship: A quiz attempt belongs to a quiz
