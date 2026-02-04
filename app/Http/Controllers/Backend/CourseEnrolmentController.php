@@ -373,5 +373,27 @@ class CourseEnrolmentController extends Controller
             
         return view('frontend.certificate.show', compact('certificate', 'quizAttempt'));
     }
+
+    /**
+     * Preview course materials as student (admin preview)
+     */
+    public function previewCourseMaterials(CourseEnrolment $courseEnrolment)
+    {
+        // Load the course with its materials
+        $course = $courseEnrolment->course;
+        $course->load([
+            'materials' => function ($q) {
+                $q->orderBy('id', 'desc');
+            }
+        ]);
+
+        // Create a temporary user instance for preview
+        $user = $courseEnrolment->user;
+
+        // Generate the preview URL
+        $previewUrl = route('auth.enrolled-courses.show', $course->id) . '?preview=true';
+
+        return redirect()->to($previewUrl);
+    }
 }
 

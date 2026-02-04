@@ -155,13 +155,14 @@
                                 </td>
                                 <td>{{ formatDatetime($row->created_at) }}</td>
                                 <td>{{ formatDatetime($row->updated_at) }}</td>                                
-                                <td>
-                                    @if($row->certificate)
-                                        <a href="{{ route('course-enrolments.certificate', $row->certificate->id) }}" target="_blank" class="link-reset fs-20 p-1"> <i class="ti ti-file-certificate"></i></a>
-                                    @endif                                    
-                                    <a href="javascript:void(0);" onclick="smallModal('{{url(route('course-enrolments.edit', $row->id))}}', 'Edit')" class="link-reset fs-20 p-1"> <i class="ti ti-pencil"></i></a>
-                                    <a href="javascript:void(0);" onclick="confirmModal('{{ route('course-enrolments.destroy', $row->id) }}', callbackCourseEnrolments )" class="link-reset fs-20 p-1"> <i class="ti ti-trash"></i></a>
-                                </td>
+                                 <td>
+                                     @if($row->certificate)
+                                         <a href="{{ route('course-enrolments.certificate', $row->certificate->id) }}" target="_blank" class="link-reset fs-20 p-1"> <i class="ti ti-file-certificate"></i></a>
+                                     @endif
+                                     <a href="{{ route('course-enrolments.preview', $row->id) }}" target="_blank" class="link-reset fs-20 p-1" title="Preview Course Materials"> <i class="ti ti-eye"></i></a>                                   
+                                     <a href="javascript:void(0);" onclick="smallModal('{{url(route('course-enrolments.edit', $row->id))}}', 'Edit')" class="link-reset fs-20 p-1"> <i class="ti ti-pencil"></i></a>
+                                     <a href="javascript:void(0);" onclick="confirmModal('{{ route('course-enrolments.destroy', $row->id) }}', callbackCourseEnrolments )" class="link-reset fs-20 p-1"> <i class="ti ti-trash"></i></a>
+                                 </td>
                             </tr>
                             @endforeach
                         </tbody>

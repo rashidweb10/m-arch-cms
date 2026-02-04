@@ -474,17 +474,32 @@ class AuthController extends Controller
      */
     public function enrolledCourseShow(\App\Models\Course $course)
     {
-        $user = Auth::user();
+        // Check if this is an admin preview
+        $isPreview = request()->has('preview');
+        
+        if ($isPreview) {
+            // For preview mode, check if user is an admin
+            if (!Auth::check() || Auth::user()->role_id != 1) {
+                abort(403, 'Unauthorized access.');
+            }
+            $user = Auth::user();
+        } else {
+            // Normal mode: Check authentication and enrollment
+            $user = Auth::user();
+            if (!$user) {
+                return redirect()->route('auth.login');
+            }
 
-        // Ensure the user is enrolled in this course and the enrollment is active
-        $isEnrolled = \App\Models\CourseEnrolment::where('user_id', $user->id)
-            ->where('course_id', $course->id)
-            ->where('validity', '>', Carbon::now()->startOfDay())
-            ->where('is_active', 1)
-            ->exists();
+            // Ensure the user is enrolled in this course and the enrollment is active
+            $isEnrolled = \App\Models\CourseEnrolment::where('user_id', $user->id)
+                ->where('course_id', $course->id)
+                ->where('validity', '>', Carbon::now()->startOfDay())
+                ->where('is_active', 1)
+                ->exists();
 
-        if (!$isEnrolled) {
-            abort(403, 'You are not enrolled in this course.');
+            if (!$isEnrolled) {
+                abort(403, 'You are not enrolled in this course.');
+            }
         }
 
         // Load the course with its materials

@@ -114,7 +114,7 @@ Route::prefix('auth')->group(function () {
         Route::get('/change-password', [FrontendAuthController::class, 'showChangePasswordForm'])->name('auth.change-password');
         Route::post('/change-password', [FrontendAuthController::class, 'changePassword'])->middleware(['protect.forms','recaptcha','throttle:10,1'])->name('auth.change-password.store');
         Route::get('/enrolled-courses', [FrontendAuthController::class, 'enrolledCourses'])->name('auth.enrolled-courses');
-        Route::get('/enrolled-courses/{course}', [FrontendAuthController::class, 'enrolledCourseShow'])->name('auth.enrolled-courses.show');
+         Route::get('/enrolled-courses/{course}', [FrontendAuthController::class, 'enrolledCourseShow'])->name('auth.enrolled-courses.show')->withoutMiddleware(['auth']);
         Route::post('/logout', [FrontendAuthController::class, 'logout'])->name('auth.logout');
 
         // Quiz Attempt Routes
@@ -192,13 +192,14 @@ Route::prefix('backend')->group(function () {
         Route::post('course-materials/bulk-inactive', [CourseMaterialController::class, 'bulkInactive'])->name('course-materials.bulk-inactive');
     });  
 
-    Route::middleware('auth.backend')->group(function () {
-        Route::resource('course-enrolments', CourseEnrolmentController::class);
-        Route::post('course-enrolments/bulk-delete', [CourseEnrolmentController::class, 'bulkDelete'])->name('course-enrolments.bulk-delete');
-        Route::post('course-enrolments/bulk-active', [CourseEnrolmentController::class, 'bulkActive'])->name('course-enrolments.bulk-active');
-        Route::post('course-enrolments/bulk-inactive', [CourseEnrolmentController::class, 'bulkInactive'])->name('course-enrolments.bulk-inactive');
-        Route::get('course-enrolments/certificate/{certificate}', [CourseEnrolmentController::class, 'viewCertificate'])->name('course-enrolments.certificate');
-    });  
+     Route::middleware('auth.backend')->group(function () {
+         Route::resource('course-enrolments', CourseEnrolmentController::class);
+         Route::post('course-enrolments/bulk-delete', [CourseEnrolmentController::class, 'bulkDelete'])->name('course-enrolments.bulk-delete');
+         Route::post('course-enrolments/bulk-active', [CourseEnrolmentController::class, 'bulkActive'])->name('course-enrolments.bulk-active');
+         Route::post('course-enrolments/bulk-inactive', [CourseEnrolmentController::class, 'bulkInactive'])->name('course-enrolments.bulk-inactive');
+         Route::get('course-enrolments/certificate/{certificate}', [CourseEnrolmentController::class, 'viewCertificate'])->name('course-enrolments.certificate');
+         Route::get('course-enrolments/preview/{courseEnrolment}', [CourseEnrolmentController::class, 'previewCourseMaterials'])->name('course-enrolments.preview');
+     }); 
 
     Route::middleware('auth.backend')->group(function () {
         Route::resource('students', StudentController::class);
