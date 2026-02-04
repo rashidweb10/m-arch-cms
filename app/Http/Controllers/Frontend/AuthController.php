@@ -505,7 +505,7 @@ class AuthController extends Controller
         // Load the course with its materials
         $course->load([
             'materials' => function ($q) {
-                $q->orderBy('id', 'desc');
+                $q->orderBy('id', 'asc');
                 //->orderBy('sorting_id', 'asc'); //
             }
         ]);
