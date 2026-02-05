@@ -4,6 +4,10 @@ $banner_title = $pageData->meta->where('meta_key', 'banner_title')->first()->met
 $banner_description = $pageData->meta->where('meta_key', 'banner_description')->first()->meta_value ?? '';
 $banner_images = $pageData->meta->where('meta_key', 'banner_images')->first()->meta_value ?? '';
 
+$popup_title = $pageData->meta->where('meta_key', 'popup_title')->first()->meta_value ?? '';
+$popup_description = $pageData->meta->where('meta_key', 'popup_description')->first()->meta_value ?? '';
+$popup_image = $pageData->meta->where('meta_key', 'popup_image')->first()->meta_value ?? '';
+
 $about_title = $pageData->meta->where('meta_key', 'about_title')->first()->meta_value ?? '';
 $about_description = $pageData->meta->where('meta_key', 'about_description')->first()->meta_value ?? '';
 $about_image = $pageData->meta->where('meta_key', 'about_image')->first()->meta_value ?? '';
@@ -51,6 +55,34 @@ $home_quicklinks = json_decode($pageData->meta->where('meta_key', 'home_quicklin
     <div class="col-md-12 form-group mb-2">
         <label for="content" class="form-label">Description <span class="text-danger">*</span></label>
         <textarea name="meta[banner_description]" class="form-control text-editor" rows="4" required>{{$banner_description}}</textarea>
+    </div>     
+</div> 
+
+<div class="row">
+    <div class="col-md-12">
+        <hr>
+        <h4 class="text-primary">Popup Section</h4>
+    </div>        
+    <div class="col-md-6 form-group mb-2">
+        <label for="name" class="form-label">Title<span class="text-danger">*</span></label>
+        <input class="form-control" value="{{$popup_title}}" name="meta[popup_title]" type="text" required>
+    </div>   
+    <div class="col-md-6">
+        <label for="name" class="form-label">Image<span class="text-danger">*</span></label>
+        <div class="form-group mb-2">
+            <div class="input-group" data-toggle="aizuploader" data-type="image" data-multiple="false">
+                <div class="input-group-prepend">
+                    <div class="input-group-text bg-soft-secondary font-weight-medium">{{ __('Browse') }}</div>
+                </div>
+                <div class="form-control file-amount">{{ __('Choose File') }}</div>
+                <input value="{{$popup_image}}" type="hidden" name="meta[popup_image]" class="selected-files" required>
+            </div>
+            <div class="file-preview box sm"></div>
+        </div>
+    </div>     
+    <div class="col-md-12 form-group mb-2">
+        <label for="content" class="form-label">Description <span class="text-danger">*</span></label>
+        <textarea name="meta[popup_description]" class="form-control text-editor" rows="4" required>{{$popup_description}}</textarea>
     </div>     
 </div> 
 
