@@ -47,7 +47,31 @@
 
 
         {!! $banner_description !!}
-        <a href="https://www.google.com/search?sca_esv=eb783835d62ec6f7&rlz=1C1SLLM_enIN1120IN1120&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOSOXx31BNcQ1ajSXd2D9ZuQC7kMPdaCdKMY0Xm0lPIgc-R5Jf8M93s6HO0-qu1rqhvw0o8RUmQBjbCy-SEAqrlroqq_Q&q=Marin+Arch+Reviews&sa=X&ved=2ahUKEwimyJPhso2SAxWoUGwGHWLJC_8Q0bkNegQIIhAH&biw=1600&bih=731&dpr=1&aic=0" target="_blank"><img src="/assets/frontend/img/review_img.jpeg" class="img-fluid" alt="Reviews" title="Check our students review" /></a> 
+        <div class="d-flex align-items-center justify-content-center gap-3 mt-3 hero-banner-container">
+            <a href="https://www.google.com/search?sca_esv=eb783835d62ec6f7&rlz=1C1SLLM_enIN1120IN1120&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOSOXx31BNcQ1ajSXd2D9ZuQC7kMPdaCdKMY0Xm0lPIgc-R5Jf8M93s6HO0-qu1rqhvw0o8RUmQBjbCy-SEAqrlroqq_Q&q=Marin+Arch+Reviews&sa=X&ved=2ahUKEwimyJPhso2SAxWoUGwGHWLJC_8Q0bkNegQIIhAH&biw=1600&bih=731&dpr=1&aic=0" target="_blank"><img src="/assets/frontend/img/review_img.jpeg" class="img-fluid review-banner-img" alt="Reviews" title="Check our students review" /></a>
+            <!-- Square Box with Image and Popup -->
+            <div class="hero-square-box" data-bs-toggle="modal" data-bs-target="#heroPopupModal">
+                <img src="/assets/frontend/img/about-home.jpg" class="hero-square-img" alt="Popup Image" />
+                <div class="hero-square-overlay">
+                    <h5 class="hero-square-heading robot_slab mb-0">Click to View</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Hero Popup Modal -->
+<div class="modal fade" id="heroPopupModal" tabindex="-1" aria-labelledby="heroPopupModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title robot_slab" id="heroPopupModalLabel">Popup Content</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>This is the popup content. You can add any content here.</p>
+            </div>
+        </div>
     </div>
 </div>
 
