@@ -25,6 +25,11 @@ class AuthController extends Controller
         return view('frontend.auth.login');
     }
 
+    public function showAppLoginForm()
+    {
+        return view('frontend.auth.app-login');
+    }    
+
     /**
      * Handle login request
      * Supports: email/password, phone/password, Gmail OAuth

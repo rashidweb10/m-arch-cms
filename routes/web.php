@@ -81,6 +81,7 @@ Route::post('/submit-form', [FormController::class, 'submit'])->middleware(['pro
 Route::prefix('auth')->group(function () {
     // Login
     Route::get('/login', [FrontendAuthController::class, 'showLoginForm'])->name('auth.login');
+    Route::get('/app-login', [FrontendAuthController::class, 'showAppLoginForm'])->name('auth.app-login');
     Route::get('/login', [FrontendAuthController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [FrontendAuthController::class, 'login'])->middleware(['protect.forms','recaptcha','throttle:10,1'])->name('auth.login');
     
