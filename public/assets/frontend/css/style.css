@@ -128,7 +128,10 @@ header li.nav-item.dropdown ul.dropdown-menu {
     border: 0;
     left:-50px;
 }
-
+.testiminials_box img {
+    border: 1px solid #ccc;
+    border-radius: 15px;
+}
 .services_boxs img {
     border: 1px solid #ccc;
     border-radius: 15px;
