@@ -3070,6 +3070,33 @@ body .course-bullet {
 .testiminials_box {
     margin-bottom: 25px;
 }
+
+/* Google Reviews Button */
+.google-reviews-btn {
+    display: inline-block;
+    background: #00a0e3;
+    color: #fff;
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    border: 2px solid #00a0e3;
+    font-family: "Roboto Slab", serif;
+    box-shadow: 0 4px 15px rgb(131 208 244 / 52%);
+}
+
+.google-reviews-btn:hover {
+    background: #00a0e3;
+    border-color: #00a0e3;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.google-reviews-btn i {
+    font-size: 18px;
+}
 .curseswe_offer .owl-nav.disabled {
     display: block !important;
     position: relative;

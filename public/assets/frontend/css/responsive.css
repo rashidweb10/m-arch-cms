@@ -1318,4 +1318,10 @@ section.about_section .container {
     .copyrighr2 {
         text-align: center !important;
     }
+    
+    /* Google Reviews Button Responsive */
+    .google-reviews-btn {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
 }
