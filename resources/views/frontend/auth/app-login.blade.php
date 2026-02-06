@@ -5,17 +5,37 @@
 
 @section('content')
 
-@include('frontend.partials.breadcrumb', ['title' => "Login"])
+@php
+    // Get home page video for background
+    $homePage = \App\Models\Page::with('meta')->where('is_active', 1)->where('slug', 'home')->first();
+    $banner_video = $homePage ? $homePage->meta->where('meta_key', 'banner_images')->first()->meta_value ?? '' : '';
+@endphp
+
 <style>
 header, footer, .header_section_top, .about_banner_spacer, .whatsapp {
     display: none;
 }    
+
+.login-video-background section {
+    position: relative;
+    z-index: 10;
+    padding-top: 80px !important;
+    padding-bottom: 60px;
+}
+
+
 </style>
-<section class="py-5">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6 col-lg-5">
-                <div class="bg-light p-4 p-md-5 rounded-3 shadow-sm">
+
+<div class="login-video-background position-relative">
+    <video width="100%" height="100%" class="login-video" loop="loop" autoplay="" playsinline="" muted=""
+        src="{{ $banner_video ? uploaded_asset($banner_video) : '' }}" id="app-login-video-bg"></video>
+    <div class="login-video-overlay"></div>
+    
+    <section class="position-relative" style="z-index: 10;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6 col-lg-5">
+                    <div class="bg-light p-4 p-md-5 rounded-3 shadow-sm">
                     <h3 class="fw-bold mb-4 text-center robot_slab">Login to your account</h3>
 
                     @if ($errors->any())
@@ -109,11 +129,12 @@ header, footer, .header_section_top, .about_banner_spacer, .whatsapp {
                             <p class="mb-0">Don't have an account? <a href="{{ route('auth.register') }}">Register here</a></p>
                         </div>
                     </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+</div>
 
 @endsection
 
