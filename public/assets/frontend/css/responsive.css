@@ -1324,4 +1324,14 @@ section.about_section .container {
         padding: 10px 20px;
         font-size: 14px;
     }
+    
+    /* Login Video Background Responsive */
+    .login-video-background {
+        min-height: 100vh;
+    }
+    
+    .login-video-background section {
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
 }
