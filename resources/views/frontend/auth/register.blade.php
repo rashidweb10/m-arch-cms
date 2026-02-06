@@ -7,7 +7,7 @@
 
 @include('frontend.partials.breadcrumb', ['title' => "Register"])
 
-<section class="py-5">
+<section class="pb-5">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8 col-lg-7">
