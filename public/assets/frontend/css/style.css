@@ -3136,6 +3136,11 @@ footer.footer {
     padding-top: 150px;
     padding-bottom: 60px;
 }
+
+.dsplay_flex1 {
+    display: flex;
+    gap: 20px;
+}
 .curseswe_offer .owl-nav.disabled {
     display: block !important;
     position: relative;

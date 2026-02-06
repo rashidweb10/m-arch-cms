@@ -9,14 +9,19 @@
 <section class="pt-4 pt-md-5 pb-5">
     <div class="container">
         <div class="row">
-            <div class="col-lg-3">
+            <div class="col-lg-12">
                 <div class="mb-4">
                     <form method="GET" action="{{ route('blog.index') }}">
-                        <div class="mb-3">
+                        <div class="row">
+                            <div class="col-md-4">
+                            <div class="mb-3">
                             <input type="text" name="search" value="{{ request()->get('search') }}" class="form-control" placeholder="Search blog">
                         </div>
+                            </div>
 
-                        <div class="mb-3">
+                            <div class="col-md-4">
+                                
+                            <div class="mb-3">
                             <select name="category" class="form-select">
                                 <option value="">All Categories</option>
                                 @foreach($categories as $cat)
@@ -27,16 +32,29 @@
                             </select>
                         </div>
 
-                        <button type="submit" class="btn btn-2 btn-success robot_slab w-100">Filter</button>
-                        <a href="{{ route('blog.index') }}" class="btn btn-secondary robot_slab w-100 mt-2">Reset</a>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="dsplay_flex1">
+                                <button style="background:#00a0e3 !important;border:0px;" type="submit" class="btn btn-2 btn-success robot_slab w-100">Filter</button>
+                            <a  href="{{ route('blog.index') }}" class="btn btn-secondary robot_slab w-100">Reset</a>
+                             
+                                </div>
+                            </div>
+                        </div>
+                       
+
+                        
+
+                       
                     </form>
                 </div>
             </div>
 
-            <div class="col-lg-9">
+            <div class="col-lg-12">
                 <div class="row">
                     @forelse($blogs as $blog)
-                        <div class="col-md-6 mb-4">
+                        <div class="col-md-4 mb-4">
                             @php
                                 $cats = $blog->categories ? $blog->categories->pluck('name')->filter()->values() : collect();
                                 $primaryCategory = $cats->first();
