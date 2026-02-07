@@ -1,4 +1,3 @@
-<script src="{{ asset('assets/frontend/js/content-protect.js') }}" defer></script>
 <script src="{{ asset('assets/frontend/js/jquery-3.6.0.min.js') }}"></script>
 <script src="{{ asset('assets/frontend/js/popper.min.js') }}"></script>
 <script src="{{ asset('assets/frontend/js/bootstrap.min.js') }}"></script>
