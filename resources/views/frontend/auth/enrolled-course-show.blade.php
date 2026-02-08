@@ -122,7 +122,7 @@
 </div>
 
 <!-- IMAGE MODAL -->
-<div class="modal fade" id="imageModal" tabindex="-1">
+<div class="modal fade" id="imageModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -137,7 +137,7 @@
 </div>
 
 <!-- VIDEO MODAL -->
-<div class="modal fade" id="videoModal" tabindex="-1">
+<div class="modal fade" id="videoModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -157,7 +157,7 @@
 </div>
 
 <!-- DOCUMENT MODAL -->
-<div class="modal fade" id="documentModal" tabindex="-1">
+<div class="modal fade" id="documentModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
