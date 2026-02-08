@@ -217,7 +217,7 @@ $(function () {
         
         // Use Google Docs Viewer to display documents without download option
         //const viewerUrl = `https://docs.google.com/viewer?url=${encodeURIComponent(fileUrl)}&embedded=true`;
-        const viewerUrl = `${fileUrl}`;
+        const viewerUrl = `${fileUrl}#toolbar=0&navpanes=0&scrollbar=0`;
         
         alert(viewerUrl);
         $('#documentFrame').attr('src', viewerUrl);
