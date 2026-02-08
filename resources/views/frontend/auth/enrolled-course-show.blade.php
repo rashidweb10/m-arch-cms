@@ -219,7 +219,7 @@ $(function () {
         //const viewerUrl = `https://docs.google.com/viewer?url=${encodeURIComponent(fileUrl)}&embedded=true`;
         const viewerUrl = `${fileUrl}#toolbar=0&navpanes=0&scrollbar=0`;
         
-        alert(viewerUrl);
+        //alert(viewerUrl);
         $('#documentFrame').attr('src', viewerUrl);
         
         new bootstrap.Modal('#documentModal').show();
