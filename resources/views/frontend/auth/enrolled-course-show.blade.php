@@ -165,11 +165,16 @@
                 <button class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body p-0">
+                <!-- PDF.js Viewer -->
+                <div id="pdfViewer" style="display: none; padding: 20px; background: #111;">
+                    <div id="pdfCanvasContainer"></div>
+                </div>
+                <!-- Fallback to iframe for other document types -->
                 <iframe id="documentFrame"
                         width="100%"
                         height="600"
                         frameborder="0"
-                        style="background: #fff;">
+                        style="background: #fff; display: none;">
                 </iframe>
             </div>
         </div>
@@ -178,7 +183,14 @@
 @endsection
 
 @section('scripts')
+<!-- PDF.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
 <script>
+// PDF.js configuration
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+  'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
 $(function () {
 
     // Expand / Collapse All
@@ -216,23 +228,84 @@ $(function () {
         
         $('#documentModalTitle').text(fileName);
         
-        // Use Google Docs Viewer to display documents without download option
-        //const viewerUrl = `https://docs.google.com/viewer?url=${encodeURIComponent(fileUrl)}&embedded=true`;
-        const viewerUrl = `${fileUrl}#toolbar=0&navpanes=0&scrollbar=0`;
-        
-        //alert(extension);
         if(extension == 'pdf'){
-            $('#documentFrame').attr('src', viewerUrl);
+            // Show PDF.js viewer and hide iframe
+            $('#documentFrame').hide();
+            $('#pdfViewer').show();
+            
+            // Render PDF
+            renderPDF(fileUrl);
+            
             new bootstrap.Modal('#documentModal').show(); 
             return true;           
+        } else {
+            // Show iframe for other document types
+            // $('#pdfViewer').hide();
+            // $('#documentFrame').show();
+            
+            // const viewerUrl = `${fileUrl}#toolbar=0&navpanes=0&scrollbar=0`;
+            // $('#documentFrame').attr('src', viewerUrl);
+            // new bootstrap.Modal('#documentModal').show(); 
+            // return true;
+            alert(`Document Not Supported: ${extension}`);
         }
-        alert(`Document Not Supported: ${extension}`);
     });
 
-    // CLEAR DOCUMENT FRAME ON CLOSE
+    // CLEAR DOCUMENT VIEWER ON CLOSE
     $('#documentModal').on('hidden.bs.modal', function () {
         $('#documentFrame').attr('src', '');
+        $('#pdfCanvasContainer').empty();
+        $('#pdfViewer').hide();
+        $('#documentFrame').show();
     });
+
+    // PDF rendering function
+    function renderPDF(url) {
+        const container = document.getElementById('pdfCanvasContainer');
+        container.innerHTML = '';
+        
+        pdfjsLib.getDocument(url).promise.then(pdf => {
+            for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+                pdf.getPage(pageNum).then(page => {
+                    const scale = 1.4;
+                    const viewport = page.getViewport({ scale });
+
+                    const canvas = document.createElement('canvas');
+                    const context = canvas.getContext('2d');
+
+                    canvas.width = viewport.width;
+                    canvas.height = viewport.height;
+
+                    container.appendChild(canvas);
+
+                    page.render({
+                        canvasContext: context,
+                        viewport: viewport
+                    });
+                });
+            }
+        });
+    }
+
+    // // Enhanced protection for PDF viewer
+    // $('#pdfViewer').on('contextmenu', function(e) {
+    //     e.preventDefault();
+    // });
+    
+    // $('#pdfViewer').on('copy cut paste selectstart', function(e) {
+    //     e.preventDefault();
+    // });
+    
+    // $(document).on('keydown', function(e) {
+    //     if ($('#pdfViewer').is(':visible')) {
+    //         if (
+    //             (e.ctrlKey && ['p','s','c','u','x','v'].includes(e.key.toLowerCase())) ||
+    //             e.key === 'PrintScreen'
+    //         ) {
+    //             e.preventDefault();
+    //         }
+    //     }
+    // });
 
 });
 </script>
@@ -245,6 +318,19 @@ $(function () {
 .attachment-card:hover {
     transform: translateY(-3px);
     box-shadow: 0 6px 20px rgba(0,0,0,.12);
+}
+
+#pdfCanvasContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+#pdfCanvasContainer canvas {
+    max-width: 100%;
+    box-shadow: 0 0 20px rgba(0,0,0,.6);
+    background: #fff;
 }
 </style>
 @endsection
