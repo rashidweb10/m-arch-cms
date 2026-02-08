@@ -78,17 +78,17 @@
                                     </div>
                                 </div>
                                 @else
-                                <!-- DOCUMENT → NEW TAB -->
-                                <a href="{{ $url }}" target="_blank" class="text-decoration-none">
-                                    <div class="card attachment-card h-100 text-center">
-                                        <div class="card-body">
-                                            <img src="{{ asset('assets/frontend/img/doc.png') }}"
-                                                 class="img-fluid mb-2 rounded"
-                                                 style="height:100px;object-fit:contain;">
-                                            <div class="small fw-semibold text-truncate">{{ $name }}</div>
-                                        </div>
+                                <!-- DOCUMENT → MODAL -->
+                                <div class="card attachment-card h-100 text-center open-document"
+                                    data-url="{{ $url }}"
+                                    data-name="{{ $name }}">
+                                    <div class="card-body">
+                                        <img src="{{ asset('assets/frontend/img/doc.png') }}"
+                                             class="img-fluid mb-2 rounded"
+                                             style="height:100px;object-fit:contain;">
+                                        <div class="small fw-semibold text-truncate">{{ $name }}</div>
                                     </div>
-                                </a>
+                                </div>
                                 @endif
                             </div>
                             @endforeach
@@ -155,6 +155,26 @@
         </div>
     </div>
 </div>
+
+<!-- DOCUMENT MODAL -->
+<div class="modal fade" id="documentModal" tabindex="-1">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="documentModalTitle"></h5>
+                <button class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body p-0">
+                <iframe id="documentFrame"
+                        width="100%"
+                        height="600"
+                        frameborder="0"
+                        style="background: #fff;">
+                </iframe>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 
 @section('scripts')
@@ -186,6 +206,28 @@ $(function () {
     // STOP VIDEO ON CLOSE
     $('#videoModal').on('hidden.bs.modal', function () {
         $('#videoFrame').attr('src', '');
+    });
+
+    // DOCUMENT MODAL
+    $('.open-document').click(function () {
+        const fileName = $(this).data('name');
+        const fileUrl = $(this).data('url');
+        
+        $('#documentModalTitle').text(fileName);
+        
+        // Use Google Docs Viewer to display documents without download option
+        //const viewerUrl = `https://docs.google.com/viewer?url=${encodeURIComponent(fileUrl)}&embedded=true`;
+        const viewerUrl = `${fileUrl}`;
+        
+        alert(viewerUrl);
+        $('#documentFrame').attr('src', viewerUrl);
+        
+        new bootstrap.Modal('#documentModal').show();
+    });
+
+    // CLEAR DOCUMENT FRAME ON CLOSE
+    $('#documentModal').on('hidden.bs.modal', function () {
+        $('#documentFrame').attr('src', '');
     });
 
 });
