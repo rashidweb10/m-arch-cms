@@ -212,6 +212,7 @@ $(function () {
     $('.open-document').click(function () {
         const fileName = $(this).data('name');
         const fileUrl = $(this).data('url');
+        const extension = fileUrl.split('?')[0].split('.').pop().toLowerCase();
         
         $('#documentModalTitle').text(fileName);
         
@@ -219,10 +220,13 @@ $(function () {
         //const viewerUrl = `https://docs.google.com/viewer?url=${encodeURIComponent(fileUrl)}&embedded=true`;
         const viewerUrl = `${fileUrl}#toolbar=0&navpanes=0&scrollbar=0`;
         
-        //alert(viewerUrl);
-        $('#documentFrame').attr('src', viewerUrl);
-        
-        new bootstrap.Modal('#documentModal').show();
+        //alert(extension);
+        if(extension == 'pdf'){
+            $('#documentFrame').attr('src', viewerUrl);
+            new bootstrap.Modal('#documentModal').show(); 
+            return true;           
+        }
+        alert(`Document Not Supported: ${extension}`);
     });
 
     // CLEAR DOCUMENT FRAME ON CLOSE
