@@ -87,7 +87,7 @@ Route::prefix('auth')->group(function () {
     
     // Registration
     Route::get('/register', [FrontendAuthController::class, 'showRegisterForm'])->name('auth.register');
-    Route::post('/register', [FrontendAuthController::class, 'register'])->middleware(['protect.forms','recaptcha','throttle:10,1'])->name('auth.register');
+    Route::post('/register', [FrontendAuthController::class, 'register'])->middleware(['protect.forms','recaptcha','throttle:3,30'])->name('auth.register');
     
     // OTP Verification
     Route::get('/verify-otp', [FrontendAuthController::class, 'showVerifyOtpForm'])->name('auth.verify-otp');
@@ -96,7 +96,7 @@ Route::prefix('auth')->group(function () {
     
     // Forgot Password
     Route::get('/forgot-password', [FrontendAuthController::class, 'showForgotPasswordForm'])->name('auth.forgot-password');
-    Route::post('/forgot-password', [FrontendAuthController::class, 'forgotPassword'])->middleware(['protect.forms','recaptcha','throttle:10,1'])->name('auth.forgot-password');
+    Route::post('/forgot-password', [FrontendAuthController::class, 'forgotPassword'])->middleware(['protect.forms','recaptcha','throttle:3,30'])->name('auth.forgot-password');
     
     // Reset Password
     Route::get('/reset-password', [FrontendAuthController::class, 'showResetPasswordForm'])->name('auth.reset-password');
