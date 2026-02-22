@@ -125,7 +125,7 @@
                                         </span>
                                     @else
                                         <div class="action-buttons-group">
-                                            <a href="{{ route('auth.enrolled-courses.show', $enrolment->course_id) }}" class="btn btn-sm btn-primary">
+                                            <a target="_blank" href="{{ route('auth.enrolled-courses.show', $enrolment->course_id) }}" class="btn btn-sm btn-primary">
                                                 <i class="fas fa-eye me-1"></i> View
                                             </a>
                                             @if($enrolment->course->quiz && $enrolment->course->quiz->is_active)
