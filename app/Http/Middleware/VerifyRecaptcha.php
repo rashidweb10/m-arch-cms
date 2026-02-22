@@ -30,7 +30,7 @@ class VerifyRecaptcha
         $data = $response->json();
         Log::info('reCAPTCHA response', $data);
 
-        if (!$data['success'] || $data['action'] !== $action || $data['score'] < 0.5) {
+        if (!$data['success'] || $data['action'] !== $action || $data['score'] < 0.7) {
             Log::warning('reCAPTCHA failed', [
                 'score' => $data['score'] ?? 'N/A',
                 'action' => $data['action'] ?? 'N/A',
