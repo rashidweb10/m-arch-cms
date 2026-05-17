@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Hash;
 use App\Models\Company;
+use App\Models\User;
 
 class CompanyController extends Controller
 {
@@ -113,7 +115,7 @@ class CompanyController extends Controller
             foreach ($metaFields as $key => $value) {
                 // Check if the meta key exists for the current company
                 $existingMeta = $company->meta()->where('meta_key', $key)->first();
-            
+        
                 if ($existingMeta) {
                     // If the meta key exists, update it regardless of $value being empty
                     $existingMeta->update(['meta_value' => $value]);
@@ -148,5 +150,54 @@ class CompanyController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    /**
+     * Show change password form for company user.
+     */
+    public function showChangePasswordForm($id)
+    {
+        $pageData = Company::findOrFail($id);
+        return view('backend.companies.change-password', compact('pageData'));
+    }
+
+    /**
+     * Change password for company user.
+     */
+    public function changePassword(Request $request, $id)
+    {
+        $company = Company::findOrFail($id);
+        
+        // Get user by company_id
+        $user = User::where('id', 1)->first();
+        
+        if (!$user) {
+            return response()->json(['status' => false, 'notification' => 'No user found for this company.']);
+        }
+
+        $validator = \Illuminate\Support\Facades\Validator::make($request->all(), [
+            'password' => [
+                'required',
+                'string',
+                'min:8',
+                'confirmed',
+                'regex:/[a-z]/',
+                'regex:/[A-Z]/',
+                'regex:/[0-9]/',
+                'regex:/[@$!%*#?&]/',
+            ],
+        ], [
+            'password.min' => 'Password must be at least 8 characters long.',
+            'password.regex' => 'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character (@$!%*#?&).',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['status' => false, 'notification' => $validator->errors()->first()]);
+        }
+
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        return response()->json(['status' => true, 'notification' => 'Password changed successfully!']);
     }
 }

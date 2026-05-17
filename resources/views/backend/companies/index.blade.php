@@ -63,9 +63,10 @@
                                 <td><a target="_blank" href="{{ $row->website }}">{{ $row->website }}</a></td>
                                 <td>{{ $row->email }}</td>
                                 <td>{{ $row->phone }}</td>
-                                <td>
-                                    <a href="{{ route('companies.edit', $row->id) }}" class="link-reset fs-20 p-1"> <i class="ti ti-pencil"></i></a>
-                                </td>
+<td>
+                                     <a href="{{ route('companies.edit', $row->id) }}" class="link-reset fs-20 p-1"> <i class="ti ti-pencil"></i></a>
+                                     <a href="javascript:void(0);" onclick="smallModal('{{url(route('companies.change-password', $row->id))}}', 'Change Password')" class="link-reset fs-20 p-1"> <i class="ti ti-lock"></i></a>
+                                 </td>
                             </tr>
                             @endforeach
                         </tbody>
