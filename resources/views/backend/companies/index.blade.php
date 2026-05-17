@@ -10,13 +10,13 @@
 <div class="row">
     <div class="col-xl-12">
         <div class="card">
-        <div class="card-header border-bottom border-dashed align-items-center">
+        <div class="card-header border-bottom border-dashed align-items-center d-none">
             <div class="row w-100">
                 <div class="col-md-5">
                     <form class="row g-3 align-items-center">
                         <div class="col-md-8">
                         <select name="company" class="form-select" id="status-select">
-                            <option value="" selected>--Select School--</option>
+                            <option value="" selected>--Select Company--</option>
                             @foreach ($companyList as $index => $row)
                                 @if(auth()->user()->company_id === null || auth()->user()->company_id == $row->id)
                                     <option value="{{$row->id}}" 
