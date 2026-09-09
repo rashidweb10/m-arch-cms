@@ -45,6 +45,9 @@ $category = request()->get('category');
                     <input class="form-check-input" type="checkbox" id="select-all-courses">
                     <label class="form-check-label" for="select-all-courses">Select All</label>
                 </div>
+                <div id="course-search-container" class="mb-2" style="display: none;">
+                    <input type="search" id="course-search" class="form-control" placeholder="Search courses..." aria-label="Search courses" autocomplete="off">
+                </div>
                 <div id="courses-container">
                     <!-- Courses will be loaded here via AJAX -->
                 </div>
@@ -97,17 +100,21 @@ $(document).ready(function() {
         const userId = $('#user_id').val();
         const $coursesContainer = $('#courses-container');
         const $selectAllContainer = $('#select-all-container');
+        const $courseSearchContainer = $('#course-search-container');
 
         // Check if both category and student are selected
         if(categoryId == '' || userId == '') {
             $coursesContainer.html('Please select both category and student first.');
             $selectAllContainer.hide();
+            $courseSearchContainer.hide();
             return false;
         }
 
         // Show a temporary loading message
         $coursesContainer.html('<p>Loading...</p>');
         $selectAllContainer.hide();
+        $courseSearchContainer.hide();
+        $('#course-search').val('');
 
         $.ajax({
             url: '{{ route('courses.by-category') }}',
@@ -130,9 +137,11 @@ $(document).ready(function() {
                             '</div>';
                     });
                     $selectAllContainer.show();
+                    $courseSearchContainer.show();
                 } else {
                     checkboxes = '<p>No courses found for this category.</p>';
                     $selectAllContainer.hide();
+                    $courseSearchContainer.hide();
                 }
 
                 $coursesContainer.html(checkboxes);
@@ -141,8 +150,29 @@ $(document).ready(function() {
                 // On error, just reset to default option
                 $coursesContainer.html('<p>Error loading courses.</p>');
                 $selectAllContainer.hide();
+                $courseSearchContainer.hide();
             }
         });
+    });
+
+    // Filter the currently loaded course checkboxes as the user types.
+    $('#course-search').on('input', function() {
+        const searchTerm = $(this).val().trim().toLowerCase();
+        let visibleCourses = 0;
+
+        $('#courses-container .form-check').each(function() {
+            const courseName = $(this).find('.form-check-label').text().toLowerCase();
+            const matches = courseName.includes(searchTerm);
+            $(this).toggle(matches);
+            if (matches) {
+                visibleCourses++;
+            }
+        });
+
+        $('#course-search-empty').remove();
+        if (visibleCourses === 0) {
+            $('#courses-container').append('<p id="course-search-empty" class="text-muted mb-0">No matching courses found.</p>');
+        }
     });
 
     // Select All functionality
@@ -163,4 +193,3 @@ $(document).ready(function() {
     }
 });
 </script>
-
