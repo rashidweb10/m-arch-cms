@@ -22,7 +22,14 @@ header, footer, .header_section_top, .about_banner_spacer, .whatsapp {
     padding-top: 80px !important;
     padding-bottom: 60px;
 }
-
+.w-111 {
+    width: 111px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-bottom: 19px;
+}
 
 </style>
 
@@ -36,6 +43,15 @@ header, footer, .header_section_top, .about_banner_spacer, .whatsapp {
             <div class="row justify-content-center">
                 <div class="col-md-6 col-lg-5">
                     <div class="bg-light p-4 p-md-5 rounded-3 shadow-sm">
+                         <!--<a class="" href="/">-->
+                             <a class="">
+                            <img
+                                class="w-111    "
+                                src="{{ uploaded_asset(get_setting('logo')) }}"
+                                title="MarinArch Logo"
+                                alt="MarinArch Logo"
+                            />
+                        </a>
                     <h3 class="fw-bold mb-4 text-center robot_slab">Login to your account</h3>
 
                     @if ($errors->any())

@@ -387,6 +387,22 @@ function initDatatable(selector){
     });   
 }
 
+function toggleSelect2(selector) {
+    const $el = $(selector);
+
+    if ($el.data('select2').isOpen()) {
+        $el.select2('close');
+        //alert('close');
+    } else {
+        $el.select2('open');
+        //alert('open');
+    }
+
+    // $el.select2('close');
+     $el.select2('close');
+     //alert('f');
+}
+
 /**
  * Allow TinyMCE popups to receive focus inside Bootstrap 5 modals
  * Safe for pages, modals, dropdowns, and dynamic content

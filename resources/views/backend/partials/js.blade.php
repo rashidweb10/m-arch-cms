@@ -75,7 +75,7 @@
 <script src="https://cdn.tiny.cloud/1/{{ config('custom.tinymce_api') }}/tinymce/7.2.1-75/tinymce.min.js"></script>
 
 <!-- Backend JS -->
-<script src="{{ asset('assets/backend/js/backend.js') }}"></script>
+<script src="{{ asset('assets/backend/js/backend.js') }}?{{time()}}"></script>
 
 <!-- Recaptcha v3 JS -->
 <script src="https://www.google.com/recaptcha/api.js?render={{ config('custom.recaptcha_site_key') }}"></script>

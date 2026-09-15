@@ -3532,3 +3532,11 @@ body .features_section {
     text-align: justify;
     margin: 0;
 }
+.w-111 {
+    width: 111px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-bottom: 19px;
+}

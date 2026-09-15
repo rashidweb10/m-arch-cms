@@ -21,6 +21,14 @@
             <div class="row justify-content-center">
                 <div class="col-md-8 col-lg-7">
                     <div class="bg-light p-4 p-md-5 rounded-3 shadow-sm">
+                        <a class="" href="/">
+                            <img
+                                class="w-111    "
+                                src="{{ uploaded_asset(get_setting('logo')) }}"
+                                title="MarinArch Logo"
+                                alt="MarinArch Logo"
+                            />
+                        </a>
                     <h3 class="fw-bold mb-4 text-center robot_slab">Create your account</h3>
 
                     @if ($errors->any())

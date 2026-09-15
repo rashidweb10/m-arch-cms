@@ -11,7 +11,7 @@
 <link href="{{ asset('assets/backend/css/toastr.min.css') }}" rel="stylesheet" type="text/css" />
 
 <!-- Backend CSS -->
-<link href="{{ asset('assets/backend/css/backend.css') }}?v=1.1.8" rel="stylesheet" type="text/css" />
+<link href="{{ asset('assets/backend/css/backend.css') }}?v=1.2.3" rel="stylesheet" type="text/css" />
 
 <!-- Aiz CSS -->
 <link href="{{ asset('assets/backend/css/web-vendors.css') }}" rel="stylesheet" type="text/css" />
