@@ -63,13 +63,18 @@ class CourseController extends Controller
      */
     public function getByCategory(Request $request)
     {
-        $categoryId = $request->input('category_id');
+        // Accept multiple categories for the enrolment form. Keep category_id as a
+        // fallback because this endpoint is also used by the single-category forms.
+        $categoryIds = array_filter((array) $request->input('category_ids', []));
+        if (empty($categoryIds) && $request->filled('category_id')) {
+            $categoryIds = [$request->input('category_id')];
+        }
         $userId = $request->input('user_id');
 
         $query = Course::where('is_active', 1);
 
-        if ($categoryId) {
-            $query->where('category_id', $categoryId);
+        if (!empty($categoryIds)) {
+            $query->whereIn('category_id', $categoryIds);
         }
 
         $courses = $query->orderBy('name', 'asc')->get(['id', 'name']);

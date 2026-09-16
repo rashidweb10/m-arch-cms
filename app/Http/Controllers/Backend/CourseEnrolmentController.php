@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\Certificate;
 use App\Models\QuizAttempt;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class CourseEnrolmentController extends Controller
 {
@@ -117,52 +118,60 @@ class CourseEnrolmentController extends Controller
         // Validate the incoming data
         $validated = $request->validate([
             'user_id' => 'required|exists:users,id',
-            'category_id' => 'nullable|exists:course_categories,id',
-            'course_ids' => 'required|array',
-            'course_ids.*' => 'exists:courses,id',
+            'category_ids' => 'required|array|min:1',
+            'category_ids.*' => 'distinct|exists:course_categories,id',
+            'course_ids' => 'required|array|min:1',
+            'course_ids.*' => 'distinct|exists:courses,id',
             'validity' => 'nullable|date',
             'is_active' => 'required|boolean',
         ]);
 
-        $courseIds = $request->input('course_ids', []);
+        $categoryIds = $validated['category_ids'];
+        $courseIds = $validated['course_ids'];
         $userId = $request->input('user_id');
         $validity = $request->input('validity');
         $isActive = $request->input('is_active');
 
-        $successCount = 0;
-        $errorMessages = [];
+        // A category is only a selection aid; enrolments are stored per course.
+        // Do not accept course IDs from outside the categories selected in the form.
+        $selectedCourseCount = Course::whereIn('id', $courseIds)
+            ->whereIn('category_id', $categoryIds)
+            ->count();
 
-        foreach ($courseIds as $courseId) {
-            // Check if student is already enrolled in the same course
-            $existingEnrolment = CourseEnrolment::where('user_id', $userId)
-                ->where('course_id', $courseId)
-                ->first();
-
-            if ($existingEnrolment) {
-                $errorMessages[] = 'This student is already enrolled in the course: ' . Course::find($courseId)->name;
-                continue;
-            }
-
-            // If validation passes, proceed to saving the data
-            $courseEnrolment = new CourseEnrolment();
-            $courseEnrolment->user_id = $userId;
-            $courseEnrolment->course_id = $courseId;
-            $courseEnrolment->validity = $validity;
-            $courseEnrolment->is_active = $isActive;
-            $courseEnrolment->save();
-
-            $successCount++;
-        }
-
-        if (!empty($errorMessages)) {
+        if ($selectedCourseCount !== count($courseIds)) {
             return response()->json([
                 'status' => false,
-                'notification' => implode('<br>', $errorMessages)
-            ], 200);
+                'notification' => 'One or more selected courses do not belong to the selected categories.'
+            ], 422);
         }
 
-        // Return JSON response for AJAX handling
-        return response()->json(['status' => true, 'notification' => $successCount . ' course(s) enrolled successfully!']);
+        $result = DB::transaction(function () use ($courseIds, $userId, $validity, $isActive) {
+            $existingCourseIds = CourseEnrolment::where('user_id', $userId)
+                ->whereIn('course_id', $courseIds)
+                ->pluck('course_id')
+                ->all();
+
+            $newCourseIds = array_values(array_diff($courseIds, $existingCourseIds));
+
+            foreach ($newCourseIds as $courseId) {
+                CourseEnrolment::create([
+                    'user_id' => $userId,
+                    'course_id' => $courseId,
+                    'validity' => $validity,
+                    'is_active' => $isActive,
+                ]);
+            }
+
+            return [count($newCourseIds), count($existingCourseIds)];
+        });
+
+        [$successCount, $skippedCount] = $result;
+        $notification = $successCount . ' course(s) enrolled successfully!';
+        if ($skippedCount) {
+            $notification .= ' ' . $skippedCount . ' already-enrolled course(s) were skipped.';
+        }
+
+        return response()->json(['status' => true, 'notification' => $notification]);
     }
 
     /**
@@ -396,4 +405,3 @@ class CourseEnrolmentController extends Controller
         return redirect()->to($previewUrl);
     }
 }
-

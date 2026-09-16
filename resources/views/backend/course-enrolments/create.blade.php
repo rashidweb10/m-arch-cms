@@ -27,9 +27,8 @@ $category = request()->get('category');
         <!-- Category -->
         <div class="col-sm-12">
             <div class="form-group mb-2">
-                <label for="category_id" class="form-label">Course Category <span class="text-danger">*</span></label>
-                <select name="category_id" id="category_id" class="form-select select2" required>
-                    <option value="">--Select Category--</option>
+                <label for="category_ids" class="form-label">Course Categories <span class="text-danger">*</span></label>
+                <select name="category_ids[]" id="category_ids" class="form-select select2" multiple required>
                     @foreach ($categoryList as $index => $row)
                         <option value="{{ $row->id }}" @if($category == $row->name) selected @endif>{{ $row->name }}</option>
                     @endforeach
@@ -86,25 +85,52 @@ $category = request()->get('category');
 $(document).ready(function() {
     initValidate('#create'); // Initializes validation for the form
     initSelect2('.select2');
+    let selectedCourseIds = new Set();
+    let courseRequestId = 0;
 
     setTimeout(function () {
         // Auto trigger when coming from URL
-        if ($('#category_id').val() && $('#user_id').val()) {
-            $('#category_id').trigger('change');
+        if ($('#category_ids').val().length && $('#user_id').val()) {
+            loadCourses(true);
         }   
     }, 1000);
 
-    // When category or student changes, fetch courses via AJAX
-    $('#category_id, #user_id').on('change', function () {
-        const categoryId = $('#category_id').val();
+    // Remember selected courses when categories are adjusted, but clear them if
+    // the student changes so selections cannot carry over to another student.
+    $('#category_ids').on('change', function () {
+        loadCourses(true);
+    });
+
+    $('#user_id').on('change', function () {
+        selectedCourseIds.clear();
+        loadCourses(false);
+    });
+
+    $(document).on('change', '.course-checkbox', function () {
+        if (this.checked) {
+            selectedCourseIds.add(String(this.value));
+        } else {
+            selectedCourseIds.delete(String(this.value));
+        }
+    });
+
+    function loadCourses(preserveSelections) {
+        const requestId = ++courseRequestId;
+        const categoryIds = $('#category_ids').val() || [];
         const userId = $('#user_id').val();
         const $coursesContainer = $('#courses-container');
         const $selectAllContainer = $('#select-all-container');
         const $courseSearchContainer = $('#course-search-container');
 
+        if (preserveSelections) {
+            selectedCourseIds = new Set($('.course-checkbox:checked').map(function () {
+                return String(this.value);
+            }).get());
+        }
+
         // Check if both category and student are selected
-        if(categoryId == '' || userId == '') {
-            $coursesContainer.html('Please select both category and student first.');
+        if(!categoryIds.length || userId == '') {
+            $coursesContainer.html('Please select at least one category and a student first.');
             $selectAllContainer.hide();
             $courseSearchContainer.hide();
             return false;
@@ -120,10 +146,16 @@ $(document).ready(function() {
             url: '{{ route('courses.by-category') }}',
             method: 'GET',
             data: {
-                category_id: categoryId,
+                category_ids: categoryIds,
                 user_id: userId
             },
             success: function (response) {
+                // Ignore an older response if the administrator changed a
+                // category again before this request completed.
+                if (requestId !== courseRequestId) {
+                    return;
+                }
+
                 // Reset options
                 let checkboxes = '';
 
@@ -131,15 +163,17 @@ $(document).ready(function() {
                     response.forEach(function (course) {
                         const isDisabled = course.is_enrolled ? 'disabled' : '';
                         const disabledText = course.is_enrolled ? ' (Already Enrolled)' : '';
+                        const isChecked = !course.is_enrolled && selectedCourseIds.has(String(course.id)) ? 'checked' : '';
+                        const courseName = $('<div>').text(course.name).html();
                         checkboxes += '<div class="form-check">' +
-                            '<input class="form-check-input course-checkbox" type="checkbox" name="course_ids[]" value="' + course.id + '" id="course_' + course.id + '" ' + isDisabled + '>' +
-                            '<label class="form-check-label" for="course_' + course.id + '">' + course.name + disabledText + '</label>' +
+                            '<input class="form-check-input course-checkbox" type="checkbox" name="course_ids[]" value="' + course.id + '" id="course_' + course.id + '" ' + isDisabled + ' ' + isChecked + '>' +
+                            '<label class="form-check-label" for="course_' + course.id + '">' + courseName + disabledText + '</label>' +
                             '</div>';
                     });
                     $selectAllContainer.show();
                     $courseSearchContainer.show();
                 } else {
-                    checkboxes = '<p>No courses found for this category.</p>';
+                    checkboxes = '<p>No courses found for the selected categories.</p>';
                     $selectAllContainer.hide();
                     $courseSearchContainer.hide();
                 }
@@ -147,13 +181,16 @@ $(document).ready(function() {
                 $coursesContainer.html(checkboxes);
             },
             error: function () {
+                if (requestId !== courseRequestId) {
+                    return;
+                }
                 // On error, just reset to default option
                 $coursesContainer.html('<p>Error loading courses.</p>');
                 $selectAllContainer.hide();
                 $courseSearchContainer.hide();
             }
         });
-    });
+    }
 
     // Filter the currently loaded course checkboxes as the user types.
     $('#course-search').on('input', function() {
@@ -178,7 +215,7 @@ $(document).ready(function() {
     // Select All functionality
     $('#select-all-courses').on('change', function() {
         const isChecked = $(this).is(':checked');
-        $('.course-checkbox:not(:disabled)').prop('checked', isChecked);
+        $('.course-checkbox:not(:disabled)').prop('checked', isChecked).trigger('change');
     });
 
     $("#create").submit(function(e) {
