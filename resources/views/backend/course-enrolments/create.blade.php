@@ -115,6 +115,8 @@ $(document).ready(function() {
     });
 
     function loadCourses(preserveSelections) {
+
+        toggleSelect2("#category_ids");
         const requestId = ++courseRequestId;
         const categoryIds = $('#category_ids').val() || [];
         const userId = $('#user_id').val();

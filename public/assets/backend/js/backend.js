@@ -398,7 +398,7 @@ function toggleSelect2(selector) {
         //alert('open');
     }
 
-    // $el.select2('close');
+     $el.select2('close');
      $el.select2('close');
      //alert('f');
 }
