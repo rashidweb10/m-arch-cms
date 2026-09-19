@@ -87,6 +87,9 @@
                             <button type="button" class="btn btn-xs btn-warning" onclick="bulkInactiveCourseEnrolments()">
                                 <i class="ti ti-x"></i> Inactive
                             </button>
+                            <button type="button" class="btn btn-xs btn-primary" onclick="bulkUpdateValidityCourseEnrolments()">
+                                <i class="ti ti-calendar"></i> Update Validity
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -263,12 +266,30 @@ function bulkInactiveCourseEnrolments() {
     $('#bulkInactiveModal').modal('show');
 }
 
+function bulkUpdateValidityCourseEnrolments() {
+    const ids = getSelectedIds();
+    if (ids.length === 0) {
+        toastr.error('Please select at least one item');
+        return;
+    }
+
+    document.getElementById('bulk_validity_message').textContent =
+        'Set a new validity date for ' + ids.length + ' selected course enrolment(s)?';
+    document.getElementById('bulk_validity_ids').value = ids.join(',');
+    document.getElementById('bulk_validity_form').setAttribute('action', '{{ route("course-enrolments.bulk-update-validity") }}');
+    document.getElementById('bulk_validity_date').value = '';
+    document.getElementById('bulk_validity_date').min = '{{ now()->toDateString() }}';
+    callBackFunction = callbackBulkCourseEnrolments;
+    $('#bulkValidityModal').modal('show');
+}
+
 // Callback function for bulk actions
 const callbackBulkCourseEnrolments = function(response) {
     // Close all bulk modals
     $('#bulkDeleteModal').modal('hide');
     $('#bulkActiveModal').modal('hide');
     $('#bulkInactiveModal').modal('hide');
+    $('#bulkValidityModal').modal('hide');
     
     // Only reload on success
     if (response && response.status) {
@@ -325,4 +346,3 @@ $(document).ready(function () {
 });
 </script>
 @endsection
-

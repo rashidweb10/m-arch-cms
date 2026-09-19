@@ -1,6 +1,6 @@
 <!-- Large Modal -->
 <div class="modal fade" id="largeModal" tabindex="-1" aria-labelledby="largeModal-label" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
-    <div class="modal-dialog modal-xl">
+    <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="largeModal-label"></h5>
@@ -123,6 +123,34 @@
                         </button>
                         <button type="submit" class="btn btn-sm btn-success">
                             <i class="fa-solid fa-check"></i> Deactivate
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bulk Validity Update Modal -->
+<div class="modal fade" id="bulkValidityModal" tabindex="-1" aria-labelledby="bulkValidityModal-label" aria-modal="true" role="dialog" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <form method="POST" class="ajaxBulkForm" action="" id="bulk_validity_form">
+                    @csrf
+                    <input type="hidden" name="ids" id="bulk_validity_ids" value="">
+                    <i class="fa-solid fa-calendar-days" style="font-size: 50px; color: #0d6efd;"></i>
+                    <p class="mt-3" id="bulk_validity_message">Set a new validity date for selected course enrolments?</p>
+                    <div class="mb-3 text-start">
+                        <label for="bulk_validity_date" class="form-label">New validity date <span class="text-danger">*</span></label>
+                        <input type="date" name="validity" id="bulk_validity_date" class="form-control" required>
+                    </div>
+                    <div class="d-flex justify-content-center gap-2 mt-2">
+                        <button type="button" class="btn btn-sm btn-danger" data-bs-dismiss="modal" aria-label="Close">
+                            <i class="fa-solid fa-xmark"></i> Cancel
+                        </button>
+                        <button type="submit" class="btn btn-sm btn-primary">
+                            <i class="fa-solid fa-check"></i> Update
                         </button>
                     </div>
                 </form>

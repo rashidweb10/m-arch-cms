@@ -364,7 +364,86 @@ class CourseEnrolmentController extends Controller
 
             return response()->json(['status' => false, 'notification' => 'There was an error deactivating the records.']);
         }
-    }    
+    }
+
+    /**
+     * Update the validity date for multiple course enrolments.
+     */
+    public function bulkUpdateValidity(Request $request)
+    {
+        $validated = $request->validate([
+            'ids' => ['required', 'string', 'regex:/^\d+(,\d+)*$/'],
+            'validity' => ['required', 'date', 'after_or_equal:today'],
+        ]);
+
+        $ids = collect(explode(',', $validated['ids']))
+            ->map(fn ($id) => (int) $id)
+            ->unique()
+            ->values();
+
+        $updated = CourseEnrolment::whereIn('id', $ids)->update([
+            'validity' => $validated['validity'],
+            'updated_at' => now(),
+        ]);
+
+        return response()->json([
+            'status' => true,
+            'notification' => $updated . ' course enrolment(s) validity updated successfully!',
+        ]);
+    }
+
+    /**
+     * Show a student's existing course assignments so their validity can be updated together.
+     */
+    public function editStudentValidity(User $student)
+    {
+        abort_unless($student->role_id == 3, 404);
+
+        $enrolments = $student->courseEnrolments()
+            ->with('course.category')
+            ->latest('id')
+            ->get();
+
+        return view('backend.course-enrolments.student-validity', compact('student', 'enrolments'));
+    }
+
+    /**
+     * Update validity for selected courses belonging to one student.
+     */
+    public function updateStudentValidity(Request $request, User $student)
+    {
+        abort_unless($student->role_id == 3, 404);
+
+        $validated = $request->validate([
+            'enrolment_ids' => ['required', 'array', 'min:1'],
+            'enrolment_ids.*' => ['required', 'integer', 'distinct'],
+            'validity' => ['required', 'date', 'after_or_equal:today'],
+        ]);
+
+        $enrolmentIds = $validated['enrolment_ids'];
+        $matchingEnrolments = CourseEnrolment::where('user_id', $student->id)
+            ->whereIn('id', $enrolmentIds)
+            ->count();
+
+        if ($matchingEnrolments !== count($enrolmentIds)) {
+            return response()->json([
+                'status' => false,
+                'notification' => 'One or more selected courses do not belong to this student.',
+            ], 422);
+        }
+
+        CourseEnrolment::where('user_id', $student->id)
+            ->whereIn('id', $enrolmentIds)
+            ->update([
+                'validity' => $validated['validity'],
+                'updated_at' => now(),
+            ]);
+
+        return response()->json([
+            'status' => true,
+            'notification' => count($enrolmentIds).' course validity date(s) updated successfully!',
+        ]);
+    }
 
     /**
      * View certificate

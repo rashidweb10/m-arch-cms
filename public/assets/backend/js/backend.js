@@ -339,6 +339,7 @@ function ajaxSubmitBulk(e, form, callBackFunction) {
                 $('#bulkDeleteModal').modal('hide');
                 $('#bulkActiveModal').modal('hide');
                 $('#bulkInactiveModal').modal('hide');
+                $('#bulkValidityModal').modal('hide');
             }
         },
         error: function(xhr) {
@@ -374,6 +375,7 @@ function ajaxSubmitBulk(e, form, callBackFunction) {
             $('#bulkDeleteModal').modal('hide');
             $('#bulkActiveModal').modal('hide');
             $('#bulkInactiveModal').modal('hide');
+            $('#bulkValidityModal').modal('hide');
         }
     });
 }

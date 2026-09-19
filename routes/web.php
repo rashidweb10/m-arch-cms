@@ -200,6 +200,9 @@ Route::prefix('backend')->group(function () {
          Route::post('course-enrolments/bulk-delete', [CourseEnrolmentController::class, 'bulkDelete'])->name('course-enrolments.bulk-delete');
          Route::post('course-enrolments/bulk-active', [CourseEnrolmentController::class, 'bulkActive'])->name('course-enrolments.bulk-active');
          Route::post('course-enrolments/bulk-inactive', [CourseEnrolmentController::class, 'bulkInactive'])->name('course-enrolments.bulk-inactive');
+         Route::post('course-enrolments/bulk-update-validity', [CourseEnrolmentController::class, 'bulkUpdateValidity'])->name('course-enrolments.bulk-update-validity');
+         Route::get('course-enrolments/student/{student}/validity', [CourseEnrolmentController::class, 'editStudentValidity'])->name('course-enrolments.student-validity.edit');
+         Route::post('course-enrolments/student/{student}/validity', [CourseEnrolmentController::class, 'updateStudentValidity'])->name('course-enrolments.student-validity.update');
          Route::get('course-enrolments/certificate/{certificate}', [CourseEnrolmentController::class, 'viewCertificate'])->name('course-enrolments.certificate');
          Route::get('course-enrolments/preview/{courseEnrolment}', [CourseEnrolmentController::class, 'previewCourseMaterials'])->name('course-enrolments.preview');
      }); 
