@@ -15,7 +15,7 @@
             <h2 class="robot_slab mb-2">Welcome, {{ $user->name }}</h2>
             <p class="mb-0">Your training progress and achievements at a glance.</p>
         </div>
-        <a href="{{ route('auth.enrolled-courses') }}" class="btn dashboard-primary-btn">
+        <a href="{{ route('auth.enrolled-categories') }}" class="btn dashboard-primary-btn">
             <i class="fas fa-book-open me-2" aria-hidden="true"></i>My courses
         </a>
     </section>

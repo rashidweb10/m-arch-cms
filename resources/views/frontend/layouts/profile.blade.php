@@ -50,12 +50,12 @@
                             @endif
                         </a>
                         
-                        <a class="sidebar-nav-item {{ request()->routeIs('auth.enrolled-courses') ? 'active' : '' }}" href="{{ route('auth.enrolled-courses') }}">
+                        <a class="sidebar-nav-item {{ request()->routeIs('auth.enrolled-categories', 'auth.enrolled-courses') ? 'active' : '' }}" href="{{ route('auth.enrolled-categories') }}">
                             <div class="nav-item-icon">
                                 <i class="fas fa-graduation-cap"></i>
                             </div>
                             <span class="nav-item-text">Enrolled Courses</span>
-                            @if(request()->routeIs('auth.enrolled-courses'))
+                            @if(request()->routeIs('auth.enrolled-categories', 'auth.enrolled-courses'))
                             <div class="nav-item-indicator"></div>
                             @endif
                         </a>
@@ -313,4 +313,3 @@
     }
 }
 </style>
-

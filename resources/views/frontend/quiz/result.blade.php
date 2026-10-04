@@ -119,7 +119,7 @@
                                 <i class="fas fa-certificate me-2"></i>View Certificate
                             </a>
                         @endif
-                        <a href="{{ route('auth.enrolled-courses') }}" class="btn btn-outline-secondary btn-lg">
+                        <a href="{{ route('auth.enrolled-categories') }}" class="btn btn-outline-secondary btn-lg">
                             <i class="fas fa-arrow-left me-2"></i>Back to Courses
                         </a>
                     </div>

@@ -91,7 +91,7 @@
                         <button onclick="printCertificate()" class="btn btn-primary me-md-2">
                             <i class="fas fa-print me-2"></i>Print Certificate
                         </button>
-                        <a href="{{ route('auth.enrolled-courses') }}" class="btn btn-outline-secondary">
+                        <a href="{{ route('auth.enrolled-categories') }}" class="btn btn-outline-secondary">
                             <i class="fas fa-arrow-left me-2"></i>Back to Courses
                         </a>
                     </div>  

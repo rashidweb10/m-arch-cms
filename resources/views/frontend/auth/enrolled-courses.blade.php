@@ -1,23 +1,42 @@
 @extends('frontend.layouts.profile')
 
-@section('meta.title', 'Enrolled Courses')
+@section('meta.title', isset($selectedCategory) && $selectedCategory ? $selectedCategory->name : 'Enrolled Courses')
 @section('meta.description', 'View your enrolled courses')
 
 @php
-    $pageTitle = 'Enrolled Courses';
+    $pageTitle = $selectedCategory ? $selectedCategory->name : 'Enrolled Courses';
 @endphp
 
 @section('profile-content')
 <div class="enrolled-courses-container">
     <!-- Page Header -->
     <div class="page-header-section mb-4">
-        <h3 class="page-title robot_slab">My Enrolled Courses</h3>
-        <p class="page-subtitle">Manage and access all your enrolled courses</p>
+        <div class="d-flex justify-content-between align-items-start gap-3 flex-wrap">
+            <div>
+                @if ($selectedCategory)
+                    <a href="{{ route('auth.enrolled-categories') }}" class="btn btn-sm btn-outline-secondary mb-3">
+                        <i class="fas fa-arrow-left me-1"></i> All categories
+                    </a>
+                @endif
+                <h3 class="page-title robot_slab">
+                    {{ $selectedCategory ? $selectedCategory->name : 'My Enrolled Courses' }}
+                </h3>
+                <p class="page-subtitle">
+                    {{ $selectedCategory ? 'Courses available in this category' : 'Manage and access all your enrolled courses' }}
+                </p>
+            </div>
+            @if ($selectedCategory)
+                <span class="category-badge"><i class="fas fa-folder-open me-1"></i>{{ $selectedCategory->name }}</span>
+            @endif
+        </div>
     </div>
     
     <!-- Search Filter -->
     <div class="search-section mb-4">
         <form method="GET" action="{{ route('auth.enrolled-courses') }}">
+            @if ($selectedCategory)
+                <input type="hidden" name="category_id" value="{{ $selectedCategory->id }}">
+            @endif
             <div class="row g-2 align-items-center">
                 <div class="col-md-7 col-12">
                     <div class="input-group search-input-wrapper">
@@ -38,7 +57,7 @@
                 </div>
                 @if(request()->get('search'))
                 <div class="col-md-2 col-6">
-                    <a href="{{ route('auth.enrolled-courses') }}" class="btn btn-outline-secondary w-100">
+                    <a href="{{ route('auth.enrolled-courses', $selectedCategory ? ['category_id' => $selectedCategory->id] : []) }}" class="btn btn-outline-secondary w-100">
                         <i class="fas fa-times me-1"></i> Clear
                     </a>
                 </div>
@@ -55,9 +74,9 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Category</th>
+                            {{-- <th>Category</th> --}}
                             <th>Course Name</th>
-                            <th>Enrolled Date</th>
+                            {{-- <th>Enrolled Date</th> --}}
                             <th>Validity</th>
                             <th>Status</th>
                             <th>Action</th>
@@ -73,21 +92,21 @@
                             @endphp
                             <tr class="{{ $isExpired ? 'expired' : '' }}">
                                 <td class="serial-num">{{ $enrolledCourses->firstItem() + $index }}</td>
-                                <td>
+                                {{-- <td>
                                     <span class="category-badge">
                                         <i class="fas fa-bookmark me-1"></i>
                                         {{ $enrolment->course->category->name ?? 'N/A' }}
                                     </span>
-                                </td>
+                                </td> --}}
                                 <td>
                                     <strong class="course-name-text robot_slab">{{ $enrolment->course->name ?? 'N/A' }}</strong>
                                 </td>
-                                <td>
+                                {{-- <td>
                                     <div class="date-cell">
                                         <i class="fas fa-calendar-alt me-2"></i>
                                         {{ formatDate($enrolment->created_at) }}
                                     </div>
-                                </td>
+                                </td> --}}
                                 <td>
                                     @if($enrolment->validity)
                                         <div class="date-cell">
@@ -447,4 +466,3 @@
 @section('scripts')
 <!-- No DataTable script needed - using Laravel pagination -->
 @endsection
-

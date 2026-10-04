@@ -46,7 +46,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item" href="{{ route('auth.enrolled-courses') }}">
+                                            <a class="dropdown-item" href="{{ route('auth.enrolled-categories') }}">
                                                 <i class="fas fa-graduation-cap me-2"></i> Enrolled Courses
                                             </a>
                                         </li>
@@ -124,7 +124,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="{{ route('auth.enrolled-courses') }}">
+                                    <a class="dropdown-item" href="{{ route('auth.enrolled-categories') }}">
                                         <i class="fas fa-graduation-cap me-2"></i> Enrolled Courses
                                     </a>
                                 </li>

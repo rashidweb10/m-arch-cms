@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Mail\OtpVerificationMail;
 use App\Mail\PasswordResetOtpMail;
 use App\Models\Certificate;
+use App\Models\CourseCategory;
 use App\Models\CourseEnrolment;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -462,11 +463,51 @@ class AuthController extends Controller
     }
 
     /**
+     * Show categories containing courses the student is enrolled in
+     */
+    public function enrolledCategories(Request $request)
+    {
+        $user = Auth::user();
+        $search = trim($request->input('search', ''));
+
+        $categories = CourseCategory::query()
+            ->select([
+                'course_categories.id',
+                'course_categories.name',
+                'course_categories.description',
+                'course_categories.image',
+            ])
+            ->selectRaw('COUNT(DISTINCT courses.id) as enrolled_courses_count')
+            ->join('courses', 'courses.category_id', '=', 'course_categories.id')
+            ->join('course_enrolments', 'course_enrolments.course_id', '=', 'courses.id')
+            ->where('course_enrolments.user_id', $user->id)
+            ->where('course_enrolments.is_active', 1)
+            ->when($search !== '', function ($query) use ($search) {
+                $query->where('course_categories.name', 'like', '%'.$search.'%');
+            })
+            ->groupBy(
+                'course_categories.id',
+                'course_categories.name',
+                'course_categories.description',
+                'course_categories.image'
+            )
+            ->orderBy('course_categories.name')
+            ->paginate(12)
+            ->withQueryString();
+
+        return view('frontend.auth.enrolled-categories', compact('user', 'categories', 'search'));
+    }
+
+    /**
      * Show enrolled courses page
      */
     public function enrolledCourses(Request $request)
     {
         $user = Auth::user();
+        $validated = $request->validate([
+            'category_id' => 'nullable|integer',
+        ]);
+        $categoryId = $validated['category_id'] ?? null;
         
         // Get search parameters
         $search = $request->input('search');
@@ -475,6 +516,18 @@ class AuthController extends Controller
         $query = \App\Models\CourseEnrolment::with('course.category')
             ->where('user_id', $user->id)
             ->where('is_active', 1);
+
+        if ($categoryId !== null) {
+            $hasEnrolledCategory = CourseEnrolment::query()
+                ->where('user_id', $user->id)
+                ->where('is_active', 1)
+                ->whereHas('course', fn ($course) => $course->where('category_id', $categoryId))
+                ->exists();
+
+            abort_unless($hasEnrolledCategory, 404);
+
+            $query->whereHas('course', fn ($course) => $course->where('category_id', $categoryId));
+        }
         
         // Add search filter for course and category name
         if ($search) {
@@ -492,7 +545,11 @@ class AuthController extends Controller
         // Implement Laravel pagination with 25 records per page
         $enrolledCourses = $query->paginate(10);
         
-        return view('frontend.auth.enrolled-courses', compact('user', 'enrolledCourses'));
+        $selectedCategory = $categoryId
+            ? CourseCategory::findOrFail($categoryId)
+            : null;
+
+        return view('frontend.auth.enrolled-courses', compact('user', 'enrolledCourses', 'selectedCategory'));
     }
 
     /**

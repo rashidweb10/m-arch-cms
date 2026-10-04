@@ -114,6 +114,7 @@ Route::prefix('auth')->group(function () {
         Route::put('/profile', [FrontendAuthController::class, 'updateProfile'])->middleware(['protect.forms','recaptcha','throttle:10,1'])->name('auth.profile.update');
         Route::get('/change-password', [FrontendAuthController::class, 'showChangePasswordForm'])->name('auth.change-password');
         Route::post('/change-password', [FrontendAuthController::class, 'changePassword'])->middleware(['protect.forms','recaptcha','throttle:10,1'])->name('auth.change-password.store');
+        Route::get('/enrolled-categories', [FrontendAuthController::class, 'enrolledCategories'])->name('auth.enrolled-categories');
         Route::get('/enrolled-courses', [FrontendAuthController::class, 'enrolledCourses'])->name('auth.enrolled-courses');
          Route::get('/enrolled-courses/{course}', [FrontendAuthController::class, 'enrolledCourseShow'])->name('auth.enrolled-courses.show')->withoutMiddleware(['auth']);
         Route::post('/logout', [FrontendAuthController::class, 'logout'])->name('auth.logout');

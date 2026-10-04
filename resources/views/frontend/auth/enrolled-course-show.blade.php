@@ -17,7 +17,7 @@
                     Category: {{ $course->category->name ?? 'N/A' }}
                 </div>
             </div>
-            <a href="{{ route('auth.enrolled-courses') }}" class="btn btn-outline-secondary btn-sm">
+            <a href="{{ route('auth.enrolled-categories') }}" class="btn btn-outline-secondary btn-sm">
                 <i class="fas fa-arrow-left me-1"></i> Back
             </a>
         </div>
