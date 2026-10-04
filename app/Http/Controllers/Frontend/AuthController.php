@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Mail\OtpVerificationMail;
 use App\Mail\PasswordResetOtpMail;
+use App\Models\Certificate;
+use App\Models\CourseEnrolment;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -338,7 +340,26 @@ class AuthController extends Controller
     public function dashboard()
     {
         $user = Auth::user();
-        return view('frontend.auth.dashboard', compact('user'));
+        $activeEnrolmentsQuery = CourseEnrolment::query()
+            ->where('course_enrolments.user_id', $user->id)
+            ->where('course_enrolments.is_active', 1)
+            ->where(function ($query) {
+                $query->whereNull('course_enrolments.validity')
+                    ->orWhereDate('course_enrolments.validity', '>=', today());
+            });
+
+        $activeCategoryCount = (clone $activeEnrolmentsQuery)
+            ->join('courses', 'course_enrolments.course_id', '=', 'courses.id')
+            ->distinct()
+            ->count('courses.category_id');
+
+        $certificateCount = Certificate::where('user_id', $user->id)->count();
+
+        return view('frontend.auth.dashboard', compact(
+            'user',
+            'activeCategoryCount',
+            'certificateCount'
+        ));
     }
 
     /**
