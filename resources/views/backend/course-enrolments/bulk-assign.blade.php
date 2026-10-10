@@ -23,7 +23,10 @@
             <div class="row">
                 <div class="col-lg-6 mb-3">
                     <div class="d-flex justify-content-between align-items-center mb-2">
-                        <label class="form-label mb-0">Students <span class="text-danger">*</span></label>
+                        <label class="form-label mb-0">
+                            Students <span class="text-danger">*</span>
+                            <span class="badge bg-light text-dark ms-1" id="selected-student-count" aria-live="polite">0 selected</span>
+                        </label>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" id="select-all-students">
                             <label class="form-check-label" for="select-all-students">Select visible</label>
@@ -68,7 +71,10 @@
                     </div>
 
                     <div class="d-flex justify-content-between align-items-center mb-2">
-                        <label class="form-label mb-0">Courses <span class="text-danger">*</span></label>
+                        <label class="form-label mb-0">
+                            Courses <span class="text-danger">*</span>
+                            <span class="badge bg-light text-dark ms-1" id="selected-course-count" aria-live="polite">0 selected</span>
+                        </label>
                         <div class="form-check" id="select-all-courses-wrapper" hidden>
                             <input class="form-check-input" type="checkbox" id="select-all-courses">
                             <label class="form-check-label" for="select-all-courses">Select visible</label>
@@ -108,6 +114,13 @@ $(function () {
     const previouslySelectedCourses = new Set(@json(array_map('strval', old('course_ids', []))));
     let courseRequestId = 0;
 
+    function updateSelectionCounts() {
+        $('#selected-student-count').text($('.student-checkbox:checked').length + ' selected');
+        $('#selected-course-count').text($('.bulk-course-checkbox:checked').length + ' selected');
+    }
+
+    $(document).on('change', '.student-checkbox', updateSelectionCounts);
+
     $('#student-search').on('input', function () {
         const search = $(this).val().trim().toLowerCase();
         $('.student-item').each(function () {
@@ -117,7 +130,7 @@ $(function () {
     });
 
     $('#select-all-students').on('change', function () {
-        $('.student-item:visible .student-checkbox').prop('checked', this.checked);
+        $('.student-item:visible .student-checkbox').prop('checked', this.checked).trigger('change');
     });
 
     $('#bulk-category').on('change', function () {
@@ -133,14 +146,12 @@ $(function () {
     });
 
     $('#select-all-courses').on('change', function () {
-        $('.bulk-course-item:visible .bulk-course-checkbox').prop('checked', this.checked);
-        $('.bulk-course-item:visible .bulk-course-checkbox').each(function () {
-            updateCourseSelection(this);
-        });
+        $('.bulk-course-item:visible .bulk-course-checkbox').prop('checked', this.checked).trigger('change');
     });
 
     $(document).on('change', '.bulk-course-checkbox', function () {
         updateCourseSelection(this);
+        updateSelectionCounts();
     });
 
     $('#bulk-course-assignment').on('submit', function (event) {
@@ -168,10 +179,12 @@ $(function () {
 
         if (!categoryId) {
             $container.html('<p class="text-muted mb-0">Choose a category to load its courses.</p>');
+            updateSelectionCounts();
             return;
         }
 
         $container.html('<p class="text-muted mb-0">Loading courses...</p>');
+        updateSelectionCounts();
         $.ajax({
             url: @json(route('courses.by-category')),
             method: 'GET',
@@ -210,10 +223,12 @@ $(function () {
 
                 $selectAll.prop('hidden', false);
                 $search.prop('hidden', false);
+                updateSelectionCounts();
             },
             error: function () {
                 if (requestId === courseRequestId) {
                     $container.html('<p class="text-danger mb-0">Could not load courses. Please change the category or reload the page.</p>');
+                    updateSelectionCounts();
                 }
             }
         });
@@ -227,6 +242,8 @@ $(function () {
             previouslySelectedCourses.delete(courseId);
         }
     }
+
+    updateSelectionCounts();
 
     if ($('#bulk-category').val()) {
         loadCategoryCourses();
