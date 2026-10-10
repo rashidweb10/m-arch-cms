@@ -197,6 +197,8 @@ Route::prefix('backend')->group(function () {
     });  
 
      Route::middleware('auth.backend')->group(function () {
+         Route::get('course-enrolments/bulk-assign', [CourseEnrolmentController::class, 'createBulkAssignment'])->name('course-enrolments.bulk-assign');
+         Route::post('course-enrolments/bulk-assign', [CourseEnrolmentController::class, 'storeBulkAssignment'])->name('course-enrolments.bulk-assign.store');
          Route::resource('course-enrolments', CourseEnrolmentController::class);
          Route::post('course-enrolments/bulk-delete', [CourseEnrolmentController::class, 'bulkDelete'])->name('course-enrolments.bulk-delete');
          Route::post('course-enrolments/bulk-active', [CourseEnrolmentController::class, 'bulkActive'])->name('course-enrolments.bulk-active');

@@ -175,6 +175,97 @@ class CourseEnrolmentController extends Controller
     }
 
     /**
+     * Show the separate form for assigning courses to multiple students.
+     */
+    public function createBulkAssignment()
+    {
+        $categoryList = CourseCategory::where('is_active', 1)->orderBy('name', 'asc')->get();
+        $students = User::where('role_id', 3)->orderBy('name', 'asc')->get();
+
+        return view('backend.course-enrolments.bulk-assign', compact('categoryList', 'students'));
+    }
+
+    /**
+     * Replace the selected course assignments for each selected student.
+     */
+    public function storeBulkAssignment(Request $request)
+    {
+        $validated = $request->validate([
+            'student_ids' => 'required|array|min:1',
+            'student_ids.*' => 'required|integer|distinct|exists:users,id',
+            'category_id' => [
+                'required',
+                \Illuminate\Validation\Rule::exists('course_categories', 'id')->where(function ($query) {
+                    $query->where('is_active', 1);
+                }),
+            ],
+            'course_ids' => 'required|array|min:1',
+            'course_ids.*' => 'required|integer|distinct|exists:courses,id',
+            'validity' => 'nullable|date',
+            'is_active' => 'required|boolean',
+        ]);
+
+        $studentIds = $validated['student_ids'];
+        $courseIds = $validated['course_ids'];
+        $categoryId = $validated['category_id'];
+
+        if (User::whereIn('id', $studentIds)->where('role_id', 3)->count() !== count($studentIds)) {
+            return back()->withErrors([
+                'student_ids' => 'Only student accounts can be selected for course assignment.',
+            ])->withInput();
+        }
+
+        $validCourseCount = Course::whereIn('id', $courseIds)
+            ->where('category_id', $categoryId)
+            ->where('is_active', 1)
+            ->count();
+
+        if ($validCourseCount !== count($courseIds)) {
+            return back()->withErrors([
+                'course_ids' => 'Select active courses that belong to the chosen category.',
+            ])->withInput();
+        }
+
+        $assignmentCount = count($studentIds) * count($courseIds);
+        $validity = $validated['validity'] ?? null;
+        $isActive = $validated['is_active'];
+
+        DB::transaction(function () use ($studentIds, $courseIds, $validity, $isActive) {
+            CourseEnrolment::whereIn('user_id', $studentIds)
+                ->whereIn('course_id', $courseIds)
+                ->delete();
+
+            $timestamp = now();
+            $enrolments = [];
+
+            foreach ($studentIds as $studentId) {
+                foreach ($courseIds as $courseId) {
+                    $enrolments[] = [
+                        'user_id' => $studentId,
+                        'course_id' => $courseId,
+                        'validity' => $validity,
+                        'is_active' => $isActive,
+                        'created_at' => $timestamp,
+                        'updated_at' => $timestamp,
+                    ];
+
+                    if (count($enrolments) === 500) {
+                        DB::table('course_enrolments')->insert($enrolments);
+                        $enrolments = [];
+                    }
+                }
+            }
+
+            if ($enrolments) {
+                DB::table('course_enrolments')->insert($enrolments);
+            }
+        });
+
+        return redirect()->route('course-enrolments.bulk-assign')
+            ->with('status', $assignmentCount . ' course assignment(s) saved successfully.');
+    }
+
+    /**
      * Display the specified resource.
      */
     public function show(string $id)

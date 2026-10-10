@@ -12,7 +12,7 @@
         <div class="card">
             <div class="card-header border-bottom border-dashed align-items-center">
                 <div class="row">
-                    <div class="col-md-10">
+                    <div class="col-md-9">
                         <form class="row g-3 align-items-center">
                             <div class="col-md">
                                 <select name="status" class="form-select select2" id="status-select">
@@ -37,9 +37,14 @@
                             </div>
                         </form>
                     </div>
-                    <div class="col-md-2 text-end">
-                        <button onclick="smallModal('{{url(route('students.create'))}}', 'Add New')"
-                        class="btn btn-primary btn-icon w-100"><i class="ti ti-plus"></i> Add New</button>        
+                    <div class="col-md-3">
+                        <div class="d-flex gap-2">
+                            <a href="{{ route('course-enrolments.bulk-assign') }}" class="btn btn-primary btn-icon flex-fill text-nowrap">
+                                <i class="ti ti-users"></i> Bulk Assign
+                            </a>
+                            <button onclick="smallModal('{{url(route('students.create'))}}', 'Add New')"
+                            class="btn btn-primary btn-icon flex-fill text-nowrap"><i class="ti ti-plus"></i> Add New</button>
+                        </div>
                     </div>
                 </div>
                 <div class="row mt-3" id="bulkActionsContainer" style="display: none;">
