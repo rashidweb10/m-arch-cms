@@ -23,7 +23,7 @@
         <div class="col-sm-12">
             <div class="form-group mb-2">
                 <label for="phone" class="form-label">Phone</label>
-                <input value="{{ old('phone', $pageData->phone) }}" name="phone" type="text" class="form-control" maxlength="20" placeholder="Enter phone number">
+                <input value="{{ old('phone', $pageData->phone) }}" name="phone" type="tel" class="form-control" maxlength="20" inputmode="tel" autocomplete="tel" placeholder="Enter phone number">
             </div>
         </div>
 
@@ -80,4 +80,3 @@ $(document).ready(function() {
     }
 });
 </script>
-
